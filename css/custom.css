@@ -265,15 +265,72 @@ h1, h2, h3, h4, h5, h6,
 
 .hero-badge {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 0.5rem 1.5rem;
-    border-radius: 30px;
-    color: var(--warm-gold);
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 1px;
+    background: linear-gradient(135deg, #c7954d 0%, #f4d03f 50%, #c7954d 100%);
+    backdrop-filter: blur(15px);
+    border: 3px solid #ffffff;
+    padding: 0.9rem 2.5rem;
+    border-radius: 40px;
+    color: #1a3a52;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 35px rgba(199, 149, 77, 0.8), 
+                0 0 30px rgba(255, 215, 0, 0.6),
+                inset 0 2px 10px rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    animation: badge-glow 2.5s ease-in-out infinite;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+.hero-badge:hover {
+    transform: scale(1.05);
+}
+
+.hero-badge::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    animation: badge-shimmer 3s ease-in-out infinite;
+}
+
+.hero-badge::after {
+    content: '❤️';
+    margin-left: 0.7rem;
+    font-size: 1.3rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes badge-glow {
+    0%, 100% {
+        box-shadow: 0 10px 35px rgba(199, 149, 77, 0.8), 
+                    0 0 30px rgba(255, 215, 0, 0.6),
+                    inset 0 2px 10px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 15px 50px rgba(199, 149, 77, 1), 
+                    0 0 50px rgba(255, 215, 0, 0.9),
+                    inset 0 2px 15px rgba(255, 255, 255, 0.5);
+    }
+}
+
+@keyframes badge-shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.3); }
+    50% { transform: scale(1); }
 }
 
 .masthead h1 {
@@ -364,463 +421,380 @@ h1, h2, h3, h4, h5, h6,
     opacity: 1;
 }
 
-/* ===== ABOUT SECTION - HEARTFELT REDESIGN ===== */
-.about-section {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
-    padding: 100px 0;
+/* ===== ABOUT SECTION - MODERN REDESIGN ===== */
+.about-section-new {
+    background: #ffffff;
+    padding: 6rem 0;
     position: relative;
-    overflow: hidden;
 }
 
-.about-section::before {
-    content: '';
-    position: absolute;
-    top: -200px;
-    right: -200px;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(199, 149, 77, 0.08) 0%, transparent 70%);
-    border-radius: 50%;
-}
-
-.about-badge {
+/* Section Header */
+.about-badge-new {
     display: inline-block;
     background: linear-gradient(135deg, #c7954d, #d1ac6b);
     color: white;
-    padding: 0.6rem 1.5rem;
+    padding: 0.6rem 1.8rem;
     border-radius: 30px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
     box-shadow: 0 4px 15px rgba(199, 149, 77, 0.3);
 }
 
-.section-heading-about {
+.about-heading-new {
     font-size: 3rem;
-    font-weight: 700;
-    color: var(--foundation-navy);
-    margin-bottom: 1rem;
+    font-weight: 800;
+    color: #1a3a52;
+    margin: 1rem 0;
 }
 
-.section-subtitle-about {
+.about-subtitle-new {
     font-size: 1.3rem;
-    color: #666;
-    font-style: italic;
-    line-height: 1.6;
+    color: #555;
+    font-weight: 400;
+    margin-bottom: 3rem;
 }
 
-/* Tribute Card */
-.tribute-card {
+/* Modern Tribute Card */
+.tribute-modern-card {
     background: white;
     border-radius: 25px;
     overflow: hidden;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
-    position: relative;
 }
 
-.tribute-image-container {
+.tribute-image-modern {
     position: relative;
-    padding: 2rem;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    height: 100%;
+    min-height: 500px;
 }
 
-.image-frame {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-}
-
-.tribute-photo {
+.tribute-image-modern img {
     width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s ease;
+    height: 100%;
+    object-fit: cover;
 }
 
-.image-frame:hover .tribute-photo {
-    transform: scale(1.05);
-}
-
-.image-overlay {
+.image-badge-modern {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
-    padding: 2rem 1.5rem 1rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.image-frame:hover .image-overlay {
-    opacity: 1;
-}
-
-.overlay-text {
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-align: center;
-}
-
-.tribute-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 20px;
+    right: 20px;
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, var(--warm-gold), var(--warm-accent));
+    background: linear-gradient(135deg, #c7954d, #d1ac6b);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 5px 20px rgba(199, 149, 77, 0.4);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 
-.tribute-badge i {
+.image-badge-modern i {
     font-size: 1.8rem;
     color: white;
 }
 
-.tribute-content {
+.tribute-story-modern {
     padding: 3rem;
+}
+
+.memorial-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1a3a52;
+    margin-bottom: 1.5rem;
+}
+
+.memorial-quote {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 1.5rem;
+    border-left: 4px solid #c7954d;
+    border-radius: 10px;
+    margin-bottom: 2rem;
     position: relative;
 }
 
-.quote-icon {
-    position: absolute;
-    top: -15px;
-    left: 2rem;
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, var(--foundation-blue), var(--foundation-teal));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 5px 15px rgba(29, 128, 159, 0.3);
+.memorial-quote i {
+    font-size: 1.5rem;
+    color: #c7954d;
+    margin-bottom: 0.5rem;
 }
 
-.quote-icon i {
-    font-size: 1.3rem;
-    color: white;
-}
-
-.tribute-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--foundation-navy);
-    margin-bottom: 1.5rem;
-    margin-top: 1rem;
-}
-
-.tribute-text {
+.memorial-quote p {
     font-size: 1.1rem;
-    line-height: 1.9;
-    color: #555;
-    margin-bottom: 1.5rem;
-}
-
-.tribute-text strong {
-    color: var(--foundation-navy);
-}
-
-.tribute-text em {
-    color: var(--warm-gold);
-    font-weight: 600;
     font-style: italic;
+    color: #2c3e50;
+    margin: 0;
+    font-weight: 600;
 }
 
-.tribute-highlight {
+.memorial-text p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #2c3e50;
+    margin-bottom: 1.2rem;
+}
+
+.memorial-text .highlight-text {
+    color: #c7954d;
+    font-weight: 700;
+}
+
+.legacy-tag {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.5rem;
-    background: linear-gradient(135deg, rgba(199, 149, 77, 0.1), rgba(209, 172, 107, 0.1));
-    border-left: 4px solid var(--warm-gold);
-    border-radius: 10px;
+    background: linear-gradient(135deg, #c7954d, #d1ac6b);
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
     margin-top: 2rem;
 }
 
-.tribute-highlight i {
-    font-size: 2rem;
-    color: var(--warm-gold);
+.legacy-tag i {
+    font-size: 1.5rem;
+    color: white;
 }
 
-.tribute-highlight span {
-    font-size: 1.1rem;
+.legacy-tag span {
+    font-size: 1rem;
     font-weight: 600;
-    color: var(--foundation-navy);
+    color: white;
 }
 
-/* Mission Card */
-.mission-card {
+/* Mission & Vision Modern Cards */
+.mv-card-modern {
     background: white;
     border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
     height: 100%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
 }
 
-.mission-card:hover {
+.mv-card-modern:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
 }
 
-.card-header-custom {
-    background: linear-gradient(135deg, var(--foundation-blue), var(--foundation-teal));
-    padding: 2rem;
-    text-align: center;
-    position: relative;
-}
-
-.header-icon {
-    width: 80px;
-    height: 80px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border: 3px solid rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
+.mv-icon-modern {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #1D809F, #2d5f7e);
+    border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1rem;
-}
-
-.header-icon i {
-    font-size: 2.5rem;
-    color: white;
-}
-
-.header-icon-gold {
-    background: linear-gradient(135deg, var(--warm-gold), var(--warm-accent));
-    border-color: rgba(255, 255, 255, 0.8);
-}
-
-.card-header-custom h3 {
-    color: white;
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 0;
-}
-
-.card-body-custom {
-    padding: 2rem;
-}
-
-.mission-lead,
-.vision-lead {
-    font-size: 1.2rem;
-    color: var(--foundation-navy);
     margin-bottom: 1.5rem;
-    line-height: 1.6;
 }
 
-.card-body-custom p {
-    font-size: 1rem;
-    line-height: 1.8;
+.mv-icon-modern i {
+    font-size: 2rem;
+    color: white;
+}
+
+.mv-icon-gold {
+    background: linear-gradient(135deg, #c7954d, #d1ac6b);
+}
+
+.mv-title-modern {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1a3a52;
+    margin-bottom: 0.5rem;
+}
+
+.mv-lead-modern {
+    font-size: 1.1rem;
     color: #555;
     margin-bottom: 1.5rem;
+    font-weight: 600;
 }
 
-.mission-pillars {
-    margin: 2rem 0;
+.mv-content-modern p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 1.5rem;
 }
 
-.pillar-item {
+.mv-features {
+    margin-top: 2rem;
+}
+
+.feature-item-modern {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    margin-bottom: 1.5rem;
     padding: 1rem;
     background: #f8f9fa;
-    border-radius: 12px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
     transition: all 0.3s ease;
 }
 
-.pillar-item:hover {
+.feature-item-modern:hover {
     background: #e9ecef;
     transform: translateX(5px);
 }
 
-.pillar-item i {
-    font-size: 1.5rem;
-    color: var(--foundation-teal);
+.feature-item-modern i {
+    font-size: 1.3rem;
+    color: #1D809F;
     margin-top: 0.2rem;
 }
 
-.pillar-item strong {
-    display: block;
-    color: var(--foundation-navy);
-    font-size: 1.1rem;
+.feature-item-modern h5 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a3a52;
     margin-bottom: 0.3rem;
 }
 
-.pillar-item p {
+.feature-item-modern p {
+    font-size: 0.9rem;
+    color: #777;
     margin: 0;
-    color: #666;
-    font-size: 0.95rem;
 }
 
-.mission-footer {
-    background: linear-gradient(135deg, rgba(29, 128, 159, 0.1), rgba(45, 95, 126, 0.1));
-    padding: 1.5rem;
-    border-radius: 12px;
-    border-left: 4px solid var(--foundation-blue);
-    margin-bottom: 0;
+.vision-steps {
+    margin-top: 2rem;
 }
 
-/* Vision Card */
-.vision-card {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    height: 100%;
-    transition: all 0.3s ease;
-}
-
-.vision-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
-}
-
-.vision-goals {
-    margin: 2rem 0;
-}
-
-.goal-card {
+.vision-step-modern {
     display: flex;
-    gap: 1.5rem;
-    align-items: flex-start;
-    padding: 1.5rem;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1rem;
     background: #f8f9fa;
-    border-radius: 12px;
+    border-radius: 10px;
     margin-bottom: 1rem;
     transition: all 0.3s ease;
 }
 
-.goal-card:hover {
-    background: linear-gradient(135deg, rgba(199, 149, 77, 0.1), rgba(209, 172, 107, 0.05));
+.vision-step-modern:hover {
+    background: linear-gradient(135deg, rgba(199, 149, 77, 0.1), transparent);
     transform: translateX(5px);
 }
 
-.goal-number {
-    min-width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, var(--warm-gold), var(--warm-accent));
-    border-radius: 12px;
+.step-number {
+    min-width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #c7954d, #d1ac6b);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: white;
-    box-shadow: 0 5px 15px rgba(199, 149, 77, 0.3);
 }
 
-.goal-content h5 {
-    color: var(--foundation-navy);
-    font-size: 1.2rem;
+.step-info h5 {
+    font-size: 1rem;
     font-weight: 700;
+    color: #1a3a52;
     margin-bottom: 0.3rem;
 }
 
-.goal-content p {
-    color: #666;
-    font-size: 0.95rem;
+.step-info p {
+    font-size: 0.9rem;
+    color: #777;
     margin: 0;
 }
 
-.vision-commitment {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    background: linear-gradient(135deg, rgba(199, 149, 77, 0.1), rgba(209, 172, 107, 0.1));
-    border-radius: 12px;
-    border-left: 4px solid var(--warm-gold);
-}
-
-.vision-commitment i {
-    font-size: 2rem;
-    color: var(--warm-gold);
-    margin-top: 0.2rem;
-}
-
-.vision-commitment p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.7;
-}
-
-/* About CTA Box */
-.about-cta-box {
-    background: linear-gradient(135deg, var(--foundation-navy) 0%, var(--foundation-blue) 100%);
-    border-radius: 25px;
+/* CTA Modern */
+.about-cta-modern {
+    background: linear-gradient(135deg, #1a3a52, #1D809F);
+    border-radius: 20px;
     padding: 3rem;
-    color: white;
     box-shadow: 0 15px 50px rgba(29, 128, 159, 0.3);
-    position: relative;
-    overflow: hidden;
 }
 
-.about-cta-box::before {
-    content: '';
-    position: absolute;
-    top: -100px;
-    right: -100px;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(199, 149, 77, 0.2) 0%, transparent 70%);
-    border-radius: 50%;
-}
-
-.cta-heading {
+.cta-title-modern {
     font-size: 1.8rem;
     font-weight: 700;
     color: white;
     margin-bottom: 1rem;
 }
 
-.cta-message {
-    font-size: 1.1rem;
-    line-height: 1.8;
+.cta-text-modern {
+    font-size: 1.05rem;
+    line-height: 1.7;
     color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 0;
 }
 
-.btn-primary-custom {
-    background: linear-gradient(135deg, var(--warm-gold), var(--warm-accent));
-    border: none;
-    color: white;
-    font-weight: 700;
+.btn-modern {
+    display: block;
+    width: 100%;
     padding: 1rem 2rem;
     border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: none;
     transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-modern-primary {
+    background: linear-gradient(135deg, #c7954d, #d1ac6b);
+    color: white;
     box-shadow: 0 5px 20px rgba(199, 149, 77, 0.4);
 }
 
-.btn-primary-custom:hover {
-    background: linear-gradient(135deg, var(--warm-accent), var(--warm-gold));
+.btn-modern-primary:hover {
+    background: linear-gradient(135deg, #d1ac6b, #c7954d);
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(199, 149, 77, 0.5);
     color: white;
 }
 
-.btn-outline-custom {
+.btn-modern-outline {
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.5);
     color: white;
-    font-weight: 700;
-    padding: 1rem 2rem;
-    border-radius: 12px;
-    transition: all 0.3s ease;
 }
 
-.btn-outline-custom:hover {
+.btn-modern-outline:hover {
     background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .tribute-image-modern {
+        min-height: 400px;
+    }
+    
+    .tribute-story-modern {
+        padding: 2rem;
+    }
+    
+    .about-heading-new {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-section-new {
+        padding: 4rem 0;
+    }
+    
+    .tribute-image-modern {
+        min-height: 300px;
+    }
+    
+    .memorial-title {
+        font-size: 1.6rem;
+    }
+    
+    .about-cta-modern {
+        padding: 2rem;
+    }
+}
     border-color: white;
     color: white;
     transform: translateY(-3px);
