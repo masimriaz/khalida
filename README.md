@@ -1,362 +1,168 @@
-# Khalida Educational Foundation Website
+# Khalida Educational Foundation
 
-A modern, professional foundation website built to honor a legacy of educational dedication. This site showcases the foundation's mission to empower children through quality education and skill-based learning programs.
+<div align="center">
 
-## 🌟 Features
+**_Empowering Futures Through Education_**
 
-- **Modern Design**: Clean, professional interface with warm, trustworthy color palette
-- **Fully Responsive**: Mobile-first design that looks great on all devices
-- **Interactive Elements**: Animated counters, smooth scrolling, modal gallery
-- **AI Initiative Section**: Featured program highlighting cutting-edge AI education for kids
-- **Complete Functionality**: Contact forms, donation CTAs, volunteer sign-up
-- **Accessibility**: High contrast, readable typography, semantic HTML
-- **Fast Loading**: Optimized images and minimal dependencies
+_Building a Legacy of Learning, One Child at a Time_
 
-## 📋 Site Structure
-
-### Single-Page Scrolling Website
-
-1. **Hero Section** - Foundation introduction with primary CTAs
-2. **About** - Tribute to founder's mother and foundation mission
-3. **Programs & Initiatives** - 5 core programs with detailed descriptions
-4. **AI Initiative** - Future Leaders Program: AI for Young Minds
-5. **Impact** - Statistics and measurable outcomes
-6. **Get Involved** - Donation, volunteer, and partnership opportunities
-7. **Gallery** - Visual showcase of programs and events
-8. **Testimonials** - Stories from beneficiaries and supporters
-9. **Contact** - Contact form and information
-10. **Footer** - Quick links, newsletter signup, social media
-
-## 🎨 Design & Branding
-
-### Color Palette
-
-- **Primary**: Navy Blue (#1a3a52) - Trust and professionalism
-- **Secondary**: Teal (#1D809F) - Education and growth
-- **Accent**: Warm Gold (#ecb807) - Hope and warmth
-- **AI Section**: Electric Blue & Cyber Lime - Innovation and future
-
-### Typography
-
-- **Headings**: Poppins (Modern, professional)
-- **Body**: Inter (Readable, accessible)
-
-## 🚀 Quick Start - Local Setup
-
-### Prerequisites
-
-- A modern web browser (Chrome, Firefox, Safari, Edge)
-- A code editor (VS Code recommended)
-- Basic understanding of HTML/CSS/JavaScript
-
-### Installation Steps
-
-1. **Clone or Download the Repository**
-
-   ```bash
-   git clone https://github.com/masimriaz/khalida-foundation.git
-   cd khalida-foundation
-   ```
-
-2. **Project Structure**
-
-   ```
-   khalida-foundation/
-   ├── index.html          # Main HTML file
-   ├── css/
-   │   ├── styles.css      # Bootstrap + base styles
-   │   └── custom.css      # Custom foundation styles
-   ├── js/
-   │   └── scripts.js      # Interactive functionality
-   ├── assets/
-   │   ├── favicon.ico
-   │   └── img/            # Images folder
-   │       ├── bg-masthead.jpg
-   │       ├── ai-poster-1.jpg
-   │       ├── course-outline.jpg
-   │       └── gallery-*.jpg
-   └── README.md
-   ```
-
-3. **Add Your Images**
-
-   Place your images in the `assets/img/` folder with these names:
-
-   - `bg-masthead.jpg` - Hero background (1920x1080px recommended)
-   - `ai-poster-1.jpg` - AI program poster
-   - `course-outline.jpg` - Course curriculum visual
-   - `gallery-1.jpg` to `gallery-5.jpg` - Gallery images
-
-   **Tip**: You can use any image format (.jpg, .png, .webp) by updating the file extensions in index.html
-
-4. **Run Locally**
-
-   **Option A: Using VS Code Live Server**
-
-   - Install "Live Server" extension in VS Code
-   - Right-click on `index.html`
-   - Select "Open with Live Server"
-   - Site will open at `http://localhost:5500`
-
-   **Option B: Using Python**
-
-   ```bash
-   # Python 3
-   python -m http.server 8000
-
-   # Then open browser to http://localhost:8000
-   ```
-
-   **Option C: Using Node.js**
-
-   ```bash
-   npx http-server
-
-   # Then open browser to http://localhost:8080
-   ```
-
-   **Option D: Direct File Access**
-
-   - Simply double-click `index.html`
-   - Opens directly in your default browser
-
-## 🌐 Deployment to GitHub Pages
-
-### Step 1: Push to GitHub
-
-If you haven't already pushed your code:
-
-```bash
-# Initialize git (if not already done)
-git init
-
-# Add all files
-git add .
-
-# Commit changes
-git commit -m "Initial commit - Khalida Foundation website"
-
-# Add remote repository
-git remote add origin https://github.com/masimriaz/khalida-foundation.git
-
-# Push to GitHub
-git push -u origin main
-```
-
-### Step 2: Enable GitHub Pages
-
-1. Go to your repository on GitHub: `https://github.com/masimriaz/khalida-foundation`
-2. Click on **Settings** (top right)
-3. Scroll down to **Pages** section (left sidebar)
-4. Under **Source**, select:
-   - Branch: `main`
-   - Folder: `/ (root)`
-5. Click **Save**
-6. Wait 1-2 minutes for deployment
-7. Your site will be live at: `https://masimriaz.github.io/khalida-foundation/`
-
-### Step 3: Custom Domain (Optional)
-
-To use a custom domain like `www.khalidafoundation.org`:
-
-1. Buy a domain from a registrar (GoDaddy, Namecheap, etc.)
-2. In GitHub Pages settings, add your custom domain
-3. In your domain registrar's DNS settings, add these records:
-
-   ```
-   Type: A
-   Name: @
-   Value: 185.199.108.153
-
-   Type: A
-   Name: @
-   Value: 185.199.109.153
-
-   Type: A
-   Name: @
-   Value: 185.199.110.153
-
-   Type: A
-   Name: @
-   Value: 185.199.111.153
-
-   Type: CNAME
-   Name: www
-   Value: masimriaz.github.io
-   ```
-
-4. Wait 24-48 hours for DNS propagation
-5. Enable HTTPS in GitHub Pages settings
-
-## 📝 Customization Guide
-
-### Update Content
-
-1. **Foundation Name**: Search and replace "Khalida Educational Foundation" in `index.html`
-2. **Contact Information**: Edit the contact section in `index.html` (lines ~450-500)
-3. **Social Media Links**: Update URLs in footer and contact sections
-4. **Mission Statement**: Edit hero section and about section content
-
-### Replace Images
-
-All images are in `assets/img/`. Simply replace files with the same names:
-
-```
-assets/img/
-├── bg-masthead.jpg       # Hero background
-├── ai-poster-1.jpg       # AI program poster
-├── course-outline.jpg    # Course details
-├── gallery-1.jpg         # Scholarship ceremony
-├── gallery-2.jpg         # Classroom
-├── gallery-3.jpg         # Teacher training
-├── gallery-4.jpg         # Community event
-└── gallery-5.jpg         # Skills workshop
-```
-
-### Modify Colors
-
-Edit `css/custom.css` at the top (lines 1-30):
-
-```css
-:root {
-  --foundation-navy: #1a3a52; /* Main color */
-  --warm-accent: #d4a574; /* Accent color */
-  --warm-gold: #ecb807; /* CTA color */
-  /* Modify these values */
-}
-```
-
-### Connect Forms to Backend
-
-The contact form currently shows an alert. To connect to a real backend:
-
-Edit `js/scripts.js` (around line 140):
-
-```javascript
-// Replace the alert with actual form submission:
-fetch("YOUR_BACKEND_URL/api/contact", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(data),
-})
-  .then((response) => response.json())
-  .then((data) => {
-    alert("Thank you! Your message has been sent.");
-    contactForm.reset();
-  })
-  .catch((error) => {
-    alert("Sorry, there was an error. Please try again.");
-  });
-```
-
-**Recommended Form Services:**
-
-- **Formspree**: https://formspree.io (Free tier available)
-- **Netlify Forms**: If you host on Netlify
-- **EmailJS**: https://www.emailjs.com (Free tier available)
-
-## 🛠️ Technologies Used
-
-- **HTML5** - Semantic markup
-- **CSS3** - Custom styling with CSS variables
-- **Bootstrap 5** - Responsive grid and components
-- **JavaScript (ES6)** - Interactive features
-- **Font Awesome** - Icons
-- **Google Fonts** - Poppins & Inter fonts
-
-## 📱 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## ⚡ Performance Optimization
-
-Current optimizations:
-
-- Lazy loading ready (uncomment in HTML if needed)
-- Optimized CSS delivery
-- Minimal JavaScript dependencies
-- CSS animations use transform/opacity for 60fps
-
-**Additional Optimizations**:
-
-1. Compress images using TinyPNG or ImageOptim
-2. Use WebP format for images
-3. Enable Cloudflare CDN if using custom domain
-4. Minify CSS/JS for production (optional)
-
-## 🔒 Security Best Practices
-
-- All external resources use HTTPS
-- No sensitive data in client-side code
-- Forms should validate on backend (when connected)
-- Regular updates of Bootstrap and dependencies
-
-## 📄 License
-
-This project is open source and available for use by the Khalida Educational Foundation.
-
-## 🤝 Contributing
-
-To contribute improvements:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/improvement`)
-3. Commit changes (`git commit -m 'Add improvement'`)
-4. Push to branch (`git push origin feature/improvement`)
-5. Open a Pull Request
-
-## 📞 Support
-
-For technical issues or questions:
-
-- Email: info@khalidafoundation.org
-- GitHub Issues: https://github.com/masimriaz/khalida-foundation/issues
-
-## 🎯 Roadmap
-
-Future enhancements:
-
-- [ ] Blog/News section
-- [ ] Donation payment gateway integration (Stripe, PayPal)
-- [ ] Event calendar
-- [ ] Volunteer portal/dashboard
-- [ ] Multi-language support
-- [ ] Student success stories database
-- [ ] Annual report downloads
-- [ ] Live chat support
+</div>
 
 ---
 
-## Quick Reference: Updating Common Elements
+## 🌟 About the Foundation
 
-### Change Hero Image
+The **Khalida Educational Foundation** stands as a living tribute to a remarkable woman whose unwavering dedication to education transformed countless lives. Founded in loving memory, our foundation honors a mother's passionate advocacy for learning and her profound belief in education's power to change destinies.
 
-Replace `assets/img/bg-masthead.jpg` with your image
-
-### Update Statistics
-
-Edit `index.html` around line 300, modify `data-target` values:
-
-```html
-<div class="stat-number" data-target="1250">0</div>
-```
-
-### Add Gallery Image
-
-1. Add image to `assets/img/`
-2. Copy a gallery-item div in `index.html`
-3. Update `data-img`, `data-title`, and `src` attributes
-
-### Modify Programs
-
-Edit the program cards section (around line 150-250 in `index.html`)
+Every program we create, every child we reach, and every community we serve carries forward her legacy—a legacy built on love, learning, and hope.
 
 ---
 
-**Built with ❤️ for the Khalida Educational Foundation**
+## 💫 Our Mission
 
-_Empowering Futures Through Education_
+We are committed to making **quality education accessible to every child**, regardless of their background or circumstances. We believe education is not just about academic achievement—it's about empowering children with the knowledge, skills, and confidence they need to build better futures for themselves and their communities.
+
+Through comprehensive educational resources, meaningful scholarships, and innovative skill-based learning programs, we support children's academic growth while equipping them with essential life skills for tomorrow's challenges.
+
+---
+
+## 🎯 Our Vision
+
+We envision a world where **every child has equal access to quality education** and the opportunity to reach their full potential. We are dedicated to:
+
+- **Breaking Educational Barriers** - Eliminating obstacles that prevent children from learning and thriving
+- **Fostering Innovation** - Introducing cutting-edge programs like AI education for young minds
+- **Building Communities** - Creating supportive learning environments for sustainable growth
+- **Nurturing Potential** - Developing curiosity, creativity, and critical thinking in every child
+- **Creating Opportunities** - Providing pathways to success through scholarships and skill development
+
+---
+
+## 📚 Our Core Programs
+
+### 1. **Scholarship Program**
+
+Providing financial assistance to deserving students, ensuring that economic barriers never stand in the way of educational dreams.
+
+### 2. **Academic Support**
+
+Offering tutoring, mentorship, and supplementary learning resources to help students excel in their studies.
+
+### 3. **Skill-Based Training**
+
+Equipping young people with practical skills—from technology to trades—preparing them for real-world opportunities.
+
+### 4. **STEM Education**
+
+Fostering interest in Science, Technology, Engineering, and Mathematics through hands-on learning experiences.
+
+### 5. **AI Initiative: Future Leaders Program**
+
+Our flagship innovation program introducing children to Artificial Intelligence, coding, and emerging technologies, preparing them to lead in tomorrow's digital world.
+
+---
+
+## 💝 Our Values
+
+**Education First** - We believe quality education is a fundamental right, not a privilege.
+
+**Inclusivity** - Every child deserves access to learning, regardless of background or circumstance.
+
+**Innovation** - We embrace new approaches and technologies to enhance learning experiences.
+
+**Integrity** - We operate with transparency, accountability, and unwavering commitment to our mission.
+
+**Community** - We build strong partnerships with families, educators, and supporters.
+
+**Excellence** - We strive for the highest standards in every program and initiative we deliver.
+
+---
+
+## 🌍 Our Impact
+
+Through dedication and community support, we are creating measurable change:
+
+- **1,250+ Students** supported through scholarships and educational programs
+- **50+ Schools** partnered with to extend our reach and impact
+- **$250,000+** invested in educational resources and infrastructure
+- **85+ Volunteers** contributing their time, expertise, and passion
+- **20+ Communities** transformed through sustained educational initiatives
+
+_Together, we are building a brighter future, one educated child at a time._
+
+---
+
+## 🤝 Get Involved
+
+### Volunteer Your Time
+
+Share your skills, knowledge, and passion by volunteering as a tutor, mentor, or program facilitator.
+
+### Partner With Us
+
+Organizations and institutions can collaborate with us to amplify our impact and reach more children.
+
+### Spread the Word
+
+Help us reach more families by sharing our mission with your network and community.
+
+---
+
+## 📞 Connect With Us
+
+We welcome inquiries, collaboration opportunities, and conversations about how we can work together to empower children through education.
+
+**Website:** [Visit Our Portfolio](index.html)  
+**Email:** info@khalidafoundation.org  
+**Location:** Serving communities with dedication and love
+
+---
+
+## 🏆 Recognition & Testimonials
+
+> _"This foundation gave my daughter the opportunity to pursue her dreams. The scholarship program changed our family's life."_  
+> — **Sarah Ahmed**, Parent of Scholarship Recipient
+
+> _"The AI Initiative opened my eyes to possibilities I never knew existed. I'm now studying computer science at university."_  
+> — **Ali Hassan**, Program Graduate
+
+> _"Partnering with Khalida Foundation has been transformative for our school and students."_  
+> — **Mrs. Fatima Khan**, School Principal
+
+---
+
+## 📅 Looking Forward
+
+As we continue to grow, we remain committed to:
+
+- Expanding our scholarship programs to reach more deserving students
+- Launching new skill-based training initiatives in emerging fields
+- Building stronger partnerships with educational institutions
+- Developing innovative programs that prepare children for the future
+- Creating sustainable educational ecosystems in underserved communities
+- Honoring the legacy that inspires us every day
+
+---
+
+## 📖 The Story Behind Our Name
+
+Named in loving memory of a dedicated educator and mother, the Khalida Educational Foundation embodies a lifetime of commitment to quality education for all. Her passion for learning, her belief in every child's potential, and her tireless advocacy for educational access continue to inspire everything we do.
+
+This is more than a foundation—it's a living legacy, a promise kept, and a beacon of hope for countless children seeking brighter futures through education.
+
+---
+
+<div align="center">
+
+### 🌟 **Every Child Deserves a Chance to Learn, Grow, and Succeed** 🌟
+
+**Khalida Educational Foundation**  
+_Where Love Meets Learning, and Dreams Take Flight_
+
+---
+
+**© 2025 Khalida Educational Foundation. All Rights Reserved.**
+
+_This portfolio represents our commitment to transparency, impact, and the transformative power of education._
+
+</div>

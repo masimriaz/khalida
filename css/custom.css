@@ -55,6 +55,143 @@ h1, h2, h3, h4, h5, h6,
     font-weight: 400;
 }
 
+/* ===== Navigation Enhancements ===== */
+
+/* Menu Toggle Button */
+.menu-toggle {
+    background: linear-gradient(135deg, var(--foundation-navy) 0%, var(--foundation-blue) 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.menu-toggle:hover {
+    background: linear-gradient(135deg, var(--foundation-blue) 0%, var(--foundation-teal) 100%);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.menu-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.menu-toggle:hover i {
+    transform: rotate(90deg);
+}
+
+/* Sidebar Navigation */
+#sidebar-wrapper {
+    background: linear-gradient(180deg, var(--foundation-navy) 0%, var(--foundation-blue) 100%);
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-nav {
+    padding-top: 2rem;
+}
+
+.sidebar-nav > .sidebar-brand {
+    background: linear-gradient(135deg, rgba(236, 184, 7, 0.15) 0%, rgba(212, 165, 116, 0.15) 100%);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    font-size: 1.3rem;
+    background: linear-gradient(135deg, var(--warm-gold) 0%, var(--warm-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+.sidebar-nav li.sidebar-nav-item a {
+    position: relative;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 18px 25px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    overflow: hidden;
+}
+
+.sidebar-nav li.sidebar-nav-item a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.sidebar-nav li.sidebar-nav-item a:hover::before {
+    width: 100%;
+}
+
+.sidebar-nav li.sidebar-nav-item a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-left-color: var(--warm-gold);
+    padding-left: 30px;
+    color: var(--warm-gold);
+    text-shadow: 0 0 10px rgba(236, 184, 7, 0.5);
+}
+
+.sidebar-nav li.sidebar-nav-item a i {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-nav li.sidebar-nav-item a:hover i {
+    transform: translateX(5px);
+}
+
+/* Active link styling */
+.sidebar-nav li.sidebar-nav-item a.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-left-color: var(--warm-accent);
+    color: var(--warm-gold);
+    font-weight: 600;
+}
+
+/* Smooth scrolling indicator */
+.sidebar-nav li.sidebar-nav-item a::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: transparent;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.sidebar-nav li.sidebar-nav-item a:hover::after,
+.sidebar-nav li.sidebar-nav-item a.active::after {
+    background: var(--warm-gold);
+    box-shadow: 0 0 10px var(--warm-gold);
+}
+
+/* Responsive Navigation Adjustments */
+@media (max-width: 768px) {
+    .sidebar-nav li.sidebar-nav-item a {
+        font-size: 1rem;
+        padding: 15px 20px;
+    }
+    
+    .menu-toggle {
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+    }
+}
+
 /* ===== Hero Section ===== */
 .masthead {
     background: linear-gradient(135deg, rgba(26, 58, 82, 0.95) 0%, rgba(44, 95, 124, 0.9) 100%), 
@@ -475,16 +612,9 @@ h1, h2, h3, h4, h5, h6,
     list-style-position: inside;
 }
 
-.donation-amounts,
 .volunteer-options,
 .partnership-benefits {
     text-align: left;
-}
-
-.amount-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
 }
 
 .cta-highlight {
@@ -712,13 +842,6 @@ h1, h2, h3, h4, h5, h6,
 
 .newsletter-form .form-control::placeholder {
     color: rgba(255, 255, 255, 0.5);
-}
-
-.footer-donate-cta {
-    padding: 2rem;
-    background: rgba(236, 184, 7, 0.1);
-    border-radius: 15px;
-    border: 2px solid var(--warm-gold);
 }
 
 /* ===== Responsive Design ===== */

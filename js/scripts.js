@@ -225,24 +225,6 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     });
     
-    // Donation Amount Button Selection
-    const amountButtons = document.querySelectorAll('.amount-buttons .btn');
-    amountButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            amountButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            if (this.textContent === 'Custom') {
-                const customAmount = prompt('Enter your donation amount:');
-                if (customAmount) {
-                    console.log('Custom donation amount: $' + customAmount);
-                }
-            } else {
-                console.log('Selected donation: ' + this.textContent);
-            }
-        });
-    });
-    
     // Add fade-in animation to elements as they come into view
     const fadeElements = document.querySelectorAll('.program-card, .testimonial-card, .benefit-card');
     const fadeObserver = new IntersectionObserver((entries) => {
