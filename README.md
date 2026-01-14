@@ -112,7 +112,7 @@ Help us reach more families by sharing our mission with your network and communi
 
 We welcome inquiries, collaboration opportunities, and conversations about how we can work together to empower children through education.
 
-**Website:** [Visit Our Portfolio](index.html)  
+**Website:** [khalidafoundation.org](http://khalidafoundation.org/)  
 **Email:** info@khalidafoundation.org  
 **Location:** Serving communities with dedication and love
 
