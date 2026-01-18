@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Superheroes Workshop – Session 1: Discovering the Power of AI</title>
+    <link rel="icon" type="image/x-icon" href="../../../assets/favicon.ico" />
+    <link href="../../../css/styles.css" rel="stylesheet" />
+    <link href="../../../css/custom.css" rel="stylesheet" />
+    <style>
+        :root { --blog-max-width: 1080px; }
+        body {
+            background: radial-gradient(circle at 18% 18%, rgba(212,106,58,0.07), transparent 35%),
+                        radial-gradient(circle at 82% 8%, rgba(31,58,70,0.07), transparent 40%),
+                        linear-gradient(180deg, #f9f5ef 0%, #ffffff 55%, #f5efe3 100%);
+        }
+        .blog-shell {
+            max-width: var(--blog-max-width);
+            margin: 0 auto;
+            padding: 6.5rem 1.25rem 3.5rem;
+            position: relative;
+        }
+        .blog-shell::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            pointer-events: none;
+            background: radial-gradient(circle at 15% 30%, rgba(240, 216, 194, 0.16), transparent 48%),
+                        radial-gradient(circle at 90% 70%, rgba(31, 58, 70, 0.08), transparent 52%);
+            z-index: -1;
+        }
+        .blog-breadcrumbs {
+            font-size: 0.95rem;
+            margin: 1rem 0 1.25rem;
+            color: var(--text-light, #4b5563);
+        }
+        .blog-breadcrumbs a { color: var(--khalida-primary-dark-teal, #1f3a46); text-decoration: none; }
+        .blog-breadcrumbs a:hover { text-decoration: underline; }
+        .blog-hero {
+            background: linear-gradient(135deg, rgba(31,58,70,0.9), rgba(212,106,58,0.9)), url("../../session1/AI-Superheroes--How-Machines-Can-Help-Us.webp");
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            border-radius: 20px;
+            padding: 2.7rem 2.2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.16);
+        }
+        .blog-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(240,216,194,0.2), transparent 45%),
+                        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.12), transparent 50%);
+            pointer-events: none;
+        }
+        .blog-hero h1 { font-size: 2.3rem; font-weight: 800; margin-bottom: 0.75rem; position: relative; z-index: 1; }
+        .blog-hero .blog-date { font-size: 0.95rem; letter-spacing: 0.6px; text-transform: uppercase; color: rgba(255,255,255,0.82); position: relative; z-index: 1; }
+        .blog-hero p { max-width: 780px; font-size: 1.08rem; line-height: 1.78; position: relative; z-index: 1; }
+        .blog-meta-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .meta-chip-soft {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.85rem;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.16);
+            color: #fff;
+            font-weight: 700;
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+        .meta-chip-soft i { color: var(--khalida-accent-soft-gold, #f0d8c2); }
+        main { display: grid; gap: 1.5rem; }
+        main > section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.85rem 1.65rem;
+            box-shadow: 0 14px 34px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        h2 { font-size: 1.68rem; font-weight: 800; color: var(--khalida-primary-dark-teal, #1f3a46); margin-bottom: 0.85rem; }
+        h3 { font-size: 1.25rem; font-weight: 700; color: var(--khalida-primary-dark-teal, #1f3a46); margin-bottom: 0.65rem; }
+        p { color: var(--text-dark, #1f252e); line-height: 1.7; }
+        .pill-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(31,58,70,0.12);
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+        .section-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 0.4rem;
+        }
+        .section-header-bar .section-kicker { font-size: 0.9rem; font-weight: 700; color: var(--khalida-muted, #4b5563); letter-spacing: 0.2px; text-transform: uppercase; }
+        .section-header-bar .section-anchor { font-size: 0.9rem; color: var(--khalida-primary-dark-teal, #1f3a46); text-decoration: none; font-weight: 700; }
+        .section-header-bar .section-anchor:hover { text-decoration: underline; }
+        ul { padding-left: 1.2rem; }
+        ul li { margin-bottom: 0.35rem; color: var(--text-dark, #1f252e); }
+        .pdf-embed {
+            width: 100%;
+            min-height: 520px;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 12px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        }
+        figure { margin: 1.5rem 0; }
+        figure img { width: 100%; border-radius: 14px; box-shadow: 0 12px 28px rgba(0,0,0,0.08); }
+        figure figcaption { font-size: 0.9rem; color: var(--text-light, #4b5563); margin-top: 0.45rem; text-align: center; }
+        .cta-card {
+            background: linear-gradient(135deg, rgba(31,58,70,0.92), rgba(122,90,58,0.9));
+            color: #fff;
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.16);
+            text-align: center;
+        }
+        .cta-card h3 { color: #fff; margin-bottom: 0.5rem; }
+        .cta-card p { color: rgba(255,255,255,0.9); margin-bottom: 0; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; color: var(--khalida-primary-dark-teal, #1f3a46); font-weight: 700; margin-top: 1rem; }
+        .back-link:hover { text-decoration: underline; }
+        @media (max-width: 768px) {
+            .blog-hero { padding: 2rem 1.4rem; }
+            .blog-hero h1 { font-size: 1.9rem; }
+            .blog-shell { padding: 6rem 1rem 2.75rem; }
+            .pdf-embed { min-height: 420px; }
+            main > section { padding: 1.25rem 1.1rem; }
+            .section-header-bar { flex-direction: column; align-items: flex-start; }
+            .blog-meta-strip { gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body id="page-top">
+    <!-- Top Navigation with Blog dropdown -->
+    <nav class="navbar navbar-expand-lg navbar-elegant fixed-top" id="mainNav">
+        <div class="container-fluid px-0">
+            <a class="navbar-brand" href="../../../index.html">
+                <i class="fas fa-graduation-cap me-2"></i>
+                <span class="brand-text">Khalida Foundation</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#programs">Programs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../courses.html#ai-initiative">AI Initiative</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#impact">Impact</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="../../index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="blogDropdown">
+                            <li><a class="dropdown-item" href="../../index.html">All Blog Posts</a></li>
+                            <li><a class="dropdown-item" href="./ai-superheroes-session-1.html">AI Superheroes – Session 1</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#get-involved">Get Involved</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-register" href="../../../register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="blog-shell">
+        <nav class="blog-breadcrumbs" aria-label="Breadcrumb">
+            <a href="../../../index.html">Home</a> &raquo; <a href="../../index.html">Blog</a> &raquo; Session 1
+        </nav>
+
+        <header class="blog-hero">
+            <div class="blog-date">January 17, 2026</div>
+            <h1>AI Superheroes Workshop – Session 1: Discovering the Power of AI</h1>
+            <p>Welcome to our first AI adventure! Together we explored how smart machines can help people, and how every kid can be an AI superhero by using technology with kindness and responsibility.</p>
+            <div class="blog-meta-strip">
+                <span class="meta-chip-soft"><i class="fas fa-child"></i> Kids 8–14</span>
+                <span class="meta-chip-soft"><i class="fas fa-clock"></i> 5 min read</span>
+                <span class="meta-chip-soft"><i class="fas fa-shield-heart"></i> Responsible AI</span>
+            </div>
+        </header>
+
+        <main>
+            <section id="what-kids-learned">
+                <div class="section-header-bar">
+                    <span class="section-kicker">Session recap</span>
+                    <a class="section-anchor" href="#what-kids-learned">Share this section</a>
+                </div>
+                <div class="pill-label">What Kids Learned</div>
+                <h2>Building Friendly, Helpful AI</h2>
+                <p>In Session 1, we broke down AI into simple, exciting ideas that kids can spot in the real world.</p>
+                <ul>
+                    <li><strong>What is AI?</strong> Smart computer programs that learn patterns (like recognizing voices or photos).</li>
+                    <li><strong>How AI helps people</strong> 🧠🤖: From reading to the visually impaired to organizing community resources.</li>
+                    <li><strong>Responsible AI superheroes</strong>: Ask “Is this kind? Is this fair? Does it keep people safe?”</li>
+                    <li><strong>Hands-on sneak peek</strong>: Trying prompts, spotting patterns, and thinking about good data.</li>
+                </ul>
+                <figure>
+                    <img src="../../session1/Learn%20AI%20Image%201.png" alt="Kids exploring how AI recognizes patterns." />
+                    <figcaption>Seeing patterns everywhere: how AI notices things like colors, shapes, and sounds.</figcaption>
+                </figure>
+            </section>
+
+            <section id="hands-on-practice">
+                <div class="section-header-bar">
+                    <span class="section-kicker">Do & discover</span>
+                    <a class="section-anchor" href="#hands-on-practice">Try at home</a>
+                </div>
+                <div class="pill-label">Hands-On Practice</div>
+                <h2>Try the AI Superhero Moves at Home</h2>
+                <p>From the practice guide, kids played with simple activities to feel how AI thinks.</p>
+                <ul>
+                    <li><strong>Spot the pattern</strong>: Sort objects by size or color, then explain the “rule” to a friend—just like training data.</li>
+                    <li><strong>Yes/No classifier</strong>: Choose a superhero mission (e.g., “save noisy pets”), then decide which sounds fit the mission.</li>
+                    <li><strong>Better prompts</strong>: Give clear, kind instructions to an imaginary robot and see how results improve.</li>
+                    <li><strong>Fairness check</strong>: Ask, “Who might feel left out?” and adjust your rule so everyone is included.</li>
+                </ul>
+                <p>Challenge: teach a family member one activity and invent a new “mission rule” together. 🦸</p>
+                <figure>
+                    <img src="../../session1/Learn%20AI%20Image%203.png" alt="Practice cards showing AI superhero missions." />
+                    <figcaption>Practice missions encourage kids to refine prompts and test fairness.</figcaption>
+                </figure>
+            </section>
+
+            <section id="pdfs">
+                <div class="section-header-bar">
+                    <span class="section-kicker">Read & explore</span>
+                    <a class="section-anchor" href="#pdfs">Open guides</a>
+                </div>
+                <div class="pill-label">Read the Guides</div>
+                <h2>Workshop & Practice PDFs</h2>
+                <h3>AI Superheroes Workshop (Viewer)</h3>
+                <iframe class="pdf-embed" src="../../session1/AI_Superheroes_Workshop.pdf" title="AI Superheroes Workshop PDF"></iframe>
+
+                <h3 style="margin-top:1.75rem;">AI Superheroes Practice Guide (Viewer)</h3>
+                <iframe class="pdf-embed" src="../../session1/AI_Superheros_Practice.pdf" title="AI Superheroes Practice Guide PDF"></iframe>
+            </section>
+
+            <section id="visual-support">
+                <div class="section-header-bar">
+                    <span class="section-kicker">See the story</span>
+                    <a class="section-anchor" href="#visual-support">View visuals</a>
+                </div>
+                <div class="pill-label">Visual Learning</div>
+                <h2>See AI Superheroes in Action</h2>
+                <figure>
+                    <img src="../../session1/Learn%20AI%20Image%205.png" alt="Kids imagining AI superheroes helping their community." />
+                    <figcaption>Imagining ways AI can help communities—safely and fairly.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../session1/fnins-16-1096737-g002.jpg" alt="Diagram showing simple AI pattern recognition." />
+                    <figcaption>Pattern recognition: how machines learn from examples we provide.</figcaption>
+                </figure>
+            </section>
+
+            <section id="closing">
+                <div class="cta-card">
+                    <h3>Keep Shining, AI Superheroes!</h3>
+                    <p>Thank you to every kid, parent, and educator for learning with us. Keep practicing kind prompts, fair rules, and curious questions—Session 2 is coming soon with new missions!</p>
+                </div>
+                <a class="back-link" href="../../index.html" aria-label="Back to blog list">&larr; Back to Blog</a>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../js/scripts.js"></script>
+</body>
+</html>

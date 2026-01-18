@@ -15,110 +15,6 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/custom.css" rel="stylesheet" />
-    <style>
-        .registration-hero {
-            background: linear-gradient(135deg, #1a3a52 0%, #1D809F 100%);
-            padding: 80px 0 60px;
-            color: white;
-            text-align: center;
-        }
-        
-        .registration-form-section {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-        
-        .registration-card {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            padding: 50px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .form-label {
-            font-weight: 600;
-            color: #1a3a52;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        
-        .form-control, .form-select {
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 12px 16px;
-            font-size: 15px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus, .form-select:focus {
-            border-color: #1D809F;
-            box-shadow: 0 0 0 0.2rem rgba(29, 128, 159, 0.15);
-        }
-        
-        .btn-register {
-            background: linear-gradient(135deg, #1D809F 0%, #1a3a52 100%);
-            color: white;
-            border: none;
-            padding: 16px 50px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 16px;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-register:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(29, 128, 159, 0.3);
-            color: white;
-        }
-        
-        .required-field::after {
-            content: " *";
-            color: #dc3545;
-        }
-        
-        .success-message {
-            display: none;
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            margin-top: 30px;
-        }
-        
-        .success-message.show {
-            display: block;
-            animation: slideIn 0.5s ease;
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .info-box {
-            background: #e3f2fd;
-            border-left: 4px solid #1D809F;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-        
-        .info-box i {
-            color: #1D809F;
-            margin-right: 10px;
-        }
-    </style>
 </head>
 <body>
     <!-- Professional Top Navigation -->
@@ -139,6 +35,13 @@
                     <li class="nav-item"><a class="nav-link" href="index.html#programs">Programs</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#ai-initiative">AI Initiative</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#impact">Impact</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="blog/index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="blogDropdown">
+                            <li><a class="dropdown-item" href="blog/index.html">All Blog Posts</a></li>
+                            <li><a class="dropdown-item" href="blog/2026/01/ai-superheroes-session-1.html">AI Superheroes – Session 1</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="index.html#get-involved">Get Involved</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#gallery">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
@@ -161,7 +64,7 @@
             <div class="registration-card">
                 <div class="info-box">
                     <i class="fas fa-info-circle fa-lg"></i>
-                    <strong>Important:</strong> Complete all required fields marked with <span style="color: #dc3545;">*</span>. 
+                    <strong>Important:</strong> Complete all required fields marked with <span class="required-asterisk">*</span>. 
                     You will receive a confirmation email after successful registration.
                 </div>
 

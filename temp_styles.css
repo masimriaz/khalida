@@ -1,0 +1,203 @@
+
+/* ===== COURSES & REGISTER PAGE STYLES ===== */
+
+/* --- Courses Page --- */
+.courses-hero {
+    background: var(--khalida-primary-dark-teal);
+    padding: 120px 0 80px;
+    color: var(--white);
+}
+
+.courses-hero .hero-badge {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--khalida-cta-golden-amber);
+    color: var(--khalida-cta-golden-amber);
+}
+
+.courses-hero .stat-number {
+    color: var(--khalida-cta-golden-amber);
+}
+
+.active-course-section {
+    background-color: var(--khalida-neutral-light-beige);
+}
+
+.active-course-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+}
+
+.active-badge {
+    background-color: var(--khalida-secondary-earthy-brown);
+    color: var(--white);
+}
+
+.course-category {
+    color: var(--khalida-secondary-earthy-brown);
+}
+
+.course-title {
+    color: var(--khalida-primary-dark-teal);
+}
+
+.course-subtitle {
+    color: var(--text-light);
+}
+
+.course-highlights {
+    background: var(--khalida-neutral-light-beige);
+    border-left-color: var(--khalida-primary-dark-teal);
+}
+
+.feature-tag {
+    background-color: rgba(42, 74, 92, 0.1);
+    color: var(--khalida-primary-dark-teal);
+    border: 1px solid rgba(42, 74, 92, 0.2);
+}
+
+.urgency-alert {
+    background: rgba(229, 184, 115, 0.15);
+    border-color: var(--khalida-accent-soft-gold);
+    color: var(--khalida-secondary-earthy-brown);
+}
+
+.course-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0,0,0,0.07);
+    transition: all 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.course-card-header {
+    background-color: var(--khalida-neutral-light-beige);
+}
+
+.course-icon {
+    background: var(--khalida-primary-dark-teal);
+}
+.course-icon.icon-purple { background: var(--khalida-secondary-earthy-brown); }
+.course-icon.icon-gold { background: var(--khalida-accent-soft-gold); }
+.course-icon.icon-teal { background: #64B5F6; }
+.course-icon.icon-pink { background: #EC407A; }
+.course-icon.icon-green { background: #66BB6A; }
+
+
+.course-card-title {
+    color: var(--khalida-primary-dark-teal);
+}
+
+.spec {
+    background-color: var(--white);
+    border-left-color: var(--khalida-primary-dark-teal);
+}
+.spec i {
+    color: var(--khalida-primary-dark-teal);
+}
+
+.btn-course-details {
+    background: var(--khalida-primary-dark-teal);
+    color: white;
+}
+.btn-course-details:hover {
+    background: var(--khalida-secondary-earthy-brown);
+}
+
+.courses-cta-section {
+    background-color: var(--khalida-primary-dark-teal);
+}
+.courses-cta-section .cta-card {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* --- Register Page --- */
+.registration-hero {
+    background: var(--khalida-primary-dark-teal);
+    padding: 80px 0 60px;
+    color: white;
+    text-align: center;
+}
+
+.registration-form-section {
+    padding: 80px 0;
+    background: var(--khalida-neutral-light-beige);
+}
+
+.registration-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.07);
+    padding: 50px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--khalida-primary-dark-teal);
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-control, .form-select {
+    border: 1px solid #d5dce4;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--khalida-primary-dark-teal);
+    box-shadow: 0 0 0 0.2rem rgba(42, 74, 92, 0.15);
+}
+
+.btn-register {
+    background: var(--khalida-primary-dark-teal);
+    color: white;
+    border: none;
+    padding: 16px 50px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(42, 74, 92, 0.2);
+    color: white;
+    background: var(--khalida-secondary-earthy-brown);
+}
+
+.success-message {
+    display: none;
+    background: var(--khalida-secondary-earthy-brown);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.info-box {
+    background: var(--khalida-neutral-light-beige);
+    border-left: 4px solid var(--khalida-primary-dark-teal);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.info-box i {
+    color: var(--khalida-primary-dark-teal);
+    margin-right: 10px;
+}

@@ -36,8 +36,15 @@
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#programs">Programs</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#ai-initiative">AI Initiative</a></li>
+                        <li class="nav-item"><a class="nav-link" href="courses.html#ai-initiative">AI Initiative</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#impact">Impact</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="blog/index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="blogDropdown">
+                                <li><a class="dropdown-item" href="blog/index.html">All Blog Posts</a></li>
+                                <li><a class="dropdown-item" href="blog/2026/01/ai-superheroes-session-1.html">AI Superheroes – Session 1</a></li>
+                            </ul>
+                        </li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#get-involved">Get Involved</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#gallery">Gallery</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
@@ -48,14 +55,23 @@
         </nav>
         <!-- Header-->
         <header class="masthead d-flex align-items-center">
-            <div class="container px-4 px-lg-5 text-center">
+            <div class="container px-4 px-lg-5 text-center hero-stack">
                 <div class="hero-badge mb-3">✨ In Loving Memory of Khalida ✨</div>
-                <h1 class="mb-3">Khalida Educational Foundation</h1>
-                <h3 class="mb-4 hero-tagline">Empowering Futures Through Education</h3>
-                <p class="lead mb-5 hero-mission">Building a legacy of learning, one child at a time. Quality education and skill-based learning for every child, everywhere.</p>
+                <h1 class="mb-3 hero-title">Khalida Educational Foundation</h1>
+                <h3 class="mb-3 hero-tagline">Empowering futures through education</h3>
+                <p class="lead mb-4 hero-mission">Building a legacy of learning, one child at a time. Quality education and skill-based learning for every child, everywhere.</p>
+                <div class="hero-meta">
+                    <span class="meta-pill"><i class="fas fa-feather-alt me-2"></i>Legacy-led compassion</span>
+                    <span class="meta-pill"><i class="fas fa-laptop-code me-2"></i>Skill-based learning</span>
+                    <span class="meta-pill"><i class="fas fa-hand-holding-heart me-2"></i>Community first</span>
+                </div>
+                <div class="hero-progress">
+                    <span class="progress-fill"></span>
+                    <span class="progress-glow"></span>
+                </div>
                 <div class="hero-cta">
                     <a class="btn btn-primary btn-xl me-3 mb-3" href="register.html">Register for Courses</a>
-                    <a class="btn btn-warning btn-xl mb-3" href="#ai-initiative">Join AI Initiative</a>
+                    <a class="btn btn-warning btn-xl mb-3" href="courses.html#ai-initiative">Join AI Initiative</a>
                 </div>
             </div>
         </header>
@@ -63,44 +79,106 @@
         <section class="about-section-new" id="about">
             <div class="container px-4 px-lg-5">
                 <!-- Section Header -->
-                <div class="text-center mb-5">
-                    <span class="about-badge-new">
+                <div class="text-center mb-5 story-header">
+                    <div class="story-header-pill">
                         <i class="fas fa-heart me-2"></i>
                         Our Story
-                    </span>
+                    </div>
                     <h2 class="about-heading-new">About Our Foundation</h2>
-                    <p class="about-subtitle-new">A Legacy of Love, Learning, and Hope</p>
+                    <div class="story-header-progress">
+                        <span class="progress-fill"></span>
+                        <span class="progress-glow"></span>
+                    </div>
                 </div>
 
-                <!-- Main Tribute Card -->
-                <div class="tribute-modern-card mb-5">
-                    <div class="row g-0">
-                        <div class="col-lg-5">
-                            <div class="tribute-image-modern">
+                <!-- Story Hero Grid -->
+                <div class="row g-4 align-items-stretch story-hero-grid mb-5">
+                    <div class="col-lg-5">
+                        <div class="story-visual-card">
+                            <div class="story-visual-media">
                                 <img src="assets/mother/img3.jpeg" alt="In Loving Memory of Khalida" />
-                                <div class="image-badge-modern">
-                                    <i class="fas fa-infinity"></i>
+                                <div class="story-visual-overlay"></div>
+                            </div>
+                            <div class="story-load-bar">
+                                <span class="load-fill"></span>
+                                <span class="load-glow"></span>
+                            </div>
+                            <div class="story-meta-chip">
+                                <i class="fas fa-sparkles me-2"></i>
+                                Memory spotlight
+                            </div>
+                            <div class="story-pill story-pill-primary">
+                                <i class="fas fa-infinity me-2"></i>Living legacy
+                            </div>
+                            <div class="story-floating-chip">
+                                <span class="chip-label">Since 1998</span>
+                                <span class="chip-detail">Love → Opportunity</span>
+                            </div>
+                            <div class="story-floating-stat">
+                                <div class="stat-number">24</div>
+                                <div class="stat-label">Years of impact</div>
+                            </div>
+                            <div class="story-dot-grid"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="story-content-card">
+                            <div class="story-eyebrow">Built on a mother's promise</div>
+                            <h3 class="story-title">Khalida's living legacy</h3>
+                            <p class="story-lead">
+                                This foundation is more than an institution—it's a living testament to a mother's unconditional love and her belief that education is the most powerful way to change the world.
+                            </p>
+                            <div class="story-timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">01</div>
+                                    <div class="timeline-body">
+                                        <h5>Hope begins at home</h5>
+                                        <p>Her conviction lit the first spark—every child deserves the tools to dream bigger.</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">02</div>
+                                    <div class="timeline-body">
+                                        <h5>Education as a promise</h5>
+                                        <p>From scholarships to mentoring, each program honors her wish to remove barriers to learning.</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">03</div>
+                                    <div class="timeline-body">
+                                        <h5>Legacy in motion</h5>
+                                        <p>Every student we empower carries her light forward into their families and communities.</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="tribute-story-modern">
-                                <h3 class="memorial-title">✨ In Loving Memory of Khalida ✨</h3>
-                                <div class="memorial-quote">
-                                    <i class="fas fa-quote-left"></i>
-                                    <p>"Education is the most powerful weapon you can use to change the world"</p>
+                            <div class="story-metrics">
+                                <div class="metric-card">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <div>
+                                        <span class="metric-value">850+</span>
+                                        <span class="metric-label">Scholarships funded</span>
+                                    </div>
                                 </div>
-                                <div class="memorial-text">
-                                    <p>
-                                        This foundation is more than an institution—it's a <span class="highlight-text">living testament to a mother's unconditional love</span> and her unwavering belief in the transformative power of education.
-                                    </p>
-                                    <p>
-                                        Her life was a beacon of hope, illuminating the path for countless children who dreamed of a brighter tomorrow. Every scholarship awarded, every child empowered, every life transformed carries her spirit forward.
-                                    </p>
+                                <div class="metric-card">
+                                    <i class="fas fa-user-friends"></i>
+                                    <div>
+                                        <span class="metric-value">3,200+</span>
+                                        <span class="metric-label">Children mentored</span>
+                                    </div>
                                 </div>
-                                <div class="legacy-tag">
-                                    <i class="fas fa-heart"></i>
-                                    <span>Her legacy lives on in the smiles of students and the hope of communities</span>
+                                <div class="metric-card">
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                    <div>
+                                        <span class="metric-value">140+</span>
+                                        <span class="metric-label">Community partners</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="story-signature">
+                                <div class="signature-mark">K</div>
+                                <div>
+                                    <p class="signature-line">“Her legacy lives on in the smiles of students and the hope of communities.”</p>
+                                    <span class="signature-byline">The Khalida Educational Foundation</span>
                                 </div>
                             </div>
                         </div>
@@ -210,22 +288,39 @@
         <!-- Programs & Initiatives -->
         <section class="content-section" id="programs">
             <div class="container px-4 px-lg-5">
-                <div class="content-section-heading text-center mb-5">
-                    <h3 class="text-secondary mb-2">Our Impact</h3>
-                    <h2 class="section-heading mb-4">Programs & Initiatives</h2>
-                    <p class="lead mb-0">Comprehensive solutions to transform education and empower communities</p>
+                <div class="content-section-heading text-center mb-5 programs-header">
+                    <div class="programs-pill">
+                        <i class="fas fa-seedling me-2"></i>
+                        Our Impact
+                    </div>
+                    <h2 class="section-heading mb-3">Programs & Initiatives</h2>
+                    <p class="lead mb-3 programs-lead">Comprehensive solutions that remove barriers, build skills, and grow opportunity for every learner.</p>
+                    <div class="programs-meta">
+                        <span class="meta-chip"><i class="fas fa-graduation-cap me-2"></i>Scholarships first</span>
+                        <span class="meta-chip"><i class="fas fa-school me-2"></i>Better learning spaces</span>
+                        <span class="meta-chip"><i class="fas fa-robot me-2"></i>Future-ready skills</span>
+                    </div>
+                    <div class="programs-progress">
+                        <span class="progress-fill"></span>
+                        <span class="progress-glow"></span>
+                    </div>
                 </div>
-                <div class="row gx-4 gx-lg-5">
+                <div class="row gx-4 gx-lg-5 programs-grid">
                     <!-- Scholarship Programs -->
                     <div class="col-lg-4 col-md-6 mb-5">
                         <div class="program-card h-100">
                             <div class="program-icon">
                                 <i class="fas fa-graduation-cap"></i>
                             </div>
+                            <span class="program-tag">Access</span>
                             <h4 class="program-title">Scholarship Programs</h4>
                             <p class="program-description">
                                 We provide comprehensive scholarships to underprivileged students, removing financial barriers and enabling them to pursue their academic dreams and access quality education.
                             </p>
+                            <div class="program-stats">
+                                <div class="stat-item"><i class="fas fa-user-graduate"></i><div><span class="stat-value">850+</span><span class="stat-label">Scholarships funded</span></div></div>
+                                <div class="stat-item"><i class="fas fa-check-circle"></i><div><span class="stat-value">92%</span><span class="stat-label">Graduation rate</span></div></div>
+                            </div>
                             <div class="program-cta">
                                 <h5 class="cta-title">How You Can Help</h5>
                                 <p class="cta-text">Sponsor a student's education and transform their future.</p>
@@ -240,10 +335,15 @@
                             <div class="program-icon">
                                 <i class="fas fa-building"></i>
                             </div>
+                            <span class="program-tag">Infrastructure</span>
                             <h4 class="program-title">Infrastructure Development</h4>
                             <p class="program-description">
                                 We collaborate with schools and educational institutions to build and improve infrastructure, creating safe, conducive learning environments that enhance the overall educational experience.
                             </p>
+                            <div class="program-stats">
+                                <div class="stat-item"><i class="fas fa-school"></i><div><span class="stat-value">32</span><span class="stat-label">Sites upgraded</span></div></div>
+                                <div class="stat-item"><i class="fas fa-book-reader"></i><div><span class="stat-value">18</span><span class="stat-label">Libraries built</span></div></div>
+                            </div>
                             <div class="program-cta">
                                 <h5 class="cta-title">How You Can Help</h5>
                                 <p class="cta-text">Fund classroom construction or library development.</p>
@@ -258,10 +358,15 @@
                             <div class="program-icon">
                                 <i class="fas fa-chalkboard-teacher"></i>
                             </div>
+                            <span class="program-tag">Excellence</span>
                             <h4 class="program-title">Teacher Training</h4>
                             <p class="program-description">
                                 We support professional development programs for educators, equipping them with modern teaching methodologies, technology integration skills, and effective classroom management techniques.
                             </p>
+                            <div class="program-stats">
+                                <div class="stat-item"><i class="fas fa-chalkboard"></i><div><span class="stat-value">540</span><span class="stat-label">Teachers upskilled</span></div></div>
+                                <div class="stat-item"><i class="fas fa-map-marked-alt"></i><div><span class="stat-value">4</span><span class="stat-label">Regions served</span></div></div>
+                            </div>
                             <div class="program-cta">
                                 <h5 class="cta-title">How You Can Help</h5>
                                 <p class="cta-text">Support workshops and certification programs for teachers.</p>
@@ -276,10 +381,15 @@
                             <div class="program-icon">
                                 <i class="fas fa-laptop-code"></i>
                             </div>
+                            <span class="program-tag">Skills</span>
                             <h4 class="program-title">Skill-Based Learning</h4>
                             <p class="program-description">
                                 We promote practical, hands-on learning that prepares children for real-world challenges. Through workshops, vocational training, coding bootcamps, and mentorship programs, students develop essential skills and explore diverse career paths.
                             </p>
+                            <div class="program-stats">
+                                <div class="stat-item"><i class="fas fa-users-cog"></i><div><span class="stat-value">1.2k</span><span class="stat-label">Learners engaged</span></div></div>
+                                <div class="stat-item"><i class="fas fa-user-friends"></i><div><span class="stat-value">60</span><span class="stat-label">Active mentors</span></div></div>
+                            </div>
                             <div class="program-cta">
                                 <h5 class="cta-title">How You Can Help</h5>
                                 <p class="cta-text">Volunteer as a mentor or sponsor skill development workshops.</p>
@@ -294,10 +404,15 @@
                             <div class="program-icon">
                                 <i class="fas fa-users"></i>
                             </div>
+                            <span class="program-tag">Community</span>
                             <h4 class="program-title">Community Engagement</h4>
                             <p class="program-description">
                                 We actively engage parents, community members, and stakeholders to build a supportive network that recognizes education's importance and participates in nurturing children's holistic growth.
                             </p>
+                            <div class="program-stats">
+                                <div class="stat-item"><i class="fas fa-handshake"></i><div><span class="stat-value">210</span><span class="stat-label">Events hosted</span></div></div>
+                                <div class="stat-item"><i class="fas fa-people-group"></i><div><span class="stat-value">25k</span><span class="stat-label">Participants reached</span></div></div>
+                            </div>
                             <div class="program-cta">
                                 <h5 class="cta-title">How You Can Help</h5>
                                 <p class="cta-text">Join community events and awareness campaigns.</p>
@@ -313,218 +428,20 @@
                             <div class="program-icon ai-icon">
                                 <i class="fas fa-robot"></i>
                             </div>
+                            <span class="program-tag">Future skills</span>
                             <h4 class="program-title">AI & Future Skills</h4>
                             <p class="program-description">
                                 Introducing cutting-edge AI and technology education for young minds (Ages 9-14). Building critical thinking, creativity, and future-ready skills through hands-on learning.
                             </p>
+                            <div class="program-stats">
+                                <div class="stat-item"><i class="fas fa-rocket"></i><div><span class="stat-value">180</span><span class="stat-label">Seats this year</span></div></div>
+                                <div class="stat-item"><i class="fas fa-layer-group"></i><div><span class="stat-value">12</span><span class="stat-label">Cohorts running</span></div></div>
+                            </div>
                             <div class="program-cta">
-                                <a href="#ai-initiative" class="btn btn-warning btn-sm">Learn More</a>
+                                <a href="courses.html#ai-initiative" class="btn btn-warning btn-sm">Learn More</a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-        <!-- AI Initiative - Future Leaders Program -->
-        <section class="ai-initiative-section" id="ai-initiative">
-            <div class="container px-4 px-lg-5">
-                <!-- Hero Header -->
-                <div class="row mb-5">
-                    <div class="col-lg-10 mx-auto">
-                        <div class="ai-hero-wrapper text-center">
-                            <div class="ai-badge-pulse mb-4">
-                                <span class="pulse-dot"></span>
-                                New Initiative Launch - Limited Seats Available
-                            </div>
-                            <h2 class="section-heading ai-heading mb-3">
-                                <span class="ai-emoji">🚀</span> Future Leaders Program
-                            </h2>
-                            <h3 class="ai-subheading mb-4">AI for Young Minds (Ages 9-14)</h3>
-                            <p class="lead text-white mb-5" style="max-width: 800px; margin: 0 auto;">
-                                Prepare your child for tomorrow's world with our groundbreaking AI education program. 
-                                Transform curiosity into capability through hands-on learning, real projects, and expert mentorship.
-                            </p>
-                            <div class="ai-stats-inline justify-content-center">
-                                <div class="inline-stat">
-                                    <i class="fas fa-clock"></i>
-                                    <div class="stat-info">
-                                        <strong>2 Months</strong>
-                                        <span>Program Duration</span>
-                                    </div>
-                                </div>
-                                <div class="inline-stat">
-                                    <i class="fas fa-video"></i>
-                                    <div class="stat-info">
-                                        <strong>Live Classes</strong>
-                                        <span>Weekly Sessions</span>
-                                    </div>
-                                </div>
-                                <div class="inline-stat">
-                                    <i class="fas fa-chalkboard-teacher"></i>
-                                    <div class="stat-info">
-                                        <strong>Expert Instructors</strong>
-                                        <span>Industry Professionals</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Main Content Grid -->
-                <div class="row gx-5 mb-5">
-                    <!-- Left: Program Highlights -->
-                    <div class="col-lg-6 mb-4">
-                        <div class="ai-program-showcase">
-                            <h4 class="text-white mb-4">
-                                <i class="fas fa-star text-warning me-2"></i>
-                                Program Highlights
-                            </h4>
-                            
-                            <div class="highlight-grid mb-4">
-                                <div class="highlight-item">
-                                    <i class="fas fa-laptop-code"></i>
-                                    <span>Hands-On Learning - Build real AI projects</span>
-                                </div>
-                                <div class="highlight-item">
-                                    <i class="fas fa-users"></i>
-                                    <span>Small Class Size - Max 15 students</span>
-                                </div>
-                                <div class="highlight-item">
-                                    <i class="fas fa-certificate"></i>
-                                    <span>Certificate of Completion</span>
-                                </div>
-                                <div class="highlight-item">
-                                    <i class="fas fa-project-diagram"></i>
-                                    <span>Real-World AI Projects</span>
-                                </div>
-                            </div>
-
-                            <!-- What Your Child Will Achieve -->
-                            <h5 class="text-white mb-3 mt-4">
-                                <i class="fas fa-trophy text-warning me-2"></i>
-                                What Your Child Will Achieve
-                            </h5>
-                            <div class="row g-3">
-                                <div class="col-6">
-                                    <div class="outcome-card-compact">
-                                        <i class="fas fa-brain"></i>
-                                        <h6>Critical Thinking</h6>
-                                        <p>Analytical problem-solving skills</p>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="outcome-card-compact">
-                                        <i class="fas fa-code"></i>
-                                        <h6>Coding Skills</h6>
-                                        <p>Master Python programming</p>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="outcome-card-compact">
-                                        <i class="fas fa-rocket"></i>
-                                        <h6>AI Portfolio</h6>
-                                        <p>Build 4+ real AI projects</p>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="outcome-card-compact">
-                                        <i class="fas fa-medal"></i>
-                                        <h6>Future Ready</h6>
-                                        <p>Competitive edge for tomorrow</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Right: Curriculum Display -->
-                    <div class="col-lg-6 mb-4">
-                        <div class="curriculum-showcase">
-                            <h4 class="text-white mb-4">
-                                <i class="fas fa-book-open text-warning me-2"></i>
-                                Complete Curriculum
-                            </h4>
-                            
-                            <div class="curriculum-preview mb-4">
-                                <img src="assets/img/poster2.jpeg" alt="AI Curriculum Overview" class="img-fluid curriculum-image" />
-                            </div>
-                            
-                            <div class="curriculum-modules">
-                                <div class="module-item">
-                                    <div class="module-number">01</div>
-                                    <div class="module-content">
-                                        <h5>Introduction to AI</h5>
-                                        <p>Understanding AI, machine learning basics, and real-world applications</p>
-                                    </div>
-                                </div>
-                                <div class="module-item">
-                                    <div class="module-number">02</div>
-                                    <div class="module-content">
-                                        <h5>Python Fundamentals</h5>
-                                        <p>Learn the programming language powering AI development</p>
-                                    </div>
-                                </div>
-                                <div class="module-item">
-                                    <div class="module-number">03</div>
-                                    <div class="module-content">
-                                        <h5>Hands-On AI Projects</h5>
-                                        <p>Build chatbots, image classifiers, and smart applications</p>
-                                    </div>
-                                </div>
-                                <div class="module-item">
-                                    <div class="module-number">04</div>
-                                    <div class="module-content">
-                                        <h5>AI Ethics & Future</h5>
-                                        <p>Understanding responsible AI and future career opportunities</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Compelling CTA Section -->
-                <div class="row">
-                    <div class="col-lg-10 mx-auto">
-                        <div class="ai-cta-premium">
-                            <div class="row align-items-center">
-                                <div class="col-lg-8 mb-4 mb-lg-0">
-                                    <div class="cta-content">
-                                        <h3 class="mb-3">
-                                            <i class="fas fa-rocket me-2"></i>
-                                            Enroll Your Child in the Future
-                                        </h3>
-                                        <p class="lead mb-2">
-                                            Limited to just <strong class="text-warning">15 students</strong> for personalized learning
-                                        </p>
-                                        <p class="mb-0">
-                                            <i class="fas fa-check-circle text-success me-2"></i> Early Bird Discount Available
-                                            <br>
-                                            <i class="fas fa-check-circle text-success me-2"></i> 100% Satisfaction Guarantee
-                                            <br>
-                                            <i class="fas fa-check-circle text-success me-2"></i> Certificate Upon Completion
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 text-center">
-                                    <a href="register.html" class="btn btn-warning btn-xl-custom mb-3 w-100">
-                                        <i class="fas fa-user-plus me-2"></i>
-                                        Register Now
-                                    </a>
-                                    <a href="#contact" class="btn btn-outline-light btn-lg w-100">
-                                        <i class="fas fa-info-circle me-2"></i>
-                                        Get Details
-                                    </a>
-                                    <p class="text-white-50 small mt-3 mb-0">
-                                        <i class="fas fa-users me-1"></i> 
-                                        <strong>8 seats remaining</strong> • Starting Soon
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 </div>
             </div>
         </section>
@@ -533,23 +450,32 @@
             <div class="container px-4 px-lg-5">
                 <!-- Section Header -->
                 <div class="row mb-5">
-                    <div class="col-lg-10 mx-auto text-center">
-                        <div class="impact-header-badge mb-3">
+                    <div class="col-lg-10 mx-auto text-center impact-header-modern">
+                        <div class="impact-pill mb-3">
                             <i class="fas fa-chart-line me-2"></i>
-                            Making Real Difference
+                            Our Impact Story
                         </div>
-                        <h2 class="section-heading-impact mb-3">Our Impact Story</h2>
-                        <p class="lead-impact mb-0">
-                            Every number represents a life transformed, a dream realized, and a future brightened. 
-                            See how your support creates lasting change in communities.
+                        <h2 class="section-heading-impact mb-2">Impact That Lives Beyond Numbers</h2>
+                        <p class="lead-impact mb-3">
+                            Every metric is a life transformed—scholarships awarded, schools uplifted, teachers empowered, and communities ignited.
                         </p>
+                        <div class="impact-meta">
+                            <span class="meta-chip"><i class="fas fa-award me-2"></i>350+ scholarships</span>
+                            <span class="meta-chip"><i class="fas fa-school me-2"></i>45 partner schools</span>
+                            <span class="meta-chip"><i class="fas fa-people-group me-2"></i>Thousands of families</span>
+                        </div>
+                        <div class="programs-progress mt-3">
+                            <span class="progress-fill"></span>
+                            <span class="progress-glow"></span>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Stats Grid with Visual Enhancement -->
-                <div class="row gx-4 gy-4 mb-5">
+                <div class="row gx-4 gy-4 mb-5 impact-grid">
                     <div class="col-lg-3 col-md-6">
                         <div class="impact-stat-card">
+                            <span class="stat-chip">Access</span>
                             <div class="stat-icon-wrapper">
                                 <div class="stat-icon-bg"></div>
                                 <i class="fas fa-user-graduate"></i>
@@ -559,13 +485,14 @@
                                 <div class="stat-label-primary">Students Supported</div>
                                 <p class="stat-description">Empowered with quality education</p>
                             </div>
-                            <div class="stat-progress">
-                                <div class="progress-bar" style="width: 85%"></div>
-                            </div>
+                                <div class="stat-progress">
+                                    <div class="progress-bar progress-85"></div>
+                                </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="impact-stat-card">
+                            <span class="stat-chip">Scholarships</span>
                             <div class="stat-icon-wrapper">
                                 <div class="stat-icon-bg stat-icon-bg-gold"></div>
                                 <i class="fas fa-award"></i>
@@ -575,13 +502,14 @@
                                 <div class="stat-label-primary">Scholarships Awarded</div>
                                 <p class="stat-description">Dreams made accessible</p>
                             </div>
-                            <div class="stat-progress">
-                                <div class="progress-bar progress-bar-gold" style="width: 70%"></div>
-                            </div>
+                                <div class="stat-progress">
+                                    <div class="progress-bar progress-bar-gold progress-70"></div>
+                                </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="impact-stat-card">
+                            <span class="stat-chip">Schools</span>
                             <div class="stat-icon-wrapper">
                                 <div class="stat-icon-bg stat-icon-bg-teal"></div>
                                 <i class="fas fa-school"></i>
@@ -591,13 +519,14 @@
                                 <div class="stat-label-primary">Schools Partnered</div>
                                 <p class="stat-description">Building educational networks</p>
                             </div>
-                            <div class="stat-progress">
-                                <div class="progress-bar progress-bar-teal" style="width: 60%"></div>
-                            </div>
+                                <div class="stat-progress">
+                                    <div class="progress-bar progress-bar-teal progress-60"></div>
+                                </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="impact-stat-card">
+                            <span class="stat-chip">Training</span>
                             <div class="stat-icon-wrapper">
                                 <div class="stat-icon-bg stat-icon-bg-purple"></div>
                                 <i class="fas fa-chalkboard-teacher"></i>
@@ -607,9 +536,9 @@
                                 <div class="stat-label-primary">Training Workshops</div>
                                 <p class="stat-description">Skills for the future</p>
                             </div>
-                            <div class="stat-progress">
-                                <div class="progress-bar progress-bar-purple" style="width: 90%"></div>
-                            </div>
+                                <div class="stat-progress">
+                                    <div class="progress-bar progress-bar-purple progress-90"></div>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -644,52 +573,6 @@
                                         </div>
                                         <h5>12 Communities</h5>
                                         <p>Reached through outreach programs</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Promise Box Redesigned -->
-                <div class="row">
-                    <div class="col-lg-10 mx-auto">
-                        <div class="impact-promise-card">
-                            <div class="promise-decoration"></div>
-                            <div class="row align-items-center">
-                                <div class="col-lg-2 text-center mb-4 mb-lg-0">
-                                    <div class="promise-icon">
-                                        <i class="fas fa-heart"></i>
-                                    </div>
-                                </div>
-                                <div class="col-lg-10">
-                                    <h3 class="promise-title mb-3">
-                                        <i class="fas fa-quote-left me-2"></i>
-                                        Our Commitment to You
-                                    </h3>
-                                    <p class="promise-text mb-3">
-                                        We are dedicated to <strong>transparency, accountability, and measurable impact</strong>. 
-                                        Every contribution directly supports educational initiatives that transform lives. We ensure 
-                                        resources reach those who need them most, creating lasting positive change in communities.
-                                    </p>
-                                    <div class="promise-values">
-                                        <div class="value-item">
-                                            <i class="fas fa-check-circle"></i>
-                                            <span>100% Transparent Operations</span>
-                                        </div>
-                                        <div class="value-item">
-                                            <i class="fas fa-check-circle"></i>
-                                            <span>Direct Community Impact</span>
-                                        </div>
-                                        <div class="value-item">
-                                            <i class="fas fa-check-circle"></i>
-                                            <span>Regular Progress Reports</span>
-                                        </div>
-                                    </div>
-                                    <div class="promise-cta mt-4">
-                                        <p class="mb-0">
-                                            <strong>Together, we're building a future where every child has the opportunity to learn, grow, and succeed.</strong>
-                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -969,69 +852,6 @@
                     </div>
                 </div>
                 
-                <!-- More Gallery Items -->
-                <div class="row mt-5">
-                    <div class="col-12 text-center mb-4">
-                        <h4 class="gallery-subheading">
-                            <i class="fas fa-camera-retro me-2"></i>
-                            More From Our Journey
-                        </h4>
-                    </div>
-                </div>
-                
-                <div class="row gx-4 gy-4">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="assets/img/gallery-1.jpg" data-title="Student Scholarship Ceremony">
-                            <div class="gallery-card-image">
-                                <img src="assets/img/gallery-1.jpg" alt="Scholarship Ceremony" />
-                                <div class="gallery-card-overlay">
-                                    <div class="gallery-zoom-icon">
-                                        <i class="fas fa-search-plus"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="gallery-card-content">
-                                <h5 class="gallery-card-title">Scholarship Ceremony</h5>
-                                <p class="gallery-card-description">Celebrating academic excellence</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="assets/img/gallery-2.jpg" data-title="Classroom Infrastructure">
-                            <div class="gallery-card-image">
-                                <img src="assets/img/gallery-2.jpg" alt="Classroom Infrastructure" />
-                                <div class="gallery-card-overlay">
-                                    <div class="gallery-zoom-icon">
-                                        <i class="fas fa-search-plus"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="gallery-card-content">
-                                <h5 class="gallery-card-title">New Classroom</h5>
-                                <p class="gallery-card-description">Building better learning spaces</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="assets/img/poster2.jpeg" data-title="AI Skills Development">
-                            <div class="gallery-card-image">
-                                <img src="assets/img/poster2.jpeg" alt="AI Skills Workshop" />
-                                <div class="gallery-card-overlay">
-                                    <div class="gallery-zoom-icon">
-                                        <i class="fas fa-search-plus"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="gallery-card-content">
-                                <h5 class="gallery-card-title">AI Initiative</h5>
-                                <p class="gallery-card-description">Future Leaders Program</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
                 <!-- View More CTA -->
                 <div class="row mt-5">
                     <div class="col-12 text-center">
@@ -1148,7 +968,11 @@
                                 <p class="form-subtitle">Fill out the form and we'll get back to you within 24 hours</p>
                             </div>
                             
-                            <form id="contactForm">
+                            <form id="contactForm" action="https://formsubmit.co/info@khalidafoundation.com" method="POST">
+                                <input type="hidden" name="_captcha" value="false">
+                                <input type="hidden" name="_template" value="table">
+                                <input type="hidden" name="_subject" value="New Inquiry from Khalida Foundation Website">
+                                <input type="hidden" name="_next" value="https://khalidafoundation.com/#contact">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="modern-form-group">
@@ -1232,7 +1056,7 @@
                                 </div>
                                 <div class="contact-info-content">
                                     <h5 class="contact-info-label">Email Us</h5>
-                                    <a href="mailto:info@khalidafoundation.org" class="contact-info-link">info@khalidafoundation.org</a>
+                                    <a href="mailto:info@khalidafoundation.com" class="contact-info-link">info@khalidafoundation.com</a>
                                     <p class="contact-info-hint">We respond within 24 hours</p>
                                 </div>
                             </div>
@@ -1291,17 +1115,6 @@
                             </div>
                         </div>
                         
-                        <!-- Response Promise -->
-                        <div class="response-promise-card">
-                            <div class="promise-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <h5 class="promise-title">Our Promise</h5>
-                            <p class="promise-text">
-                                <strong>We value your time.</strong> Every message receives a personal response 
-                                within 24 hours. Your questions and ideas matter to us.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1377,7 +1190,7 @@
                                 <li><a href="#about"><i class="fas fa-chevron-right me-2"></i>About Us</a></li>
                                 <li><a href="courses.html"><i class="fas fa-chevron-right me-2"></i>Our Courses</a></li>
                                 <li><a href="#programs"><i class="fas fa-chevron-right me-2"></i>Our Programs</a></li>
-                                <li><a href="#ai-initiative"><i class="fas fa-chevron-right me-2"></i>AI Initiative</a></li>
+                                <li><a href="courses.html#ai-initiative"><i class="fas fa-chevron-right me-2"></i>AI Initiative</a></li>
                                 <li><a href="#impact"><i class="fas fa-chevron-right me-2"></i>Our Impact</a></li>
                             </ul>
                         </div>
@@ -1415,7 +1228,7 @@
                             <ul class="footer-contact">
                                 <li>
                                     <i class="fas fa-envelope"></i>
-                                    <a href="mailto:info@khalidafoundation.org">info@khalidafoundation.org</a>
+                                    <a href="mailto:info@khalidafoundation.com">info@khalidafoundation.com</a>
                                 </li>
                                 <li>
                                     <i class="fas fa-phone"></i>

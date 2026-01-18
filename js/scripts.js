@@ -134,37 +134,8 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     }
     
-    // Contact Form Submission
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData);
-            
-            // Here you would typically send the data to a server
-            // For now, we'll just show a success message
-            alert('Thank you for your message! We will get back to you soon.');
-            contactForm.reset();
-            
-            // You can replace the above with actual form submission logic:
-            // fetch('/api/contact', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(data)
-            // })
-            // .then(response => response.json())
-            // .then(data => {
-            //     alert('Thank you! Your message has been sent.');
-            //     contactForm.reset();
-            // })
-            // .catch(error => {
-            //     alert('Sorry, there was an error. Please try again.');
-            // });
-        });
-    }
+    // Contact Form Submission (handled via formsubmit.co action)
+    // No JS interception needed so the form posts directly and delivers email from static hosting
     
     // Newsletter Form Submission
     const newsletterForms = document.querySelectorAll('.newsletter-form');
@@ -235,33 +206,3 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
-            if (scrollToTopVisible) {
-                fadeOut(scrollToTop);
-                scrollToTopVisible = false;
-            }
-        }
-    })
-})
-
-function fadeOut(el) {
-    el.style.opacity = 1;
-    (function fade() {
-        if ((el.style.opacity -= .1) < 0) {
-            el.style.display = "none";
-        } else {
-            requestAnimationFrame(fade);
-        }
-    })();
-};
-
-function fadeIn(el, display) {
-    el.style.opacity = 0;
-    el.style.display = display || "block";
-    (function fade() {
-        var val = parseFloat(el.style.opacity);
-        if (!((val += .1) > 1)) {
-            el.style.opacity = val;
-            requestAnimationFrame(fade);
-        }
-    })();
-};
