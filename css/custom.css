@@ -4892,3 +4892,76 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
+/* Modern course palette & module card styles */
+:root{
+    --course-accent: #6C63FF; /* modern purple */
+    --course-accent-2: #00C2A8; /* teal */
+    --course-bg: #0f1724; /* dark hero background */
+    --course-card-bg: #ffffff;
+    --course-muted: #6b7280;
+}
+
+.courses-hero{
+    background: linear-gradient(180deg, rgba(15,23,36,0.95), rgba(15,23,36,0.9)), url('../assets/img/poster2.jpeg') center/cover no-repeat;
+    color: #fff;
+    padding: 120px 0;
+}
+
+.courses-hero .courses-hero-pill{
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    display: inline-block;
+    font-weight:600;
+}
+
+.course-card{
+    border-radius: 12px;
+    background: var(--course-card-bg);
+    box-shadow: 0 8px 30px rgba(16,24,40,0.06);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+.course-card:hover{ transform: translateY(-6px); box-shadow:0 18px 50px rgba(16,24,40,0.12); }
+
+.module {
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+}
+.module-icon{
+    min-width:64px;
+    height:64px;
+    border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:22px;font-weight:700;
+    background:linear-gradient(135deg,var(--course-accent),var(--course-accent-2));
+}
+.module-body h5{ margin-bottom:6px; }
+.module-body p{ margin-bottom:8px; color:var(--course-muted); }
+.module-list{ padding-left:0; list-style:none; margin:0; }
+.module-list li{ display:flex; gap:10px; align-items:flex-start; margin-bottom:8px; color:#374151; }
+.module-list li i{ color:var(--course-accent-2); margin-top:3px; }
+
+.skill-card{ border-radius:10px; background:linear-gradient(180deg, #fbfbff, #f7f7ff); text-align:center; padding:18px; }
+
+/* smaller screens adjustments */
+@media (max-width:576px){
+    .module{ flex-direction:row; }
+    .module-icon{ min-width:54px; height:54px; border-radius:10px; }
+}
+
+/* Plain hero for single course pages (solid, appealing banner) */
+.courses-hero.plain-hero{
+    background: linear-gradient(135deg, rgba(108,99,255,0.95), rgba(0,194,168,0.95));
+    color: #fff;
+    padding: 100px 0 70px;
+    border-radius: 14px;
+}
+.courses-hero.plain-hero .courses-hero-pill{ background: rgba(255,255,255,0.12); }
+.courses-hero.plain-hero .display-3{ color: #fff; }
+.courses-hero.plain-hero .courses-hero-sub{ color: rgba(255,255,255,0.92); font-size:1.15rem; }
+.courses-hero.plain-hero .courses-hero-cta .btn{ box-shadow: 0 10px 30px rgba(15,23,36,0.18); }
+
+
+
