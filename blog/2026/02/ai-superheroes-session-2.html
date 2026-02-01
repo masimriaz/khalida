@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Superheroes Workshop – Session 2: Building Noor - A Safe Islamic AI Chatbot for Kids</title>
+    <meta name="description" content="Learn how we built Noor, a child-safe Islamic AI chatbot for kids ages 9-14, teaching Islamic values with multi-layer safety protection">
+    <link rel="icon" type="image/x-icon" href="../../../assets/favicon.ico" />
+    <link href="../../../css/styles.css" rel="stylesheet" />
+    <link href="../../../css/custom.css" rel="stylesheet" />
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { 
+            --blog-max-width: 1080px; 
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Prevent content overlap */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: radial-gradient(circle at 18% 18%, rgba(212,106,58,0.07), transparent 35%),
+                        radial-gradient(circle at 82% 8%, rgba(31,58,70,0.07), transparent 40%),
+                        linear-gradient(180deg, #f9f5ef 0%, #ffffff 55%, #f5efe3 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .blog-shell {
+            max-width: var(--blog-max-width);
+            margin: 0 auto;
+            padding: 6.5rem 1.25rem 3.5rem;
+            position: relative;
+        }
+        .blog-shell::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            pointer-events: none;
+            background: radial-gradient(circle at 15% 30%, rgba(240, 216, 194, 0.16), transparent 48%),
+                        radial-gradient(circle at 90% 70%, rgba(31, 58, 70, 0.08), transparent 52%);
+            z-index: -1;
+        }
+        .blog-breadcrumbs {
+            font-size: 0.95rem;
+            margin: 1rem 0 1.25rem;
+            color: var(--text-light, #4b5563);
+        }
+        .blog-breadcrumbs a { color: var(--khalida-primary-dark-teal, #1f3a46); text-decoration: none; }
+        .blog-breadcrumbs a:hover { text-decoration: underline; }
+        .blog-hero {
+            background: linear-gradient(135deg, rgba(46,204,113,0.9), rgba(39,174,96,0.9)), url("../../session2/Learn%20AI%20Image%205.png");
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            border-radius: 20px;
+            padding: 2.7rem 2.2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.16);
+        }
+        .blog-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(240,216,194,0.2), transparent 45%),
+                        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.12), transparent 50%);
+            pointer-events: none;
+        }
+        .blog-hero h1 { font-size: 2.3rem; font-weight: 800; margin-bottom: 0.75rem; position: relative; z-index: 1; }
+        .blog-hero .blog-date { font-size: 0.95rem; letter-spacing: 0.6px; text-transform: uppercase; color: rgba(255,255,255,0.82); position: relative; z-index: 1; }
+        .blog-hero p { max-width: 780px; font-size: 1.08rem; line-height: 1.78; position: relative; z-index: 1; }
+        .blog-meta-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .meta-chip-soft {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.85rem;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.16);
+            color: #fff;
+            font-weight: 700;
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+        .meta-chip-soft i { color: var(--khalida-accent-soft-gold, #f0d8c2); }
+        main { 
+            display: grid; 
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        main > section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.85rem 1.65rem;
+            box-shadow: 0 14px 34px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: var(--transition-smooth);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 0;
+        }
+        main > section:hover {
+            box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+            z-index: 2;
+        }
+        h2 { font-size: 1.68rem; font-weight: 800; color: var(--khalida-primary-dark-teal, #1f3a46); margin-bottom: 0.85rem; }
+        h3 { font-size: 1.25rem; font-weight: 700; color: var(--khalida-primary-dark-teal, #1f3a46); margin-bottom: 0.65rem; }
+        p { color: var(--text-dark, #1f252e); line-height: 1.7; }
+        .pill-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(31,58,70,0.12);
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+        .section-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 0.4rem;
+        }
+        .section-header-bar .section-kicker { 
+            font-size: 0.9rem; 
+            font-weight: 700; 
+            color: var(--khalida-muted, #4b5563); 
+            letter-spacing: 0.2px; 
+            text-transform: uppercase; 
+        }
+        .section-header-bar .section-anchor { 
+            font-size: 0.9rem; 
+            color: var(--khalida-primary-dark-teal, #1f3a46); 
+            text-decoration: none; 
+            font-weight: 700; 
+        }
+        .section-header-bar .section-anchor:hover { text-decoration: underline; }
+        ul { padding-left: 1.2rem; }
+        ul li { margin-bottom: 0.35rem; color: var(--text-dark, #1f252e); }
+        .pdf-embed {
+            width: 100%;
+            min-height: 600px;
+            border: 2px solid rgba(0,0,0,0.08);
+            border-radius: 12px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+            display: block;
+            margin: 2rem auto;
+        }
+        figure { 
+            margin: 1.5rem 0; 
+            clear: both;
+            width: 100%;
+        }
+        figure img { 
+            width: 100%; 
+            height: auto;
+            display: block;
+            border-radius: 14px; 
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08); 
+        }
+        figure figcaption { 
+            font-size: 0.9rem; 
+            color: var(--text-light, #4b5563); 
+            margin-top: 0.45rem; 
+            text-align: center; 
+        }
+        .cta-card {
+            background: linear-gradient(135deg, rgba(46,204,113,0.92), rgba(39,174,96,0.9));
+            color: #fff;
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.16);
+            text-align: center;
+            margin: 2rem 0;
+            clear: both;
+        }
+        .cta-card h3 { 
+            color: #fff; 
+            margin-bottom: 0.5rem; 
+        }
+        .cta-card p { 
+            color: rgba(255,255,255,0.9); 
+            margin-bottom: 0; 
+        }
+        .back-link { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.4rem; 
+            text-decoration: none; 
+            color: var(--khalida-primary-dark-teal, #1f3a46); 
+            font-weight: 700; 
+            margin-top: 1rem; 
+        }
+        .back-link:hover { text-decoration: underline; }
+        .kids-friendly-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin: 2.5rem 0;
+            box-shadow: 0 8px 30px rgba(253,203,110,0.4);
+            border: 3px solid rgba(255,255,255,0.5);
+            position: relative;
+            overflow: hidden;
+            clear: both;
+        }
+        .kids-friendly-box::before {
+            content: '✨';
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.15;
+            right: 20px;
+            top: 20px;
+            z-index: 0;
+        }
+        .kids-friendly-box h4 {
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            margin-bottom: 1.25rem;
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+        .kids-friendly-box p {
+            font-size: 1.08rem;
+            color: var(--text-dark, #1f252e);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .kids-friendly-box p:last-child {
+            margin-bottom: 0;
+        }
+        .safety-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            margin: 0.4rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(231,76,60,0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .safety-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231,76,60,0.4);
+        }
+        .feature-card {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            padding: 1.75rem;
+            border-radius: 14px;
+            margin-bottom: 1.25rem;
+            border-left: 5px solid #2ecc71;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #2ecc71, #27ae60);
+            z-index: 0;
+        }
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(46,204,113,0.15);
+            border-left-color: #27ae60;
+            z-index: 2;
+        }
+        .feature-card h5 {
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .feature-card p {
+            margin: 0;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 3.5rem;
+            border-left: 4px solid transparent;
+            background-image: linear-gradient(to bottom, #2ecc71, #27ae60);
+            background-size: 4px 100%;
+            background-repeat: no-repeat;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 1.5rem;
+            clear: both;
+        }
+        .timeline-item h5 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1f3a46;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .timeline-item p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4b5563;
+            margin: 0;
+            padding-left: 0.5rem;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -3.75rem;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: white;
+            border-radius: 50%;
+            border: 4px solid #2ecc71;
+            box-shadow: 0 4px 12px rgba(46,204,113,0.3), 0 0 0 4px rgba(46,204,113,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            color: #2ecc71;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .timeline-dot:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(46,204,113,0.4), 0 0 0 6px rgba(46,204,113,0.15);
+            z-index: 11;
+        }
+        .code-preview {
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            color: #f8f8f2;
+            padding: 2rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.92rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            clear: both;
+            max-width: 100%;
+        }
+        .code-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.05), transparent);
+            border-radius: 12px 12px 0 0;
+            z-index: 0;
+        }
+        .code-preview code {
+            color: #f8f8f2;
+            line-height: 1.6;
+            display: block;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(52,152,219,0.08), rgba(155,89,182,0.08));
+            border-left: 5px solid #3498db;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 20px rgba(52,152,219,0.12);
+            position: relative;
+            overflow: hidden;
+            clear: both;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(52,152,219,0.15), transparent);
+            border-radius: 50%;
+            transform: translate(40%, -40%);
+            z-index: 0;
+        }
+        .highlight-box h4 {
+            position: relative;
+            z-index: 2;
+        }
+        .highlight-box .timeline {
+            position: relative;
+            z-index: 2;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(46,204,113,0.15);
+        }
+        .stat-card h3 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .stat-card p {
+            color: var(--text-dark, #1f252e);
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .stat-card small {
+            display: block;
+            margin-top: 0.5rem;
+            color: var(--text-light, #4b5563);
+            font-size: 0.85rem;
+        }
+        .row {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+        .row::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        [class*="col-"] {
+            position: relative;
+            min-height: 1px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        
+        /* Additional layout fixes */
+        .lead {
+            font-size: 1.15rem;
+            font-weight: 400;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        
+        h2, h3, h4, h5 {
+            clear: both;
+        }
+        
+        /* Ensure proper spacing for sections */
+        section {
+            overflow: visible;
+        }
+        
+        /* Fix any Bootstrap conflicts */
+        .container, .container-fluid {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .blog-hero { padding: 2rem 1.4rem; }
+            .blog-hero h1 { font-size: 1.9rem; }
+            .blog-shell { padding: 6rem 1rem 2.75rem; }
+            .pdf-embed { min-height: 420px; }
+            main > section { padding: 1.25rem 1.1rem; }
+            .section-header-bar { flex-direction: column; align-items: flex-start; }
+            .blog-meta-strip { gap: 0.5rem; }
+            .timeline { padding-left: 2.5rem; }
+            .timeline-dot { left: -2.75rem; }
+        }
+    </style>
+</head>
+<body id="page-top">
+    <!-- Top Navigation with Blog dropdown -->
+    <nav class="navbar navbar-expand-lg navbar-elegant fixed-top" id="mainNav">
+        <div class="container-fluid px-0">
+            <a class="navbar-brand" href="../../../index.html">
+                <i class="fas fa-graduation-cap me-2"></i>
+                <span class="brand-text">Khalida Foundation</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#about">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="coursesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Courses</a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="coursesDropdown">
+                            <li><a class="dropdown-item" href="../../../course-pages/courses.html">All Courses</a></li>
+                            <li><a class="dropdown-item" href="../../../course-pages/advanced-ai-for-kids.html">Advanced AI for Kids</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#programs">Programs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../course-pages/courses.html#ai-initiative">AI Initiative</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#impact">Impact</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="../../../blog/index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="blogDropdown">
+                            <li><a class="dropdown-item" href="../../../blog/index.html">All Blog Posts</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/01/ai-superheroes-session-1.html">AI Superheroes – Session 1</a></li>
+                            <li><a class="dropdown-item active" href="../../../blog/2026/02/ai-superheroes-session-2.html">AI Superheroes – Session 2</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#get-involved">Get Involved</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-register" href="../../../register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="blog-shell">
+        <nav class="blog-breadcrumbs" aria-label="Breadcrumb">
+            <a href="../../../index.html">Home</a> &raquo; <a href="../../index.html">Blog</a> &raquo; Session 2
+        </nav>
+
+        <header class="blog-hero">
+            <div class="blog-date">January 31, 2026</div>
+            <h1>🌟 Building Noor: A Safe Islamic AI Chatbot for Kids</h1>
+            <p>Welcome to Session 2 of our AI Superheroes Workshop! Today we built something amazing together - Noor, a friendly Islamic chatbot that teaches kids about Islamic values while keeping them super safe with special protection layers.</p>
+            <div class="blog-meta-strip">
+                <span class="meta-chip-soft"><i class="fas fa-child"></i> Kids 9–14</span>
+                <span class="meta-chip-soft"><i class="fas fa-clock"></i> 8 min read</span>
+                <span class="meta-chip-soft"><i class="fas fa-shield-heart"></i> Child-Safe AI</span>
+                <span class="meta-chip-soft"><i class="fas fa-robot"></i> Islamic Values</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- What We Built -->
+            <section id="what-we-built">
+                <div class="section-header-bar">
+                    <span class="section-kicker">Our Creation</span>
+                    <a class="section-anchor" href="#what-we-built">Share this section</a>
+                </div>
+                <div class="pill-label">🤖 What We Built</div>
+                <h2>Meet Noor - Your Friendly Islamic Learning Companion!</h2>
+                <p class="lead">In this hands-on workshop, young AI superheroes built <strong>Noor</strong> – a special chatbot that helps kids learn about Islamic values like kindness, honesty, and respect. But Noor isn't just any chatbot - it's designed with super safety powers to protect kids!</p>
+                
+                <div class="kids-friendly-box">
+                    <h4>👦 Imagine having a friendly robot helper...</h4>
+                    <p>That knows about Islamic values and can answer your questions about being kind, honest, and helpful! But this robot is special – it has <strong>safety guards</strong> that make sure everything it says is safe for kids like you.</p>
+                    <p>It never pretends to be a religious teacher. Instead, it encourages you to ask your parents, teachers, or imam for important questions. It's like a learning friend that helps you understand Islamic values!</p>
+                </div>
+
+                <figure>
+                    <img src="../../session2/Learn%20AI%20Image%205.png" alt="Kids learning about building safe AI chatbots" />
+                    <figcaption>Young AI superheroes learning to build safe and helpful Islamic chatbots</figcaption>
+                </figure>
+            </section>
+
+            <!-- Why This Matters -->
+            <section id="why-matters">
+                <div class="section-header-bar">
+                    <span class="section-kicker">The Big Picture</span>
+                    <a class="section-anchor" href="#why-matters">Why it's important</a>
+                </div>
+                <div class="pill-label">💡 Why This Matters</div>
+                <h2>Why Building Safe AI for Kids is Super Important</h2>
+                <p>When we build AI for children, we need to be extra careful! Here's why Noor is special:</p>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h5>🛡️ Safety First</h5>
+                            <p>Noor has TWO safety guards that check every question and every answer to make sure everything is safe and appropriate for kids ages 9-14.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h5>🎓 Educational Focus</h5>
+                            <p>Noor teaches Islamic values like kindness, honesty, helping others, and respecting parents - all in simple, easy-to-understand language.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h5>🏠 No Religious Rulings</h5>
+                            <p>Noor NEVER gives fatwas or religious rulings. For important questions, it always tells you to ask your parents, teacher, or imam.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h5>🔒 Privacy Protected</h5>
+                            <p>Noor runs on your own computer - no cloud, no internet needed! Your conversations stay private and safe.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How Noor Works -->
+            <section id="how-it-works">
+                <div class="section-header-bar">
+                    <span class="section-kicker">Under the Hood</span>
+                    <a class="section-anchor" href="#how-it-works">Learn more</a>
+                </div>
+                <div class="pill-label">🚀 How Noor Works</div>
+                <h2>The Journey of Your Question</h2>
+                <p class="lead" style="margin-bottom: 2.5rem;">Ever wonder what happens when you ask Noor a question? Let's take an exciting journey through the chatbot's brain! 🎢</p>
+                
+                <!-- Modern Journey Cards -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 3rem 2rem; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 20px 60px rgba(102,126,234,0.3);">
+                    <h3 style="text-align: center; margin-bottom: 1rem; color: #ffffff; font-weight: 800; font-size: 1.8rem;">Let's Follow Your Question Through Noor's Brain! 🧠✨</h3>
+                    <p style="text-align: center; color: rgba(255,255,255,0.9); font-size: 1.1rem; margin-bottom: 3rem;">Watch your question travel through 7 amazing steps!</p>
+                    
+                    <div class="row g-3">
+                        <!-- Step 1 -->
+                        <div class="col-md-6">
+                            <div style="background: white; border-radius: 16px; padding: 1.75rem; box-shadow: 0 8px 30px rgba(0,0,0,0.12); position: relative; overflow: hidden; height: 100%;">
+                                <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 50%; opacity: 0.1;"></div>
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.5rem; flex-shrink: 0;">1</div>
+                                    <h4 style="margin: 0; color: #1f3a46; font-weight: 700; font-size: 1.15rem;">👦 You Ask a Question</h4>
+                                </div>
+                                <p style="margin: 0; color: #4b5563; line-height: 1.6; padding-left: 0.5rem;">Like <em>"What does Islam teach about kindness?"</em> - You type your question into the chatbot!</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="col-md-6">
+                            <div style="background: white; border-radius: 16px; padding: 1.75rem; box-shadow: 0 8px 30px rgba(0,0,0,0.12); position: relative; overflow: hidden; height: 100%;">
+                                <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 50%; opacity: 0.1;"></div>
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.5rem; flex-shrink: 0;">2</div>
+                                    <h4 style="margin: 0; color: #1f3a46; font-weight: 700; font-size: 1.15rem;">🛡️ Safety Guard #1</h4>
+                                </div>
+                                <p style="margin: 0; color: #4b5563; line-height: 1.6; padding-left: 0.5rem;">Is this question safe? No bad words? Not asking for personal info? <strong style="color: #2ecc71;">✓ Safe to continue!</strong></p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="col-md-6">
+                            <div style="background: white; border-radius: 16px; padding: 1.75rem; box-shadow: 0 8px 30px rgba(0,0,0,0.12); position: relative; overflow: hidden; height: 100%;">
+                                <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: linear-gradient(135deg, #9b59b6, #8e44ad); border-radius: 50%; opacity: 0.1;"></div>
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #9b59b6, #8e44ad); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.5rem; flex-shrink: 0;">3</div>
+                                    <h4 style="margin: 0; color: #1f3a46; font-weight: 700; font-size: 1.15rem;">📚 Knowledge Base</h4>
+                                </div>
+                                <p style="margin: 0; color: #4b5563; line-height: 1.6; padding-left: 0.5rem;">Noor looks in its "book of answers" about Islamic values - like a super-fast library search! 📖⚡</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="col-md-6">
+                            <div style="background: white; border-radius: 16px; padding: 1.75rem; box-shadow: 0 8px 30px rgba(0,0,0,0.12); position: relative; overflow: hidden; height: 100%;">
+                                <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 50%; opacity: 0.1;"></div>
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.5rem; flex-shrink: 0;">4</div>
+                                    <h4 style="margin: 0; color: #1f3a46; font-weight: 700; font-size: 1.15rem;">🤖 Smart AI Brain</h4>
+                                </div>
+                                <p style="margin: 0; color: #4b5563; line-height: 1.6; padding-left: 0.5rem;">If the answer isn't in the book, Noor's AI brain thinks: <em>"Is this about Islam? Can I answer it safely for kids?"</em></p>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="col-md-6">
+                            <div style="background: white; border-radius: 16px; padding: 1.75rem; box-shadow: 0 8px 30px rgba(0,0,0,0.12); position: relative; overflow: hidden; height: 100%;">
+                                <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 50%; opacity: 0.1;"></div>
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.5rem; flex-shrink: 0;">5</div>
+                                    <h4 style="margin: 0; color: #1f3a46; font-weight: 700; font-size: 1.15rem;">🛡️ Safety Guard #2</h4>
+                                </div>
+                                <p style="margin: 0; color: #4b5563; line-height: 1.6; padding-left: 0.5rem;">Is this answer good for kids? Simple language? Kind words? No religious rulings? <strong style="color: #2ecc71;">✓ Perfect!</strong></p>
+                            </div>
+                        </div>
+
+                        <!-- Step 6 -->
+                        <div class="col-md-6">
+                            <div style="background: white; border-radius: 16px; padding: 1.75rem; box-shadow: 0 8px 30px rgba(0,0,0,0.12); position: relative; overflow: hidden; height: 100%;">
+                                <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: linear-gradient(135deg, #2ecc71, #27ae60); border-radius: 50%; opacity: 0.1;"></div>
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #2ecc71, #27ae60); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.5rem; flex-shrink: 0;">6</div>
+                                    <h4 style="margin: 0; color: #1f3a46; font-weight: 700; font-size: 1.15rem;">💬 You Get Your Answer!</h4>
+                                </div>
+                                <p style="margin: 0; color: #4b5563; line-height: 1.6; padding-left: 0.5rem;">Noor shows you a safe, helpful, and educational response about Islamic values! 🎉</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 7 -->
+                        <div class="col-md-12">
+                            <div style="background: linear-gradient(135deg, #f39c12, #e67e22); border-radius: 16px; padding: 2rem; box-shadow: 0 8px 30px rgba(243,156,18,0.3); text-align: center;">
+                                <div style="display: inline-flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 0.75rem;">
+                                    <div style="width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f39c12; font-weight: 800; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">7</div>
+                                    <h3 style="margin: 0; color: white; font-weight: 800; font-size: 1.5rem;">😊 You Learn Something New!</h3>
+                                </div>
+                                <p style="margin: 0; color: rgba(255,255,255,0.95); font-size: 1.15rem; line-height: 1.6;">You just learned something amazing about Islamic values in a safe and fun way! Keep asking questions! 🌟</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning mt-4" style="background: linear-gradient(135deg, #fff9e6, #fff3cd); border: 2px solid #ffc107; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(255,193,7,0.2);">
+                    <h5 style="color: #856404; margin-bottom: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-info-circle"></i> The Default Safety Rule</h5>
+                    <p style="color: #856404; margin: 0; font-size: 1.05rem; line-height: 1.6;">
+                        If Noor doesn't know the answer or if it's not about Islamic values, it always says: 
+                        <strong>"Please ask a parent, teacher, or imam."</strong> - This keeps you safe and makes sure you get the right information from trusted adults! 🤲
+                    </p>
+                </div>
+
+                <figure>
+                    <img src="../../session2/ChatGPT%20Image%20Jan%2031,%202026,%2008_02_06%20PM.png" alt="Diagram showing how Noor processes questions safely" />
+                    <figcaption>Visual guide showing Noor's safety layers and how it processes questions</figcaption>
+                </figure>
+            </section>
+
+            <!-- Safety Features -->
+            <section id="safety-features">
+                <div class="section-header-bar">
+                    <span class="section-kicker">Protection Powers</span>
+                    <a class="section-anchor" href="#safety-features">Safety first</a>
+                </div>
+                <div class="pill-label">🛡️ Super Safety Features</div>
+                <h2>Noor's Special Safety Powers</h2>
+                <p class="lead" style="margin-bottom: 2rem;">Every time you chat with Noor, your question goes through multiple safety checks. Think of them as <strong>security checkpoints</strong> that make sure everything is safe for kids! It's like having bodyguards protecting you online! 🦸‍♂️🦸‍♀️</p>
+                
+                <div class="mt-4 mb-4" style="background: linear-gradient(135deg, rgba(231,76,60,0.05), rgba(192,57,43,0.05)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(231,76,60,0.1);">
+                    <h4 class="mb-3" style="color: #1f3a46; font-weight: 800; text-align: center;">🏆 Safety Badges Noor Earned</h4>
+                    <p style="text-align: center; color: #4b5563; margin-bottom: 1.5rem;">Each badge represents a safety feature that protects you!</p>
+                    <div style="text-align: center;">
+                    <span class="safety-badge">⭐ Two Safety Guards</span>
+                    <span class="safety-badge">🚫 No Personal Information</span>
+                    <span class="safety-badge">🚫 No Religious Rulings</span>
+                    <span class="safety-badge">👶 Simple Kid Language</span>
+                    <span class="safety-badge">😊 Always Kind & Positive</span>
+                    <span class="safety-badge">🏠 Runs on Your Computer</span>
+                    <span class="safety-badge">🤲 Ask Adults for Big Questions</span>
+                    <span class="safety-badge">📖 Islamic Values Only</span>
+                    </div>
+                </div>
+
+                <h4 class="mt-5 mb-3" style="color: #1f3a46; font-weight: 700;">💻 Code Example: Safety Filter</h4>
+                <p style="margin-bottom: 1rem; color: #4b5563;">Here's a simplified version of how Noor checks if questions are safe (written in Python):</p>
+                <div class="code-preview">
+                    <code>
+# Here's how Noor's safety filter works (simplified for kids!):<br><br>
+def is_question_safe(your_question):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"""Check if the question is safe for kids"""<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;# Block inappropriate words<br>
+&nbsp;&nbsp;&nbsp;&nbsp;unsafe_words = ['violence', 'harm', 'personal info']<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;# Block religious authority requests<br>
+&nbsp;&nbsp;&nbsp;&nbsp;authority_words = ['fatwa', 'ruling', 'is this haram', 'is this halal']<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;# Only allow safe, educational questions<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if any(unsafe_word in your_question for unsafe_word in unsafe_words):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return False  # Not safe! ❌<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;return True  # Safe to answer! ✅
+                    </code>
+                </div>
+
+                <figure>
+                    <img src="../../session2/ChatGPT%20Image%20Jan%2031,%202026,%2008_39_17%20PM.png" alt="Example of safety filters in action" />
+                    <figcaption>See how Noor's safety filters protect kids from inappropriate content</figcaption>
+                </figure>
+            </section>
+
+            <!-- Example Conversations -->
+            <section id="examples">
+                <div class="section-header-bar">
+                    <span class="section-kicker">See it in action</span>
+                    <a class="section-anchor" href="#examples">Chat examples</a>
+                </div>
+                <div class="pill-label">💬 Example Conversations</div>
+                <h2 style="margin-bottom: 1rem;">How Noor Responds to Different Questions</h2>
+                <p class="lead" style="color: #4b5563; margin-bottom: 2rem;">Let's see Noor in action! Here are real examples of how the chatbot handles different types of questions. 🎭</p>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card border-success mb-3" style="box-shadow: 0 4px 15px rgba(46,204,113,0.2); border-width: 2px;">
+                            <div class="card-header bg-success text-white" style="font-weight: 700;">
+                                <strong>✅ Islamic Values Question (Gets Helpful Answer)</strong>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>You:</strong> "What does Islam teach about kindness?"</p>
+                                <hr>
+                                <p><strong>Noor:</strong> "Islam teaches us to be kind to everyone! The Prophet Muhammad (peace be upon him) said kindness is a mark of faith. Being kind makes Allah happy and makes others feel good too! You can show kindness by helping your family, being nice to friends, and caring for animals. 😊"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card border-primary mb-3" style="box-shadow: 0 4px 15px rgba(52,152,219,0.2); border-width: 2px;">
+                            <div class="card-header bg-primary text-white" style="font-weight: 700;">
+                                <strong>✅ Character Values Question</strong>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>You:</strong> "Why should I be honest?"</p>
+                                <hr>
+                                <p><strong>Noor:</strong> "Islam values honesty very much! Being truthful is important even when it's hard. The Prophet Muhammad (peace be upon him) was known as 'Al-Amin' which means 'the truthful one.' When you're honest, people trust you and Allah is pleased with you!"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card border-warning mb-3" style="box-shadow: 0 4px 15px rgba(255,193,7,0.2); border-width: 2px;">
+                            <div class="card-header bg-warning text-dark" style="font-weight: 700;">
+                                <strong>⚠️ Non-Islamic Question (Redirected)</strong>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>You:</strong> "What's the weather today?"</p>
+                                <hr>
+                                <p><strong>Noor:</strong> "Please ask a parent, teacher, or imam."</p>
+                                <small class="text-muted">Not about Islamic values → Noor redirects you to ask adults</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card border-danger mb-3" style="box-shadow: 0 4px 15px rgba(231,76,60,0.2); border-width: 2px;">
+                            <div class="card-header bg-danger text-white" style="font-weight: 700;">
+                                <strong>🚫 Religious Ruling Request (Blocked for Safety)</strong>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>You:</strong> "Is this action haram?"</p>
+                                <hr>
+                                <p><strong>Noor:</strong> "That's a very important question! Please ask your parents, teacher, or imam for guidance on religious matters."</p>
+                                <small class="text-muted">Safety filter activated → Only trained scholars can answer this</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What Kids Learned -->
+            <section id="what-kids-learned">
+                <div class="section-header-bar">
+                    <span class="section-kicker">Learning outcomes</span>
+                    <a class="section-anchor" href="#what-kids-learned">Key takeaways</a>
+                </div>
+                <div class="pill-label">🌟 What Kids Learned</div>
+                <h2 style="margin-bottom: 1rem;">Amazing Things We Discovered Together!</h2>
+                <p class="lead" style="color: #4b5563; margin-bottom: 2.5rem;">Our young AI superheroes learned so much during this workshop! Here are the key skills and concepts they mastered. 🎓</p>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div style="background: linear-gradient(135deg, rgba(52,152,219,0.08), rgba(41,128,185,0.08)); padding: 1.75rem; border-radius: 14px; height: 100%; border-left: 4px solid #3498db;">
+                        <h4 style="color: #3498db; font-weight: 800; margin-bottom: 1rem;">🛡️ AI Safety is Super Important</h4>
+                        <ul>
+                            <li>Why AI needs multiple safety checks to protect kids</li>
+                            <li>How to keep personal information private online</li>
+                            <li>Understanding that AI should never replace parents or teachers</li>
+                            <li>The importance of always asking adults for important questions</li>
+                        </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <div style="background: linear-gradient(135deg, rgba(46,204,113,0.08), rgba(39,174,96,0.08)); padding: 1.75rem; border-radius: 14px; height: 100%; border-left: 4px solid #2ecc71;">
+                        <h4 style="color: #2ecc71; font-weight: 800; margin-bottom: 1rem;">🤖 Ethical AI Design</h4>
+                        <ul>
+                            <li>AI should never claim to have authority it doesn't have</li>
+                            <li>Being transparent - kids should know how AI works</li>
+                            <li>Respecting cultural and religious values in technology</li>
+                            <li>Designing age-appropriate content for different ages</li>
+                        </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <div style="background: linear-gradient(135deg, rgba(230,126,34,0.08), rgba(211,84,0,0.08)); padding: 1.75rem; border-radius: 14px; height: 100%; border-left: 4px solid #e67e22;">
+                        <h4 style="color: #e67e22; font-weight: 800; margin-bottom: 1rem;">💻 Python Programming Skills</h4>
+                        <ul>
+                            <li>Building web applications with Flask framework</li>
+                            <li>Creating modular code that's organized and easy to understand</li>
+                            <li>Implementing safety filters and input validation</li>
+                            <li>Managing data with JSON files (like a digital filing cabinet!)</li>
+                        </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <div style="background: linear-gradient(135deg, rgba(155,89,182,0.08), rgba(142,68,173,0.08)); padding: 1.75rem; border-radius: 14px; height: 100%; border-left: 4px solid #9b59b6;">
+                        <h4 style="color: #9b59b6; font-weight: 800; margin-bottom: 1rem;">📖 Islamic Values</h4>
+                        <ul>
+                            <li>Learning about kindness, honesty, and respect for others</li>
+                            <li>Understanding the importance of helping others and charity</li>
+                            <li>Discovering stories about Prophet Muhammad (PBUH)</li>
+                            <li>Appreciating the value of seeking knowledge in Islam</li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technology Overview -->
+            <section id="technology">
+                <div class="section-header-bar">
+                    <span class="section-kicker">Tech stack</span>
+                    <a class="section-anchor" href="#technology">How it's built</a>
+                </div>
+                <div class="pill-label">🔧 Technology Stack</div>
+                <h2>The Tools We Used to Build Noor</h2>
+                
+                <p>Think of building Noor like building a house - we needed different tools for different jobs!</p>
+
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div style="font-size: 3rem;">🐍</div>
+                            <h4>Python</h4>
+                            <p>The brain of our chatbot - Python makes everything work together!</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div style="font-size: 3rem;">🌐</div>
+                            <h4>Flask</h4>
+                            <p>The web framework that lets you talk to Noor through your browser!</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div style="font-size: 3rem;">🎨</div>
+                            <h4>Bootstrap</h4>
+                            <p>Makes Noor look beautiful with colors, buttons, and animations!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Details -->
+            <section id="implementation">
+                <div class="section-header-bar">
+                    <span class="section-kicker">Behind the scenes</span>
+                    <a class="section-anchor" href="#implementation">Code details</a>
+                </div>
+                <div class="pill-label">⚙️ Implementation Highlights</div>
+                <h2>Cool Features We Built Into Noor</h2>
+
+                <h4 class="mt-4">1. 📚 Smart Knowledge Matching</h4>
+                <p>Noor doesn't just look for exact matches - it's smart! It can understand that "being nice" and "kindness" mean similar things.</p>
+                <div class="code-preview">
+                    <code>
+# How Noor finds the best answer:<br><br>
+def find_best_answer(your_question):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"""Find the answer that matches your question best"""<br>
+&nbsp;&nbsp;&nbsp;&nbsp;best_match = None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;best_score = 0.0<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;# Look through all the answers Noor knows<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for knowledge_item in noor_knowledge:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Calculate how similar your question is (70% or higher!)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;similarity = compare_questions(your_question, knowledge_item)<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if similarity > best_score and similarity > 0.70:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;best_score = similarity<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;best_match = knowledge_item<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;return best_match  # Return the best answer! ✨
+                    </code>
+                </div>
+
+                <h4 class="mt-4">2. 🛡️ Double Safety Protection</h4>
+                <p>Every question and answer goes through TWO safety checks - like having two bodyguards!</p>
+                <div class="code-preview">
+                    <code>
+def get_safe_response(your_input):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"""Get a response with double safety protection"""<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;# 🛡️ Safety Check #1: Is the question safe?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if not is_question_safe(your_input):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Let's talk about something positive! 😊"<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;# 📚 Try to find answer in knowledge base<br>
+&nbsp;&nbsp;&nbsp;&nbsp;answer = find_in_knowledge_base(your_input)<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;# 🤖 If not found, use AI brain (carefully!)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if not answer:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;answer = get_ai_response(your_input)<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;# 🛡️ Safety Check #2: Is the answer safe for kids?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if is_answer_safe(answer):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return answer  # All good! ✅<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Please ask a parent, teacher, or imam." # Stay safe! 🤲
+                    </code>
+                </div>
+
+                <h4 class="mt-4">3. 🎨 Beautiful User Interface</h4>
+                <p>We made Noor fun and easy to use with:</p>
+                <ul>
+                    <li>✨ Smooth animations and colorful gradients</li>
+                    <li>💬 Real-time chat with typing indicators (dots that show Noor is thinking!)</li>
+                    <li>🔘 Quick suggestion buttons for common questions</li>
+                    <li>📱 Works on phones, tablets, and computers</li>
+                    <li>😊 Emojis to make conversations friendly and fun</li>
+                </ul>
+            </section>
+
+            <!-- Results -->
+            <section id="results">
+                <div class="section-header-bar">
+                    <span class="section-kicker">Achievements</span>
+                    <a class="section-anchor" href="#results">Our success</a>
+                </div>
+                <div class="pill-label">🏆 Results & Impact</div>
+                <h2>What We Achieved Together!</h2>
+                
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <h3 style="color: #2ecc71;">100%</h3>
+                            <p><strong>Safety Test Pass Rate</strong></p>
+                            <small>All safety checks passed!</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <h3 style="color: #3498db;">13+</h3>
+                            <p><strong>Knowledge Items</strong></p>
+                            <small>And growing every day!</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <h3 style="color: #e74c3c;">2</h3>
+                            <p><strong>Safety Guard Layers</strong></p>
+                            <small>Double protection!</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <h3 style="color: #9b59b6;">0</h3>
+                            <p><strong>Cloud Dependencies</strong></p>
+                            <small>100% on your computer!</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Workshop Resources -->
+            <section id="resources">
+                <div class="section-header-bar">
+                    <span class="section-kicker">Downloads</span>
+                    <a class="section-anchor" href="#resources">Get materials</a>
+                </div>
+                <div class="pill-label">📁 Workshop Resources</div>
+                <h2>Workshop Materials & Presentation</h2>
+                
+                <h3 class="mt-4">📊 AI Superheroes Workshop - Session 2 Presentation</h3>
+                <p>View the complete workshop presentation that guided our session:</p>
+                <iframe class="pdf-embed" src="../../session2/AI_Superheroes_Workshop%202.pdf" title="AI Superheroes Workshop Session 2 PDF"></iframe>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5>📥 Download Presentation</h5>
+                                <p>Get the PDF version to review at your own pace</p>
+                                <a href="../../session2/AI_Superheroes_Workshop%202.pdf" class="btn btn-primary" download>Download PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5>💻 Source Code (Coming Soon)</h5>
+                                <p>Complete code with documentation and examples</p>
+                                <button class="btn btn-secondary" disabled>GitHub Repository</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Try It Yourself -->
+            <section id="try-it">
+                <div class="section-header-bar">
+                    <span class="section-kicker">Get started</span>
+                    <a class="section-anchor" href="#try-it">Build your own</a>
+                </div>
+                <div class="pill-label">🚀 Try It Yourself!</div>
+                <h2>Want to Build Your Own Noor?</h2>
+                <p class="lead" style="margin-bottom: 2rem;">Ready to create your own AI chatbot? Here's everything you need to get started! Remember to ask an adult for help.</p>
+                
+                <div class="row mt-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h5>🎯 What You'll Need</h5>
+                            <ul style="margin-bottom: 0;">
+                                <li>💻 A computer (Windows, Mac, or Linux)</li>
+                                <li>🐍 Python 3.8 or newer installed</li>
+                                <li>👨‍👩‍👧‍👦 Help from a parent or teacher</li>
+                                <li>🌟 Curiosity and excitement to learn!</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-card">
+                            <h5>📚 What You'll Learn</h5>
+                            <ul style="margin-bottom: 0;">
+                                <li>🔧 Setting up Python projects</li>
+                                <li>🤖 Building AI chatbots</li>
+                                <li>🛡️ Implementing safety features</li>
+                                <li>🎨 Creating beautiful interfaces!</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="color: #1f3a46; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem;">📝 Setup Steps (Ask an adult to help!)</h3>
+                <div class="code-preview">
+                    <code>
+# Step 1: Download the project<br>
+git clone https://github.com/yourusername/noor-islamic-chatbot<br><br>
+# Step 2: Go to the project folder<br>
+cd noor-islamic-chatbot<br><br>
+# Step 3: Install the tools we need<br>
+pip install -r requirements.txt<br><br>
+# Step 4: Start Noor!<br>
+python app.py<br><br>
+# Step 5: Open your browser and visit:<br>
+http://localhost:5000
+                    </code>
+                </div>
+
+                <div class="card mt-4" style="border: 2px solid #2ecc71;">
+                    <div class="card-header" style="background: #2ecc71; color: white;">
+                        <h5 class="mb-0">👨‍🏫 For Teachers & Parents: Admin Panel</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Adults can add new questions and answers during demos:</p>
+                        <ul>
+                            <li>Visit <code>http://localhost:5000/admin</code></li>
+                            <li>Add new Islamic values questions and safe answers</li>
+                            <li>Show kids how AI learns new information</li>
+                            <li>Demonstrate the power of growing knowledge bases</li>
+                        </ul>
+                        <p class="mb-0"><strong>Note:</strong> Always review answers for age-appropriateness before adding them!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section id="conclusion">
+                <div class="section-header-bar">
+                    <span class="section-kicker">Summary</span>
+                    <a class="section-anchor" href="#conclusion">Final thoughts</a>
+                </div>
+                <div class="pill-label">🎯 Key Takeaways</div>
+                <h2>What We Learned About Building Safe AI</h2>
+                
+                <p class="lead">Building Noor taught us that creating AI for children requires more than just technical skills - it demands a deep commitment to safety, ethics, and education.</p>
+                
+                <div class="feature-card">
+                    <h5>🌟 Our Big Lessons:</h5>
+                    <ol style="font-size: 1.05rem;">
+                        <li><strong>Safety is #1:</strong> Multiple layers of protection are essential for child-facing AI</li>
+                        <li><strong>Know Your Limits:</strong> AI should never claim authority it doesn't have - Noor knows it's not a scholar!</li>
+                        <li><strong>Be Transparent:</strong> Kids should understand how the technology works - no secrets!</li>
+                        <li><strong>Respect Values:</strong> Honor religious and cultural values in every design decision</li>
+                        <li><strong>Age-Appropriate:</strong> Language, tone, and content must match the audience</li>
+                        <li><strong>Encourage Guidance:</strong> Always redirect to trusted adults for important matters</li>
+                        <li><strong>Privacy Matters:</strong> Running on-premise protects children's privacy</li>
+                        <li><strong>Continuous Learning:</strong> The knowledge base can grow, but safety rules stay strict!</li>
+                    </ol>
+                </div>
+
+                <div class="cta-card mt-4">
+                    <h3>🎯 Mission Accomplished!</h3>
+                    <p class="lead">We successfully built a safe, educational, and fun Islamic AI chatbot that:</p>
+                    <div class="row text-start mt-3">
+                        <div class="col-md-6">
+                            <ul style="color: white;">
+                                <li>✅ Teaches Islamic values to children</li>
+                                <li>✅ Maintains strict safety standards</li>
+                                <li>✅ Respects religious boundaries</li>
+                                <li>✅ Provides transparency and explainability</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul style="color: white;">
+                                <li>✅ Runs entirely on-premise for privacy</li>
+                                <li>✅ Can be extended with new knowledge</li>
+                                <li>✅ Uses kid-friendly language and emojis</li>
+                                <li>✅ Encourages asking trusted adults</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="mt-3 mb-0" style="font-size: 1.2rem;"><strong>Keep being AI Superheroes! 🦸‍♂️🦸‍♀️</strong></p>
+                </div>
+            </section>
+
+            <!-- Next Steps -->
+            <section id="next-steps">
+                <div class="cta-card" style="background: linear-gradient(135deg, rgba(52,152,219,0.92), rgba(155,89,182,0.9));">
+                    <h3>🚀 What's Next?</h3>
+                    <p class="lead">Ready for more AI adventures?</p>
+                    <div class="mt-3">
+                        <a href="../../index.html" class="btn btn-light btn-lg me-2 mb-2">📚 View All Posts</a>
+                        <a href="../01/ai-superheroes-session-1.html" class="btn btn-outline-light btn-lg mb-2">← Session 1</a>
+                    </div>
+                    <p class="mt-3 mb-0">Stay tuned for Session 3 where we'll explore even more exciting AI projects!</p>
+                </div>
+                <a class="back-link" href="../../index.html" aria-label="Back to blog list">← Back to Blog</a>
+            </section>
+
+            <!-- Tags -->
+            <section class="mt-4">
+                <h5>🏷️ Tags:</h5>
+                <div class="mt-2">
+                    <span class="badge bg-secondary me-2 mb-2">AI for Kids</span>
+                    <span class="badge bg-secondary me-2 mb-2">Islamic Education</span>
+                    <span class="badge bg-secondary me-2 mb-2">Child Safety</span>
+                    <span class="badge bg-secondary me-2 mb-2">Python Programming</span>
+                    <span class="badge bg-secondary me-2 mb-2">Flask Framework</span>
+                    <span class="badge bg-secondary me-2 mb-2">Ethical AI</span>
+                    <span class="badge bg-secondary me-2 mb-2">On-Premise AI</span>
+                    <span class="badge bg-secondary me-2 mb-2">NLP</span>
+                    <span class="badge bg-secondary me-2 mb-2">Chatbot Development</span>
+                    <span class="badge bg-secondary me-2 mb-2">AI Workshop</span>
+                    <span class="badge bg-secondary me-2 mb-2">Noor Chatbot</span>
+                    <span class="badge bg-secondary me-2 mb-2">Islamic Values</span>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../js/scripts.js"></script>
+</body>
+</html>

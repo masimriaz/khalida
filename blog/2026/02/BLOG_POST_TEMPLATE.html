@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Noor: A Safe Islamic AI Chatbot for Kids | AI Superheroes Workshop Session 2</title>
+    <meta name="description" content="Learn how we built Noor, a child-safe Islamic AI chatbot for kids ages 9-14, teaching Islamic values with multi-layer safety protection">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Prism.js for code highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --dark-color: #2c3e50;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .feature-box {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+        
+        .architecture-diagram {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+        
+        .safety-badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .demo-showcase {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .kids-friendly-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -2.6rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        
+        .chatbot-preview {
+            border: 3px solid var(--primary-color);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .tech-badge {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.7rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="badge bg-light text-dark mb-3">AI Superheroes Workshop - Session 2</div>
+                    <h1 class="hero-title">🌟 Building Noor: A Safe Islamic AI Chatbot for Kids</h1>
+                    <p class="hero-subtitle">
+                        Learn how we built an educational, child-safe AI chatbot that teaches Islamic values 
+                        to children ages 9-14, with multi-layer safety protection and ethical AI design.
+                    </p>
+                    <div class="mt-4">
+                        <span class="badge bg-success me-2">✓ 100% On-Premise</span>
+                        <span class="badge bg-success me-2">✓ Child-Safe (Ages 9-14)</span>
+                        <span class="badge bg-success me-2">✓ No Religious Rulings</span>
+                        <span class="badge bg-success">✓ Privacy-First</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="bi bi-robot" style="font-size: 10rem; opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <article>
+            <!-- Introduction -->
+            <section>
+                <h2 class="section-title"><i class="bi bi-book"></i> What We Built</h2>
+                <p class="lead">
+                    In this hands-on AI workshop, young learners built <strong>Noor</strong> – 
+                    a friendly Islamic chatbot designed specifically for children. Unlike regular chatbots, 
+                    Noor is built with safety, Islamic ethics, and education at its core.
+                </p>
+                
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="bi bi-shield-check text-success" style="font-size: 3rem;"></i>
+                                <h5 class="mt-3">Child-Safe</h5>
+                                <p>Multi-layer safety filters protect kids from inappropriate content</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="bi bi-mortarboard text-primary" style="font-size: 3rem;"></i>
+                                <h5 class="mt-3">Educational</h5>
+                                <p>Teaches Islamic values like kindness, honesty, and respect</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="bi bi-house-check text-warning" style="font-size: 3rem;"></i>
+                                <h5 class="mt-3">On-Premise</h5>
+                                <p>Runs locally - no cloud dependency, complete privacy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why This Matters -->
+            <section>
+                <h2 class="section-title"><i class="bi bi-lightbulb"></i> Why This Matters for Kids</h2>
+                <div class="kids-friendly-box">
+                    <h4>👶 Imagine having a friendly robot helper...</h4>
+                    <p style="font-size: 1.1rem;">
+                        That knows about Islamic values and can answer your questions about being kind, 
+                        honest, and helpful! But this robot is special – it has <strong>safety guards</strong> 
+                        that make sure everything it says is safe for kids like you.
+                    </p>
+                    <p style="font-size: 1.1rem;">
+                        It never pretends to be a religious teacher. Instead, it encourages you to 
+                        ask your parents, teachers, or imam for important questions. It's like a 
+                        learning friend that helps you understand Islamic values!
+                    </p>
+                </div>
+            </section>
+
+            <!-- The Challenge -->
+            <section>
+                <h2 class="section-title"><i class="bi bi-exclamation-triangle"></i> The Challenge</h2>
+                <p>
+                    Building AI for children presents unique challenges:
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="feature-box">
+                            <h5><i class="bi bi-shield-x text-danger"></i> Safety First</h5>
+                            <p>Children need protection from inappropriate content, personal data collection, and religious misinformation.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-box">
+                            <h5><i class="bi bi-chat-dots text-primary"></i> Age-Appropriate</h5>
+                            <p>Language must be simple, responses short, and tone always positive and encouraging.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-box">
+                            <h5><i class="bi bi-bank text-warning"></i> No Religious Authority</h5>
+                            <p>The chatbot must never issue fatwas or religious rulings – it's a helper, not a mufti.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-box">
+                            <h5><i class="bi bi-eye text-info"></i> Transparency</h5>
+                            <p>Kids and parents should understand how the chatbot works and what it can/cannot do.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Architecture -->
+            <section>
+                <h2 class="section-title"><i class="bi bi-diagram-3"></i> How Noor Works (Kid-Friendly Explanation)</h2>
+                
+                <div class="architecture-diagram">
+                    <h4 class="text-center mb-4">🚀 The Journey of Your Question</h4>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <h5>1. 👦 You Ask a Question</h5>
+                            <p>Like "What does Islam teach about kindness?"</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: #e74c3c;"></div>
+                            <h5>2. 🛡️ Safety Guard #1: Question Check</h5>
+                            <p>Is this question safe? No bad words? Not asking for personal info? ✓</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: #27ae60;"></div>
+                            <h5>3. 📚 Knowledge Base Search</h5>
+                            <p>The chatbot looks in its "book of answers" about Islamic values</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: #9b59b6;"></div>
+                            <h5>4. 🤖 Smart Brain (if needed)</h5>
+                            <p>If not found, the AI brain checks: "Is this about Islam? Can I answer safely?"</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: #e74c3c;"></div>
+                            <h5>5. 🛡️ Safety Guard #2: Answer Check</h5>
+                            <p>Is this answer good for kids? Simple language? Kind? No religious rulings? ✓</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: #3498db;"></div>
+                            <h5>6. 💬 Show Answer!</h5>
+                            <p>You get a safe, educational response!</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: #f39c12;"></div>
+                            <h5>7. 😊 You Learn!</h5>
+                            <p>You learned something new about Islamic values!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning mt-4">
+                    <h5><i class="bi bi-info-circle"></i> The Default Rule</h5>
+                    <p class="mb-0">
+                        If Noor doesn't know the answer or if it's not about Islam, it says: 
+                        <strong>"Please ask a parent, teacher, or imam."</strong>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Safety Features -->
+            <section>
+                <h2 class="section-title"><i class="bi bi-shield-fill-check"></i> Safety Features</h2>
+                <p class="lead">Every interaction goes through multiple safety layers:</p>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="mt-4 mb-3">Safety Badges:</h4>
+                        <span class="safety-badge">⭐ Two Safety Guards</span>
+                        <span class="safety-badge">🚫 No Personal Information</span>
+                        <span class="safety-badge">🚫 No Religious Rulings</span>
+                        <span class="safety-badge">👶 Simple Language</span>
+                        <span class="safety-badge">😊 Always Kind</span>
+                        <span class="safety-badge">🏠 On Your Computer</span>
+                        <span class="safety-badge">🤲 Ask Adults for Big Questions</span>
+                    </div>
+                </div>
+
+                <div class="code-block mt-4">
+                    <pre><code class="language-python"># Safety Filter Example
+def is_input_safe(user_input):
+    """Check if child's question is safe"""
+    
+    # Block inappropriate content
+    unsafe_words = ['violence', 'harm', 'personal info']
+    
+    # Block religious authority requests
+    authority_keywords = ['fatwa', 'ruling', 'haram', 'halal']
+    
+    # Only allow safe, educational questions
+    if any(unsafe in user_input.lower() for unsafe in unsafe_words):
+        return False
+    
+    return True  # Question is safe!</code></pre>
+                </div>
+            </section>
+
+            <!-- Tech Stack -->
+            <section>
+                <h2 class="section-title"><i class="bi bi-code-square"></i> Technology Stack</h2>
+                <p>Built with modern, kid-friendly technologies:</p>
+                
+                <div class="tech-stack">
+                    <span class="tech-badge"><i class="bi bi-python"></i> Python 3.8+</span>
+                    <span class="tech-badge"><i class="bi bi-globe"></i> Flask Web Framework</span>
+                    <span class="tech-badge"><i class="bi bi-bootstrap"></i> Bootstrap 5</span>
+                    <span class="tech-badge"><i class="bi bi-shield-check"></i> Multi-Layer Safety</span>
+                    <span class="tech-badge"><i class="bi bi-database"></i> JSON Knowledge Base</span>
+                    <span class="tech-badge"><i class="bi bi-laptop"></i> 100% On-Premise</span>
+                </div>
+
+                <h4 class="mt-4">Project Structure:</h4>
+                <div class="code-block">
+                    <pre><code class="language-plaintext">Islamic_Chatbot/
+├── app.py                 # Main Flask application
+├── chatbot/
+│   ├── core.py           # Chatbot orchestration
+│   ├── prompt.py         # LLM prompt construction
+│   ├── safety.py         # Safety & moderation ⭐
+│   ├── knowledge.py      # Islamic knowledge base
+│   └── examples.py       # Few-shot learning examples
+├── templates/
+│   ├── index.html        # Beautiful chat interface
+│   └── admin.html        # Knowledge management
+├── data/
+│   └── islamic_qa.json   # Extensible Q&A database
+└── requirements.txt      # Python dependencies</code></pre>
+                </div>
+            </section>
+
+            <!-- Demo Showcase -->
+            <section>
+                <div class="demo-showcase">
+                    <h2><i class="bi bi-play-circle"></i> See It in Action!</h2>
+                    <p class="lead">
+                        The chatbot features a beautiful, modern interface with real-time chat, 
+                        typing indicators, and quick suggestion buttons.
+                    </p>
+                    <div class="mt-4">
+                        <a href="#chatbot-demo" class="btn btn-light btn-lg me-3">
+                            <i class="bi bi-chat-dots"></i> Try Demo
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-lg">
+                            <i class="bi bi-github"></i> View Code
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Example Conversations -->
+            <section>
+                <h2 class="section-title"><i class="bi bi-chat-left-quote"></i> Example Conversations</h2>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white">
+                                ✅ Islamic Question (Gets Answer)
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Child:</strong> "What does Islam teach about kindness?"</p>
+                                <hr>
+                                <p><strong>Noor:</strong> "Islam teaches us to be kind to everyone! The Prophet Muhammad (peace be upon him) said kindness is a mark of faith. Being kind makes Allah happy and makes others feel good too! 😊"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card border-warning">
+                            <div class="card-header bg-warning text-dark">
+                                ⚠️ Non-Islamic Question (Default Response)
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Child:</strong> "What's the weather today?"</p>
+                                <hr>
+                                <p><strong>Noor:</strong> "Please ask a parent, teacher, or imam."</p>
+                                <small class="text-muted">Not about Islam → redirect to adults</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="card border-primary">
+                            <div class="card-header bg-primary text-white">
+                                ✅ Values Question
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Child:</strong> "Why should I be honest?"</p>
+                                <hr>
+                                <p><strong>Noor:</strong> "Islam values honesty very much! Being truthful is important even when it's hard. The Prophet (peace be upon him) was known as 'Al-Amin' which means 'the truthful one.'"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card border-danger">
+                            <div class="card-header bg-danger text-white">
+                                🚫 Religious Ruling Request (Blocked)
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Child:</strong> "Is this haram?"</p>
+                                <hr>
+                                <p><strong>Noor:</strong> "That's a very important question! Please ask your parents, teacher, or imam for guidance on religious matters."</p>
+                                <small class="text-muted">Safety filter → redirect to authority</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What Kids Learned -->
+            <section>
+                <h2 class="section-title"><i class="bi bi-stars"></i> What Kids Learned</h2>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4><i class="bi bi-1-circle-fill text-primary"></i> AI Safety Matters</h4>
+                        <ul>
+                            <li>Why AI needs multiple safety checks</li>
+                            <li>How to protect children online</li>
+                            <li>Why personal information should never be shared</li>
+                            <li>The importance of adult guidance</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h4><i class="bi bi-2-circle-fill text-success"></i> Ethical AI Design</h4>
+                        <ul>
+                            <li>AI should never claim authority it doesn't have</li>
+                            <li>Transparency and explainability for kids</li>
+                            <li>Cultural and religious sensitivity</li>
+                            <li>Age-appropriate content design</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h4><i class="bi bi-3-circle-fill text-warning"></i> Python Programming</h4>
+                        <ul>
+                            <li>Building web applications with Flask</li>
+                            <li>Modular code architecture</li>
+                            <li>Safety filtering and validation</li>
+                            <li>JSON data management</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h4><i class="bi bi-4-circle-fill text-info"></i> Islamic Values</h4>
+                        <ul>
+                            <li>Kindness, honesty, and respect</li>
+                            <li>Helping others and charity</li>
+                            <li>Learning about Prophet Muhammad (PBUH)</li>
+                            <li>The importance of seeking knowledge</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Highlights -->
+            <section>
+                <h2 class="section-title"><i class="bi bi-code-slash"></i> Implementation Highlights</h2>
+                
+                <h4>1. Knowledge Base with Smart Matching</h4>
+                <div class="code-block">
+                    <pre><code class="language-python">def get_answer(self, question: str) -> Optional[str]:
+    """Find best matching answer using similarity scoring"""
+    question_lower = question.lower().strip()
+    best_match = None
+    best_score = 0.0
+    
+    for item in self.knowledge_items:
+        # Calculate similarity (must be 70% or higher)
+        score = SequenceMatcher(None, question_lower, 
+                               item['question'].lower()).ratio()
+        
+        if score > best_score and score > 0.70:  # Strict matching
+            best_score = score
+            best_match = item
+    
+    return best_match['answer'] if best_match else None</code></pre>
+                </div>
+
+                <h4 class="mt-4">2. Multi-Layer Safety Filtering</h4>
+                <div class="code-block">
+                    <pre><code class="language-python">def get_response(self, user_input: str) -> str:
+    """Safe response with multiple validation layers"""
+    
+    # Layer 1: Check if input is safe
+    if not self.safety_filter.is_input_safe(user_input):
+        return "Let's talk about something positive! 😊"
+    
+    # Layer 2: Try knowledge base first
+    kb_response = self.knowledge_base.get_answer(user_input)
+    
+    # Layer 3: Use AI brain if needed
+    if not kb_response:
+        kb_response = self._get_llm_response(user_input)
+    
+    # Layer 4: Final safety validation
+    if self.safety_filter.is_response_safe(kb_response):
+        return kb_response
+    else:
+        return "Please ask a parent, teacher, or imam."</code></pre>
+                </div>
+
+                <h4 class="mt-4">3. Beautiful Modern UI</h4>
+                <p>Built with Bootstrap 5, featuring:</p>
+                <ul>
+                    <li>Gradient backgrounds and smooth animations</li>
+                    <li>Real-time chat with typing indicators</li>
+                    <li>Quick suggestion buttons for common questions</li>
+                    <li>Mobile-responsive design</li>
+                    <li>Emoji support for kid-friendly communication</li>
+                </ul>
+            </section>
+
+            <!-- Results & Impact -->
+            <section>
+                <h2 class="section-title"><i class="bi bi-trophy"></i> Results & Impact</h2>
+                
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="text-success">100%</h2>
+                                <p>Safety Test Pass Rate</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="text-primary">13</h2>
+                                <p>Knowledge Items</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="text-warning">2</h2>
+                                <p>Safety Guard Layers</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="text-info">0</h2>
+                                <p>External Dependencies</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <blockquote class="mt-4">
+                    "This project taught us that AI isn't just about making smart computers - it's about making SAFE and HELPFUL computers, especially for kids!" - Workshop Participant
+                </blockquote>
+            </section>
+
+            <!-- Try It Yourself -->
+            <section>
+                <h2 class="section-title"><i class="bi bi-play-btn"></i> Try It Yourself!</h2>
+                
+                <div class="alert alert-info">
+                    <h5><i class="bi bi-download"></i> Get Started</h5>
+                    <p>Clone the repository and run it on your computer:</p>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Clone the project
+git clone https://github.com/yourusername/islamic-chatbot
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the chatbot
+python app.py
+
+# Open in browser
+http://localhost:5000</code></pre>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="bi bi-gear"></i> Admin Panel</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Instructors can add new Q&A live during demos:</p>
+                        <ul>
+                            <li>Visit <code>http://localhost:5000/admin</code></li>
+                            <li>Add new questions and safe answers</li>
+                            <li>Demonstrate how AI learns new information</li>
+                            <li>Show kids the power of extensible systems</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conclusion -->
+            <section>
+                <h2 class="section-title"><i class="bi bi-heart"></i> Conclusion</h2>
+                
+                <p class="lead">
+                    Building Noor taught us that creating AI for children requires more than just technical skills - 
+                    it demands a deep commitment to safety, ethics, and education.
+                </p>
+                
+                <div class="feature-box">
+                    <h5>Key Takeaways:</h5>
+                    <ol>
+                        <li><strong>Safety First:</strong> Multiple layers of protection are essential for child-facing AI</li>
+                        <li><strong>Know Your Limits:</strong> AI should never claim authority it doesn't have</li>
+                        <li><strong>Transparency:</strong> Kids should understand how the technology works</li>
+                        <li><strong>Cultural Sensitivity:</strong> Respect religious and cultural values in design</li>
+                        <li><strong>Age-Appropriate:</strong> Language, tone, and content must match the audience</li>
+                        <li><strong>Encourage Guidance:</strong> Always redirect to trusted adults for important matters</li>
+                    </ol>
+                </div>
+
+                <div class="demo-showcase mt-4">
+                    <h3>🎯 Mission Accomplished!</h3>
+                    <p>
+                        We successfully built a safe, educational, and fun Islamic AI chatbot that:
+                    </p>
+                    <ul class="text-start" style="max-width: 600px; margin: 0 auto;">
+                        <li>✅ Teaches Islamic values to children</li>
+                        <li>✅ Maintains strict safety standards</li>
+                        <li>✅ Respects religious boundaries</li>
+                        <li>✅ Provides transparency and explainability</li>
+                        <li>✅ Runs entirely on-premise for privacy</li>
+                        <li>✅ Can be extended with new knowledge</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Workshop Resources -->
+            <section>
+                <h2 class="section-title"><i class="bi bi-folder"></i> Workshop Resources</h2>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5><i class="bi bi-file-earmark-pdf"></i> Workshop Presentation</h5>
+                                <p>AI Superheroes Workshop Session 2 - Building Safe AI for Kids</p>
+                                <a href="#" class="btn btn-primary">View PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5><i class="bi bi-github"></i> Source Code</h5>
+                                <p>Complete source code with documentation and examples</p>
+                                <a href="#" class="btn btn-dark">GitHub Repo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5><i class="bi bi-diagram-3"></i> Architecture Diagram</h5>
+                                <p>Kid-friendly drawing guide and system architecture</p>
+                                <a href="#" class="btn btn-info">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5><i class="bi bi-file-text"></i> Documentation</h5>
+                                <p>Complete setup guide, API docs, and tutorials</p>
+                                <a href="#" class="btn btn-success">Read Docs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tags -->
+            <section class="mt-5 mb-5">
+                <h5>Tags:</h5>
+                <span class="badge bg-secondary me-2">AI for Kids</span>
+                <span class="badge bg-secondary me-2">Islamic Education</span>
+                <span class="badge bg-secondary me-2">Child Safety</span>
+                <span class="badge bg-secondary me-2">Python</span>
+                <span class="badge bg-secondary me-2">Flask</span>
+                <span class="badge bg-secondary me-2">Ethical AI</span>
+                <span class="badge bg-secondary me-2">On-Premise AI</span>
+                <span class="badge bg-secondary me-2">NLP</span>
+                <span class="badge bg-secondary me-2">Chatbot</span>
+                <span class="badge bg-secondary me-2">Workshop</span>
+            </section>
+        </article>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2026 AI Superheroes Workshop | Built with ❤️ for Muslim Kids</p>
+            <p class="mb-0">
+                <a href="#" class="text-white me-3"><i class="bi bi-github"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+</body>
+</html>
