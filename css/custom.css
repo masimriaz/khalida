@@ -101,6 +101,10 @@ h1, h2, h3, h4, h5, h6,
     padding-bottom: 0.65rem;
 }
 
+.nav-master {
+    gap: 0.35rem;
+}
+
 /* Brand Styling */
 .navbar-brand {
     font-size: 1.65rem;
@@ -337,10 +341,22 @@ h1, h2, h3, h4, h5, h6,
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
+    .nav-master {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.65rem;
+    }
+
+    .nav-master .nav-item {
+        width: 100%;
+    }
+
     .nav-link {
         margin: 0.35rem 0;
         padding: 1.1rem 1.5rem !important;
         border-radius: 12px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
     }
     
     .nav-link::before {
@@ -366,6 +382,7 @@ h1, h2, h3, h4, h5, h6,
         margin: 1.5rem 0 0.5rem 0 !important;
         text-align: center;
         display: block;
+        grid-column: 1 / -1;
     }
     
     .dropdown-menu {
@@ -374,11 +391,19 @@ h1, h2, h3, h4, h5, h6,
         margin-top: 0.5rem;
         margin-left: 1rem;
     }
+
+    .nav-master .nav-item.dropdown {
+        grid-column: 1 / -1;
+    }
 }
 
 @media (min-width: 992px) {
     .navbar-expand-lg .navbar-nav .nav-link {
         padding: 0.75rem 1.25rem !important;
+    }
+
+    .nav-master {
+        gap: 0.15rem;
     }
 }
 

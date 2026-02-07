@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Superheroes Workshop – Session 3: Coding Our Islamic Chatbot with Python</title>
+    <meta name="description" content="Kids learn Python programming basics by building their own Islamic chatbot - a fun, hands-on coding adventure for ages 9-14">
+    <link rel="icon" type="image/x-icon" href="../../../assets/favicon.ico" />
+    <link href="../../../css/styles.css" rel="stylesheet" />
+    <link href="../../../css/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { 
+            --blog-max-width: 1080px; 
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --python-blue: #3776ab;
+            --python-yellow: #ffd343;
+        }
+        
+        html { scroll-behavior: smooth; }
+        *, *::before, *::after { box-sizing: border-box; }
+        
+        body {
+            background: radial-gradient(circle at 18% 18%, rgba(55,118,171,0.07), transparent 35%),
+                        radial-gradient(circle at 82% 8%, rgba(255,211,67,0.07), transparent 40%),
+                        linear-gradient(180deg, #f9f5ef 0%, #ffffff 55%, #f5efe3 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .blog-shell {
+            max-width: var(--blog-max-width);
+            margin: 0 auto;
+            padding: 6.5rem 1.25rem 3.5rem;
+            position: relative;
+        }
+        .blog-shell::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            pointer-events: none;
+            background: radial-gradient(circle at 15% 30%, rgba(240, 216, 194, 0.16), transparent 48%),
+                        radial-gradient(circle at 90% 70%, rgba(31, 58, 70, 0.08), transparent 52%);
+            z-index: -1;
+        }
+        .blog-breadcrumbs {
+            font-size: 0.95rem;
+            margin: 1rem 0 1.25rem;
+            color: var(--text-light, #4b5563);
+        }
+        .blog-breadcrumbs a { color: var(--khalida-primary-dark-teal, #1f3a46); text-decoration: none; }
+        .blog-breadcrumbs a:hover { text-decoration: underline; }
+        .blog-hero {
+            background: linear-gradient(135deg, rgba(55,118,171,0.9), rgba(255,211,67,0.9));
+            color: #fff;
+            border-radius: 20px;
+            padding: 2.7rem 2.2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.16);
+        }
+        .blog-hero::after {
+            content: '🐍';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.08;
+            right: -30px;
+            bottom: -40px;
+            z-index: 0;
+        }
+        .blog-hero h1 { font-size: 2.3rem; font-weight: 800; margin-bottom: 0.75rem; position: relative; z-index: 1; }
+        .blog-hero .blog-date { font-size: 0.95rem; letter-spacing: 0.6px; text-transform: uppercase; color: rgba(255,255,255,0.82); position: relative; z-index: 1; }
+        .blog-hero p { max-width: 780px; font-size: 1.08rem; line-height: 1.78; position: relative; z-index: 1; }
+        .blog-meta-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .meta-chip-soft {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.85rem;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.16);
+            color: #fff;
+            font-weight: 700;
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+        .meta-chip-soft i { color: var(--khalida-accent-soft-gold, #f0d8c2); }
+        main { 
+            display: grid; 
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        main > section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.85rem 1.65rem;
+            box-shadow: 0 14px 34px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: var(--transition-smooth);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 0;
+        }
+        main > section:hover {
+            box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+            z-index: 2;
+        }
+        .lead {
+            font-size: 1.15rem;
+            font-weight: 400;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        h2 { font-size: 1.68rem; font-weight: 800; color: var(--khalida-primary-dark-teal, #1f3a46); margin-bottom: 0.85rem; }
+        h3 { font-size: 1.25rem; font-weight: 700; color: var(--khalida-primary-dark-teal, #1f3a46); margin-bottom: 0.65rem; }
+        h4 { font-size: 1.1rem; font-weight: 700; color: var(--khalida-primary-dark-teal, #1f3a46); margin-bottom: 0.5rem; }
+        p { color: var(--text-dark, #1f252e); line-height: 1.7; }
+        .pill-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(55,118,171,0.12);
+            color: var(--python-blue);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+        .section-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 0.4rem;
+        }
+        .section-header-bar .section-kicker { 
+            font-size: 0.9rem; 
+            font-weight: 700; 
+            color: var(--khalida-muted, #4b5563); 
+            letter-spacing: 0.2px; 
+            text-transform: uppercase; 
+        }
+        .section-header-bar .section-anchor { 
+            font-size: 0.9rem; 
+            color: var(--khalida-primary-dark-teal, #1f3a46); 
+            text-decoration: none; 
+            font-weight: 700; 
+        }
+        .section-header-bar .section-anchor:hover { text-decoration: underline; }
+
+        .code-preview {
+            background: #1f2430;
+            color: #e6edf3;
+            padding: 1.5rem 1.75rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.92rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.08);
+            position: relative;
+            clear: both;
+            max-width: 100%;
+        }
+        .code-preview::before {
+            content: 'Python';
+            position: absolute;
+            top: 0.7rem;
+            right: 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--python-yellow);
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+        .code-preview code {
+            color: #e6edf3;
+            line-height: 1.6;
+            display: block;
+            white-space: pre;
+        }
+        .comment { color: #8b949e; font-style: italic; }
+        .keyword { color: #79c0ff; }
+        .string { color: #a5d6ff; }
+        .function { color: #7ee787; }
+
+        figure { 
+            margin: 1.5rem 0; 
+            clear: both;
+            width: 100%;
+        }
+        figure img { 
+            width: 100%; 
+            height: auto;
+            display: block;
+            border-radius: 14px; 
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08); 
+        }
+        figure figcaption { 
+            font-size: 0.9rem; 
+            color: var(--text-light, #4b5563); 
+            margin-top: 0.45rem; 
+            text-align: center; 
+        }
+        .story-box::before {
+            content: '✨';
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.15;
+            right: 20px;
+            top: 20px;
+            z-index: 0;
+        }
+        .story-box h4 {
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            margin-bottom: 1.25rem;
+            font-size: 1.35rem;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+        .story-box p {
+            font-size: 1.08rem;
+            color: var(--text-dark, #1f252e);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .story-box p:last-child {
+            margin-bottom: 0;
+        }
+        .story-box ul {
+            position: relative;
+            z-index: 1;
+       
+            color: #fff; 
+            margin-bottom: 0.5rem; 
+        }
+        .cta-card p { 
+            color: rgba(255,255,255,0.9); 
+            margin-bottom: 0; 
+        }
+        .back-link { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.4rem; 
+            text-decoration: none; 
+            color: var(--khalida-primary-dark-teal, #1f3a46); 
+            font-weight: 700; 
+            margin-top: 1rem; 
+        }
+        .back-link:hover { text-decoration: underline; }
+        .kids-friendly-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin: 2.5rem 0;
+            box-shadow: 0 8px 30px rgba(253,203,110,0.4);
+            border: 3px solid rgba(255,255,255,0.5);
+            position: relative;
+            overflow: hidden;
+            clear: both;
+        }
+        .kids-friendly-box::before {
+            content: '✨';
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.15;
+            right: 20px;
+            top: 20px;
+            z-index: 0;
+        }
+        .kids-friendly-box h4 {
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            margin-bottom: 1.25rem;
+            font-size: 1.35rem;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+        .kids-friendly-box p {
+            font-size: 1.08rem;
+            color: var(--text-dark, #1f252e);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .kids-friendly-box p:last-child {
+            margin-bottom: 0;
+        }
+        .kids-friendly-box ul {
+            position: relative;
+            z-index: 1;
+        }
+        .safety-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            margin: 0.4rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(231,76,60,0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .safety-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231,76,60,0.4);
+        }
+        .feature-card {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            padding: 1.75rem;
+            border-radius: 14px;
+            margin-bottom: 1.25rem;
+            border-left: 5px solid var(--python-blue);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--python-blue), #2a5f8f);
+            z-index: 0;
+        }
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(55,118,171,0.15);
+            border-left-color: #2a5f8f;
+            z-index: 2;
+        }
+        .feature-card h5 {
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .feature-card p {
+            margin: 0;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(52,152,219,0.08), rgba(155,89,182,0.08));
+            border-left: 5px solid #3498db;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 20px rgba(52,152,219,0.12);
+            position: relative;
+            overflow: hidden;
+            clear: both;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(52,152,219,0.15), transparent);
+            border-radius: 50%;
+            transform: translate(40%, -40%);
+            z-index: 0;
+        }
+        .highlight-box h4 {
+            position: relative;
+            z-index: 2;
+        }
+        .highlight-box .timeline {
+            position: relative;
+            z-index: 2;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(55,118,171,0.15);
+        }
+        .stat-card h3 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--python-blue), #2a5f8f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .stat-card p {
+            color: var(--text-dark, #1f252e);
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .stat-card small {
+            display: block;
+            margin-top: 0.5rem;
+            color: var(--text-light, #4b5563);
+            font-size: 0.85rem;
+        }
+        .row {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+        .row::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        [class*="col-"] {
+            position: relative;
+            min-height: 1px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        ul { padding-left: 1.2rem; }
+        ul li { margin-bottom: 0.35rem; color: var(--text-dark, #1f252e); }
+        .code-preview code {
+            color: #e6edf3;
+            line-height: 1.6;
+            display: block;
+            white-space: pre;
+        }
+        .comment { color: #8b949e; font-style: italic; }
+        .keyword { color: #79c0ff; }
+        .string { color: #a5d6ff; }
+        .function { color: #7ee787; }
+        
+        /* Story boxes */
+        .story-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffeaa7 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border-left: 5px solid var(--python-yellow);
+            box-shadow: 0 4px 20px rgba(255,211,67,0.2);
+        }
+        .story-box h4 {
+            color: var(--khalida-primary-dark-teal);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .story-box p { margin-bottom: 0.75rem; }
+        
+        /* Activity cards */
+        .activity-card {
+            background: linear-gradient(135deg, #e8f4f8, #d4ebf7);
+            padding: 1.5rem;
+            border-radius: 14px;
+            margin: 1.5rem 0;
+            border-left: 5px solid var(--python-blue);
+            box-shadow: 0 4px 15px rgba(55,118,171,0.15);
+        }
+        .activity-card h5 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 1.5rem;
+            clear: both;
+        }
+        .timeline-item h5 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1f3a46;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .timeline-item p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4b5563;
+            margin: 0;
+            padding-left: 0.5rem;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -3.75rem;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: white;
+            border-radius: 50%;
+            border: 4px solid var(--python-blue);
+            box-shadow: 0 4px 12px rgba(55,118,171,0.3), 0 0 0 4px rgba(55,118,171,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            clear: both;
+        }
+        .celebration-box h4 { color: white; font-size: 1.5rem; margin-bottom: 0.75rem; }
+        .celebration-box p { color: rgba(255,255,255,0.95); margin: 0; }
+        
+        h2, h3, h4, h5 {
+            clear: both;
+        }
+        
+        /* Ensure proper spacing for sections */
+        section {
+            overflow: visible;
+        }
+        
+        /* Timeline Card Structure */
+        .timeline-card {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            padding: 1.75rem;
+            border-radius: 14px;
+            margin-bottom: 1.25rem;
+            border-left: 5px solid var(--python-blue);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--python-blue), var(--python-yellow));
+            z-index: 0;
+        }
+        .timeline-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(55,118,171,0.15);
+            border-left-color: var(--python-yellow);
+            z-index: 2;
+        }
+        .timeline-card .timeline-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, var(--python-blue), #2a5f8f);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 4px 12px rgba(55,118,171,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        .timeline-card h5 {
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        .timeline-card p {
+            margin: 0;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+            color: var(--text-dark, #1f252e);
+        }
+        
+        @media (max-width: 768px) {
+            .blog-shell { padding: 6rem 1rem 2.75rem; }
+            .blog-hero { padding: 2rem 1.4rem; }
+            .blog-hero h1 { font-size: 1.9rem; }
+            .code-preview { 
+                font-size: 0.85rem; 
+                padding: 1rem; 
+                min-height: auto;
+                overflow-x: auto;
+            }
+            .pdf-embed { min-height: 420px; }
+            main > section { padding: 1.25rem 1.1rem; }
+            .section-header-bar { 
+                flex-direction: column; 
+                align-items: flex-start; 
+            }
+            .blog-meta-strip { gap: 0.5rem; }
+            .timeline { padding-left: 0; }
+            .timeline-card { padding: 1.25rem 1rem; }
+            .story-box { padding: 1.75rem; }
+            .kids-friendly-box { padding: 1.75rem; }
+            .activity-card { padding: 1.25rem; }
+            .teacher-tip { padding: 1rem; }
+            .celebration-box { padding: 1.5rem; }
+            .feature-card { padding: 1.25rem; }
+            .timeline-card .timeline-badge {
+                width: 2rem;
+                height: 2rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* ==================== Bootstrap 5 Enhanced Components ==================== */
+        
+        /* Card Hover Lift Effect */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.15) !important;
+        }
+        
+        /* Badge Circle for Timeline Icons */
+        .badge-circle {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        /* Enhanced Code Blocks */
+        code:not(.code-preview code) {
+            background: rgba(55,118,171,0.08);
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+        
+        /* List Group Enhancements */
+        .list-group-flush .list-group-item {
+            background: transparent;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        
+        /* Alert Customizations */
+        .alert {
+            border-radius: 12px;
+        }
+        .alert-heading {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Card Border Start Enhancement */
+        .border-start {
+            border-left-width: 4px !important;
+        }
+        
+        /* Bootstrap Badge Utilities */
+        .badge {
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        
+        /* Card Header Customization */
+        .card-header {
+            padding: 1rem 1.25rem;
+        }
+        
+        /* Smooth Transitions for All Interactive Elements */
+        .card, .btn, .badge, .alert {
+            transition: all 0.3s ease;
+        }
+        
+        /* Responsive Typography */
+        @media (max-width: 576px) {
+            .display-6 { font-size: 1.75rem; }
+            .badge-circle { width: 2.5rem; height: 2.5rem; font-size: 1rem; }
+        }
+        
+        /* Focus States for Accessibility */
+        .card:focus-within {
+            outline: 2px solid var(--python-blue);
+            outline-offset: 2px;
+        }
+        
+        /* Print Styles */
+        @media print {
+            .hover-lift { transform: none !important; }
+            .card { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-elegant fixed-top" id="mainNav">
+        <div class="container-fluid px-3 px-lg-4">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html#page-top">
+                <i class="fas fa-graduation-cap"></i>
+                <span class="brand-text">Khalida Foundation</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto align-items-lg-center nav-master">
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#page-top">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#about">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="masterDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Explore</a>
+                        <ul class="dropdown-menu dropdown-menu-end p-3 shadow-lg" aria-labelledby="masterDropdown" style="min-width: 320px;">
+                            <li class="dropdown-header text-uppercase small text-muted">Courses</li>
+                            <li><a class="dropdown-item" href="../../../course-pages/courses.html">All Courses</a></li>
+                            <li><a class="dropdown-item" href="../../../course-pages/advanced-ai-for-kids.html">Advanced AI for Kids</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header text-uppercase small text-muted">Programs</li>
+                            <li><a class="dropdown-item" href="../../../index.html#programs">Programs & Initiatives</a></li>
+                            <li><a class="dropdown-item" href="../../../index.html#impact">Impact</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header text-uppercase small text-muted">AI Initiative</li>
+                            <li><a class="dropdown-item" href="../../../course-pages/courses.html#ai-initiative">AI Initiative Overview</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="../../../blog/index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="blogDropdown">
+                            <li><a class="dropdown-item" href="../../../blog/index.html">All Blog Posts</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/01/ai-superheroes-session-1.html">AI Superheroes – Session 1</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-2.html">AI Superheroes – Session 2</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-3.html">AI Superheroes – Session 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#get-involved">Get Involved</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-2"><a class="nav-link nav-link-register" href="../../../register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="blog-shell">
+        <nav class="blog-breadcrumbs">
+            <a href="../../../index.html">Home</a> &raquo; <a href="../../index.html">Blog</a> &raquo; Session 3
+        </nav>
+
+        <header class="blog-hero">
+            <div class="blog-date">February 7, 2026</div>
+            <h1>🐍 AI Superheroes Workshop – Session 3: Coding Our Islamic Chatbot with Python</h1>
+            <p>Time to become real coders! In this session, kids learn Python programming by bringing their Islamic chatbot designs to life—one line of code at a time!</p>
+            <div class="blog-meta-strip">
+                <span class="meta-chip-soft"><i class="fas fa-child"></i> Ages 9–14</span>
+                <span class="meta-chip-soft"><i class="fas fa-clock"></i> 90 minutes</span>
+                <span class="meta-chip-soft"><i class="fas fa-code"></i> Beginner Python</span>
+                <span class="meta-chip-soft"><i class="fas fa-heart"></i> Islamic Values</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Session Overview -->
+            <section id="overview">
+                <div class="pill-label">📋 Session Overview</div>
+                <h2>What We'll Learn Today</h2>
+                <p class="lead">Welcome back, AI Superheroes! In Sessions 1 and 2, we learned what AI is and designed our Islamic chatbot "Noor." Today, we're going to learn how to <strong>actually build it</strong> using Python—a friendly programming language that talks to computers!</p>
+                
+                <h3>🎯 Learning Goals</h3>
+                <ul>
+                    <li><strong>Understand Python</strong> – What it is and why it's perfect for chatbots</li>
+                    <li><strong>Learn basic coding</strong> – Variables, input/output, if/else, and lists</li>
+                    <li><strong>Build a real chatbot</strong> – Create a working Islamic chatbot in Python</li>
+                    <li><strong>Test and improve</strong> – Run our chatbot and add more features</li>
+                    <li><strong>Think like a coder</strong> – Break problems into small steps</li>
+                </ul>
+
+                <div class="story-box">
+                    <h4>📖 The Story of Python the Friendly Snake 🐍</h4>
+                    <p><strong>Once upon a time,</strong> a man named Guido wanted to create a programming language that was <strong>easy to read</strong> and <strong>fun to use</strong>—like having a friendly conversation with a computer!</p>
+                    <p>He named it <strong>"Python"</strong> (after a funny TV show, not the snake!). Python became so loved that today, millions of people use it to build amazing things: chatbots, games, websites, and even AI!</p>
+                    <p><strong>Why do we love Python?</strong></p>
+                    <ul>
+                        <li>✅ It's easy to read (almost like English!)</li>
+                        <li>✅ It's powerful (can build chatbots, games, AI)</li>
+                        <li>✅ It's friendly (great for beginners)</li>
+                        <li>✅ It's free (anyone can use it)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Session Timeline -->
+            <section id="timeline" class="mb-5">
+                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 d-inline-flex align-items-center gap-2">
+                    <i class="fas fa-clock"></i> Session Timeline
+                </span>
+                <h2 class="display-6 fw-bold text-dark mb-4">90-Minute Adventure Plan</h2>
+                
+                <div class="row g-4">
+                    <!-- Timeline Item 1 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm hover-lift">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="badge-circle bg-primary text-white me-3">
+                                        🎬
+                                    </div>
+                                    <span class="badge bg-primary text-white rounded-pill">0-10 min</span>
+                                </div>
+                                <h5 class="card-title fw-bold mb-2">Welcome & Story Time</h5>
+                                <p class="card-text text-muted small mb-0">Recap Sessions 1 & 2, introduce Python with the "Friendly Snake" story, show what we'll build today</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <small class="text-primary"><i class="fas fa-check-circle"></i> Foundation Setting</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 2 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm hover-lift">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="badge-circle bg-success text-white me-3">
+                                        🏗️
+                                    </div>
+                                    <span class="badge bg-success text-white rounded-pill">10-25 min</span>
+                                </div>
+                                <h5 class="card-title fw-bold mb-2">Python Basics Part 1</h5>
+                                <p class="card-text text-muted small mb-0">Learn Variables & Print (storing information and showing messages)</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <small class="text-success"><i class="fas fa-code"></i> Core Concepts</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 3 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm hover-lift">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="badge-circle bg-info text-white me-3">
+                                        🎤
+                                    </div>
+                                    <span class="badge bg-info text-white rounded-pill">25-40 min</span>
+                                </div>
+                                <h5 class="card-title fw-bold mb-2">Python Basics Part 2</h5>
+                                <p class="card-text text-muted small mb-0">Learn Input & If/Else (asking questions and making decisions)</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <small class="text-info"><i class="fas fa-keyboard"></i> User Interaction</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 4 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm hover-lift">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="badge-circle bg-warning text-dark me-3">
+                                        📚
+                                    </div>
+                                    <span class="badge bg-warning text-dark rounded-pill">40-55 min</span>
+                                </div>
+                                <h5 class="card-title fw-bold mb-2">Python Basics Part 3</h5>
+                                <p class="card-text text-muted small mb-0">Learn Lists (storing many Q&A pairs like flashcards)</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <small class="text-warning"><i class="fas fa-list"></i> Data Structures</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 5 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm hover-lift">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="badge-circle bg-danger text-white me-3">
+                                        🤖
+                                    </div>
+                                    <span class="badge bg-danger text-white rounded-pill">55-75 min</span>
+                                </div>
+                                <h5 class="card-title fw-bold mb-2">Build Our Chatbot!</h5>
+                                <p class="card-text text-muted small mb-0">Put it all together—code "Noor" the Islamic chatbot step by step</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <small class="text-danger"><i class="fas fa-rocket"></i> Main Project</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 6 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm hover-lift">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="badge-circle bg-secondary text-white me-3">
+                                        🎉
+                                    </div>
+                                    <span class="badge bg-secondary text-white rounded-pill">75-85 min</span>
+                                </div>
+                                <h5 class="card-title fw-bold mb-2">Test & Celebrate</h5>
+                                <p class="card-text text-muted small mb-0">Run our chatbots, share with the group, celebrate being coders!</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <small class="text-secondary"><i class="fas fa-star"></i> Showcase Time</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 7 -->
+                    <div class="col-12">
+                        <div class="card border-0 shadow-sm bg-gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="card-body text-white">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="badge-circle bg-white text-dark me-3 fs-4">
+                                        🚀
+                                    </div>
+                                    <span class="badge bg-white text-dark rounded-pill">85-90 min</span>
+                                </div>
+                                <h5 class="card-title fw-bold mb-2 text-white">What's Next?</h5>
+                                <p class="card-text mb-0 opacity-90">How to extend the chatbot, practice at home, preview future sessions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 1: Variables & Print -->
+            <section id="part1">
+                <div class="pill-label">🏗️ Part 1</div>
+                <h2>Variables & Print: Storing & Showing Information</h2>
+                
+                <div class="card border-0 shadow-sm bg-warning bg-opacity-10 mb-4">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="fs-1 me-3">📖</div>
+                            <h4 class="card-title mb-0 fw-bold text-dark">The Treasure Box Story</h4>
+                        </div>
+                        <p class="card-text mb-3">Imagine you have a <strong>treasure box</strong> with a label on it. You can put something inside (like your favorite toy's name) and later open the box to see what's inside!</p>
+                        <p class="card-text mb-0">In Python, we call these boxes <strong>"variables"</strong>—they store information for us!</p>
+                    </div>
+                </div>
+
+                <h3>🎓 Concept: Variables</h3>
+                <p>A <strong>variable</strong> is like a labeled box that holds information.</p>
+                
+                <div class="code-preview">
+<code><span class="comment"># This is how we create a variable (treasure box)</span>
+<span class="keyword">chatbot_name</span> = <span class="string">"Noor"</span>     <span class="comment"># Put "Noor" in the box labeled "chatbot_name"</span>
+<span class="keyword">age</span> = <span class="string">10</span>                   <span class="comment"># Put the number 10 in the box labeled "age"</span>
+<span class="keyword">is_kind</span> = <span class="string">True</span>             <span class="comment"># Put True (yes) in the box labeled "is_kind"</span></code>
+                </div>
+
+                <div class="alert alert-info border-0 shadow-sm mb-4" role="alert">
+                    <div class="d-flex align-items-start">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-chalkboard-teacher fs-3 text-info"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5 class="alert-heading fw-bold mb-2">
+                                <i class="fas fa-lightbulb text-warning"></i> Teacher Tip
+                            </h5>
+                            <p class="mb-0">Use physical boxes or index cards to demonstrate variables! Write labels and put toy items inside to show how variables work.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>🎓 Concept: Print (Showing Messages)</h3>
+                <p>To show a message on screen, we use <code>print()</code>—it's like asking the computer to speak!</p>
+                
+                <div class="code-preview">
+<code><span class="comment"># Tell the computer to say hello!</span>
+<span class="function">print</span>(<span class="string">"As-salamu alaykum!"</span>)
+<span class="function">print</span>(<span class="string">"My name is"</span>, chatbot_name)   <span class="comment"># Show the treasure from our box!</span></code>
+                </div>
+
+                <div class="card border-start border-5 border-success shadow-sm mb-4">
+                    <div class="card-header bg-success bg-opacity-10 border-0">
+                        <h5 class="card-title mb-0 fw-bold text-success">
+                            <i class="fas fa-users me-2"></i>Kids Activity #1: Create Your Own Variables
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-3"><strong>Task:</strong> Everyone creates 3 variables about themselves:</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item border-0 py-2 px-0">
+                                <code class="text-primary">my_name</code> = your name
+                            </li>
+                            <li class="list-group-item border-0 py-2 px-0">
+                                <code class="text-primary">my_age</code> = your age
+                            </li>
+                            <li class="list-group-item border-0 py-2 px-0">
+                                <code class="text-primary">favorite_subject</code> = what you love to learn
+                            </li>
+                        </ul>
+                        <div class="alert alert-light border mt-3 mb-0">
+                            <p class="mb-0"><strong>Then:</strong> Use <code class="text-primary">print()</code> to show these on screen!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-success bg-gradient border-0 shadow text-center" role="alert" style="background: linear-gradient(135deg, #2ecc71, #27ae60) !important;">
+                    <div class="display-6 mb-2">🎉</div>
+                    <h4 class="alert-heading fw-bold text-white mb-2">Checkpoint #1</h4>
+                    <p class="mb-0 text-white fw-medium">Amazing! You just learned how computers remember information! Give yourself a high-five! 🙌</p>
+                </div>
+            </section>
+
+            <!-- Part 2: Input & If/Else -->
+            <section id="part2">
+                <div class="pill-label">🎤 Part 2</div>
+                <h2>Input & If/Else: Asking Questions & Making Decisions</h2>
+                
+                <div class="card border-0 shadow-sm bg-info bg-opacity-10 mb-4">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="fs-1 me-3">📖</div>
+                            <h4 class="card-title mb-0 fw-bold text-dark">The Smart Robot Story</h4>
+                        </div>
+                        <p class="card-text mb-3">Imagine you meet a friendly robot. The robot asks: <strong>"What is your name?"</strong> You tell it, and the robot remembers!</p>
+                        <p class="card-text mb-3">Then the robot says: <strong>"If your name starts with 'A', I'll call you Amazing!"</strong></p>
+                        <p class="card-text mb-0">This is exactly what <code>input()</code> and <code>if/else</code> do in Python!</p>
+                    </div>
+                </div>
+
+                <h3>🎓 Concept: Input (Asking Questions)</h3>
+                <p><code>input()</code> lets your program ask the user a question and wait for an answer!</p>
+                
+                <div class="code-preview">
+<code><span class="comment"># Ask the user their name and store it in a variable</span>
+<span class="keyword">user_name</span> = <span class="function">input</span>(<span class="string">"What is your name? "</span>)
+<span class="function">print</span>(<span class="string">"Nice to meet you,"</span>, user_name, <span class="string">"!"</span>)</code>
+                </div>
+
+                <h3>🎓 Concept: If/Else (Making Decisions)</h3>
+                <p>Sometimes we want our program to do different things based on the answer. That's where <code>if/else</code> comes in!</p>
+                
+                <div class="code-preview">
+<code><span class="comment"># Ask a question</span>
+<span class="keyword">feeling</span> = <span class="function">input</span>(<span class="string">"How are you feeling? (happy/sad) "</span>)
+
+<span class="comment"># Make a decision based on the answer</span>
+<span class="keyword">if</span> feeling == <span class="string">"happy"</span>:
+    <span class="function">print</span>(<span class="string">"Alhamdulillah! I'm happy too! 😊"</span>)
+<span class="keyword">elif</span> feeling == <span class="string">"sad"</span>:
+    <span class="function">print</span>(<span class="string">"Don't worry! Allah is always with you. 🤲"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"I hope you have a blessed day!"</span>)</code>
+                </div>
+
+                <div class="teacher-tip">
+                    <h5><i class="fas fa-chalkboard-teacher"></i> Teacher Tip</h5>
+                    <p>Act out if/else with kids! Say: "If you're wearing blue, stand up. Else, sit down." This shows decision-making in action!</p>
+                </div>
+
+                <div class="activity-card">
+                    <h5><i class="fas fa-users"></i> Kids Activity #2: Build a Greeting Bot</h5>
+                    <p><strong>Task:</strong> Create a simple program that:</p>
+                    <ol style="margin-top: 0.5rem;">
+                        <li>Asks: "What time is it? (morning/afternoon/evening)"</li>
+                        <li>If morning → says "Good morning! Start your day with Bismillah!"</li>
+                        <li>If afternoon → says "Good afternoon! Hope your day is blessed!"</li>
+                        <li>If evening → says "Good evening! Don't forget your evening dua!"</li>
+                    </ol>
+                </div>
+
+                <div class="celebration-box">
+                    <h4>🎉 Checkpoint #2</h4>
+                    <p>Wow! Your programs can now talk AND think! You're becoming real coders! 💪</p>
+                </div>
+            </section>
+
+            <!-- Part 3: Lists -->
+            <section id="part3">
+                <div class="pill-label">📚 Part 3</div>
+                <h2>Lists: Storing Many Things at Once</h2>
+                
+                <div class="story-box">
+                    <h4>📖 The Backpack Story</h4>
+                    <p>Imagine your school backpack. Instead of carrying one pencil, you carry a <strong>list</strong> of items: pencil, eraser, notebook, snack!</p>
+                    <p>In Python, a <strong>list</strong> is like a backpack—it holds many items in one place!</p>
+                </div>
+
+                <h3>🎓 Concept: Lists</h3>
+                <p>A <strong>list</strong> stores multiple items in order. We use square brackets <code>[ ]</code> to create them.</p>
+                
+                <div class="code-preview">
+<code><span class="comment"># Create a list of duas (prayers)</span>
+<span class="keyword">duas</span> = [<span class="string">"Bismillah"</span>, <span class="string">"Alhamdulillah"</span>, <span class="string">"SubhanAllah"</span>]
+
+<span class="comment"># Access items by their position (counting starts at 0!)</span>
+<span class="function">print</span>(duas[0])    <span class="comment"># Shows "Bismillah" (first item)</span>
+<span class="function">print</span>(duas[1])    <span class="comment"># Shows "Alhamdulillah" (second item)</span>
+
+<span class="comment"># Add a new item to the list</span>
+duas.<span class="function">append</span>(<span class="string">"MashaAllah"</span>)
+<span class="function">print</span>(duas)       <span class="comment"># Shows all 4 duas!</span></code>
+                </div>
+
+                <div class="teacher-tip">
+                    <h5><i class="fas fa-chalkboard-teacher"></i> Teacher Tip</h5>
+                    <p>Use flashcards arranged in a row to demonstrate lists! Number them 0, 1, 2, 3 to show how Python counts from zero.</p>
+                </div>
+
+                <h3>🎓 Why Lists Are Perfect for Chatbots</h3>
+                <p>Our chatbot needs to remember MANY questions and answers! Lists help us organize them like flashcards.</p>
+                
+                <div class="code-preview">
+<code><span class="comment"># Store questions and answers together!</span>
+<span class="keyword">questions</span> = [<span class="string">"Who created us?"</span>, <span class="string">"What do we say before eating?"</span>]
+<span class="keyword">answers</span> = [<span class="string">"Allah created us"</span>, <span class="string">"We say Bismillah"</span>]
+
+<span class="comment"># When someone asks question 0, give answer 0!</span>
+<span class="function">print</span>(<span class="string">"Q:"</span>, questions[0])
+<span class="function">print</span>(<span class="string">"A:"</span>, answers[0])</code>
+                </div>
+
+                <div class="activity-card">
+                    <h5><i class="fas fa-users"></i> Kids Activity #3: Create Your Q&A List</h5>
+                    <p><strong>Task:</strong> Create two lists:</p>
+                    <ul style="margin-top: 0.5rem;">
+                        <li><code>my_questions</code> = 3 Islamic questions kids ask</li>
+                        <li><code>my_answers</code> = 3 kind, simple answers</li>
+                    </ul>
+                    <p style="margin-top: 0.5rem;"><strong>Example:</strong></p>
+                    <ul style="margin-top: 0.25rem;">
+                        <li>Q: "How many times do we pray?" → A: "We pray 5 times a day!"</li>
+                    </ul>
+                </div>
+
+                <div class="celebration-box">
+                    <h4>🎉 Checkpoint #3</h4>
+                    <p>You're ready! Now you know ALL the Python basics to build a chatbot! Let's do this! 🚀</p>
+                </div>
+            </section>
+
+            <!-- Main Build Section -->
+            <section id="build-chatbot">
+                <div class="pill-label">🤖 Build Time!</div>
+                <h2>Building "Noor" - Our Islamic Chatbot</h2>
+                
+                <p class="lead">Time to put everything together! We'll build our chatbot step by step. Follow along and type the code with us!</p>
+
+                <h3>Step 1: Welcome Message</h3>
+                <p>First, let's make our chatbot introduce itself!</p>
+                
+                <div class="code-preview">
+<code><span class="comment"># Step 1: Welcome the user</span>
+<span class="function">print</span>(<span class="string">"╔════════════════════════════════╗"</span>)
+<span class="function">print</span>(<span class="string">"║   As-salamu alaykum! 🌙       ║"</span>)
+<span class="function">print</span>(<span class="string">"║   I am Noor, your kind        ║"</span>)
+<span class="function">print</span>(<span class="string">"║   Islamic helper chatbot!     ║"</span>)
+<span class="function">print</span>(<span class="string">"╚════════════════════════════════╝"</span>)
+<span class="function">print</span>()</code>
+                </div>
+
+                <div class="teacher-tip">
+                    <h5><i class="fas fa-chalkboard-teacher"></i> Teacher Tip</h5>
+                    <p>Ask a volunteer to read the welcome message out loud! Make it fun and engaging. Encourage kids to customize their chatbot's name.</p>
+                </div>
+
+                <h3>Step 2: Get the User's Name</h3>
+                <p>Let's ask who we're talking to!</p>
+                
+                <div class="code-preview">
+<code><span class="comment"># Step 2: Get user's name</span>
+<span class="keyword">user_name</span> = <span class="function">input</span>(<span class="string">"What is your name? "</span>)
+<span class="function">print</span>(<span class="string">"Nice to meet you,"</span>, user_name, <span class="string">"! 😊"</span>)
+<span class="function">print</span>()</code>
+                </div>
+
+                <h3>Step 3: Store Q&A Pairs</h3>
+                <p>Now we create our knowledge base—the questions Noor knows about!</p>
+                
+                <div class="code-preview">
+<code><span class="comment"># Step 3: Create our Q&A database using lists</span>
+<span class="keyword">questions</span> = [
+    <span class="string">"who created us"</span>,
+    <span class="string">"how many times do we pray"</span>,
+    <span class="string">"what do we say before eating"</span>,
+    <span class="string">"what is the quran"</span>,
+    <span class="string">"how should we treat others"</span>
+]
+
+<span class="keyword">answers</span> = [
+    <span class="string">"Allah (SWT) created us and everything in the universe! ☝️"</span>,
+    <span class="string">"We pray 5 times a day: Fajr, Dhuhr, Asr, Maghrib, and Isha! 🕌"</span>,
+    <span class="string">"We say 'Bismillah' (In the name of Allah) before eating! 🍎"</span>,
+    <span class="string">"The Quran is Allah's beautiful message to guide us in life! 📖"</span>,
+    <span class="string">"We should treat everyone with kindness, respect, and love! ❤️"</span>
+]</code>
+                </div>
+
+                <div class="activity-card">
+                    <h5><i class="fas fa-users"></i> Volunteer Moment!</h5>
+                    <p>Ask 2-3 kids to suggest more questions and answers! Add them to the lists together as a group.</p>
+                </div>
+
+                <h3>Step 4: The Chatbot Loop</h3>
+                <p>This is the brain! Our chatbot will keep asking what the user wants to know.</p>
+                
+                <div class="code-preview">
+<code><span class="comment"># Step 4: Main chatbot conversation loop</span>
+<span class="function">print</span>(<span class="string">"You can ask me anything about Islam!"</span>)
+<span class="function">print</span>(<span class="string">"Type 'bye' when you want to leave.\n"</span>)
+
+<span class="keyword">while</span> True:
+    <span class="comment"># Get user's question</span>
+    <span class="keyword">user_question</span> = <span class="function">input</span>(user_name + <span class="string">": "</span>).<span class="function">lower</span>()  <span class="comment"># Convert to lowercase</span>
+    
+    <span class="comment"># Check if user wants to exit</span>
+    <span class="keyword">if</span> user_question == <span class="string">"bye"</span>:
+        <span class="function">print</span>(<span class="string">"Noor: Wa alaykumu as-salam! May Allah bless you! 🤲"</span>)
+        <span class="keyword">break</span>  <span class="comment"># Exit the loop</span>
+    
+    <span class="comment"># Search for the answer</span>
+    <span class="keyword">found_answer</span> = False
+    
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="function">len</span>(questions)):
+        <span class="keyword">if</span> questions[i] <span class="keyword">in</span> user_question:
+            <span class="function">print</span>(<span class="string">"Noor:"</span>, answers[i])
+            found_answer = True
+            <span class="keyword">break</span>
+    
+    <span class="comment"># If we don't know the answer</span>
+    <span class="keyword">if not</span> found_answer:
+        <span class="function">print</span>(<span class="string">"Noor: I'm still learning! Can you ask in a simpler way? 🤔"</span>)
+    
+    <span class="function">print</span>()  <span class="comment"># Add spacing for readability</span></code>
+                </div>
+
+                <div class="teacher-tip">
+                    <h5><i class="fas fa-chalkboard-teacher"></i> Teacher Tip</h5>
+                    <p><strong>Explain the loop:</strong> "This is like a conversation that keeps going until we say 'bye'—just like talking with a friend!" Walk through the logic slowly, one line at a time.</p>
+                </div>
+
+                <h3>🎯 The Complete Chatbot Code</h3>
+                <p>Here's everything put together! This is the full working chatbot:</p>
+                
+                <div class="code-preview">
+<code><span class="comment"># ================================================</span>
+<span class="comment"># NOOR - My Kind Islamic Chatbot</span>
+<span class="comment"># Created by: [Student's Name]</span>
+<span class="comment"># Date: February 7, 2026</span>
+<span class="comment"># ================================================</span>
+
+<span class="comment"># Welcome message</span>
+<span class="function">print</span>(<span class="string">"╔════════════════════════════════╗"</span>)
+<span class="function">print</span>(<span class="string">"║   As-salamu alaykum! 🌙       ║"</span>)
+<span class="function">print</span>(<span class="string">"║   I am Noor, your kind        ║"</span>)
+<span class="function">print</span>(<span class="string">"║   Islamic helper chatbot!     ║"</span>)
+<span class="function">print</span>(<span class="string">"╚════════════════════════════════╝"</span>)
+<span class="function">print</span>()
+
+<span class="comment"># Get user's name</span>
+<span class="keyword">user_name</span> = <span class="function">input</span>(<span class="string">"What is your name? "</span>)
+<span class="function">print</span>(<span class="string">"Nice to meet you,"</span>, user_name, <span class="string">"! 😊\n"</span>)
+
+<span class="comment"># Knowledge base: Questions and Answers</span>
+<span class="keyword">questions</span> = [
+    <span class="string">"who created us"</span>,
+    <span class="string">"how many times do we pray"</span>,
+    <span class="string">"what do we say before eating"</span>,
+    <span class="string">"what is the quran"</span>,
+    <span class="string">"how should we treat others"</span>,
+    <span class="string">"what is ramadan"</span>,
+    <span class="string">"who is prophet muhammad"</span>
+]
+
+<span class="keyword">answers</span> = [
+    <span class="string">"Allah (SWT) created us and everything in the universe! ☝️"</span>,
+    <span class="string">"We pray 5 times a day: Fajr, Dhuhr, Asr, Maghrib, and Isha! 🕌"</span>,
+    <span class="string">"We say 'Bismillah' (In the name of Allah) before eating! 🍎"</span>,
+    <span class="string">"The Quran is Allah's beautiful message to guide us in life! 📖"</span>,
+    <span class="string">"We should treat everyone with kindness, respect, and love! ❤️"</span>,
+    <span class="string">"Ramadan is the blessed month when we fast from dawn to sunset! 🌙"</span>,
+    <span class="string">"Prophet Muhammad ﷺ is the last messenger of Allah and our role model! ✨"</span>
+]
+
+<span class="comment"># Main conversation loop</span>
+<span class="function">print</span>(<span class="string">"You can ask me anything about Islam!"</span>)
+<span class="function">print</span>(<span class="string">"Type 'bye' when you want to leave.\n"</span>)
+
+<span class="keyword">while</span> True:
+    <span class="comment"># Get user's question</span>
+    <span class="keyword">user_question</span> = <span class="function">input</span>(user_name + <span class="string">": "</span>).<span class="function">lower</span>()
+    
+    <span class="comment"># Check if user wants to exit</span>
+    <span class="keyword">if</span> user_question == <span class="string">"bye"</span>:
+        <span class="function">print</span>(<span class="string">"Noor: Wa alaykumu as-salam! May Allah bless you! 🤲"</span>)
+        <span class="keyword">break</span>
+    
+    <span class="comment"># Search for the answer in our knowledge base</span>
+    <span class="keyword">found_answer</span> = False
+    
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="function">len</span>(questions)):
+        <span class="keyword">if</span> questions[i] <span class="keyword">in</span> user_question:
+            <span class="function">print</span>(<span class="string">"Noor:"</span>, answers[i])
+            found_answer = True
+            <span class="keyword">break</span>
+    
+    <span class="comment"># If we don't know the answer</span>
+    <span class="keyword">if not</span> found_answer:
+        <span class="function">print</span>(<span class="string">"Noor: I'm still learning! Can you ask in a simpler way? 🤔"</span>)
+    
+    <span class="function">print</span>()
+
+<span class="function">print</span>(<span class="string">"Thank you for chatting with me, "</span> + user_name + <span class="string">"! 💚"</span>)</code>
+                </div>
+
+                <div class="celebration-box">
+                    <h4>🎉 You Did It!</h4>
+                    <p>YOU JUST BUILT A REAL CHATBOT! Time to test it! 🚀</p>
+                </div>
+            </section>
+
+            <!-- Testing Section -->
+            <section id="testing">
+                <div class="pill-label">🧪 Testing Time</div>
+                <h2>Running & Testing Our Chatbot</h2>
+                
+                <h3>How to Run Your Chatbot</h3>
+                <ol>
+                    <li>Save your code as <code>noor_chatbot.py</code></li>
+                    <li>Open your terminal or command prompt</li>
+                    <li>Type: <code>python noor_chatbot.py</code></li>
+                    <li>Press Enter and watch the magic! ✨</li>
+                </ol>
+
+                <h3>Test These Questions</h3>
+                <div class="activity-card">
+                    <h5><i class="fas fa-flask"></i> Try Asking Noor:</h5>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>"Who created us?"</li>
+                        <li>"How many times do we pray?"</li>
+                        <li>"What is Ramadan?"</li>
+                        <li>"Tell me about Prophet Muhammad"</li>
+                        <li>"What happens when I ask something Noor doesn't know?"</li>
+                    </ul>
+                </div>
+
+                <div class="teacher-tip">
+                    <h5><i class="fas fa-chalkboard-teacher"></i> Teacher Tip</h5>
+                    <p><strong>Group Activity:</strong> Have kids pair up and test each other's chatbots! One asks questions while the other demonstrates. Celebrate when the chatbot responds correctly!</p>
+                </div>
+
+                <h3>🐛 What If Something Goes Wrong?</h3>
+                <p>Don't worry! Every coder faces errors. Here's how to fix common ones:</p>
+                
+                <div class="activity-card">
+                    <h5><i class="fas fa-bug"></i> Common Fixes</h5>
+                    <ul style="margin-top: 0.5rem;">
+                        <li><strong>IndentationError:</strong> Check your spacing! Python uses spaces to group code.</li>
+                        <li><strong>NameError:</strong> Did you spell your variable name correctly?</li>
+                        <li><strong>SyntaxError:</strong> Did you forget a quote mark (<code>"</code>) or colon (<code>:</code>)?</li>
+                        <li><strong>Chatbot doesn't respond:</strong> Make sure your question matches words in the questions list!</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Extension Ideas -->
+            <section id="extensions">
+                <div class="pill-label">🚀 Level Up!</div>
+                <h2>How to Make Your Chatbot Even Better</h2>
+                
+                <p>Now that you have a working chatbot, here are fun ways to extend it!</p>
+
+                <h3>💡 Extension Idea #1: Add More Q&A</h3>
+                <div class="code-preview">
+<code><span class="comment"># Just add more items to your lists!</span>
+questions.<span class="function">append</span>(<span class="string">"what are the five pillars"</span>)
+answers.<span class="function">append</span>(<span class="string">"The five pillars are: Shahada, Salah, Zakat, Sawm, and Hajj! 🕋"</span>)</code>
+                </div>
+
+                <h3>💡 Extension Idea #2: Add Greetings</h3>
+                <div class="code-preview">
+<code><span class="comment"># Respond to greetings!</span>
+<span class="keyword">if</span> <span class="string">"assalam"</span> <span class="keyword">in</span> user_question <span class="keyword">or</span> <span class="string">"salam"</span> <span class="keyword">in</span> user_question:
+    <span class="function">print</span>(<span class="string">"Noor: Wa alaykumu as-salam! How can I help you today? 😊"</span>)</code>
+                </div>
+
+                <h3>💡 Extension Idea #3: Add Stories</h3>
+                <div class="code-preview">
+<code><span class="comment"># Tell a beautiful Islamic story!</span>
+<span class="keyword">if</span> <span class="string">"story"</span> <span class="keyword">in</span> user_question:
+    <span class="function">print</span>(<span class="string">"Noor: Let me tell you about Prophet Yunus (Jonah)..."</span>)
+    <span class="function">print</span>(<span class="string">"He was swallowed by a big fish, but never stopped praying!"</span>)
+    <span class="function">print</span>(<span class="string">"Allah saved him because he always had faith! 🐋"</span>)</code>
+                </div>
+
+                <h3>💡 Extension Idea #4: Add Daily Duas</h3>
+                <div class="code-preview">
+<code><span class="comment"># Suggest a dua based on the situation</span>
+<span class="keyword">if</span> <span class="string">"morning"</span> <span class="keyword">in</span> user_question:
+    <span class="function">print</span>(<span class="string">"Noor: Morning dua: Alhamdulillah for this new day! ☀️"</span>)
+<span class="keyword">elif</span> <span class="string">"sleep"</span> <span class="keyword">in</span> user_question:
+    <span class="function">print</span>(<span class="string">"Noor: Before sleep, say: Bismika Allahumma ahya wa amut 🌙"</span>)</code>
+                </div>
+
+                <h3>💡 Extension Idea #5: Emoji Mood</h3>
+                <p>Make Noor show different moods based on the topic!</p>
+                
+                <div class="code-preview">
+<code><span class="comment"># Add emotions to responses</span>
+<span class="keyword">happy_emojis</span> = [<span class="string">"😊"</span>, <span class="string">"😄"</span>, <span class="string">"🌟"</span>, <span class="string">"✨"</span>]
+<span class="keyword">peaceful_emojis</span> = [<span class="string">"🕌"</span>, <span class="string">"🌙"</span>, <span class="string">"☮️"</span>, <span class="string">"🤲"</span>]
+
+<span class="comment"># Use them in responses!</span>
+<span class="function">print</span>(<span class="string">"Noor: MashaAllah!"</span>, happy_emojis[0])</code>
+                </div>
+
+                <div class="activity-card">
+                    <h5><i class="fas fa-rocket"></i> Challenge for Home</h5>
+                    <p>Try adding 3 of these extensions to your chatbot this week! Bring it back to Session 4 to share!</p>
+                </div>
+            </section>
+
+            <!-- Best Practices -->
+            <section id="best-practices">
+                <div class="pill-label">🛡️ Safety First</div>
+                <h2>Chatbot Best Practices - Being Responsible Coders</h2>
+                
+                <h3>✅ What Our Chatbot SHOULD Do</h3>
+                <ul>
+                    <li>✅ Use <strong>kind, respectful</strong> language</li>
+                    <li>✅ Give <strong>accurate Islamic information</strong> (verified by adults)</li>
+                    <li>✅ Say <strong>"I don't know"</strong> instead of guessing</li>
+                    <li>✅ Encourage <strong>learning and curiosity</strong></li>
+                    <li>✅ Respect <strong>all people</strong> regardless of background</li>
+                </ul>
+
+                <h3>❌ What Our Chatbot Should NOT Do</h3>
+                <ul>
+                    <li>❌ Share personal information (addresses, phone numbers)</li>
+                    <li>❌ Give medical or legal advice</li>
+                    <li>❌ Make fun of anyone or any belief</li>
+                    <li>❌ Discuss adult topics</li>
+                    <li>❌ Pretend to be a real scholar (we're learning!)</li>
+                </ul>
+
+                <div class="story-box">
+                    <h4>🛡️ The Safety Shield</h4>
+                    <p>Remember: Our chatbot is a <strong>learning tool</strong>, not a replacement for parents, teachers, or scholars!</p>
+                    <p>If someone asks something inappropriate, our chatbot should say:</p>
+                    <p style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 8px; font-style: italic;">
+                        <strong>"I'm a learning chatbot for kids! Please ask a parent, teacher, or trusted adult about this question. 🤲"</strong>
+                    </p>
+                </div>
+
+                <h3>Adding a Safety Check</h3>
+                <div class="code-preview">
+<code><span class="comment"># List of topics we shouldn't discuss</span>
+<span class="keyword">unsafe_topics</span> = [<span class="string">"password"</span>, <span class="string">"address"</span>, <span class="string">"phone"</span>, <span class="string">"credit card"</span>]
+
+<span class="comment"># Check if question contains unsafe words</span>
+<span class="keyword">for</span> unsafe_word <span class="keyword">in</span> unsafe_topics:
+    <span class="keyword">if</span> unsafe_word <span class="keyword">in</span> user_question:
+        <span class="function">print</span>(<span class="string">"Noor: That's private information! Never share it online. 🛡️"</span>)
+        <span class="keyword">continue</span>  <span class="comment"># Skip to next question</span></code>
+                </div>
+            </section>
+
+            <!-- Recap Section -->
+            <section id="recap">
+                <div class="pill-label">📝 Mini Recap</div>
+                <h2>What We Learned Today - AI Superhero Skills Unlocked!</h2>
+                
+                <div class="story-box">
+                    <h4>🎯 Today's Big Wins</h4>
+                    <ul style="margin-bottom: 0;">
+                        <li>🐍 <strong>Met Python</strong> - The friendly programming language</li>
+                        <li>📦 <strong>Variables</strong> - Treasure boxes that store information</li>
+                        <li>🖨️ <strong>Print</strong> - Making the computer talk</li>
+                        <li>🎤 <strong>Input</strong> - Asking questions and getting answers</li>
+                        <li>🤔 <strong>If/Else</strong> - Making smart decisions</li>
+                        <li>📚 <strong>Lists</strong> - Storing many things in a backpack</li>
+                        <li>🤖 <strong>Built Noor</strong> - A real working Islamic chatbot!</li>
+                        <li>🛡️ <strong>Safety First</strong> - Being responsible coders</li>
+                    </ul>
+                </div>
+
+                <h3>🗣️ Tell Someone at Home</h3>
+                <div class="activity-card">
+                    <h5><i class="fas fa-home"></i> Homework Challenge</h5>
+                    <p>Teach your parent or sibling about:</p>
+                    <ol style="margin-top: 0.5rem;">
+                        <li>What a variable is (use the treasure box story!)</li>
+                        <li>How if/else works (use the robot story!)</li>
+                        <li>Show them your chatbot in action! 🎉</li>
+                    </ol>
+                </div>
+
+                <h3>🌟 You Are Now:</h3>
+                <ul>
+                    <li>✅ A <strong>Python programmer</strong></li>
+                    <li>✅ A <strong>chatbot builder</strong></li>
+                    <li>✅ A <strong>problem solver</strong></li>
+                    <li>✅ An <strong>AI Superhero</strong> who codes with Islamic values!</li>
+                </ul>
+            </section>
+
+            <!-- What's Next -->
+            <section id="next-steps">
+                <div class="pill-label">🔮 What's Next?</div>
+                <h2>Future Adventures - Session 4 Preview</h2>
+                
+                <h3>🚀 Where We're Going Next</h3>
+                <p>In our next session, we'll learn about:</p>
+                <ul>
+                    <li>🧠 <strong>Making Noor Smarter</strong> - Adding AI/ML concepts</li>
+                    <li>🎨 <strong>Adding a Voice</strong> - Text-to-speech for our chatbot</li>
+                    <li>🎯 <strong>Pattern Matching</strong> - Understanding questions better</li>
+                    <li>💾 <strong>Saving Data</strong> - Remembering past conversations</li>
+                    <li>🌐 <strong>Local LLMs</strong> - Introduction to on-premise AI models</li>
+                </ul>
+
+                <h3>📚 Practice at Home</h3>
+                <div class="activity-card">
+                    <h5><i class="fas fa-laptop-code"></i> Weekly Coding Challenge</h5>
+                    <p><strong>Your Mission:</strong></p>
+                    <ol style="margin-top: 0.5rem;">
+                        <li>Add 5 new Q&A pairs to your chatbot</li>
+                        <li>Teach Noor to tell one Islamic story</li>
+                        <li>Add a greeting and goodbye message</li>
+                        <li>Test your chatbot with 3 different people</li>
+                        <li>Write down what questions Noor struggled with</li>
+                    </ol>
+                    <p style="margin-top: 1rem;"><strong>Bonus:</strong> Draw a flowchart showing how your chatbot thinks!</p>
+                </div>
+
+                <h3>🎓 Keep Learning Resources</h3>
+                <ul>
+                    <li>📖 <strong>Python.org</strong> - Free tutorials for kids</li>
+                    <li>🎮 <strong>Code.org</strong> - Fun coding games</li>
+                    <li>📺 <strong>Islamic Kids Programs</strong> - Learn Quran & Hadith facts to add to Noor</li>
+                    <li>👥 <strong>Our Online Community</strong> - Share your chatbot with other AI Superheroes!</li>
+                </ul>
+            </section>
+
+            <!-- Final Celebration -->
+            <section id="celebration">
+                <div class="celebration-box">
+                    <h4>🎉 CONGRATULATIONS, CODE WARRIORS! 🎉</h4>
+                    <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                        You didn't just learn Python today—you <strong>built something real</strong> that can help others learn about Islam!
+                    </p>
+                    <p style="margin-bottom: 0;">
+                        You are officially <strong>AI SUPERHERO CODERS!</strong> 💪🦸‍♀️🦸‍♂️
+                    </p>
+                </div>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                    <p style="font-size: 1.2rem; color: var(--khalida-primary-dark-teal); font-weight: 700;">
+                        Keep coding, keep learning, keep being awesome! 🌟
+                    </p>
+                    <p style="font-style: italic; color: var(--text-light);">
+                        "Indeed, Allah loves those who are constantly striving to improve." - Inspired by Islamic teachings
+                    </p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #e8f4f8, #d4ebf7); padding: 1.5rem; border-radius: 12px; text-align: center;">
+                    <h4 style="margin-bottom: 0.75rem;">📸 Share Your Journey!</h4>
+                    <p style="margin: 0;">
+                        Take a screenshot of your chatbot running and share it with your family! Don't forget to explain how it works using the stories we learned today! 💚
+                    </p>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <a class="back-link" href="../../index.html" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--khalida-primary-dark-teal); font-weight: 700;">
+                        <i class="fas fa-arrow-left"></i> Back to Blog
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="modern-footer">
+        <div class="container px-4 px-lg-5">
+            <div class="footer-top">
+                <div class="row align-items-center mb-5">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="footer-brand">
+                            <h3 class="brand-name">
+                                <i class="fas fa-graduation-cap me-2"></i>
+                                Khalida Educational Foundation
+                            </h3>
+                            <p class="brand-tagline">
+                                Empowering futures through education. Building a legacy of learning, one child at a time.
+                            </p>
+                            <div class="brand-mission">
+                                <i class="fas fa-heart text-danger me-2"></i>
+                                <em>"In loving memory of Khalida - A tribute to a life dedicated to education"</em>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="newsletter-box">
+                            <h4 class="newsletter-title">
+                                <i class="fas fa-bell me-2"></i>
+                                Stay Updated
+                            </h4>
+                            <p class="newsletter-subtitle">Get the latest news and updates about our programs</p>
+                            <form class="newsletter-form-modern">
+                                <div class="newsletter-input-wrapper">
+                                    <i class="fas fa-envelope newsletter-icon"></i>
+                                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                                    <button class="newsletter-btn" type="submit">
+                                        <span>Subscribe</span>
+                                        <i class="fas fa-arrow-right ms-2"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-main">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading">
+                            <i class="fas fa-link me-2"></i>
+                            Quick Links
+                        </h5>
+                        <ul class="footer-menu">
+                            <li><a href="../../../index.html#about"><i class="fas fa-chevron-right me-2"></i>About Us</a></li>
+                            <li><a href="../../../course-pages/courses.html"><i class="fas fa-chevron-right me-2"></i>Our Courses</a></li>
+                            <li><a href="../../../index.html#programs"><i class="fas fa-chevron-right me-2"></i>Our Programs</a></li>
+                            <li><a href="../../../course-pages/courses.html#ai-initiative"><i class="fas fa-chevron-right me-2"></i>AI Initiative</a></li>
+                            <li><a href="../../../index.html#impact"><i class="fas fa-chevron-right me-2"></i>Our Impact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading">
+                            <i class="fas fa-hands-helping me-2"></i>
+                            Get Involved
+                        </h5>
+                        <ul class="footer-menu">
+                            <li><a href="../../../index.html#get-involved"><i class="fas fa-chevron-right me-2"></i>Volunteer</a></li>
+                            <li><a href="../../../index.html#get-involved"><i class="fas fa-chevron-right me-2"></i>Partner With Us</a></li>
+                            <li><a href="../../../register.html"><i class="fas fa-chevron-right me-2"></i>Register for Course</a></li>
+                            <li><a href="../../../index.html#contact"><i class="fas fa-chevron-right me-2"></i>Contact Us</a></li>
+                            <li><a href="../../../index.html#testimonials"><i class="fas fa-chevron-right me-2"></i>Testimonials</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading">
+                            <i class="fas fa-folder-open me-2"></i>
+                            Resources
+                        </h5>
+                        <ul class="footer-menu">
+                            <li><a href="../../../index.html#gallery"><i class="fas fa-chevron-right me-2"></i>Photo Gallery</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Annual Reports</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Success Stories</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>FAQs</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading">
+                            <i class="fas fa-map-marked-alt me-2"></i>
+                            Contact Info
+                        </h5>
+                        <ul class="footer-contact">
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:info@khalidafoundation.com">info@khalidafoundation.com</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+16096086282">+1 (609) 608-6282</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Education Street<br>Foundation City, State 12345</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <p class="copyright-text">
+                            <i class="fas fa-copyright me-1"></i>
+                            2025 Khalida Educational Foundation. All rights reserved.
+                            <br class="d-md-none">
+                            <span class="tribute-text">A Tribute to a Legacy of Love and Learning</span>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="footer-social">
+                            <span class="social-text">Follow Us:</span>
+                            <a href="#" class="footer-social-icon" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="footer-social-icon" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="footer-social-icon" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="footer-social-icon" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="footer-social-icon" title="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../js/scripts.js"></script>
+</body>
+</html>
