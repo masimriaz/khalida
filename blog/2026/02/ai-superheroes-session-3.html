@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Superheroes Workshop – Session 3: Learning Python & Building Our Islamic Chatbot</title>
+    <meta name="description" content="Kids ages 9-14 learn Python programming by building a safe Islamic chatbot with real code, stories, and hands-on activities">
+    <link rel="icon" type="image/x-icon" href="../../../assets/favicon.ico" />
+    <link href="../../../css/styles.css" rel="stylesheet" />
+    <link href="../../../css/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --blog-max-width: 1080px; 
+            --python-blue: #3776ab;
+            --python-yellow: #ffd43b;
+            --success-green: #2ecc71;
+            --warning-orange: #e67e22;
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            background: radial-gradient(circle at 18% 18%, rgba(212,106,58,0.07), transparent 35%),
+                        radial-gradient(circle at 82% 8%, rgba(31,58,70,0.07), transparent 40%),
+                        linear-gradient(180deg, #f9f5ef 0%, #ffffff 55%, #f5efe3 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .blog-shell {
+            max-width: var(--blog-max-width);
+            margin: 0 auto;
+            padding: 6.5rem 1.25rem 3.5rem;
+            position: relative;
+        }
+        
+        .blog-breadcrumbs {
+            font-size: 0.95rem;
+            margin: 1rem 0 1.25rem;
+            color: #4b5563;
+        }
+        
+        .blog-breadcrumbs a { 
+            color: #1f3a46; 
+            text-decoration: none; 
+        }
+        
+        .blog-breadcrumbs a:hover { 
+            text-decoration: underline; 
+        }
+        
+        .blog-hero {
+            background: linear-gradient(135deg, rgba(55,118,171,0.95), rgba(255,212,59,0.85)), 
+                        url("../../session1/AI-Superheroes--How-Machines-Can-Help-Us.webp");
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            border-radius: 20px;
+            padding: 2.7rem 2.2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.16);
+        }
+        
+        .blog-hero h1 { 
+            font-size: 2.3rem; 
+            font-weight: 800; 
+            margin-bottom: 0.75rem; 
+            position: relative; 
+            z-index: 1; 
+        }
+        
+        .blog-hero .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .blog-hero p { 
+            max-width: 780px; 
+            font-size: 1.08rem; 
+            line-height: 1.78; 
+            position: relative; 
+            z-index: 1; 
+        }
+        
+        .meta-chip-soft {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.85rem;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.16);
+            color: #fff;
+            font-weight: 700;
+            border: 1px solid rgba(255,255,255,0.18);
+            margin: 0.3rem;
+        }
+        
+        main { 
+            display: grid; 
+            gap: 1.5rem; 
+            margin-top: 2rem;
+        }
+        
+        main > section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 14px 34px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        
+        h2 { 
+            font-size: 1.9rem; 
+            font-weight: 800; 
+            color: #1f3a46; 
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--python-blue);
+        }
+        
+        h3 { 
+            font-size: 1.4rem; 
+            font-weight: 700; 
+            color: #1f3a46; 
+            margin: 1.5rem 0 0.8rem 0;
+        }
+        
+        h4 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #2c5282;
+            margin: 1rem 0 0.5rem 0;
+        }
+        
+        p { 
+            color: #1f252e; 
+            line-height: 1.7; 
+            margin-bottom: 1rem;
+        }
+        
+        .timeline {
+            border-left: 4px solid var(--python-blue);
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -2.7rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: var(--python-blue);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 2px var(--python-blue);
+        }
+        
+        .timeline-time {
+            font-weight: 700;
+            color: var(--python-blue);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .story-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            border-left: 5px solid #f39c12;
+        }
+        
+        .story-box h4 {
+            color: #d35400;
+            margin-top: 0;
+        }
+        
+        .code-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-box pre {
+            margin: 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .code-label {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--python-blue);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 5px solid var(--success-green);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .tip-box h4 {
+            color: #27ae60;
+            margin-top: 0;
+        }
+        
+        .teacher-tip {
+            background: #fff3cd;
+            border-left: 5px solid var(--warning-orange);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .teacher-tip h4 {
+            color: #d68910;
+            margin-top: 0;
+        }
+        
+        .fun-checkpoint {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .concept-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .concept-card:hover {
+            border-color: var(--python-blue);
+            box-shadow: 0 4px 12px rgba(55,118,171,0.2);
+            transform: translateY(-2px);
+        }
+        
+        .concept-card h4 {
+            color: var(--python-blue);
+            margin-top: 0;
+        }
+        
+        ul.emoji-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        ul.emoji-list li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        ul.emoji-list li:before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+        
+        .download-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .download-box a {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .download-box a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .recap-box {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+        
+        .recap-box h3 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .recap-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .recap-box li {
+            padding: 0.5rem 0;
+            padding-left: 2.5rem;
+            position: relative;
+        }
+        
+        .recap-box li:before {
+            content: "🎯";
+            position: absolute;
+            left: 0;
+            font-size: 1.3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .blog-shell { padding: 6rem 1rem 2.75rem; }
+            .blog-hero { padding: 2rem 1.5rem; }
+            .blog-hero h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.5rem; }
+            .timeline { padding-left: 1.5rem; }
+        }
+    </style>
+</head>
+<body id="page-top">
+    <!-- Navigation (same as other blog posts) -->
+    <nav class="navbar navbar-expand-lg navbar-elegant fixed-top" id="mainNav">
+        <div class="container-fluid px-0">
+            <a class="navbar-brand" href="../../../index.html">
+                <i class="fas fa-graduation-cap me-2"></i>
+                <span class="brand-text">Khalida Foundation</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#about">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="blogDropdown" role="button" data-bs-toggle="dropdown">Blog</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="../../index.html">All Blog Posts</a></li>
+                            <li><a class="dropdown-item" href="../01/ai-superheroes-session-1.html">Session 1</a></li>
+                            <li><a class="dropdown-item" href="../02/ai-superheroes-session-2.html">Session 2</a></li>
+                            <li><a class="dropdown-item" href="ai-superheroes-session-3.html">Session 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="blog-shell">
+        <div class="blog-breadcrumbs">
+            <a href="../../../index.html">Home</a> &raquo; 
+            <a href="../../index.html">Blog</a> &raquo; 
+            Session 3
+        </div>
+
+        <header class="blog-hero">
+            <h1>🐍 AI Superheroes Workshop – Session 3</h1>
+            <p class="subtitle">Learning Python & Building Our Islamic Chatbot</p>
+            <p>Today, kids will learn real Python programming by building a safe, kind Islamic chatbot—turning their Session 2 ideas into actual working code!</p>
+            <div>
+                <span class="meta-chip-soft"><i class="fas fa-calendar"></i> Feb 7, 2026</span>
+                <span class="meta-chip-soft"><i class="fas fa-users"></i> Ages 9-14</span>
+                <span class="meta-chip-soft"><i class="fas fa-clock"></i> 90 min</span>
+                <span class="meta-chip-soft"><i class="fas fa-code"></i> Python</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Introduction -->
+            <section>
+                <h2>🎯 Session Overview</h2>
+                <p>Welcome to Session 3! This is where the magic happens—kids will write real Python code and see their chatbot come to life! We'll build on everything they learned in Sessions 1 and 2, but now they'll become actual programmers.</p>
+                
+                <div class="story-box">
+                    <h4>📖 The Story We'll Tell Kids</h4>
+                    <p><strong>"Remember Noor, the chatbot you designed in Session 2? Today, we're going to teach you the secret language that makes Noor work—it's called Python! Think of Python like giving instructions to a really smart helper. Just like you follow a recipe to bake cookies, computers follow Python code to do amazing things!"</strong></p>
+                </div>
+
+                <h3>What Kids Will Learn Today:</h3>
+                <ul class="emoji-list">
+                    <li>What Python is and why it's perfect for AI</li>
+                    <li>Basic Python concepts through stories and examples</li>
+                    <li>How to make a chatbot respond to questions</li>
+                    <li>How to keep the chatbot safe and kind</li>
+                    <li>How to run their own code and see it work!</li>
+                </ul>
+
+                <h3>Connection to Previous Sessions:</h3>
+                <p><strong>Session 1:</strong> Kids learned about AI patterns and how machines learn</p>
+                <p><strong>Session 2:</strong> Kids designed their Islamic chatbot's personality and trained it with Q&A</p>
+                <p><strong>Session 3 (Today):</strong> Kids will code their chatbot using Python!</p>
+            </section>
+
+            <!-- Timeline -->
+            <section>
+                <h2>⏰ Session Timeline (90 Minutes)</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">0:00 - 0:10 (10 min)</div>
+                        <h4>Welcome & Recap</h4>
+                        <p>Quick review of Sessions 1 & 2, introduction to today's goal</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">0:10 - 0:25 (15 min)</div>
+                        <h4>Python Story Time</h4>
+                        <p>What is Python? Why we use it? Explained through stories</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">0:25 - 0:45 (20 min)</div>
+                        <h4>Python Basics</h4>
+                        <p>Variables, input/output, if/else - all with live examples</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">0:45 - 1:05 (20 min)</div>
+                        <h4>Building the Chatbot</h4>
+                        <p>Live coding session - creating the Islamic chatbot together</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">1:05 - 1:20 (15 min)</div>
+                        <h4>Testing & Playing</h4>
+                        <p>Kids run their chatbot, test it, and add their own questions</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">1:20 - 1:30 (10 min)</div>
+                        <h4>Recap & Next Steps</h4>
+                        <p>What we learned, how to extend, and celebrating success!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 1: Python Introduction -->
+            <section>
+                <h2>🐍 Part 1: What is Python?</h2>
+                
+                <div class="story-box">
+                    <h4>📖 The Python Story (For Kids)</h4>
+                    <p><strong>Teacher says:</strong> "Imagine you have a super smart robot friend who can help you, but there's one problem—the robot only speaks a special language called Python! Python is like giving step-by-step instructions to this robot. When you write Python code, you're teaching the robot exactly what to do."</p>
+                    <p><strong>"Python was created by a person named Guido van Rossum who wanted to make a programming language that was easy to read—almost like reading English! That's why it's perfect for you to learn!"</strong></p>
+                </div>
+
+                <h3>Why Python for AI?</h3>
+                <div class="concept-card">
+                    <h4>🎨 Python is Like LEGO Blocks</h4>
+                    <p>Just like you can build anything with LEGO by connecting blocks, Python lets you build any program by connecting simple commands. Want to make a chatbot? Just connect the right Python blocks!</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>🗣️ Python Speaks Human Language</h4>
+                    <p>Python words are easy to understand: <code>print</code> shows something on screen, <code>if</code> makes decisions, <code>input</code> asks questions. You already know what these words mean!</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>🤖 Python Powers Real AI</h4>
+                    <p>Big companies like Google, Netflix, and Instagram use Python! Even ChatGPT (that you used in Session 2) was built using Python. Now YOU'RE learning the same language!</p>
+                </div>
+
+                <div class="teacher-tip">
+                    <h4>👨‍🏫 Teacher Tip</h4>
+                    <p><strong>Show a simple example first!</strong> Open Python and type: <code>print("Hello, AI Superheroes!")</code> and press Enter. Watch their faces light up when the computer responds! This instant feedback is crucial for engagement.</p>
+                </div>
+            </section>
+
+            <!-- Part 2: Python Basics -->
+            <section>
+                <h2>📚 Part 2: Python Basics (The Fun Way!)</h2>
+
+                <!-- Variables -->
+                <h3>1️⃣ Variables: Storing Information</h3>
+                
+                <div class="story-box">
+                    <h4>📖 The Box Story</h4>
+                    <p><strong>"Imagine you have a magical box with a label on it. You can put anything inside and whenever you call out the label name, the box shows you what's inside! In Python, these magical boxes are called VARIABLES."</strong></p>
+                </div>
+
+                <div class="code-box">
+                    <span class="code-label">Python Code</span>
+                    <pre><code class="language-python"># Creating a magical box (variable) called 'chatbot_name'
+chatbot_name = "Noor"
+
+# Creating another box for the chatbot's greeting
+greeting = "Assalamu Alaikum!"
+
+# Let's see what's in the boxes!
+print(chatbot_name)  # Shows: Noor
+print(greeting)      # Shows: Assalamu Alaikum!
+
+# We can even combine them!
+print(chatbot_name + " says " + greeting)
+# Shows: Noor says Assalamu Alaikum!</code></pre>
+                </div>
+
+                <div class="teacher-tip">
+                    <h4>👨‍🏫 Teaching Moment</h4>
+                    <p><strong>Ask kids:</strong> "What would you name your chatbot? Let's create a variable for it!" Have each kid say their chatbot name and create their own variable. This personalizes the learning!</p>
+                </div>
+
+                <!-- Input and Output -->
+                <h3>2️⃣ Input & Output: Talking with the Computer</h3>
+
+                <div class="story-box">
+                    <h4>📖 The Conversation Story</h4>
+                    <p><strong>"INPUT is when you TALK to the computer (like asking a question). OUTPUT is when the computer TALKS BACK to you (like giving an answer). It's just like having a conversation with a friend!"</strong></p>
+                </div>
+
+                <div class="code-box">
+                    <span class="code-label">Python Code</span>
+                    <pre><code class="language-python"># INPUT - Asking the user a question
+name = input("What is your name? ")
+
+# OUTPUT - Showing a message
+print("Assalamu Alaikum, " + name + "!")
+print("Welcome to our Islamic chatbot workshop!")
+
+# Let's try another one
+age = input("How old are you? ")
+print("Masha'Allah! " + age + " is a great age to learn coding!")</code></pre>
+                </div>
+
+                <div class="fun-checkpoint">
+                    🎉 CHECKPOINT: Let kids run this code and see it ask THEM questions! 🎉
+                </div>
+
+                <!-- If/Else Logic -->
+                <h3>3️⃣ If/Else: Making Decisions</h3>
+
+                <div class="story-box">
+                    <h4>📖 The Traffic Light Story</h4>
+                    <p><strong>"Think about a traffic light. IF the light is green, you go. ELSE (if it's red), you stop. Computers make decisions the same way! IF something is true, do this. ELSE, do something different."</strong></p>
+                </div>
+
+                <div class="code-box">
+                    <span class="code-label">Python Code</span>
+                    <pre><code class="language-python"># Let's make our chatbot smart!
+question = input("Ask me something: ")
+
+# IF/ELSE - Making decisions
+if "prayer" in question:
+    print("Muslims pray 5 times a day! 🤲")
+elif "ramadan" in question:
+    print("Ramadan is the holy month of fasting! 🌙")
+else:
+    print("That's a great question! I'm still learning!")
+
+# Another example - checking if someone is being kind
+greeting = input("Say hello to the chatbot: ")
+
+if "assalamu alaikum" in greeting.lower():
+    print("Wa Alaikum Assalam! 😊")
+elif "hello" in greeting.lower():
+    print("Hello! You can also say Assalamu Alaikum! 👋")
+else:
+    print("Nice to meet you! 🌟")</code></pre>
+                </div>
+
+                <div class="teacher-tip">
+                    <h4>👨‍🏫 Interactive Activity</h4>
+                    <p><strong>Game Time!</strong> Ask kids: "What should our chatbot do IF someone asks about Allah? What should it say ELSE?" Write their ideas on a board and then code them together!</p>
+                </div>
+
+                <!-- Lists -->
+                <h3>4️⃣ Lists: Collections of Information</h3>
+
+                <div class="story-box">
+                    <h4>📖 The Backpack Story</h4>
+                    <p><strong>"Imagine your backpack full of school supplies. It's one backpack, but it holds many things: pencils, books, erasers. A LIST in Python is like that backpack—it can hold many items in one place!"</strong></p>
+                </div>
+
+                <div class="code-box">
+                    <span class="code-label">Python Code</span>
+                    <pre><code class="language-python"># A list of Islamic greetings
+greetings = ["Assalamu Alaikum", "Wa Alaikum Assalam", "JazakAllah Khair"]
+
+# We can access items by their position (starting from 0!)
+print(greetings[0])  # Shows: Assalamu Alaikum
+print(greetings[1])  # Shows: Wa Alaikum Assalam
+
+# A list of chatbot topics
+topics = ["Allah", "Prayer", "Ramadan", "Quran", "Kindness"]
+
+# Let's show all topics
+for topic in topics:
+    print("I can teach you about: " + topic)
+
+# This shows:
+# I can teach you about: Allah
+# I can teach you about: Prayer
+# I can teach you about: Ramadan
+# I can teach you about: Quran
+# I can teach you about: Kindness</code></pre>
+                </div>
+
+                <div class="tip-box">
+                    <h4>✨ Kids Love This!</h4>
+                    <p>Let each kid add their favorite Islamic topic to the list. Watch how the loop automatically includes their topic when it runs!</p>
+                </div>
+            </section>
+
+            <!-- Part 3: Building the Chatbot -->
+            <section>
+                <h2>🤖 Part 3: Building Our Islamic Chatbot!</h2>
+
+                <p>Now comes the exciting part—we'll build a complete chatbot together! We'll code it step by step, explaining each part.</p>
+
+                <h3>Step 1: The Chatbot's Brain (Knowledge Base)</h3>
+
+                <div class="story-box">
+                    <h4>📖 The Flashcard Story</h4>
+                    <p><strong>"Remember the Q&A cards you created in Session 2? Now we're going to put them into Python! Each card becomes a 'dictionary'—like a mini filing cabinet that keeps the question and answer together."</strong></p>
+                </div>
+
+                <div class="code-box">
+                    <span class="code-label">Python Code - Step 1</span>
+                    <pre><code class="language-python"># Our chatbot's knowledge - like a collection of flashcards!
+chatbot_knowledge = [
+    {
+        "question": "assalamu alaikum",
+        "answer": "Wa Alaikum Assalam! 🌟 How can I help you?"
+    },
+    {
+        "question": "who is allah",
+        "answer": "Allah is the One God, Creator of everything! 🤲"
+    },
+    {
+        "question": "what is ramadan",
+        "answer": "Ramadan is a holy month when we fast and pray! 🌙"
+    },
+    {
+        "question": "how many times do we pray",
+        "answer": "Muslims pray 5 times a day! 🕌"
+    },
+]
+
+# Each {...} is like one flashcard!
+# "question" is on the front
+# "answer" is on the back</code></pre>
+                </div>
+
+                <div class="teacher-tip">
+                    <h4>👨‍🏫 Participation Moment</h4>
+                    <p><strong>Ask volunteers:</strong> "Who wants to add their Q&A to our chatbot?" Let 2-3 kids dictate their questions and answers, and add them to the code live. They'll feel like they're building it!</p>
+                </div>
+
+                <h3>Step 2: Finding the Right Answer</h3>
+
+                <div class="code-box">
+                    <span class="code-label">Python Code - Step 2</span>
+                    <pre><code class="language-python"># This function is like a detective! 🔍
+# It searches for the right answer to the question
+
+def find_answer(user_question):
+    # Make the question lowercase so "Hello" and "hello" match
+    user_question = user_question.lower()
+    
+    # Look through all our flashcards
+    for flashcard in chatbot_knowledge:
+        # Check if the keywords match
+        if flashcard["question"] in user_question:
+            return flashcard["answer"]
+    
+    # If we didn't find an answer, be honest!
+    return "I'm still learning! 🌱 Try asking about Allah, prayer, or Ramadan!"
+
+# Let's test it!
+answer = find_answer("Who is Allah?")
+print(answer)  # Shows: Allah is the One God, Creator of everything! 🤲</code></pre>
+                </div>
+
+                <div class="tip-box">
+                    <h4>✨ Visual Explanation</h4>
+                    <p><strong>Draw on board:</strong> Show the loop going through each flashcard, checking if it matches. Use actual flashcards if possible—hold them up and "check" each one!</p>
+                </div>
+
+                <h3>Step 3: Safety First! 🛡️</h3>
+
+                <div class="story-box">
+                    <h4>📖 The Guard Story</h4>
+                    <p><strong>"Every good chatbot needs a guard to make sure it only talks about kind, safe things. Our safety guard checks questions before answering them—like a teacher making sure everyone is being respectful!"</strong></p>
+                </div>
+
+                <div class="code-box">
+                    <span class="code-label">Python Code - Step 3</span>
+                    <pre><code class="language-python"># Safety guard function! 🛡️
+def is_safe_question(question):
+    # Words that mean someone might not be being kind
+    unsafe_words = ["hate", "bad", "stupid", "violence"]
+    
+    # Check if the question has any unsafe words
+    question_lower = question.lower()
+    for word in unsafe_words:
+        if word in question_lower:
+            return False  # Not safe!
+    
+    return True  # Safe to answer!
+
+# Testing our safety guard
+print(is_safe_question("Tell me about prayer"))  # True - Safe!
+print(is_safe_question("I hate this"))           # False - Not safe!</code></pre>
+                </div>
+
+                <div class="teacher-tip">
+                    <h4>👨‍🏫 Discussion Point</h4>
+                    <p><strong>Ask kids:</strong> "Why do you think we need a safety guard? What other words should we protect against?" This teaches them about responsible AI!</p>
+                </div>
+
+                <h3>Step 4: Putting It All Together!</h3>
+
+                <div class="code-box">
+                    <span class="code-label">Python Code - Complete Chatbot</span>
+                    <pre><code class="language-python"># The main chatbot function! 🤖
+def chatbot_response(user_input):
+    # First, check if it's safe
+    if not is_safe_question(user_input):
+        return "Let's talk about kind things! 😊 Ask about Islam or how to be good!"
+    
+    # If safe, find the answer
+    return find_answer(user_input)
+
+# Start the chatbot! 🎉
+def start_chatbot():
+    print("=" * 50)
+    print("🌟 Welcome to Noor - Your Islamic Chatbot! 🌟")
+    print("=" * 50)
+    print()
+    print("I can answer questions about Islam!")
+    print("Type 'goodbye' when you want to stop.")
+    print()
+    
+    # Keep chatting until user says goodbye
+    while True:
+        # Get user's question
+        user_input = input("You: ")
+        
+        # Check if they want to leave
+        if "goodbye" in user_input.lower():
+            print("Noor: Ma'a salama! May Allah bless you! 🌟")
+            break
+        
+        # Get and show the response
+        response = chatbot_response(user_input)
+        print("Noor: " + response)
+        print()
+
+# RUN THE CHATBOT!
+start_chatbot()</code></pre>
+                </div>
+
+                <div class="fun-checkpoint">
+                    🎊 MAJOR CHECKPOINT: Run the complete chatbot! Let it work! 🎊<br>
+                    Kids will be AMAZED to see their code actually chatting with them!
+                </div>
+            </section>
+
+            <!-- Part 4: Testing & Extending -->
+            <section>
+                <h2>🎮 Part 4: Testing & Making It Your Own!</h2>
+
+                <h3>Testing Time!</h3>
+                <p>Now kids will:</p>
+                <ul class="emoji-list">
+                    <li>Run the chatbot on their own</li>
+                    <li>Try different questions</li>
+                    <li>Test the safety features</li>
+                    <li>See what happens when the chatbot doesn't know something</li>
+                </ul>
+
+                <div class="teacher-tip">
+                    <h4>👨‍🏫 Guided Testing</h4>
+                    <p><strong>Give kids these test questions:</strong></p>
+                    <ul>
+                        <li>"Assalamu Alaikum" - Should get a greeting</li>
+                        <li>"Who is Allah?" - Should get an answer</li>
+                        <li>"What is your favorite color?" - Should say "I'm still learning!"</li>
+                        <li>Something with a safety word - Should redirect kindly</li>
+                    </ul>
+                </div>
+
+                <h3>Making It Your Own! ✨</h3>
+
+                <div class="concept-card">
+                    <h4>🎨 Challenge 1: Add More Q&A</h4>
+                    <p>Can you add 3 new questions and answers to chatbot_knowledge? Try adding:</p>
+                    <ul>
+                        <li>A question about Prophet Muhammad (PBUH)</li>
+                        <li>A question about being kind</li>
+                        <li>Your own favorite Islamic topic!</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <h4>🌈 Challenge 2: Change the Chatbot Name</h4>
+                    <p>Want to call your chatbot something else? Change the name in the greeting! Examples: Noor, Ameen, Salma, Rashid</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>🎯 Challenge 3: Add a Dua</h4>
+                    <p>Can you make the chatbot share a simple dua when someone asks? Try adding "Alhamdulillah" or "Bismillah" with an explanation!</p>
+                </div>
+
+                <div class="tip-box">
+                    <h4>✨ Celebration Moment!</h4>
+                    <p>When a kid successfully adds a new Q&A and runs it, celebrate! "You just programmed AI! That's exactly what real programmers do at Google and Microsoft!"</p>
+                </div>
+            </section>
+
+            <!-- Part 5: Best Practices -->
+            <section>
+                <h2>🌟 Part 5: Being a Responsible AI Builder</h2>
+
+                <h3>What Our Chatbot Should Always Do:</h3>
+
+                <div class="concept-card">
+                    <h4>✅ Be Kind and Respectful</h4>
+                    <p>Always use nice language, never be mean or rude. Just like Prophet Muhammad (PBUH) taught us!</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>✅ Be Honest When It Doesn't Know</h4>
+                    <p>It's okay to say "I don't know!" Better than making things up. Honesty is important in Islam!</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>✅ Keep It Safe</h4>
+                    <p>Never talk about harmful things. Always check questions for safety first!</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>✅ Teach Good Values</h4>
+                    <p>Focus on helping people learn, be kind, and understand Islam better!</p>
+                </div>
+
+                <h3>What Our Chatbot Should NEVER Do:</h3>
+
+                <div class="concept-card" style="border-color: #e74c3c;">
+                    <h4>❌ Answer Adult or Harmful Questions</h4>
+                    <p>Some topics aren't for kids or could be harmful. That's what our safety guard prevents!</p>
+                </div>
+
+                <div class="concept-card" style="border-color: #e74c3c;">
+                    <h4>❌ Pretend to Know Everything</h4>
+                    <p>Our chatbot has limited knowledge on purpose. That's being honest!</p>
+                </div>
+
+                <div class="concept-card" style="border-color: #e74c3c;">
+                    <h4>❌ Be Mean or Disrespectful</h4>
+                    <p>Even if someone asks mean questions, our chatbot stays kind!</p>
+                </div>
+
+                <div class="teacher-tip">
+                    <h4>👨‍🏫 Discussion Activity</h4>
+                    <p><strong>Role Play:</strong> "What if someone asks the chatbot something it shouldn't answer? Let's act it out!" This helps kids understand responsible AI design.</p>
+                </div>
+            </section>
+
+            <!-- Part 6: Next Steps -->
+            <section>
+                <h2>🚀 Part 6: What's Next?</h2>
+
+                <h3>How to Extend Your Chatbot:</h3>
+
+                <div class="concept-card">
+                    <h4>📚 Add Islamic Stories</h4>
+                    <p>You could add short stories about Prophets or Islamic history! When someone asks "Tell me a story," your chatbot could share one!</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>🤲 Add More Duas</h4>
+                    <p>Create a collection of duas for different situations: before eating, after waking up, when entering a house!</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>🎨 Make It Interactive</h4>
+                    <p>Add a menu: "Type 1 for prayer times, 2 for duas, 3 for stories!" This makes it even more helpful!</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4>🧠 Make It Smarter</h4>
+                    <p>In future sessions, you'll learn about real AI and Large Language Models (LLMs) that can understand even more complex questions!</p>
+                </div>
+
+                <h3>Preparing for Advanced AI (Future Sessions):</h3>
+                <p>What you learned today is the foundation! Soon you'll learn about:</p>
+                <ul class="emoji-list">
+                    <li><strong>Machine Learning:</strong> Teaching AI to learn from examples (like you did in Session 1!)</li>
+                    <li><strong>Natural Language Processing:</strong> Understanding human language better</li>
+                    <li><strong>APIs:</strong> Connecting your chatbot to bigger AI systems</li>
+                    <li><strong>Cloud vs On-Prem:</strong> Where should AI live? (Safety & privacy)</li>
+                </ul>
+
+                <div class="story-box">
+                    <h4>🎯 The Journey Continues...</h4>
+                    <p>Remember: Every expert programmer started exactly where you are now—with simple print statements and if/else logic. You're already building real AI! The only difference between you and professional programmers is time and practice. Keep coding! 🚀</p>
+                </div>
+            </section>
+
+            <!-- Teaching Flow Summary -->
+            <section>
+                <h2>👨‍🏫 Teaching Flow Guide</h2>
+
+                <h3>Instructor Explanation Moments:</h3>
+                <ul>
+                    <li><strong>Intro (10 min):</strong> Tell the Python story, show what we'll build</li>
+                    <li><strong>Each Concept (3-5 min each):</strong> Story → Example → Live Demo</li>
+                    <li><strong>Chatbot Build (20 min):</strong> Step-by-step live coding with explanations</li>
+                </ul>
+
+                <h3>Kids Participation Moments:</h3>
+                <ul>
+                    <li><strong>Name their chatbot</strong> - Let them choose their own name</li>
+                    <li><strong>Add Q&A</strong> - Kids volunteer their questions/answers</li>
+                    <li><strong>Test the code</strong> - Kids type questions to the chatbot</li>
+                    <li><strong>Add new features</strong> - Kids customize their chatbot</li>
+                    <li><strong>Show & tell</strong> - Kids demo their additions</li>
+                </ul>
+
+                <h3>"Ask a Volunteer to Help" Moments:</h3>
+                <div class="teacher-tip">
+                    <h4>✋ Volunteer Opportunities</h4>
+                    <ul>
+                        <li>"Who wants to name our chatbot?" → Have them tell you the name to type</li>
+                        <li>"Who has a question we should add?" → Add their Q&A live</li>
+                        <li>"Who wants to test if safety works?" → Let them type a test question</li>
+                        <li>"Who wants to run the chatbot first?" → They press Enter and interact</li>
+                        <li>"Who successfully added a new Q&A?" → They show their screen!</li>
+                    </ul>
+                </div>
+
+                <h3>Fun Checkpoints ("Run Your Bot! 🎉"):</h3>
+                <ol>
+                    <li><strong>After variables:</strong> "Run it! See your chatbot's name appear!"</li>
+                    <li><strong>After input/output:</strong> "Run it! Type your name and see what happens!"</li>
+                    <li><strong>After if/else:</strong> "Run it! Ask about prayer and see the response!"</li>
+                    <li><strong>After safety:</strong> "Run it! Try typing a safety word!"</li>
+                    <li><strong>Complete chatbot:</strong> "RUN IT! Have a full conversation!"</li>
+                </ol>
+            </section>
+
+            <!-- Mini Recap -->
+            <section>
+                <div class="recap-box">
+                    <h3>🎯 Mini Recap - What Kids Should Remember</h3>
+                    
+                    <h4 style="color: white; margin-top: 1.5rem;">The 7 Things We Learned:</h4>
+                    <ul>
+                        <li><strong>Python is a language for talking to computers</strong> - Just like Arabic or English, but for machines!</li>
+                        <li><strong>Variables are like labeled boxes</strong> - They store information we can use later!</li>
+                        <li><strong>Input gets info FROM us, Output shows info TO us</strong> - It's a conversation!</li>
+                        <li><strong>If/Else helps make decisions</strong> - Just like we make choices every day!</li>
+                        <li><strong>Lists hold many things together</strong> - Like a backpack for code!</li>
+                        <li><strong>Functions are helpers that do jobs</strong> - Like having a smart assistant!</li>
+                        <li><strong>Safety first in AI</strong> - Always be kind, honest, and helpful!</li>
+                    </ul>
+
+                    <h4 style="color: white; margin-top: 1.5rem;">The Big Achievement:</h4>
+                    <p><strong>YOU BUILT A REAL CHATBOT! 🎉</strong></p>
+                    <p>Not a game, not a toy—a real AI chatbot that:</p>
+                    <ul>
+                        <li>Understands questions</li>
+                        <li>Gives smart answers</li>
+                        <li>Stays safe and kind</li>
+                        <li>Teaches about Islam</li>
+                    </ul>
+
+                    <h4 style="color: white; margin-top: 1.5rem;">Remember This:</h4>
+                    <p style="font-size: 1.2rem; font-weight: 700;">"Every expert was once a beginner. You're now a Python programmer! 🌟"</p>
+                </div>
+            </section>
+
+            <!-- Download Section -->
+            <section>
+                <div class="download-box">
+                    <h3>📥 Download the Complete Code</h3>
+                    <p>Get the full chatbot code to practice at home!</p>
+                    <a href="../../session3/my_islamic_chatbot.py" download>
+                        <i class="fas fa-download"></i> Download my_islamic_chatbot.py
+                    </a>
+                    <p style="margin-top: 1rem; font-size: 0.95rem;">
+                        Open it with Python on your computer and keep learning!
+                    </p>
+                </div>
+            </section>
+
+            <!-- Analogies & Stories Summary -->
+            <section>
+                <h2>📖 Quick Reference: Stories & Analogies</h2>
+                
+                <p>Use these instead of technical jargon:</p>
+
+                <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                    <thead>
+                        <tr style="background: #f0f0f0;">
+                            <th style="padding: 0.8rem; text-align: left; border: 1px solid #ddd;">Technical Term</th>
+                            <th style="padding: 0.8rem; text-align: left; border: 1px solid #ddd;">Kid-Friendly Story/Analogy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>Variable</strong></td>
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">A labeled box that holds information</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>Function</strong></td>
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">A smart helper robot that does a specific job</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>If/Else</strong></td>
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">Traffic light decisions - if green go, else stop</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>List</strong></td>
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">A backpack that holds many items</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>Loop</strong></td>
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">Going around in a circle, checking each item</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>Dictionary</strong></td>
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">A flashcard with front (question) and back (answer)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>String</strong></td>
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">Words or sentences in quotes, like a message</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;"><strong>Input/Output</strong></td>
+                            <td style="padding: 0.8rem; border: 1px solid #ddd;">Asking a question (input) and hearing an answer (output)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Teacher Tips Summary -->
+            <section>
+                <h2>💡 Final Teacher Tips</h2>
+
+                <div class="teacher-tip">
+                    <h4>🎯 Keep It Interactive</h4>
+                    <p>Every 5-7 minutes, have kids DO something: type code, answer a question, test something, add a feature. Active > Passive!</p>
+                </div>
+
+                <div class="teacher-tip">
+                    <h4>🎯 Celebrate Small Wins</h4>
+                    <p>When code runs successfully (even just print("Hello")), CELEBRATE! "It worked! You're a programmer!" builds confidence.</p>
+                </div>
+
+                <div class="teacher-tip">
+                    <h4>🎯 Errors Are Learning Moments</h4>
+                    <p>When code breaks, say: "Great! This is how we learn! Even expert programmers get errors every day. Let's fix it together!" Never make kids feel bad about errors.</p>
+                </div>
+
+                <div class="teacher-tip">
+                    <h4>🎯 Use Their Ideas</h4>
+                    <p>When building the chatbot, use Q&A that kids suggest. If they see THEIR question in the code, they're invested!</p>
+                </div>
+
+                <div class="teacher-tip">
+                    <h4>🎯 Pace Check</h4>
+                    <p>Every 15 minutes, ask: "Thumbs up if you're following, thumbs sideways if you need a moment, thumbs down if you're lost." Adjust accordingly!</p>
+                </div>
+
+                <div class="teacher-tip">
+                    <h4>🎯 Visual Visual Visual</h4>
+                    <p>Use the board, use props, use hand gestures. When explaining loops, literally walk in a circle. Physical = memorable!</p>
+                </div>
+            </section>
+
+            <!-- Closing -->
+            <section>
+                <h2>🌟 Closing Thoughts</h2>
+
+                <p>This session transforms kids from <em>users</em> of technology to <em>creators</em> of technology. They're not just learning Python—they're learning that:</p>
+
+                <ul class="emoji-list">
+                    <li>Technology is something they can build, not just use</li>
+                    <li>AI isn't magic—it's code they can understand and write</li>
+                    <li>They can use technology to teach Islamic values</li>
+                    <li>Being kind and safe with AI is as important as making it work</li>
+                    <li>They have the power to create helpful things for their community</li>
+                </ul>
+
+                <div class="story-box">
+                    <h4>🎯 The Message to End With</h4>
+                    <p><strong>"Today you became AI builders. You wrote real Python code. You created a chatbot that teaches about Islam. You made technology that helps people!</strong></p>
+                    <p><strong>Remember: Every app, every game, every AI you use was built by programmers who started exactly where you are now. The only difference? They kept learning and practicing.</strong></p>
+                    <p><strong>You're not just learning code—you're learning how to make the world better with technology. And that's what being an AI Superhero is all about! 🦸‍♂️🦸‍♀️"</strong></p>
+                </div>
+
+                <div class="fun-checkpoint">
+                    Ma'a salama, AI Superheroes! Until next session! 🚀✨
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
