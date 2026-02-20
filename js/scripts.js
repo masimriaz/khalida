@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', event => {
     let scrollToTopVisible = false;
     const navbar = document.getElementById('mainNav');
     
-    // Navbar scroll effect
+    // Enhanced Navbar scroll effect with smooth transition
     function navbarScrollEffect() {
         if (window.scrollY > 100) {
             navbar.classList.add('navbar-scrolled');
@@ -18,23 +18,81 @@ window.addEventListener('DOMContentLoaded', event => {
     
     // Call on load and scroll
     navbarScrollEffect();
-    window.addEventListener('scroll', navbarScrollEffect);
+    window.addEventListener('scroll', navbarScrollEffect, { passive: true });
 
-    // Close responsive navbar when link is clicked
+    // Enhanced mobile menu handling with better UX
     const navbarToggler = document.querySelector('.navbar-toggler');
     const navbarCollapse = document.querySelector('.navbar-collapse');
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
     
+    // Close responsive navbar when link is clicked (improved)
     document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navbarCollapse.classList.contains('show')) {
+        link.addEventListener('click', function(e) {
+            // Don't close if it's a dropdown toggle
+            if (!this.classList.contains('dropdown-toggle') && navbarCollapse.classList.contains('show')) {
                 navbarToggler.click();
             }
         });
     });
 
+    // Handle dropdown menus on mobile/tablet
+    if (window.innerWidth < 992) {
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                const dropdown = this.nextElementSibling;
+                
+                // Close other dropdowns
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    if (menu !== dropdown) {
+                        menu.style.display = 'none';
+                    }
+                });
+                
+                // Toggle current dropdown
+                if (dropdown.style.display === 'block') {
+                    dropdown.style.display = 'none';
+                } else {
+                    dropdown.style.display = 'block';
+                }
+            });
+        });
+    }
+
+    // Responsive navbar resize handler
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            if (window.innerWidth >= 992) {
+                // Remove inline styles on desktop
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = '';
+                });
+            }
+        }, 250);
+    });
+
+    // Add active class to current page nav item
+    const currentLocation = location.pathname;
+    document.querySelectorAll('.nav-link').forEach(link => {
+        let href = link.getAttribute('href');
+        if (currentLocation.includes(href) && href !== '/' && href !== 'index.html') {
+            link.classList.add('active');
+            // Also mark parent dropdown as active if applicable
+            const parentDropdown = link.closest('.dropdown');
+            if (parentDropdown) {
+                parentDropdown.querySelector('.dropdown-toggle').classList.add('active');
+            }
+        }
+    });
+
     // Scroll to top button appear
     document.addEventListener('scroll', () => {
         const scrollToTop = document.body.querySelector('.scroll-to-top');
+        // Only proceed if scroll-to-top element exists
+        if (!scrollToTop) return;
+        
         if (document.documentElement.scrollTop > 100) {
             if (!scrollToTopVisible) {
                 fadeIn(scrollToTop);
@@ -46,9 +104,10 @@ window.addEventListener('DOMContentLoaded', event => {
                 scrollToTopVisible = false;
             }
         }
-    })
+    }, { passive: true })
 
     function fadeOut(el) {
+        if (!el) return;
         el.style.opacity = 1;
         (function fade() {
             if ((el.style.opacity -= .1) < 0) {
@@ -60,6 +119,7 @@ window.addEventListener('DOMContentLoaded', event => {
     };
 
     function fadeIn(el, display) {
+        if (!el) return;
         el.style.opacity = 0;
         el.style.display = display || "block";
         (function fade() {

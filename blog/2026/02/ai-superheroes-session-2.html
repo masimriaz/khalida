@@ -372,15 +372,18 @@
             padding: 2rem;
             border-radius: 12px;
             overflow-x: auto;
-            overflow-y: hidden;
+            overflow-y: visible;
             font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
             font-size: 0.92rem;
             margin: 2rem 0;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
             border: 1px solid rgba(255,255,255,0.1);
             position: relative;
             clear: both;
             max-width: 100%;
+            white-space: pre;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         .code-preview::before {
             content: '';
@@ -397,6 +400,10 @@
             color: #f8f8f2;
             line-height: 1.6;
             display: block;
+            white-space: pre;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
         }
         .highlight-box {
             background: linear-gradient(135deg, rgba(52,152,219,0.08), rgba(155,89,182,0.08));
@@ -516,6 +523,18 @@
             .blog-meta-strip { gap: 0.5rem; }
             .timeline { padding-left: 2.5rem; }
             .timeline-dot { left: -2.75rem; }
+            .code-preview {
+                padding: 1.5rem 1rem;
+                font-size: 0.85rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 1.5rem 0;
+                border-radius: 8px;
+            }
+            .code-preview code {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
         }
     </style>
 </head>
@@ -550,12 +569,17 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../../../blog/index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+                        <a class="nav-link dropdown-toggle" href="../../../blog/index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-newspaper me-1"></i>Blog
+                        </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="blogDropdown">
-                            <li><a class="dropdown-item" href="../../../blog/index.html">All Blog Posts</a></li>
-                            <li><a class="dropdown-item" href="../../../blog/2026/01/ai-superheroes-session-1.html">AI Superheroes – Session 1</a></li>
-                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-2.html">AI Superheroes – Session 2</a></li>
-                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-3.html">AI Superheroes – Session 3</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/index.html"><i class="fas fa-list me-2"></i>All Blog Posts</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header">AI Superheroes Workshop Series</li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/01/ai-superheroes-session-1.html"><span class="badge badge-sm bg-primary me-2">S1</span>Discovering AI Power</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-2.html"><span class="badge badge-sm bg-success me-2">S2</span>Building Noor Chatbot</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-3.html"><span class="badge badge-sm bg-info me-2">S3</span>Python Programming</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-4.html"><span class="badge badge-sm bg-danger me-2">S4</span>Leveling Up Noor</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="../../../index.html#get-involved">Get Involved</a></li>

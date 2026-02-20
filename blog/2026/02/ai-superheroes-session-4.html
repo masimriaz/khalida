@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Superheroes Workshop – Session 4: Leveling Up Noor - Advanced Features & Real-World Impact</title>
+    <meta name="description" content="Kids learn to enhance their Islamic chatbot Noor with advanced features, testing, and real-world applications—becoming true AI Superheroes!">
+    <link rel="icon" type="image/x-icon" href="../../../assets/favicon.ico" />
+    <link href="../../../css/styles.css" rel="stylesheet" />
+    <link href="../../../css/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { 
+            --blog-max-width: 900px; 
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --noor-coral: #e74c3c;
+            --noor-purple: #9b59b6;
+            --noor-orange: #f39c12;
+            --section-spacing: 3rem;
+        }
+        
+        html { scroll-behavior: smooth; }
+        *, *::before, *::after { box-sizing: border-box; }
+        
+        body {
+            background: linear-gradient(180deg, #f9f5ef 0%, #ffffff 50%, #f5efe3 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .blog-wrapper {
+            width: 100%;
+            max-width: var(--blog-max-width);
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+        
+        .blog-shell {
+            width: 100%;
+            padding: 6.5rem 0 2rem;
+        }
+        
+        .blog-breadcrumbs {
+            font-size: 0.95rem;
+            margin: 1rem 0 2rem;
+            color: var(--text-light, #4b5563);
+        }
+        .blog-breadcrumbs a { 
+            color: var(--khalida-primary-dark-teal, #1f3a46); 
+            text-decoration: none; 
+            font-weight: 600;
+        }
+        .blog-breadcrumbs a:hover { text-decoration: underline; }
+        
+        .blog-hero {
+            background: linear-gradient(135deg, rgba(155,89,182,0.95), rgba(231,76,60,0.95));
+            color: #fff;
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            margin-bottom: var(--section-spacing);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        
+        .blog-hero h1 { 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            margin-bottom: 1rem; 
+            line-height: 1.2;
+        }
+        
+        .blog-hero .blog-date { 
+            font-size: 0.95rem; 
+            letter-spacing: 0.6px; 
+            text-transform: uppercase; 
+            color: rgba(255,255,255,0.9); 
+            margin-bottom: 1rem;
+        }
+        
+        .blog-hero p { 
+            max-width: 100%; 
+            font-size: 1.1rem; 
+            line-height: 1.8; 
+            color: rgba(255,255,255,0.95);
+        }
+        
+        .blog-meta-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .meta-chip-soft {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        .meta-chip-soft i { color: var(--khalida-accent-soft-gold, #f0d8c2); }
+        
+        main { 
+            width: 100%;
+            margin-bottom: 3rem;
+        }
+        
+        main > section {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: var(--section-spacing);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: var(--transition-smooth);
+        }
+        
+        main > section:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+        
+        h2 { 
+            font-size: 2rem; 
+            font-weight: 800; 
+            color: var(--khalida-primary-dark-teal, #1f3a46); 
+            margin: 1.5rem 0 1rem;
+            line-height: 1.3;
+        }
+        
+        h3 { 
+            font-size: 1.4rem; 
+            font-weight: 700; 
+            color: var(--khalida-primary-dark-teal, #1f3a46); 
+            margin: 1.75rem 0 1rem;
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            margin: 1.25rem 0 0.75rem;
+        }
+        
+        p { 
+            color: var(--text-dark, #1f252e); 
+            line-height: 1.75;
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pill-label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(155,89,182,0.15);
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.3px;
+        }
+        
+        ul { 
+            padding-left: 1.75rem;
+            margin: 1rem 0;
+        }
+        
+        ul li { 
+            margin-bottom: 0.75rem; 
+            color: var(--text-dark, #1f252e);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        
+        .cta-card {
+            background: linear-gradient(135deg, rgba(155,89,182,0.92), rgba(231,76,60,0.9));
+            color: #fff;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .cta-card h3 { 
+            color: #fff; 
+            margin: 0 0 1rem 0;
+            font-size: 1.8rem;
+        }
+        
+        .cta-card p { 
+            color: rgba(255,255,255,0.95); 
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .back-link { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            text-decoration: none; 
+            color: var(--khalida-primary-dark-teal, #1f3a46); 
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+        
+        .back-link:hover { 
+            text-decoration: underline; 
+            color: var(--noor-coral);
+        }
+        
+        .kids-friendly-box {
+            background: linear-gradient(135deg, #ffe5e5 0%, #f5d5ff 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(231,76,60,0.15);
+            border: 3px solid rgba(255,255,255,0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .kids-friendly-box::before {
+            content: '🚀';
+            position: absolute;
+            font-size: 5rem;
+            opacity: 0.1;
+            right: -10px;
+            bottom: -15px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .kids-friendly-box h4 {
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .kids-friendly-box p {
+            font-size: 1rem;
+            color: var(--text-dark, #1f252e);
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .kids-friendly-box ul {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-card {
+            background: #ffffff;
+            padding: 1.75rem;
+            border-radius: 14px;
+            margin-bottom: 1.25rem;
+            border-left: 5px solid var(--noor-coral);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: var(--transition-smooth);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(231,76,60,0.12);
+            border-left-color: var(--noor-purple);
+        }
+        
+        .feature-card h5 {
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            margin: 0 0 0.75rem 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        .feature-card p {
+            margin: 0;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(231,76,60,0.08), rgba(155,89,182,0.08));
+            border-left: 5px solid var(--noor-coral);
+            border-radius: 14px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(231,76,60,0.1);
+        }
+        
+        .highlight-box h4 {
+            margin-top: 0;
+            color: var(--khalida-primary-dark-teal);
+        }
+        
+        .code-preview {
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            color: #f8f8f2;
+            padding: 2rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            overflow-y: visible;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.1);
+            white-space: pre;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .code-preview code {
+            color: #f8f8f2;
+            line-height: 1.6;
+            display: block;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            white-space: pre;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .comment { color: #8b949e; font-style: italic; }
+        .keyword { color: #79c0ff; font-weight: 600; }
+        .string { color: #a5d6ff; }
+        .function { color: #7ee787; font-weight: 600; }
+        
+        .success-story-box {
+            background: linear-gradient(135deg, #e8f8f5 0%, #f4ecf7 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border-left: 5px solid var(--noor-purple);
+            box-shadow: 0 4px 15px rgba(155,89,182,0.1);
+        }
+        
+        .success-story-box h4 {
+            color: var(--khalida-primary-dark-teal);
+            margin-top: 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .success-story-box p {
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            :root {
+                --section-spacing: 2rem;
+            }
+            
+            .blog-shell { 
+                padding: 6rem 0 1.5rem;
+            }
+            
+            .blog-wrapper {
+                padding: 0 1rem;
+            }
+            
+            .blog-hero { 
+                padding: 2rem 1.5rem;
+                margin-bottom: 2rem;
+                border-radius: 16px;
+            }
+            
+            .blog-hero h1 { 
+                font-size: 1.8rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            main > section {
+                padding: 1.75rem 1.25rem;
+                margin-bottom: 2rem;
+                border-radius: 16px;
+            }
+            
+            h2 { 
+                font-size: 1.6rem;
+                margin: 1rem 0 0.75rem;
+            }
+            
+            h3 { 
+                font-size: 1.2rem;
+                margin: 1.25rem 0 0.75rem;
+            }
+            
+            p { 
+                font-size: 1rem;
+            }
+            
+            .blog-meta-strip { 
+                gap: 0.75rem;
+            }
+            
+            .code-preview {
+                padding: 1.5rem 1rem;
+                font-size: 0.8rem;
+                margin: 1.5rem 0;
+                border-radius: 8px;
+            }
+            
+            .code-preview code {
+                font-size: 0.8rem;
+                line-height: 1.5;
+            }
+            
+            .kids-friendly-box {
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+                border-radius: 14px;
+            }
+            
+            .feature-card {
+                padding: 1.25rem;
+                margin-bottom: 1rem;
+            }
+            
+            .cta-card {
+                padding: 1.75rem;
+                margin: 1.75rem 0;
+                border-radius: 16px;
+            }
+            
+            .cta-card h3 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .blog-wrapper {
+                padding: 0 0.75rem;
+            }
+            
+            .blog-hero {
+                padding: 1.5rem 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .blog-hero h1 {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .blog-meta-strip {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .meta-chip-soft {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            main > section {
+                padding: 1.5rem 1rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-elegant fixed-top" id="mainNav">
+        <div class="container-fluid px-3 px-lg-4">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html#page-top">
+                <i class="fas fa-graduation-cap"></i>
+                <span class="brand-text">Khalida Foundation</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto align-items-lg-center nav-master">
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#page-top">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#about">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="masterDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Explore</a>
+                        <ul class="dropdown-menu dropdown-menu-end p-3 shadow-lg" aria-labelledby="masterDropdown" style="min-width: 320px;">
+                            <li class="dropdown-header text-uppercase small text-muted">Courses</li>
+                            <li><a class="dropdown-item" href="../../../course-pages/courses.html">All Courses</a></li>
+                            <li><a class="dropdown-item" href="../../../course-pages/advanced-ai-for-kids.html">Advanced AI for Kids</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header text-uppercase small text-muted">Programs</li>
+                            <li><a class="dropdown-item" href="../../../index.html#programs">Programs & Initiatives</a></li>
+                            <li><a class="dropdown-item" href="../../../index.html#impact">Impact</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header text-uppercase small text-muted">AI Initiative</li>
+                            <li><a class="dropdown-item" href="../../../course-pages/courses.html#ai-initiative">AI Initiative Overview</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="../../../blog/index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="blogDropdown">
+                            <li><a class="dropdown-item" href="../../../blog/index.html">All Blog Posts</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/01/ai-superheroes-session-1.html">AI Superheroes – Session 1</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-2.html">AI Superheroes – Session 2</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-3.html">AI Superheroes – Session 3</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-4.html">AI Superheroes – Session 4</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#get-involved">Get Involved</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-2"><a class="nav-link nav-link-register" href="../../../register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="blog-shell">
+        <div class="blog-wrapper">
+            <nav class="blog-breadcrumbs">
+                <a href="../../../index.html">Home</a> » <a href="../../index.html">Blog</a> » Session 4
+            </nav>
+
+            <header class="blog-hero">
+                <div class="blog-date">February 14, 2026</div>
+                <h1>⭐ AI Superheroes Workshop – Session 4: Leveling Up Noor - Advanced Features & Real-World Impact</h1>
+                <p>You've built Noor! Now let's make it amazing! Learn how to add powerful features, test like a professional, and discover how your AI is going to change the world.</p>
+                <div class="blog-meta-strip">
+                    <span class="meta-chip-soft"><i class="fas fa-child"></i> Ages 9–14</span>
+                    <span class="meta-chip-soft"><i class="fas fa-clock"></i> 90 minutes</span>
+                    <span class="meta-chip-soft"><i class="fas fa-graduation-cap"></i> Advanced Level</span>
+                    <span class="meta-chip-soft"><i class="fas fa-heart"></i> Real-World Impact</span>
+                </div>
+            </header>
+
+            <main>
+                <!-- Session Overview -->
+                <section id="overview\">
+                    <div class=\"pill-label\">📋 Session Overview</div>
+                    <h2>Welcome Back, AI Superheroes! 🚀</h2>
+                    <p class=\"lead\">Alhamdulillah! You've completed three amazing sessions. You learned what AI is, designed an Islamic chatbot called <strong>Noor</strong>, and brought it to life with Python code. But here's the exciting part: <strong>your journey as a true AI Superhero is just beginning!</strong></p>
+                    
+                    <p>In Session 4, you're going to:</p>
+                    <ul>
+                        <li><strong>Level up Noor</strong> with advanced features that make it smarter and more helpful</li>
+                        <li><strong>Test your code</strong> like professional engineers do, finding and fixing bugs</li>
+                        <li><strong>Understand AI Ethics</strong> and why it's important to build AI that's fair and safe</li>
+                        <li><strong>Discover real-world impact</strong> – how AI is already helping people in education, healthcare, and more</li>
+                    <li><strong>Plan your next project</strong> – what will you build next season?</li>
+                </ul>
+
+                <h3>🎯 Today's Learning Goals</h3>
+                <div class="kids-friendly-box">
+                    <h4>By the end of today, you will be able to:</h4>
+                    <ul>
+                        <li>Add <strong>memory features</strong> to Noor so it remembers things about you</li>
+                        <li>Create <strong>test cases</strong> to make sure Noor works perfectly</li>
+                        <li>Understand <strong>AI ethics</strong> and make sure your AI is kind to everyone</li>
+                        <li>Deploy Noor <strong>online</strong> so your friends and family can chat with it</li>
+                        <li>Explain how <strong>your code makes a difference</strong> in the real world</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Part 1 -->
+            <section id="part1">
+                <div class="pill-label">🧠 Part 1: Adding Memory to Noor</div>
+                <h2>Making Noor Remember (Python Dictionaries)</h2>
+                <p>Right now, Noor can answer questions, but does it remember who you are? Let's teach Noor to remember your name, your favorite hadith, and things you like!</p>
+
+                <div class="kids-friendly-box">
+                    <h4>💡 What You'll Learn Today</h4>
+                    <ul>
+                        <li>What Python dictionaries are and why they're powerful</li>
+                        <li>How to store and retrieve information from memory</li>
+                        <li>Making your chatbot remember user information</li>
+                        <li>Building personalized AI responses</li>
+                    </ul>
+                </div>
+
+                <h3>What's a Dictionary? 📚</h3>
+                <p>In Python, a <strong>dictionary</strong> is like a real dictionary where you look up words. But instead, you're storing information organized in pairs: a <strong>key</strong> and a <strong>value</strong>.</p>
+
+                <div class="highlight-box">
+                    <h4>🔑 Key-Value Pairs Explained</h4>
+                    <p>Think of it like a contact card:</p>
+                    <ul>
+                        <li><strong>Key:</strong> "name" → <strong>Value:</strong> "Fatima"</li>
+                        <li><strong>Key:</strong> "age" → <strong>Value:</strong> "11"</li>
+                        <li><strong>Key:</strong> "favorite_dua" → <strong>Value:</strong> "Alhamdulillah"</li>
+                    </ul>
+                </div>
+
+                <h3>Noor's New Brain: Learning Your Name 🧠</h3>
+                <p>Here's how to give Noor a memory so it can remember who you are:</p>
+                <div class="code-preview"><code><span class="comment"># Noor's improved brain - now with memory!</span>
+<span class="keyword">user_profile</span> = {
+    <span class="string">"name"</span>: <span class="string">""</span>,
+    <span class="string">"age"</span>: <span class="string">""</span>,
+    <span class="string">"favorite_dua"</span>: <span class="string">""</span>
+}
+
+<span class="comment"># When Noor meets you</span>
+<span class="keyword">if</span> <span class="string">"my name is"</span> <span class="keyword">in</span> user_question:
+    user_profile[<span class="string">"name"</span>] = user_question.<span class="function">split</span>(<span class="string">"my name is "</span>)[1]
+    <span class="function">print</span>(<span class="string">"Noor: Nice to meet you, "</span> + user_profile[<span class="string">"name"</span>] + <span class="string">"!"</span>)</code></div>
+
+                <div class="success-story-box">
+                    <h4>💡 What's Happening Here?</h4>
+                    <p>Noor is now <strong>learning from you</strong> and storing information! Instead of forgetting your name after each question, Noor remembers it and can greet you by name next time. This is how real AI assistants like Siri and Google Assistant work!</p>
+                    <p><strong>Fun fact:</strong> The more Noor remembers about you, the more helpful it becomes. But remember: with great memory comes great responsibility—we need to protect people's privacy! 🔒</p>
+                </div>
+
+                <h3>� How Dictionaries Work: Step by Step</h3>
+                <div class="feature-card">
+                    <h5><i class="fas fa-book"></i> Creating a Dictionary</h5>
+                    <p>First, we create an empty dictionary to store Noor's memory. Then, we add information using keys and values!</p>
+                </div>
+
+                <div class="feature-card">
+                    <h5><i class="fas fa-database"></i> Storing Information</h5>
+                    <p>When a user says "My name is Sarah", we extract "Sarah" and store it in our dictionary with the key "name".</p>
+                </div>
+
+                <div class="feature-card">
+                    <h5><i class="fas fa-retrieve"></i> Retrieving Information</h5>
+                    <p>Later, when we want to greet the user, we look up the value for the "name" key and say their name!</p>
+                </div>
+
+                <h3>🚀 Challenge: Add More Memories!</h3>
+                <div class="highlight-box" style="background: linear-gradient(135deg, rgba(155,89,182,0.08), rgba(240,216,194,0.08));">
+                    <h4>Try These Challenges</h4>
+                    <div class="feature-card" style="margin: 1.5rem 0 1rem 0;">
+                        <h5><i class="fas fa-star" style="color: #F0D8C2;"></i> Challenge Level 1: Learn Their Favorite Surah</h5>
+                        <p>Modify Noor's code to remember your favorite Surah from the Quran. Try to understand the pattern in the code above and add a similar line for Surah!</p>
+                    </div>
+                    <div class="feature-card" style="margin: 0 0 1rem 0;">
+                        <h5><i class="fas fa-star" style="color: #F0D8C2;"></i><i class="fas fa-star" style="color: #F0D8C2;"></i> Challenge Level 2: Personalized Greetings</h5>
+                        <p>Make Noor greet you differently based on the time of day! If it's morning, say "Assalamu Alaikum! Good morning, [name]!" If it's evening, say something else. Hint: You can use Python's <code>datetime</code> module!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 2 -->
+            <section id="part2">
+                <div class="pill-label">✅ Part 2: Testing Noor Like a Professional</div>
+                <h2>Quality Assurance: Making Sure Noor Works Perfectly!</h2>
+                <p>Real software engineers don't just run their code once. They test it thoroughly to find and fix bugs before users see them. Let's see how professional testing works!</p>
+
+                <div class="kids-friendly-box">
+                    <h4>🎯 Quality Assurance Basics</h4>
+                    <ul>
+                        <li>Every feature must be tested before release</li>
+                        <li>Test cases help identify bugs early</li>
+                        <li>Good testing = happy users</li>
+                        <li>Professional developers test 1000s of cases!</li>
+                    </ul>
+                </div>
+
+                <h3>What Are Test Cases? 🧪</h3>
+                <p>A <strong>test case</strong> is a specific question you ask your code, with an <strong>expected answer</strong> that you know is correct. If Noor gives the right answer, the test passes! If not, you found a bug to fix.</p>
+
+                <div class="highlight-box">
+                    <h4>🔬 How to Create a Test Case</h4>
+                    <ol>
+                        <li><strong>Input:</strong> The question to ask Noor</li>
+                        <li><strong>Expected Output:</strong> What the answer should be</li>
+                        <li><strong>Run Code:</strong> Execute Noor with that input</li>
+                        <li><strong>Compare:</strong> Does the actual output match expected?</li>
+                        <li><strong>Result:</strong> ✅ PASS or ❌ FAIL</li>
+                    </ol>
+                </div>
+
+                <h3>Testing Noor's Islamic Knowledge</h3>
+                <p>Let's write three real test cases for Noor:</p>
+                <div class="code-preview"><code><span class="comment"># Test Case 1: Basic question about prayer</span>
+<span class="keyword">if</span> <span class="string">"how many times do we pray"</span> <span class="keyword">in</span> <span class="string">"How many times do we pray in a day?"</span>:
+    <span class="function">print</span>(<span class="string">"✅ Test 1 PASSED"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"❌ Test 1 FAILED"</span>)
+
+<span class="comment"># Test Case 2: Greeting recognition</span>
+<span class="keyword">if</span> <span class="string">"salam"</span> <span class="keyword">in</span> <span class="string">"As-salamualaikum!"</span>:
+    <span class="function">print</span>(<span class="string">"✅ Test 2 PASSED"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"❌ Test 2 FAILED"</span>)
+
+<span class="comment"># Test Case 3: Quranic knowledge</span>
+<span class="keyword">if</span> <span class="string">"quran"</span> <span class="keyword">in</span> <span class="string">"Tell me about the Quran"</span>:
+    <span class="function">print</span>(<span class="string">"✅ Test 3 PASSED"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"❌ Test 3 FAILED"</span>)</code></div>
+
+                <div class="success-story-box">
+                    <h4>🌟 Why Testing Matters in the Real World</h4>
+                    <p>Imagine if a calculator gave you the wrong answer, or if your email went to the wrong person. That would be a disaster! Engineers at companies like Google, Apple, and Microsoft test their code millions of times to make sure everything works. Your job as an AI Superhero is to do the same!</p>
+                    <p><strong>Did you know?</strong> Large companies like Google have entire teams dedicated to Quality Assurance. Some engineers write ONLY test code! Testing is that important.</p>
+                </div>
+
+                <h3>📝 Test Case Template You Can Use</h3>
+                <div class="highlight-box" style="background: linear-gradient(135deg, rgba(155,89,182,0.08), rgba(240,216,194,0.08));">
+                    <h4>Copy and Use This Format:</h4>
+                    <div class="code-preview"><code><span class="comment"># Simple Test Case Template</span>
+test_question = <span class="string">"Your question here"</span>
+expected_answer = <span class="string">"What Noor should say"</span>
+
+<span class="comment"># Run Noor with the test question</span>
+actual_answer = noor_chatbot(test_question)
+
+<span class="comment"># Check if it matches</span>
+<span class="keyword">if</span> actual_answer == expected_answer:
+    <span class="function">print</span>(<span class="string">"✅ TEST PASSED"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"❌ TEST FAILED"</span>)
+    <span class="function">print</span>(<span class="string">"Expected: "</span> + expected_answer)
+    <span class="function">print</span>(<span class="string">"Got: "</span> + actual_answer)</code></div>
+                </div>
+
+                <h3>🚀 Challenge: Create Your Own Test Suite</h3>
+                <div class="highlight-box" style="background: linear-gradient(135deg, rgba(155,89,182,0.08), rgba(240,216,194,0.08));">
+                    <h4>Level Up Your Testing!</h4>
+                    <div class="feature-card" style="margin: 1.5rem 0 1rem 0;">
+                        <h5><i class="fas fa-star" style="color: #F0D8C2;"></i> Challenge Level 1: Write 5 Test Cases</h5>
+                        <p>Think of 5 different questions you might ask Noor, and write test cases for each one. Examples: "what is ramadan?", "who is prophet Muhammad?", "what do we say before eating?" Create scripts that test each and show ✅ PASS or ❌ FAIL.</p>
+                    </div>
+                    <div class="feature-card" style="margin: 0 0 1rem 0;">
+                        <h5><i class="fas fa-star" style="color: #F0D8C2;"></i><i class="fas fa-star" style="color: #F0D8C2;"></i><i class="fas fa-star" style="color: #F0D8C2;"></i> Challenge Level 3: Bug Hunt!</h5>
+                        <p>In the previous session, did you notice any questions Noor couldn't answer? Or any wrong answers? Write test cases to catch those bugs, then fix your code! This is what professional developers do every day.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 3 -->
+            <section id="part3">
+                <div class="pill-label">🤝 Part 3: AI Ethics - The Superhero's Code</div>
+                <h2>With Great AI Power Comes Great Responsibility!</h2>
+                <p>Now that you can build AI, let's talk about something super important: <strong>being responsible and kind with your creation</strong>. This is what makes you a true AI Superhero!</p>
+
+                <h3>Four Rules for Ethical AI 🌟</h3>
+
+                <div class="feature-card">
+                    <h5><i class="fas fa-shield-alt"></i> Rule 1: Be Honest</h5>
+                    <p>Never trick people into thinking Noor is human. Always tell them it's an AI chatbot. Your AI should say things like "I'm Noor, an AI assistant made by Khalida Foundation." Being honest builds trust!</p>
+                </div>
+
+                <div class="feature-card">
+                    <h5><i class="fas fa-lock"></i> Rule 2: Protect Privacy</h5>
+                    <p>If someone tells Noor their name or favorite dua, that's personal information. Never share it without permission. If Noor has a database of conversations, make sure it's protected and secure. This is like keeping a friend's secret!</p>
+                </div>
+
+                <div class="feature-card">
+                    <h5><i class="fas fa-heart"></i> Rule 3: Be Fair to Everyone</h5>
+                    <p>Your AI should be equally helpful to everyone—boys and girls, all ages, all backgrounds. Check: Does Noor work better for some people than others? If so, fix it! Remember: <strong>"He is not a Mumin (believer) whose neighbor is not safe from his evil."</strong> (Hadith)</p>
+                </div>
+
+                <div class="feature-card">
+                    <h5><i class="fas fa-graduation-cap"></i> Rule 4: Keep Learning</h5>
+                    <p>The world changes, and your understanding should grow too. If you discover Noor is giving wrong information about Islam, update it! AI should help people learn, not spread misinformation. Always be willing to improve!</p>
+                </div>
+
+                <div class="kids-friendly-box">
+                    <h4>🧠 Think About It!</h4>
+                    <p>Answer these questions about your own Noor chatbot:</p>
+                    <ul>
+                        <li>Does Noor clearly say it's an AI?</li>
+                        <li>Have you protected people's personal information?</li>
+                        <li>Does Noor give the same quality of help to everyone?</li>
+                        <li>Are all the Islamic facts in Noor accurate and respectful?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Part 4 -->
+            <section id="part4">
+                <div class="pill-label">🌍 Part 4: Real-World Impact - AI Superheroes in Action</div>
+                <h2>How AI Is Already Changing the World (For Good!)</h2>
+
+                <h3>🏥 AI in Healthcare: Saving Lives</h3>
+                <p><strong>Noor</strong> is actually the name of a real AI system in the Middle East that helps doctors diagnose diseases faster! Doctors show Noor images of eyes, and Noor can detect diseases like diabetes before patients even know they have them. This gives people a chance to get treatment early and stay healthy. <strong>Subhanallah—technology guided by compassion!</strong></p>
+
+                <h3>📚 AI in Education: Making Learning Accessible</h3>
+                <p>Imagine a child in a remote village who doesn't have access to good teachers. AI tutors can:</p>
+                <ul>
+                    <li>Explain difficult concepts in many languages</li>
+                    <li>Adjust the lesson speed to match each student's pace</li>
+                    <li>Provide instant feedback and encouragement</li>
+                    <li>Work 24/7 whenever the student wants to learn</li>
+                </ul>
+                <p>This is exactly what you're building with Noor! Every person deserves quality education, and AI can help make that happen.</p>
+
+                <h3>🌱 AI in Agriculture: Feeding the World</h3>
+                <p>In countries like India and Pakistan, AI is helping farmers:</p>
+                <ul>
+                    <li>Predict rainfall and best planting times</li>
+                    <li>Detect plant diseases early</li>
+                    <li>Recommend the best crops for their soil</li>
+                    <li>Reduce waste and grow more food with less resources</li>
+                </ul>
+                <p><strong>Remember the hadith: "Whoever plants a tree, Allah credits him with the reward."</strong> AI is helping farmers plant smarter!</p>
+
+                <h3>🎓 AI for Social Good: Your Potential</h3>
+                <div class="highlight-box">
+                    <h4>💭 What Problem Will YOU Solve?</h4>
+                    <p>Think about your community. What's a problem you see? Maybe:</p>
+                    <ul>
+                        <li>Kids struggle with homework → Build a homework helper chatbot</li>
+                        <li>Elderly people feel lonely → Create an AI friend that tells stories and asks about their day</li>
+                        <li>People forget prayer times → Design an AI notification system</li>
+                        <li>Students need career guidance → Build an AI mentor that suggests jobs based on interests</li>
+                    </ul>
+                    <p>This is how you become an <strong>AI Superhero</strong>! You don't need superpowers—you just need code, creativity, and compassion! 💪</p>
+                </div>
+            </section>
+
+            <!-- Part 5 -->
+            <section id="part5">
+                <div class="pill-label">🚀 Part 5: Deployment - Taking Noor to the World!</div>
+                <h2>Putting Your AI Online (The Cool Part!)</h2>
+
+                <h3>What's Deployment? 🌐</h3>
+                <p>So far, Noor only runs on your computer. <strong>Deployment</strong> means putting Noor on the internet so other people can chat with it! Here's how to get started:</p>
+
+                <h3>Step-by-Step: Deploy Noor</h3>
+                <div class="feature-card">
+                    <h5><i class="fas fa-flask"></i> Option 1: Replit (Easiest!)</h5>
+                    <p><strong>Replit</strong> is an online platform where you can run Python code for free. Steps:</p>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Go to <strong>replit.com</strong></li>
+                        <li>Click "Create" and choose Python</li>
+                        <li>Paste your Noor code</li>
+                        <li>Click "Run" to start</li>
+                        <li>Share the link with friends! They can chat with Noor without installing Python!</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h5><i class="fas fa-globe"></i> Option 2: Flask Web App (Intermediate)</h5>
+                    <p><strong>Flask</strong> is a Python tool that turns your chatbot into a website. This is what professional developers use! You'll learn this in advanced workshops.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h5><i class="fas fa-cloud"></i> Option 3: Cloud Services (Advanced)</h5>
+                    <p>Companies like Google Cloud and AWS host AI systems that serve millions of users. Ultra-cool, but you'll learn this in university-level courses!</p>
+                </div>
+
+                <div class="kids-friendly-box">
+                    <h4>🎉 Your Deployment Checklist</h4>
+                    <ul>
+                        <li>✨ Noor works perfectly on your computer (all tests pass)</li>
+                        <li>✨ You've added at least 2 advanced features (memory, greetings, etc.)</li>
+                        <li>✨ You understand the 4 AI Ethics rules</li>
+                        <li>✨ You've deployed Noor online (Replit or similar)</li>
+                        <li>✨ You can explain to others what Noor does and why it's helpful</li>
+                    </ul>
+                    <p><strong>If you've done all this, YOU ARE AN AI SUPERHERO! 🦸‍♀️🦸‍♂️</strong></p>
+                </div>
+            </section>
+
+            <!-- Part 6 -->
+            <section id="part6">
+                <div class="pill-label">🎓 Part 6: What's Next? Your AI Journey Continues</div>
+                <h2>You've Completed Season 1! What Comes Next? 🌟</h2>
+
+                <p>Congratulations! You've gone from learning what AI is to building and deploying your own AI chatbot. That's incredible! But this is just the beginning of your journey as an AI Superhero.</p>
+
+                <h3>Season 2 Ideas (Coming Soon!)</h3>
+
+                <div class="feature-card">
+                    <h5><i class="fas fa-brain"></i> Machine Learning: Teaching Noor to Learn</h5>
+                    <p>Right now, Noor only knows the answers you programmed. Imagine if Noor could <strong>learn from conversations</strong> and get smarter over time! This is called machine learning, and it's how ChatGPT and other AI systems work.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h5><i class="fas fa-microphone"></i> Voice AI: Make Noor Talk!</h5>
+                    <p>Instead of typing, imagine chatting with Noor like you're talking to a friend! You'll learn how to add speech recognition (listening) and text-to-speech (talking) to your AI.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h5><i class="fas fa-image"></i> Computer Vision: Teaching Noor to See</h5>
+                    <p>What if Noor could analyze images? You could show Noor a photo of a Quranic verse and it could explain it. This is computer vision, and it's revolutionary!</p>
+                </div>
+
+                <div class="feature-card">
+                    <h5><i class="fas fa-robot"></i> Advanced NLP: Understanding Language Better</h5>
+                    <p>Natural Language Processing (NLP) is how AI understands human language context and nuance. Your Season 2 Noor could understand questions like "What should I do when I'm sad?" and give thoughtful, compassionate answers.</p>
+                </div>
+
+                <div class="success-story-box">
+                    <h4>🌍 Real AI Superheroes Are Waiting for You!</h4>
+                    <p>When you're ready, there are amazing organizations and communities:</p>
+                    <ul>
+                        <li><strong>Google AI for Everyone</strong> – Free tutorials and competitions</li>
+                        <li><strong>TensorFlow Lite</strong> – Building ML models for mobile devices</li>
+                        <li><strong>Hugging Face</strong> – The AI community where developers share their projects</li>
+                        <li><strong>OpenAI API</strong> – Use powerful AI models with a few lines of code</li>
+                    </ul>
+                    <p>The AI revolution is here, and <strong>you're part of it!</strong> ⚡</p>
+                </div>
+            </section>
+
+            <!-- Closing -->
+            <section id="closing">
+                <div class="pill-label">💫 Your AI Superhero Certificate</div>
+                <h2>You Did It! 🎉</h2>
+                <p>Over these four sessions, you've:</p>
+                <ul>
+                    <li><strong>Session 1:</strong> Discovered what AI is and why it matters</li>
+                    <li><strong>Session 2:</strong> Designed an Islamic chatbot with safety and values at its core</li>
+                    <li><strong>Session 3:</strong> Learned Python and brought Noor to life with code</li>
+                    <li><strong>Session 4:</strong> Advanced your skills, tested like a professional, and made your AI ethical and impactful</li>
+                </ul>
+
+                <div class="cta-card">
+                    <h3>You Are Now an AI Superhero! ⭐</h3>
+                    <p>You have the knowledge and skills to understand, build, and deploy AI. More importantly, you understand that with great power comes responsibility. Use your skills to make the world better, help people learn, and spread compassion through technology. The future is in your hands!</p>
+                </div>
+
+                <div class="kids-friendly-box">
+                    <h4>📝 Reflection Questions (Share with Your Instructor!)</h4>
+                    <ul>
+                        <li>What was your favorite part of building Noor?</li>
+                        <li>Which feature made Noor the smartest?</li>
+                        <li>How would you use AI to help your community?</li>
+                        <li>What AI superhero challenge will you take next?</li>
+                        <li>Will you teach someone else to build AI?</li>
+                    </ul>
+                </div>
+
+                <p style="text-align: center; margin: 2rem 0; font-size: 1.15rem; font-weight: 600; color: var(--noor-purple);">
+                    Thank you for joining us on this incredible AI journey! Keep coding. Keep learning. Keep building. Keep dreaming. 🚀<br><br>
+                    <strong>- The Khalida Foundation Team</strong>
+                </p>
+            </section>
+
+            </main>
+
+            <div style="margin-top: 2rem;">
+                <a class="back-link" href="../../index.html">
+                    <i class="fas fa-arrow-left"></i> Back to Blog
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="modern-footer">
+        <div class="container px-4 px-lg-5">
+            <div class="footer-top">
+                <div class="row align-items-center mb-5">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="footer-brand">
+                            <h3 class="brand-name">
+                                <i class="fas fa-graduation-cap me-2"></i>
+                                Khalida Educational Foundation
+                            </h3>
+                            <p class="brand-tagline">
+                                Empowering futures through education. Building a legacy of learning, one child at a time.
+                            </p>
+                            <div class="brand-mission">
+                                <i class="fas fa-heart text-danger me-2"></i>
+                                <em>"In loving memory of Khalida - A tribute to a life dedicated to education"</em>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="newsletter-box">
+                            <h4 class="newsletter-title">
+                                <i class="fas fa-bell me-2"></i>
+                                Stay Updated
+                            </h4>
+                            <p class="newsletter-subtitle">Get the latest news and updates about our programs</p>
+                            <form class="newsletter-form-modern">
+                                <div class="newsletter-input-wrapper">
+                                    <i class="fas fa-envelope newsletter-icon"></i>
+                                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                                    <button class="newsletter-btn" type="submit">
+                                        <span>Subscribe</span>
+                                        <i class="fas fa-arrow-right ms-2"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-main">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading">
+                            <i class="fas fa-link me-2"></i>
+                            Quick Links
+                        </h5>
+                        <ul class="footer-menu">
+                            <li><a href="../../../index.html#about"><i class="fas fa-chevron-right me-2"></i>About Us</a></li>
+                            <li><a href="../../../course-pages/courses.html"><i class="fas fa-chevron-right me-2"></i>Our Courses</a></li>
+                            <li><a href="../../../index.html#programs"><i class="fas fa-chevron-right me-2"></i>Our Programs</a></li>
+                            <li><a href="../../../course-pages/courses.html#ai-initiative"><i class="fas fa-chevron-right me-2"></i>AI Initiative</a></li>
+                            <li><a href="../../../index.html#impact"><i class="fas fa-chevron-right me-2"></i>Our Impact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading">
+                            <i class="fas fa-hands-helping me-2"></i>
+                            Get Involved
+                        </h5>
+                        <ul class="footer-menu">
+                            <li><a href="../../../index.html#get-involved"><i class="fas fa-chevron-right me-2"></i>Volunteer</a></li>
+                            <li><a href="../../../index.html#get-involved"><i class="fas fa-chevron-right me-2"></i>Partner With Us</a></li>
+                            <li><a href="../../../register.html"><i class="fas fa-chevron-right me-2"></i>Register for Course</a></li>
+                            <li><a href="../../../index.html#contact"><i class="fas fa-chevron-right me-2"></i>Contact Us</a></li>
+                            <li><a href="../../../index.html#testimonials"><i class="fas fa-chevron-right me-2"></i>Testimonials</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading">
+                            <i class="fas fa-folder-open me-2"></i>
+                            Resources
+                        </h5>
+                        <ul class="footer-menu">
+                            <li><a href="../../../index.html#gallery"><i class="fas fa-chevron-right me-2"></i>Photo Gallery</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Annual Reports</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Success Stories</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>FAQs</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading">
+                            <i class="fas fa-map-marked-alt me-2"></i>
+                            Contact Info
+                        </h5>
+                        <ul class="footer-contact">
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:info@khalidafoundation.com">info@khalidafoundation.com</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+16096086282">+1 (609) 608-6282</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Education Street<br>Foundation City, State 12345</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <p class="copyright-text">
+                            <i class="fas fa-copyright me-1"></i>
+                            2026 Khalida Educational Foundation. All rights reserved.
+                            <br class="d-md-none">
+                            <span class="tribute-text">A Tribute to a Legacy of Love and Learning</span>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="footer-social">
+                            <span class="social-text">Follow Us:</span>
+                            <a href="#" class="footer-social-icon" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="footer-social-icon" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="footer-social-icon" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="footer-social-icon" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../js/scripts.js"></script>
+</body>
+</html>

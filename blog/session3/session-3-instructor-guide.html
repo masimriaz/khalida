@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Session 3 Instructor Guide – AI Superheroes</title>
+    <meta name="description" content="Instructor PPT-style guide for Session 3: Python chatbot for kids ages 9-14." />
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
+    <link href="../../css/styles.css" rel="stylesheet" />
+    <link href="../../css/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        :root {
+            --slide-bg: #ffffff;
+            --slide-accent: #3776ab;
+            --slide-accent-2: #ffd343;
+        }
+        body {
+            background: radial-gradient(circle at 12% 12%, rgba(55,118,171,0.08), transparent 32%),
+                        radial-gradient(circle at 88% 10%, rgba(255,211,67,0.08), transparent 35%),
+                        linear-gradient(180deg, #f9f5ef 0%, #ffffff 55%, #f5efe3 100%);
+        }
+        .guide-shell {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 7rem 1.25rem 3rem;
+        }
+        .guide-hero {
+            background: linear-gradient(135deg, rgba(55,118,171,0.92), rgba(255,211,67,0.92));
+            color: #fff;
+            border-radius: 20px;
+            padding: 2.5rem 2.25rem;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.16);
+            position: relative;
+            overflow: hidden;
+        }
+        .guide-hero::after {
+            content: '🐍';
+            position: absolute;
+            font-size: 12rem;
+            opacity: 0.08;
+            right: -20px;
+            bottom: -40px;
+        }
+        .guide-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+        .guide-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.2);
+            font-weight: 700;
+        }
+        .slide-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .slide-card {
+            background: var(--slide-bg);
+            border-radius: 18px;
+            padding: 1.75rem;
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .slide-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--slide-accent), var(--slide-accent-2));
+        }
+        .slide-title {
+            font-weight: 800;
+            color: var(--khalida-primary-dark-teal, #1f3a46);
+            margin-bottom: 0.5rem;
+        }
+        .slide-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            background: rgba(55,118,171,0.12);
+            color: var(--slide-accent);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .slide-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .slide-actions .badge {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .practice-box {
+            background: rgba(55,118,171,0.06);
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            border: 1px dashed rgba(55,118,171,0.2);
+        }
+        .code-mini {
+            background: #1f2430;
+            color: #e6edf3;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.92rem;
+            overflow-x: auto;
+        }
+        .code-mini .comment { color: #8b949e; font-style: italic; }
+        .code-mini .keyword { color: #79c0ff; }
+        .code-mini .string { color: #a5d6ff; }
+        .code-mini .function { color: #7ee787; }
+        .footer-note {
+            margin-top: 2.5rem;
+            text-align: center;
+            color: var(--text-light, #4b5563);
+        }
+        @media (max-width: 768px) {
+            .guide-shell { padding: 6rem 1rem 2.5rem; }
+            .guide-hero { padding: 2rem 1.5rem; }
+            .slide-card { padding: 1.4rem; }
+        }
+    </style>
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-elegant fixed-top" id="mainNav">
+        <div class="container-fluid px-3 px-lg-4">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html#page-top">
+                <i class="fas fa-graduation-cap"></i>
+                <span class="brand-text">Khalida Foundation</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto align-items-lg-center nav-master">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html#page-top">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../index.html#about">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="masterDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Explore</a>
+                        <ul class="dropdown-menu dropdown-menu-end p-3 shadow-lg" aria-labelledby="masterDropdown" style="min-width: 320px;">
+                            <li class="dropdown-header text-uppercase small text-muted">Courses</li>
+                            <li><a class="dropdown-item" href="../../course-pages/courses.html">All Courses</a></li>
+                            <li><a class="dropdown-item" href="../../course-pages/advanced-ai-for-kids.html">Advanced AI for Kids</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header text-uppercase small text-muted">Programs</li>
+                            <li><a class="dropdown-item" href="../../index.html#programs">Programs & Initiatives</a></li>
+                            <li><a class="dropdown-item" href="../../index.html#impact">Impact</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header text-uppercase small text-muted">AI Initiative</li>
+                            <li><a class="dropdown-item" href="../../course-pages/courses.html#ai-initiative">AI Initiative Overview</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="../../blog/index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="blogDropdown">
+                            <li><a class="dropdown-item" href="../../blog/index.html">All Blog Posts</a></li>
+                            <li><a class="dropdown-item" href="../../blog/2026/01/ai-superheroes-session-1.html">AI Superheroes – Session 1</a></li>
+                            <li><a class="dropdown-item" href="../../blog/2026/02/ai-superheroes-session-2.html">AI Superheroes – Session 2</a></li>
+                            <li><a class="dropdown-item" href="../../blog/2026/02/ai-superheroes-session-3.html">AI Superheroes – Session 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../../index.html#get-involved">Get Involved</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../index.html#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../index.html#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-2"><a class="nav-link nav-link-register" href="../../register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="guide-shell">
+        <header class="guide-hero">
+            <div class="text-uppercase small">Instructor Guide</div>
+            <h1 class="mt-2">Session 3 (90 Minutes) – Python Chatbot</h1>
+            <p class="lead mb-0">A PPT-style, hands-on teaching flow that keeps kids engaged while building Noor step by step.</p>
+            <div class="guide-meta">
+                <span class="guide-chip"><i class="fas fa-clock"></i> 90 minutes</span>
+                <span class="guide-chip"><i class="fas fa-user-friends"></i> Ages 9–14</span>
+                <span class="guide-chip"><i class="fas fa-code"></i> Python Basics</span>
+                <span class="guide-chip"><i class="fas fa-robot"></i> Build Noor</span>
+            </div>
+        </header>
+
+        <section class="slide-grid">
+            <article class="slide-card">
+                <div class="slide-badge"><i class="fas fa-play"></i> 0–5 min</div>
+                <h2 class="slide-title">Welcome + Tech Check</h2>
+                <p>Warm greeting, confirm laptops open, and verify Python runs.</p>
+                <div class="practice-box">
+                    <strong>Quick check:</strong> Ask kids to run <code>python --version</code> and show the output.
+                </div>
+            </article>
+
+            <article class="slide-card">
+                <div class="slide-badge"><i class="fas fa-book-open"></i> 5–10 min</div>
+                <h2 class="slide-title">Story Hook: Friendly Python Snake</h2>
+                <p><strong>Python is like a friendly language</strong> that helps us talk to computers in simple words. It is popular because it is easy to read, and it can build cool things like games and chatbots.</p>
+                <p><strong>Tell the story:</strong> “Python is a friendly snake who loves clear instructions. When we speak clearly, Python understands and helps us build Noor.”</p>
+                <div class="practice-box">
+                    <strong>Mini concept tour:</strong>
+                    <div>• <strong>Variables</strong> are labeled boxes that store information.</div>
+                    <div>• <strong>Input</strong> is how Noor asks questions and listens.</div>
+                    <div>• <strong>If/Else</strong> helps Noor make choices.</div>
+                    <div>• <strong>Lists</strong> are backpacks that hold many items.</div>
+                    <div>• <strong>Loops</strong> help Noor keep the conversation going.</div>
+                </div>
+                <div class="slide-actions">
+                    <span class="badge bg-primary">Ask: What can a chatbot help with?</span>
+                    <span class="badge bg-warning text-dark">Show final goal</span>
+                    <span class="badge bg-success">Promise: We build Noor today!</span>
+                </div>
+            </article>
+
+            <article class="slide-card">
+                <div class="slide-badge"><i class="fas fa-box"></i> 10–20 min</div>
+                <h2 class="slide-title">Hands‑On 1: Variables + Print</h2>
+                <p>Explain variables as treasure boxes, then run the first code together.</p>
+                <div class="code-mini"><code><span class="comment"># Variables</span>
+<span class="keyword">chatbot_name</span> = <span class="string">"Noor"</span>
+<span class="keyword">age</span> = <span class="string">10</span>
+<span class="function">print</span>(chatbot_name)
+<span class="function">print</span>(<span class="string">"My age is"</span>, age)</code></div>
+                <div class="practice-box">
+                    <strong>Challenge:</strong> Create 3 variables about yourself and print them.
+                </div>
+            </article>
+
+            <article class="slide-card">
+                <div class="slide-badge"><i class="fas fa-keyboard"></i> 20–30 min</div>
+                <h2 class="slide-title">Hands‑On 2: Input</h2>
+                <p>Show how input asks a question and remembers the answer.</p>
+                <div class="code-mini"><code><span class="keyword">user_name</span> = <span class="function">input</span>(<span class="string">"What is your name? "</span>)
+<span class="function">print</span>(<span class="string">"Nice to meet you,"</span>, user_name)</code></div>
+                <div class="practice-box">
+                    <strong>Mini task:</strong> Ask for favorite color and print a friendly reply.
+                </div>
+            </article>
+
+            <article class="slide-card">
+                <div class="slide-badge"><i class="fas fa-random"></i> 30–45 min</div>
+                <h2 class="slide-title">Hands‑On 3: If / Else</h2>
+                <p>Teach decisions with simple feelings and responses.</p>
+                <div class="code-mini"><code><span class="keyword">feeling</span> = <span class="function">input</span>(<span class="string">"happy or sad? "</span>)
+<span class="keyword">if</span> feeling == <span class="string">"happy"</span>:
+    <span class="function">print</span>(<span class="string">"Alhamdulillah!"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"Allah is with you."</span>)</code></div>
+                <div class="practice-box">
+                    <strong>Game:</strong> “If you’re wearing blue, stand up.” Connect it to code.
+                </div>
+            </article>
+
+            <article class="slide-card">
+                <div class="slide-badge"><i class="fas fa-list"></i> 45–55 min</div>
+                <h2 class="slide-title">Hands‑On 4: Lists</h2>
+                <p>Explain lists as backpacks, then add items together.</p>
+                <div class="code-mini"><code><span class="keyword">duas</span> = [<span class="string">"Bismillah"</span>, <span class="string">"Alhamdulillah"</span>]
+<span class="function">print</span>(duas[0])
+duas.<span class="function">append</span>(<span class="string">"MashaAllah"</span>)</code></div>
+                <div class="practice-box">
+                    <strong>Challenge:</strong> Add 2 more items to the list.
+                </div>
+            </article>
+
+            <article class="slide-card">
+                <div class="slide-badge"><i class="fas fa-robot"></i> 55–75 min</div>
+                <h2 class="slide-title">Build Noor – Chatbot</h2>
+                <p>Combine lists, input, if/else, and loops to build Noor step by step. Explain each concept as we code so kids see how each piece becomes the chatbot.</p>
+
+                <div class="practice-box">
+                    <strong>Instructor tip:</strong> After each block, say “Run it!” and celebrate every success out loud.
+                </div>
+
+                <h3 class="mt-4">Step 1: Warm welcome (print)</h3>
+                <p><strong>Concept:</strong> <code>print()</code> makes the computer speak.</p>
+                <div class="code-mini"><code><span class="comment"># Noor says hello!</span>
+<span class="function">print</span>(<span class="string">"As-salamu alaykum! I am Noor."</span>)
+<span class="function">print</span>(<span class="string">"I can answer simple Islamic questions."</span>)
+<span class="function">print</span>(<span class="string">"Type 'bye' to exit.\n"</span>)</code></div>
+                <div class="practice-box">
+                    <strong>Fun line:</strong> “If Noor can talk, you can too! Say hello back.”
+                </div>
+
+                <h3 class="mt-4">Step 2: Build Noor’s LLM brain (lists)</h3>
+                <p><strong>Concept:</strong> Lists store Noor’s “brain” knowledge. It is like a tiny LLM brain with facts it already knows.</p>
+                <div class="code-mini"><code><span class="comment"># Noor's brain: questions + answers</span>
+<span class="keyword">questions</span> = [
+    <span class="string">"who created us"</span>,
+    <span class="string">"how many times do we pray"</span>,
+    <span class="string">"what is the quran"</span>,
+    <span class="string">"what is ramadan"</span>,
+    <span class="string">"what do we say before eating"</span>,
+    <span class="string">"who is prophet muhammad"</span>
+]
+
+<span class="keyword">answers</span> = [
+    <span class="string">"Allah (SWT) created us!"</span>,
+    <span class="string">"We pray 5 times a day."</span>,
+    <span class="string">"The Quran is Allah's message."</span>,
+    <span class="string">"Ramadan is the blessed month of fasting."</span>,
+    <span class="string">"We say Bismillah before eating."</span>,
+    <span class="string">"Prophet Muhammad ﷺ is our final messenger."</span>
+]</code></div>
+                <div class="practice-box">
+                    <strong>Kid prompt:</strong> “Let’s add one new Q&amp;A to Noor’s brain together!”
+                </div>
+
+                <h3 class="mt-4">Step 3: Ask the user (input)</h3>
+                <p><strong>Concept:</strong> <code>input()</code> lets Noor listen. <code>lower()</code> helps matching.</p>
+                <div class="code-mini"><code><span class="keyword">user_question</span> = <span class="function">input</span>(<span class="string">"You: "</span>).<span class="function">lower</span>()</code></div>
+                <div class="practice-box">
+                    <strong>Fun line:</strong> “We turn letters to lowercase so Noor doesn’t get confused.”
+                </div>
+
+                <h3 class="mt-4">Step 4: Keep chatting (while loop)</h3>
+                <p><strong>Concept:</strong> A loop keeps the conversation going until we say “bye.”</p>
+                <div class="code-mini"><code><span class="keyword">while</span> True:
+    <span class="keyword">user_question</span> = <span class="function">input</span>(<span class="string">"You: "</span>).<span class="function">lower</span>()
+
+    <span class="comment"># Friendly greetings</span>
+    <span class="keyword">if</span> <span class="string">"salam"</span> <span class="keyword">in</span> user_question <span class="keyword">or</span> <span class="string">"assalam"</span> <span class="keyword">in</span> user_question:
+        <span class="function">print</span>(<span class="string">"Noor: Wa alaykumu as-salam!"</span>)
+        <span class="keyword">continue</span>
+
+    <span class="comment"># Gratitude moment</span>
+    <span class="keyword">if</span> <span class="string">"thank"</span> <span class="keyword">in</span> user_question:
+        <span class="function">print</span>(<span class="string">"Noor: You're welcome! 😊"</span>)
+        <span class="keyword">continue</span>
+
+    <span class="keyword">if</span> user_question == <span class="string">"bye"</span>:
+        <span class="function">print</span>(<span class="string">"Noor: Wa alaykumu as-salam!"</span>)
+        <span class="keyword">break</span></code></div>
+                <div class="practice-box">
+                    <strong>Kid line:</strong> “Noor is a good listener and waits for your next question.”
+                </div>
+
+                <h3 class="mt-4">Step 5: Search Noor’s brain (for loop)</h3>
+                <p><strong>Concept:</strong> A loop checks every question to find a match.</p>
+                <div class="code-mini"><code><span class="comment"># Search in Noor's brain</span>
+    <span class="keyword">found</span> = False
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="function">len</span>(questions)):
+        <span class="keyword">if</span> questions[i] <span class="keyword">in</span> user_question:
+            <span class="function">print</span>(<span class="string">"Noor:"</span>, answers[i])
+            found = True
+            <span class="keyword">break</span></code></div>
+                <div class="practice-box">
+                    <strong>Kid prompt:</strong> “Noor scans like a detective. 🕵️”
+                </div>
+
+                <h3 class="mt-4">Step 6: Friendly fallback (if not found)</h3>
+                <p><strong>Concept:</strong> If Noor does not know, it answers kindly.</p>
+                <div class="code-mini"><code><span class="keyword">if not</span> found:
+    <span class="function">print</span>(<span class="string">"Noor: I'm still learning. Ask simply!"</span>)
+    <span class="function">print</span>()</code></div>
+                <div class="practice-box">
+                    <strong>Joy moment:</strong> “Even Noor is a learner—just like us!”
+                </div>
+
+                <h3 class="mt-4">Step 7: Put it all together</h3>
+                <p><strong>Concept:</strong> We combine all blocks in one file. Run, test, celebrate.</p>
+                <div class="practice-box">
+                    <strong>Mini challenge:</strong> Add two new Q&amp;A pairs and create one new greeting rule.
+                </div>
+            </article>
+
+            <article class="slide-card">
+                <div class="slide-badge"><i class="fas fa-star"></i> 75–85 min</div>
+                <h2 class="slide-title">Test + Share</h2>
+                <p>Pair kids to test each other’s chatbot and celebrate wins.</p>
+                <div class="slide-actions">
+                    <span class="badge bg-success">Celebrate correct answers</span>
+                    <span class="badge bg-secondary">Help fix indentation</span>
+                </div>
+            </article>
+
+            <article class="slide-card">
+                <div class="slide-badge"><i class="fas fa-flag-checkered"></i> 85–90 min</div>
+                <h2 class="slide-title">Wrap‑Up + Next Steps</h2>
+                <p>Recap skills and give a short homework challenge.</p>
+                <div class="practice-box">
+                    <strong>Homework:</strong> Add 2 new Q&A pairs to Noor.
+                </div>
+            </article>
+        </section>
+
+        <div class="footer-note">Tip: Keep energy high with quick check-ins and celebrate each success.</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/scripts.js"></script>
+</body>
+</html>

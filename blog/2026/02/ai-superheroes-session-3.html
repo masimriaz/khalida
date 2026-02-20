@@ -163,7 +163,7 @@
             padding: 1.5rem 1.75rem;
             border-radius: 12px;
             overflow-x: auto;
-            overflow-y: hidden;
+            overflow-y: visible;
             font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
             font-size: 0.92rem;
             margin: 2rem 0;
@@ -172,6 +172,9 @@
             position: relative;
             clear: both;
             max-width: 100%;
+            white-space: pre;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         .code-preview::before {
             content: 'Python';
@@ -189,6 +192,9 @@
             line-height: 1.6;
             display: block;
             white-space: pre;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
         }
         .comment { color: #8b949e; font-style: italic; }
         .keyword { color: #79c0ff; }
@@ -611,13 +617,25 @@
             .blog-hero h1 { font-size: 1.9rem; }
             .code-preview { 
                 font-size: 0.85rem; 
-                padding: 1rem; 
+                padding: 1.25rem 1rem; 
                 min-height: auto;
                 overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 1.5rem 0;
+                border-radius: 8px;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            .code-preview code {
+                font-size: 0.85rem;
+                line-height: 1.5;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
             }
             .pdf-embed { min-height: 420px; }
             main > section { padding: 1.25rem 1.1rem; }
             .section-header-bar { 
+
                 flex-direction: column; 
                 align-items: flex-start; 
             }
@@ -756,12 +774,17 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../../../blog/index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+                        <a class="nav-link dropdown-toggle" href="../../../blog/index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-newspaper me-1"></i>Blog
+                        </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="blogDropdown">
-                            <li><a class="dropdown-item" href="../../../blog/index.html">All Blog Posts</a></li>
-                            <li><a class="dropdown-item" href="../../../blog/2026/01/ai-superheroes-session-1.html">AI Superheroes – Session 1</a></li>
-                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-2.html">AI Superheroes – Session 2</a></li>
-                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-3.html">AI Superheroes – Session 3</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/index.html"><i class="fas fa-list me-2"></i>All Blog Posts</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header">AI Superheroes Workshop Series</li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/01/ai-superheroes-session-1.html"><span class="badge badge-sm bg-primary me-2">S1</span>Discovering AI Power</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-2.html"><span class="badge badge-sm bg-success me-2">S2</span>Building Noor Chatbot</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-3.html"><span class="badge badge-sm bg-info me-2">S3</span>Python Programming</a></li>
+                            <li><a class="dropdown-item" href="../../../blog/2026/02/ai-superheroes-session-4.html"><span class="badge badge-sm bg-danger me-2">S4</span>Leveling Up Noor</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="../../../index.html#get-involved">Get Involved</a></li>
