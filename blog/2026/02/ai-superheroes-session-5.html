@@ -1,0 +1,2263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Master Python fundamentals: variables, types, input/output, if-else, loops, lists & dictionaries. Includes problem-solving framework and homework for kids ages 9-14.">
+    <title>AI Superheroes – Session 5: Python Fundamentals Unlocked | Khalida Foundation</title>
+    <link rel="icon" type="image/x-icon" href="../../../assets/favicon.ico" />
+    <!-- Font Awesome icons -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google Fonts for Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Core theme CSS -->
+    <link href="../../../css/styles.css" rel="stylesheet" />
+    <link href="../../../css/custom.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    <style>
+        /* Compact Navbar Override */
+        #mainNav .container-fluid {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+        
+        #mainNav {
+            padding: 0.5rem 0 !important;
+            min-height: 60px !important;
+        }
+        
+        #mainNav .navbar-brand {
+            font-size: 1.1rem !important;
+            padding: 0.4rem 0 !important;
+        }
+        
+        #mainNav .nav-link {
+            padding: 0.5rem 1rem !important;
+            font-size: 0.95rem !important;
+        }
+        
+        #mainNav .navbar-toggler {
+            padding: 0.4rem 0.6rem !important;
+            font-size: 1rem !important;
+        }
+        
+        .blog-shell {
+            width: 100%;
+            padding: 5rem 0 3rem;
+        }
+        
+        :root { 
+            --blog-max-width: 1200px; 
+            --blog-content-width: 95%;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            --section-spacing: 1.5rem;
+        }
+        
+        html { scroll-behavior: smooth; }
+        *, *::before, *::after { box-sizing: border-box; }
+        
+        body {
+            background: linear-gradient(180deg, #f9f5ef 0%, #ffffff 50%, #f5efe3 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        .blog-wrapper {
+            width: var(--blog-content-width);
+            max-width: var(--blog-max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .blog-shell {
+            width: 100%;
+            padding: 6.5rem 0 3rem;
+        }
+        
+        .blog-breadcrumbs {
+            font-size: 0.95rem;
+            margin: 1rem 0 2rem;
+            color: var(--text-light, #4b5563);
+        }
+        .blog-breadcrumbs a { 
+            color: var(--khalida-primary-dark-teal, #1f3a46); 
+            text-decoration: none; 
+            font-weight: 600;
+        }
+        .blog-breadcrumbs a:hover { text-decoration: underline; }
+        
+        .blog-hero {
+            background: var(--primary-gradient);
+            color: #fff;
+            border-radius: 20px;
+            padding: clamp(2rem, 6vw, 3rem);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .blog-hero::before {
+            content: '🚀';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            right: -20px;
+            top: -30px;
+            z-index: 0;
+        }
+        
+        .blog-hero h1 { 
+            font-size: clamp(2rem, 6vw, 3rem); 
+            font-weight: 800; 
+            margin-bottom: 1.5rem; 
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .blog-hero .blog-date { 
+            font-size: clamp(0.85rem, 2vw, 1rem); 
+            letter-spacing: 0.6px; 
+            text-transform: uppercase; 
+            color: rgba(255,255,255,0.9); 
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+        }
+        
+        .blog-hero p { 
+            max-width: 100%; 
+            font-size: clamp(1rem, 2.5vw, 1.15rem); 
+            line-height: 1.85; 
+            color: rgba(255,255,255,0.97);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .blog-meta-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .meta-chip-soft {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.25rem;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            font-weight: 700;
+            font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .meta-chip-soft:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        main { 
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        
+        main > section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: var(--transition-smooth);
+        }
+        
+        main > section:hover {
+            box-shadow: 0 15px 45px rgba(0,0,0,0.12);
+            transform: translateY(-3px);
+        }
+        
+        h2 { 
+            font-size: clamp(1.5rem, 5vw, 2.4rem); 
+            font-weight: 800; 
+            color: #1f3a46; 
+            margin: 1.5rem 0 1.25rem 0;
+            line-height: 1.25;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        
+        h3 { 
+            font-size: clamp(1.15rem, 3.5vw, 1.6rem); 
+            font-weight: 700; 
+            color: #1f3a46; 
+            margin: 1.5rem 0 0.75rem 0;
+            line-height: 1.35;
+        }
+        
+        h4 {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-weight: 700;
+            color: #667eea;
+            margin: 1.25rem 0 0.75rem 0;
+            line-height: 1.3;
+        }
+        
+        p { 
+            color: #1f252e; 
+            line-height: 1.85;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            margin-bottom: 1rem;
+            letter-spacing: 0.2px;
+        }
+        
+        .pill-label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(102, 126, 234, 0.15);
+            color: #667eea;
+            font-weight: 700;
+            font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+            margin-bottom: 1rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        
+        ul, ol { 
+            padding-left: clamp(1.5rem, 5vw, 2.25rem);
+            margin: 1.25rem 0;
+        }
+        
+        ul li, ol li { 
+            margin-bottom: 0.75rem; 
+            color: #1f252e;
+            line-height: 1.88;
+            font-size: clamp(0.95rem, 2vw, 1.08rem);
+        }
+        
+        .variable-type-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: clamp(1rem, 2.5vw, 1.5rem);
+            border-radius: 16px;
+            margin-bottom: 1.25rem;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: var(--transition-smooth);
+        }
+        
+        .variable-type-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+            border-left-color: #764ba2;
+        }
+        
+        .variable-type-card h5 {
+            color: #667eea;
+            margin: 0 0 0.75rem 0;
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            font-weight: 800;
+        }
+        
+        .variable-type-card p {
+            margin-bottom: 0.75rem;
+        }
+        
+        .code-example {
+            background: #282c34;
+            border-radius: 14px;
+            padding: 0;
+            margin: 1rem 0;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+        
+        .code-header {
+            background: #21252b;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .code-language {
+            color: #61afef;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .copy-btn {
+            background: #61afef;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .copy-btn:hover {
+            background: #528bcc;
+            transform: translateY(-1px);
+        }
+        
+        .copy-btn.copied {
+            background: #98c379;
+        }
+        
+        .copy-btn i {
+            font-size: 0.9rem;
+        }
+        
+        .code-content {
+            padding: clamp(1.1rem, 2.5vw, 1.75rem);
+            overflow-x: auto;
+        }
+        
+        .code-example pre {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .code-example code {
+            color: #abb2bf;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+            line-height: 1.8;
+            display: block;
+            white-space: pre;
+        }
+        
+        /* Python Syntax Highlighting */
+        .code-example .hljs-keyword { color: #c678dd; font-weight: 600; }
+        .code-example .hljs-string { color: #98c379; }
+        .code-example .hljs-number { color: #d19a66; }
+        .code-example .hljs-comment { color: #5c6370; font-style: italic; }
+        .code-example .hljs-function { color: #61afef; }
+        .code-example .hljs-built_in { color: #e5c07b; }
+        .code-example .hljs-variable { color: #e06c75; }
+        .code-example .hljs-title { color: #61afef; font-weight: 600; }
+        .code-example .hljs-params { color: #d19a66; }
+        .code-example .hljs-attr { color: #d19a66; }
+        .code-example .hljs-literal { color: #56b6c2; }
+        
+        .code-label {
+            display: block;
+            color: #888;
+            font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .output-example {
+            background: #121212;
+            color: #00ff00;
+            border-radius: 14px;
+            padding: clamp(1.25rem, 3vw, 2rem);
+            margin: 1.75rem 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
+            line-height: 1.75;
+            border: 1px solid #00ff00;
+            border-opacity: 0.3;
+            box-shadow: 0 4px 12px rgba(0,255,0,0.1);
+            overflow-x: auto;
+        }
+        
+        .kids-friendly-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: clamp(1.5rem, 3.5vw, 2.25rem);
+            border-radius: 18px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(253, 203, 110, 0.25);
+            border: 3px solid rgba(255,255,255,0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .kids-friendly-box::before {
+            content: '💡';
+            position: absolute;
+            font-size: 5rem;
+            opacity: 0.1;
+            right: -10px;
+            bottom: -15px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .kids-friendly-box h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .kids-friendly-box p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: #2c3e50;
+            line-height: 1.8;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+        
+        .kids-friendly-box ul {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: clamp(1.5rem, 3.5vw, 2.25rem);
+            border-radius: 18px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.15);
+            border: 3px solid rgba(33, 150, 243, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-box h4 {
+            color: #1565c0;
+            margin-bottom: 1rem;
+            font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+            font-weight: 800;
+        }
+        
+        .highlight-box p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: #0d47a1;
+            line-height: 1.8;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .highlight-box ul {
+            color: #0d47a1;
+            margin: 1rem 0;
+        }
+        
+        .highlight-box ul li {
+            color: #0d47a1;
+            margin-bottom: 0.75rem;
+            font-size: clamp(0.95rem, 2vw, 1.08rem);
+            line-height: 1.6;
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            padding: clamp(1.5rem, 3.5vw, 2.25rem);
+            border-radius: 18px;
+            margin: 2rem 0;
+            color: white;
+            box-shadow: 0 8px 25px rgba(67, 233, 123, 0.25);
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+        
+        .success-box h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+            font-weight: 700;
+        }
+        
+        .success-box p {
+            color: white;
+            margin: 0 0 0.75rem 0;
+            font-size: clamp(0.95rem, 2vw, 1.08rem);
+            line-height: 1.7;
+            font-weight: 500;
+        }
+        
+        .success-box ul {
+            color: white;
+            margin: 1rem 0;
+            list-style-position: inside;
+        }
+        
+        .success-box ul li {
+            color: white;
+            margin-bottom: 0.75rem;
+            font-size: clamp(0.95rem, 2vw, 1.08rem);
+            line-height: 1.6;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: clamp(1rem, 2.5vw, 1.75rem);
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: clamp(1.75rem, 4vw, 2.5rem);
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transition: var(--transition-smooth);
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        
+        .feature-card i {
+            font-size: clamp(2rem, 8vw, 3rem);
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h5 {
+            color: #667eea;
+            margin: 0 0 0.75rem 0;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            font-weight: 700;
+        }
+        
+        .feature-card p {
+            margin: 0;
+            line-height: 1.7;
+            font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+            color: #555;
+            flex-grow: 1;
+        }
+        
+        .problem-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #f1f3f5 100%);
+            padding: clamp(1.5rem, 3.5vw, 2.25rem);
+            border-radius: 18px;
+            margin: 2rem 0;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        }
+        
+        .problem-title {
+            color: #667eea;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        
+        .problem-stage {
+            background: white;
+            padding: clamp(1.25rem, 3vw, 1.75rem);
+            border-radius: 14px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #764ba2;
+        }
+        
+        .problem-stage h5 {
+            color: #764ba2;
+            font-weight: 700;
+            margin: 0 0 0.75rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 14px;
+            overflow: hidden;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: clamp(0.85rem, 2vw, 1.25rem);
+            text-align: left;
+            font-weight: 700;
+        }
+        
+        .comparison-table td {
+            padding: clamp(0.85rem, 2vw, 1.5rem);
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .cta-card {
+            background: var(--secondary-gradient);
+            color: #fff;
+            border-radius: 20px;
+            padding: clamp(2rem, 5vw, 3.25rem) clamp(1.75rem, 4vw, 2.5rem);
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .cta-card h3 { 
+            color: #fff; 
+            margin: 0 0 1rem 0;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            line-height: 1.3;
+        }
+        
+        .cta-card p { 
+            color: rgba(255,255,255,0.95); 
+            margin: 0;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.6;
+        }
+        
+        .back-link { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            text-decoration: none; 
+            color: #667eea; 
+            font-weight: 700;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover { 
+            text-decoration: underline; 
+            color: #764ba2;
+            gap: 0.75rem;
+        }
+        
+        .comparison-visual {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(1.25rem, 3vw, 2rem);
+            margin: 2.5rem 0;
+        }
+        
+        .comparison-visual > div {
+            padding: clamp(1.5rem, 4vw, 2.25rem);
+            border-radius: 16px;
+            background: #f8f9fa;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        
+        .comparison-visual h5 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #667eea;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+        }
+        
+        @media (max-width: 1024px) {
+            .blog-wrapper {
+                --blog-content-width: 97%;
+            }
+            
+            main > section {
+                padding: clamp(2rem, 4vw, 3rem);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-wrapper {
+                --blog-content-width: 100%;
+                padding: 0 1rem;
+            }
+            
+            main > section {
+                padding: clamp(1.75rem, 3vw, 2.5rem);
+                margin-bottom: 2.5rem;
+                border-radius: 16px;
+            }
+            
+            .blog-hero {
+                padding: clamp(2rem, 5vw, 3rem);
+                margin-bottom: 2.5rem;
+            }
+            
+            h2 {
+                font-size: clamp(1.4rem, 4vw, 1.8rem);
+                margin: 1.75rem 0 1.25rem;
+            }
+            
+            h3 {
+                font-size: clamp(1.05rem, 3vw, 1.3rem);
+                margin: 1.75rem 0 1rem;
+            }
+            
+            .comparison-visual {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 1rem;
+            }
+            
+            .feature-card {
+                padding: 1.25rem;
+            }
+            
+            .feature-card i {
+                font-size: 2rem;
+            }
+            
+            .feature-card h5 {
+                font-size: 1rem;
+            }
+            
+            .feature-card p {
+                font-size: 0.95rem;
+            }
+            
+            .blog-meta-strip {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .meta-chip-soft {
+                justify-content: center;
+                width: 100%;
+                padding: 0.6rem 1rem;
+            }
+            
+            .code-example {
+                padding: 1rem;
+                margin: 1.5rem 0;
+            }
+            
+            .code-example code {
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .blog-wrapper {
+                padding: 0 0.75rem;
+            }
+            
+            main > section {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+                gap: 0.5rem;
+            }
+            
+            .problem-title {
+                font-size: 1.1rem;
+                gap: 0.5rem;
+            }
+            
+            .comparison-table {
+                font-size: 0.85rem;
+                overflow-x: auto;
+                display: block;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body id="page-top">
+    <!-- Professional Top Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-elegant fixed-top" id="mainNav">
+        <div class="container-fluid px-3 px-lg-4">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html#page-top">
+                <i class="fas fa-graduation-cap"></i>
+                <span class="brand-text">Khalida Foundation</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto align-items-lg-center nav-master">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="../../../index.html#page-top">Home</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="../../../index.html#about">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="masterDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Explore</a>
+                        <ul class="dropdown-menu dropdown-menu-end p-3 shadow-lg" aria-labelledby="masterDropdown" style="min-width: 320px;">
+                            <li class="dropdown-header text-uppercase small text-muted">Courses</li>
+                            <li><a class="dropdown-item" href="../../../course-pages/courses.html">All Courses</a></li>
+                            <li><a class="dropdown-item" href="../../../course-pages/advanced-ai-for-kids.html">Advanced AI for Kids</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header text-uppercase small text-muted">Programs</li>
+                            <li><a class="dropdown-item" href="../../../index.html#programs">Programs & Initiatives</a></li>
+                            <li><a class="dropdown-item" href="../../../index.html#impact">Impact</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header text-uppercase small text-muted">AI Initiative</li>
+                            <li><a class="dropdown-item" href="../../../course-pages/courses.html#ai-initiative">AI Initiative Overview</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="../../index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-newspaper me-1"></i>Blog
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="blogDropdown">
+                            <li><a class="dropdown-item" href="../../index.html"><i class="fas fa-list me-2"></i>All Blog Posts</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header">AI Superheroes Workshop Series</li>
+                            <li><a class="dropdown-item" href="../01/ai-superheroes-session-1.html"><span class="badge badge-sm bg-primary me-2">S1</span>Discovering AI Power</a></li>
+                            <li><a class="dropdown-item" href="ai-superheroes-session-2.html"><span class="badge badge-sm bg-success me-2">S2</span>Building Noor Chatbot</a></li>
+                            <li><a class="dropdown-item" href="ai-superheroes-session-3.html"><span class="badge badge-sm bg-info me-2">S3</span>Python Programming</a></li>
+                            <li><a class="dropdown-item" href="ai-superheroes-session-4.html"><span class="badge badge-sm bg-danger me-2">S4</span>Leveling Up Noor</a></li>
+                            <li><a class="dropdown-item" href="ai-superheroes-session-5.html"><span class="badge badge-sm bg-warning me-2">S5</span><i class="fas fa-code me-2"></i>Python Fundamentals</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="../../../index.html#get-involved">Get Involved</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="../../../index.html#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="../../../index.html#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-2"><a class="nav-link nav-link-register" href="../../../register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="blog-wrapper">
+        <div class="blog-shell">
+            <!-- Breadcrumbs -->
+            <nav class="blog-breadcrumbs">
+                <a href="../../../index.html">Home</a> &nbsp;/&nbsp;
+                <a href="../../index.html">Blog</a> &nbsp;/&nbsp;
+                <span>Session 5: Python Fundamentals</span>
+            </nav>
+            
+            <!-- Hero Section -->
+            <div class="blog-hero">
+                <div class="blog-date">✨ AI Superheroes Workshop – Session 5</div>
+                <h1>🚀 Python Fundamentals Unlocked: Become a Code Superhero!</h1>
+                <p>Master the essential building blocks of Python: variables, data types, input/output, loops, conditionals, lists, and dictionaries. Learn the proven problem-solving framework that professional developers use, then solve real challenges like a true AI Superhero!</p>
+                <div class="blog-meta-strip">
+                    <span class="meta-chip-soft"><i class="fas fa-code"></i> Python Basics</span>
+                    <span class="meta-chip-soft"><i class="fas fa-graduation-cap"></i> Ages 9-14</span>
+                    <span class="meta-chip-soft"><i class="fas fa-lightbulb"></i> Hands-On Learning</span>
+                    <span class="meta-chip-soft"><i class="fas fa-rocket"></i> Problem-Solving</span>
+                </div>
+            </div>
+            
+            <main>
+                <!-- Section 1: Intro -->
+                <section>
+                    <h2>🎯 What Will You Learn?</h2>
+                    <p>Welcome to the foundation of your AI Superhero journey! In this session, you'll master the core tools every Python programmer needs. Don't worry if it seems like a lot—we'll break it down into bite-sized, digestible pieces.</p>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-cube"></i>
+                            <h5>Variables & Types</h5>
+                            <p>Learn how to store and work with different kinds of information in your code.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-comments"></i>
+                            <h5>Input & Output</h5>
+                            <p>Talk to your users! Ask questions and display amazing results.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-code-branch"></i>
+                            <h5>Loops & Conditionals</h5>
+                            <p>Make smart decisions and repeat tasks like a coding champion.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-boxes"></i>
+                            <h5>Lists & Dictionaries</h5>
+                            <p>Organize your data like a superhero organizes their arsenal!</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Section 2: Variables & Types -->
+                <section>
+                    <h2>📦 Section 1: Variables & Data Types</h2>
+                    
+                    <h3>What is a Variable?</h3>
+                    <p>Think of a <strong>variable</strong> as a labeled box 📦. You put information inside, give it a name (label), and can use it whenever you need it.</p>
+                    
+                    <div class="kids-friendly-box">
+                        <h4>🧠 Remember: Think of the Labeled Box Concept</h4>
+                        <p>Just like you might have a box labeled "Toys" that holds action figures, or a box labeled "Snacks" that holds your favorite treats, variables are labeled boxes that hold information!</p>
+                    </div>
+                    
+                    <h3>The 6 Essential Python Data Types</h3>
+                    
+                    <div class="variable-type-card">
+                        <h5>1. Integer (int) 🔢</h5>
+                        <p><strong>Definition:</strong> Whole numbers (no decimal point). Positive, negative, or zero.</p>
+                        <p><strong>Examples:</strong> 42, -5, 0, 2024, 999</p>
+                        <div class="code-example">
+                            <div class="code-header">
+                                <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-python">age = 12
+score = 95
+temperature = -3
+players = 0</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="variable-type-card">
+                        <h5>2. Float (float) 📊</h5>
+                        <p><strong>Definition:</strong> Decimal numbers (with a decimal point). Used for measurements and prices.</p>
+                        <p><strong>Examples:</strong> 3.14, 9.99, 2.5, 0.01</p>
+                        <div class="code-example">
+                            <div class="code-header">
+                                <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-python">height = 5.5
+price = 9.99
+pi = 3.14159
+discount = 0.25</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="variable-type-card">
+                        <h5>3. String (str) 📝</h5>
+                        <p><strong>Definition:</strong> Text data. Anything in quotes is a string (words, sentences, even numbers as text!).</p>
+                        <p><strong>Examples:</strong> "Hello", "Python is fun!", "2024", "🚀"</p>
+                        <div class="code-example">
+                            <div class="code-header">
+                                <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-python">name = "Asim"
+greeting = "Hello, Superhero!"
+city = "New York"
+emoji = "🚀"</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="variable-type-card">
+                        <h5>4. Boolean (bool) ✅❌</h5>
+                        <p><strong>Definition:</strong> True/False values. Used for yes/no, on/off decisions.</p>
+                        <p><strong>Examples:</strong> True, False (note the capital letters!)</p>
+                        <div class="code-example">
+                            <div class="code-header">
+                                <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-python">is_sunny = True
+is_raining = False
+is_homework_done = True
+can_play = False</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="variable-type-card">
+                        <h5>5. List (list) 📋</h5>
+                        <p><strong>Definition:</strong> A collection of items in order. Like a shopping list where the order matters.</p>
+                        <p><strong>Examples:</strong> [1, 2, 3], ["apple", "banana", "orange"], [True, False, True]</p>
+                        <div class="code-example">
+                            <div class="code-header">
+                                <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-python">colors = ["red", "blue", "green", "yellow"]
+scores = [95, 87, 92, 88]
+mixed = ["apple", 5, True, 3.14]</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="variable-type-card">
+                        <h5>6. Dictionary (dict) 🗝️</h5>
+                        <p><strong>Definition:</strong> A collection of paired information (key-value pairs). Like a real dictionary where you look up a word to find its meaning.</p>
+                        <p><strong>Examples:</strong> {"name": "Asim"}, {"age": 12, "grade": 7}</p>
+                        <div class="code-example">
+                            <div class="code-header">
+                                <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-python">student = {"name": "Asim", "age": 12, "grade": "7"}
+book = {"title": "Python Fun", "pages": 250, "price": 9.99}
+superhero = {"name": "Spider-Man", "power": "Web-Slinging"}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="success-box">
+                        <h4>🎉 Challenge Yourself!</h4>
+                        <p>Create variables of each type with information about yourself: your name (string), age (integer), height in feet (float), whether you like coding (boolean), favorite foods (list), and your daily schedule (dictionary). Go!)</p>
+                    </div>
+                </section>
+                
+                <!-- Section 3: Input & Output -->
+                <section>
+                    <h2>💬 Section 2: Input & Output in Python</h2>
+                    
+                    <h3>The Conversation Framework</h3>
+                    <p>Every program needs to <strong>talk</strong> to users. This means:</p>
+                    <ul>
+                        <li><strong>Input:</strong> Getting information FROM the user (asking questions)</li>
+                        <li><strong>Output:</strong> Sending information TO the user (showing results)</li>
+                    </ul>
+                    
+                    <h3>Input: Asking Your Users Questions ❓</h3>
+                    
+                    <p>Use the <code>input()</code> function to ask users for information:</p>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">name = input("What is your name? ")
+print("Hello, " + name + "!")</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">What is your name? Asim
+Hello, Asim!</div>
+                    
+                    <p><strong>How it works:</strong></p>
+                    <ol>
+                        <li>The <code>input()</code> function shows a question to the user</li>
+                        <li>The user types their answer</li>
+                        <li>The answer gets stored in the variable (in this case, <code>name</code>)</li>
+                    </ol>
+                    
+                    <div class="kids-friendly-box">
+                        <h4>💡 Pro Tip: input() Always Returns Text</h4>
+                        <p>Remember: <code>input()</code> always gives you a STRING, even if the user types a number! If you need a number, you need to convert it using <code>int()</code> or <code>float()</code>.</p>
+                    </div>
+                    
+                    <h3>Converting Input to Numbers</h3>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">age_text = input("How old are you? ")
+age = int(age_text)  # Convert text to number</code></pre>
+                        </div>
+                    </div>
+                    
+                    <p>Or simpler, all in one line:</p>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">age = int(input("How old are you? "))</code></pre>
+                        </div>
+                    </div>
+                    
+                    <h3>Output: Showing Results to Users 📺</h3>
+                    
+                    <p>Use the <code>print()</code> function to display information:</p>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">print("Hello, World!")
+print("I love Python!")
+print(42)
+print(3.14)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">Hello, World!
+I love Python!
+42
+3.14</div>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">name = "Asim"
+age = 12
+print(name)
+print(age)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">Asim
+12</div>
+                    
+                    <h3>Combining Input & Output: A Complete Example! 🌟</h3>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python"># Get information from the user
+superhero_name = input("What's your superhero name? ")
+power = input("What's your superpower? ")
+age = int(input("How old are you? "))
+
+# Process the information
+birth_year = 2024 - age
+
+# Show the results
+print("\n--- Your Superhero Profile ---")
+print("Name: " + superhero_name)
+print("Power: " + power)
+print("Age: " + str(age))
+print("Probably born in: " + str(birth_year))</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">What's your superhero name? Spider-Kid
+What's your superpower? Web-Slinging
+How old are you? 12
+
+--- Your Superhero Profile ---
+Name: Spider-Kid
+Power: Web-Slinging
+Age: 12
+Probably born in: 2012</div>
+                    
+                    <div class="success-box">
+                        <h4>🎉 Try It Yourself!</h4>
+                        <p>Create a program that asks for 3 pieces of information about yourself (name, favorite food, favorite movie) and then prints them back out in a cool format. Test it!</p>
+                    </div>
+                </section>
+                
+                <!-- Section 4: If-Else & For Loops -->
+                <section>
+                    <h2>🔀 Section 3: Decisions & Repetition (If-Else & Loops)</h2>
+                    
+                    <h3>Part A: Making Decisions with If-Else ✅❌</h3>
+                    
+                    <p>Programs need to make decisions based on information. "If this is true, do this. Otherwise, do that."</p>
+                    
+                    <h4>Comparison Operators: The Decision Tools</h4>
+                    <p>Before using if-else, you need to know how to compare values:</p>
+                    
+                    <div class="comparison-table">
+                        <tr>
+                            <th>Operator</th>
+                            <th>Meaning</th>
+                            <th>Example</th>
+                            <th>Result</th>
+                        </tr>
+                        <tr>
+                            <td><code>==</code></td>
+                            <td>Equal to</td>
+                            <td>5 == 5</td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td><code>!=</code></td>
+                            <td>Not equal to</td>
+                            <td>5 != 3</td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td><code>&gt;</code></td>
+                            <td>Greater than</td>
+                            <td>10 > 5</td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;</code></td>
+                            <td>Less than</td>
+                            <td>3 < 10</td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td><code>&gt;=</code></td>
+                            <td>Greater than or equal</td>
+                            <td>10 >= 10</td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;=</code></td>
+                            <td>Less than or equal</td>
+                            <td>5 <= 10</td>
+                            <td>True</td>
+                        </tr>
+                    </div>
+                    
+                    <h4>Your First If-Else Statement</h4>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">age = int(input("How old are you? "))
+
+if age >= 13:
+    print("You can play the video game!")
+else:
+    print("Wait a bit longer, young padawan!")</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="kids-friendly-box">
+                        <h4>💡 Indentation Matters!</h4>
+                        <p>In Python, indentation (spacing at the beginning of lines) is SUPER important! The code inside the <code>if</code> block must be indented. Think of it as showing which code "belongs" to the if statement.</p>
+                    </div>
+                    
+                    <h4>Real-World Example: Grade Checker</h4>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">score = int(input("Enter your test score: "))
+
+if score >= 90:
+    print("🌟 A - Excellent work, Superhero!")
+elif score >= 80:
+    print("✨ B - Great job!")
+elif score >= 70:
+    print("👍 C - Good effort!")
+else:
+    print("💪 Keep practicing! You'll get there!")</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">Enter your test score: 85
+✨ B - Great job!</div>
+                    
+                    <p>Notice we used <code>elif</code> (meaning "else if"). This lets us check multiple conditions!</p>
+                    
+                    <h3>Part B: Repeating Code with For Loops 🔁</h3>
+                    
+                    <p>Sometimes you need to do the same thing multiple times. Instead of writing the code 100 times, use a <strong>loop</strong>!</p>
+                    
+                    <h4>Your First For Loop</h4>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">for count in range(5):
+    print("Count: " + str(count))
+print("Blastoff! 🚀")</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">Count: 0
+Count: 1
+Count: 2
+Count: 3
+Count: 4
+Blastoff! 🚀</div>
+                    
+                    <p><strong>How it works:</strong> The variable <code>count</code> starts at 0 and goes up to 4 (range(5) means 0 through 4). The code inside the loop runs 5 times, each time with a different value for <code>count</code>.</p>
+                    
+                    <h4>Looping Through a List</h4>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">foods = ["Pizza", "Pasta", "Ice Cream", "Fruit"]
+
+for food in foods:
+    print(f"I love {food}!")</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">I love Pizza!
+I love Pasta!
+I love Ice Cream!
+I love Fruit!</div>
+                    
+                    <p>This is a <code>for-in</code> loop. It goes through each item in the list, one by one.</p>
+                    
+                    <div class="highlight-box">
+                        <h4>📌 Loop Analogy</h4>
+                        <p>Imagine you have a stack of dishes to wash. A for loop is like saying: "For each dish in the stack, wash it, then move to the next one." Easy!</p>
+                    </div>
+                    
+                    <h4>Complete Example: Printing a Times Table</h4>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">number = 5
+
+print(f"The {number} Times Table:")
+for i in range(1, 11):
+    result = number * i
+    print(f"{number} × {i} = {result}")</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">The 5 Times Table:
+5 × 1 = 5
+5 × 2 = 10
+5 × 3 = 15
+5 × 4 = 20
+5 × 5 = 25
+5 × 6 = 30
+5 × 7 = 35
+5 × 8 = 40
+5 × 9 = 45
+5 × 10 = 50</div>
+                </section>
+                
+                <!-- Section 5: Lists & Dictionaries -->
+                <section>
+                    <h2>🗂️ Section 4: Lists & Dictionaries - Organizing Data</h2>
+                    
+                    <p>As a programmer, you'll often work with collections of information. Python gives you two amazing tools: lists and dictionaries.</p>
+                    
+                    <h3>Part A: Lists 📋 - The Ordered Collection</h3>
+                    
+                    <h4>What is a List?</h4>
+                    <p>A list is like a shopping list or a to-do list. Items are stored in order, and you can access them by their position (starting from 0!).</p>
+                    
+                    <h4>Creating and Using Lists</h4>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python"># Create a list of favorite superheroes
+heroes = ["Spider-Man", "Wonder Woman", "Black Panther", "Captain Marvel"]
+
+# Access items by position (remember: counting starts at 0!)
+print(heroes[0])  # Spider-Man (first item)
+print(heroes[1])  # Wonder Woman (second item)
+print(heroes[3])  # Captain Marvel (fourth item)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">Spider-Man
+Wonder Woman
+Captain Marvel</div>
+                    
+                    <div class="kids-friendly-box">
+                        <h4>💡 Indexing Starts at 0!</h4>
+                        <p>In Python, the first item in a list is at position 0, the second at position 1, etc. This might feel weird at first, but it's how all programming languages work. Remember: <strong>0, 1, 2, 3...</strong></p>
+                    </div>
+                    
+                    <h4>List Operations: Adding, Removing, Modifying</h4>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">scores = [95, 87, 92]
+
+# Add an item
+scores.append(88)
+print(scores)  # [95, 87, 92, 88]
+
+# Remove an item
+scores.remove(87)
+print(scores)  # [95, 92, 88]
+
+# Change an item
+scores[0] = 100
+print(scores)  # [100, 92, 88]
+
+# Get the length (how many items)
+print(len(scores))  # 3</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">[95, 87, 92, 88]
+[95, 92, 88]
+[100, 92, 88]
+3</div>
+                    
+                    <h4>Looping Through a List</h4>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">tasks = ["Complete homework", "Practice coding", "Help a friend", "Celebrate!"]
+
+print("Today's Superhero Tasks:")
+for i, task in enumerate(tasks):
+    print(f"{i + 1}. {task}")</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">Today's Superhero Tasks:
+1. Complete homework
+2. Practice coding
+3. Help a friend
+4. Celebrate!</div>
+                    
+                    <h3>Part B: Dictionaries 🗝️ - The Key-Value Collection</h3>
+                    
+                    <h4>What is a Dictionary?</h4>
+                    <p>A dictionary is like a real dictionary 📚. Instead of looking up items by position (0, 1, 2...), you look them up by a "key". Each key has a corresponding "value".</p>
+                    
+                    <h4>Real-World Example: Phone Book</h4>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python"># Phone book - keys are names, values are numbers
+phone_book = {
+    "Asim": "555-0123",
+    "Sarah": "555-0456",
+    "Marcus": "555-0789",
+    "Emma": "555-1011"
+}
+
+# Look up a phone number
+print(phone_book["Asim"])        # 555-0123
+print(phone_book["Sarah"])       # 555-0456</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">555-0123
+555-0456</div>
+                    
+                    <h4>Adding and Modifying Dictionary Items</h4>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">student = {"name": "Asim", "grade": 7, "score": 95}
+
+# Add a new key-value pair
+student["age"] = 12
+print(student)
+
+# Change a value
+student["score"] = 98
+print(student)
+
+# Delete an item
+del student["age"]
+print(student)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">{'name': 'Asim', 'grade': 7, 'score': 95, 'age': 12}
+{'name': 'Asim', 'grade': 7, 'score': 98, 'age': 12}
+{'name': 'Asim', 'grade': 7, 'score': 98}</code>
+                    
+                    <h4>Looping Through Dictionaries</h4>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">grades = {
+    "Asim": 92,
+    "Sarah": 88,
+    "Marcus": 95,
+    "Emma": 87
+}
+
+for student, grade in grades.items():
+    print(f"{student}: {grade}")</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="output-example">Asim: 92
+Sarah: 88
+Marcus: 95
+Emma: 87</div>
+                    
+                    <h3>Lists vs. Dictionaries: Quick Comparison</h3>
+                    
+                    <div class="comparison-visual">
+                        <div>
+                            <h5>📋 Lists</h5>
+                            <ul>
+                                <li>Ordered collection</li>
+                                <li>Access by position (0, 1, 2...)</li>
+                                <li>Great for sequences</li>
+                                <li>Example: [1, 2, 3]</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5>🗝️ Dictionaries</h5>
+                            <ul>
+                                <li>Key-value pairs</li>
+                                <li>Access by key name</li>
+                                <li>Great for labeled data</li>
+                                <li>Example: {"name": "Asim"}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Section 6: Problem-Solving Framework -->
+                <section>
+                    <h2>🧠 The AI Superhero Problem-Solving Framework</h2>
+                    
+                    <p>Here's the secret that professional programmers use: <strong>don't jump straight to coding</strong>. Have a plan first! Use this proven 3-stage framework:</p>
+                    
+                    <h3>The Three Stages</h3>
+                    
+                    <div class="highlight-box">
+                        <h4>🎯 STAGE 1: RESEARCH, DEFINE & REFINE</h4>
+                        <ul>
+                            <li><strong>Research:</strong> Read the problem carefully. What is it asking?</li>
+                            <li><strong>Define:</strong> Break it into smaller, manageable parts</li>
+                            <li><strong>Refine:</strong> Figure out what you already know that helps</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h4>📝 STAGE 2: WRITE THE ALGORITHM (Pseudo Code)</h4>
+                        <ul>
+                            <li>Write your solution in plain English/simple words</li>
+                            <li>Don't worry about Python syntax yet</li>
+                            <li>Focus on the logic and steps</li>
+                            <li>This is your "blueprint" for the code</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h4>💻 STAGE 3: CODE IT IN PYTHON</h4>
+                        <ul>
+                            <li>Translate your algorithm into Python</li>
+                            <li>Test with examples</li>
+                            <li>Fix any problems (debugging)</li>
+                            <li>Celebrate! 🎉</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="kids-friendly-box">
+                        <h4>💡 Why This Framework Works</h4>
+                        <p>When you plan before coding, you solve the hard part (thinking) before dealing with Python syntax. It's like building a blueprint before constructing a house. You're 10x less likely to get stuck!</p>
+                    </div>
+                </section>
+                
+                <!-- Section 7: Homework Problems -->
+                <section>
+                    <h2>🏠 Homework: Code Like a Superhero!</h2>
+                    
+                    <p>Now it's your turn! Use the framework above to solve these problems. Remember: Plan first, code second.</p>
+                    
+                    <!-- Problem 1 -->
+                    <div class="problem-section">
+                        <div class="problem-title">⭐ Problem 1: Your Superhero Profile</div>
+                        
+                        <p><strong>Problem Description:</strong> Create a program that asks for superhero information and displays a formatted profile.</p>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">🔍</span> Stage 1: Research, Define & Refine</h5>
+                            <p><strong>What does the problem ask?</strong> Get information from user, store it, display it nicely.</p>
+                            <p><strong>Break it down:</strong></p>
+                            <ul>
+                                <li>Input: Ask for superhero name, power, and strength level (1-10)</li>
+                                <li>Storage: Keep this info in variables (or a dictionary)</li>
+                                <li>Output: Display a nicely formatted profile</li>
+                            </ul>
+                            <p><strong>What tools do I need?</strong> input(), print(), variables, strings</p>
+                        </div>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">📋</span> Stage 2: Write the Algorithm (Pseudo Code)</h5>
+                            <pre><code>ALGORITHM SuperheroProfile
+    Display "Welcome to SuperheroMaker!"
+    Ask user for "What's your superhero name?"
+    Store in variable: name
+    Ask user for "What's your superpower?"
+    Store in variable: power
+    Ask user for "Strength level (1-10)?"
+    Store in variable: strength
+    
+    Create a nicely formatted display:
+    Print "=== SUPERHERO PROFILE ==="
+    Print "Name: [name]"
+    Print "Power: [power]"
+    Print "Strength: [strength]/10"
+    Print "Status: HERO ACTIVATED! 🦸"
+END</code></pre>
+                        </div>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">💻</span> Stage 3: Python Code</h5>
+                            <div class="code-example">
+                                <div class="code-header">
+                                    <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                                <div class="code-content">
+                                    <pre><code class="language-python">print("Welcome to SuperheroMaker!")
+name = input("What's your superhero name? ")
+power = input("What's your superpower? ")
+strength = int(input("Strength level (1-10)? "))
+
+print("\n=== SUPERHERO PROFILE ===")
+print(f"Name: {name}")
+print(f"Power: {power}")
+print(f"Strength: {strength}/10")
+print("Status: HERO ACTIVATED! 🦸")</code></pre>
+                                </div>
+                            </div>
+                            <p><strong>Expected Output:</strong></p>
+                            <div class="output-example">Welcome to SuperheroMaker!
+What's your superhero name? Spider-Kid
+What's your superpower? Web-Slinging
+Strength level (1-10)? 8
+
+=== SUPERHERO PROFILE ===
+Name: Spider-Kid
+Power: Web-Slinging
+Strength: 8/10
+Status: HERO ACTIVATED! 🦸</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Problem 2 -->
+                    <div class="problem-section">
+                        <div class="problem-title">⭐⭐ Problem 2: Magic Score Checker (If-Else)</div>
+                        
+                        <p><strong>Problem Description:</strong> Create a program that evaluates test scores and gives feedback.</p>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">🔍</span> Stage 1: Research, Define & Refine</h5>
+                            <p><strong>What does the problem ask?</strong> Get a score, determine a grade, show feedback.</p>
+                            <ul>
+                                <li>Input: Ask for test score (number)</li>
+                                <li>Decision: Check score against thresholds</li>
+                                <li>Output: Show grade and encouraging message</li>
+                            </ul>
+                            <p><strong>Scoring rules:</strong> A: 90+, B: 80-89, C: 70-79, D: 60-69, F: Below 60</p>
+                        </div>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">📋</span> Stage 2: Algorithm</h5>
+                            <pre><code>ALGORITHM ScoreChecker
+    Ask user for test score
+    IF score >= 90 THEN
+        Print "A - Excellent! You're a coding star!"
+    ELSE IF score >= 80 THEN
+        Print "B - Great job! Very good work!"
+    ELSE IF score >= 70 THEN
+        Print "C - Good effort! Keep practicing!"
+    ELSE IF score >= 60 THEN
+        Print "D - You're getting there! Don't give up!"
+    ELSE
+        Print "F - Keep trying! You'll improve!"
+    END IF
+END</code></pre>
+                        </div>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">💻</span> Stage 3: Python Code</h5>
+                            <div class="code-example">
+                                <div class="code-header">
+                                    <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                                <div class="code-content">
+                                    <pre><code class="language-python">score = int(input("Enter your test score: "))
+
+if score >= 90:
+    print("A - Excellent! You're a coding star! ⭐")
+elif score >= 80:
+    print("B - Great job! Very good work! 👏")
+elif score >= 70:
+    print("C - Good effort! Keep practicing! 💪")
+elif score >= 60:
+    print("D - You're getting there! Don't give up! 🚀")
+else:
+    print("F - Keep trying! You'll improve! 📚")</code></pre>
+                                </div>
+                            </div>
+                            <p><strong>Test it with scores: 95, 85, 75, 65, 55</strong></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Problem 3 -->
+                    <div class="problem-section">
+                        <div class="problem-title">⭐⭐⭐ Problem 3: Favorite Things Counter (Lists + For Loop)</div>
+                        
+                        <p><strong>Problem Description:</strong> Create a list of favorite items and display them numbered with a total count.</p>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">🔍</span> Stage 1: Research, Define & Refine</h5>
+                            <ul>
+                                <li>Create a list of favorite foods/games/movies</li>
+                                <li>Loop through the list to display each item numbered</li>
+                                <li>Show the total count at the end</li>
+                            </ul>
+                            <p><strong>Tools needed:</strong> Lists, for loops, len(), print()</p>
+                        </div>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">📋</span> Stage 2: Algorithm</h5>
+                            <pre><code>ALGORITHM FavoriteThingsList
+    CREATE a list with favorite foods:
+        ["Pizza", "Ice Cream", "Burgers", "Tacos", "Sushi"]
+    
+    Print "My Favorite Foods:"
+    FOR each food in the list:
+        Print the position number and the food name
+    END FOR
+    
+    Calculate total = length of the list
+    Print "Total favorites: [total]"
+END</code></pre>
+                        </div>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">💻</span> Stage 3: Python Code</h5>
+                            <div class="code-example">
+                                <div class="code-header">
+                                    <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                                <div class="code-content">
+                                    <pre><code class="language-python">foods = ["Pizza", "Ice Cream", "Burgers", "Tacos", "Sushi"]
+
+print("My Favorite Foods:")
+for i, food in enumerate(foods):
+    print(f"{i + 1}. {food}")
+
+total = len(foods)
+print(f"Total favorites: {total}")</code></pre>
+                                </div>
+                            </div>
+                            <p><strong>Expected Output:</strong></p>
+                            <div class="output-example">My Favorite Foods:
+1. Pizza
+2. Ice Cream
+3. Burgers
+4. Tacos
+5. Sushi
+Total favorites: 5</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Problem 4 -->
+                    <div class="problem-section">
+                        <div class="problem-title">⭐⭐⭐⭐ Problem 4: Grade Book Builder (Dictionaries)</div>
+                        
+                        <p><strong>Problem Description:</strong> Build a simple grade management system using dictionaries.</p>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">🔍</span> Stage 1: Research, Define & Refine</h5>
+                            <ul>
+                                <li>Create a dictionary with student names and grades</li>
+                                <li>Check if each student passed (grade >= 70)</li>
+                                <li>Display all students with pass/fail status</li>
+                            </ul>
+                            <p><strong>Tools needed:</strong> Dictionaries, for loops, if-else, .items()</p>
+                        </div>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">📋</span> Stage 2: Algorithm</h5>
+                            <pre><code>ALGORITHM GradeBook
+    CREATE dictionary with students and grades:
+        {"Asim": 92, "Sarah": 88, "Marcus": 75, "Emma": 65}
+    
+    Print "=== GRADE BOOK ==="
+    FOR each student and grade in the dictionary:
+        IF grade >= 70 THEN
+            Print student name, grade, "PASSED ✓"
+        ELSE
+            Print student name, grade, "NEEDS IMPROVEMENT"
+        END IF
+    END FOR
+END</code></pre>
+                        </div>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">💻</span> Stage 3: Python Code</h5>
+                            <div class="code-example">
+                                <div class="code-header">
+                                    <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                                <div class="code-content">
+                                    <pre><code class="language-python">grades = {
+    "Asim": 92,
+    "Sarah": 88,
+    "Marcus": 75,
+    "Emma": 65
+}
+
+print("=== GRADE BOOK ===")
+for student, grade in grades.items():
+    if grade >= 70:
+        print(f"{student}: {grade} - PASSED ✓")
+    else:
+        print(f"{student}: {grade} - NEEDS IMPROVEMENT")
+
+# Bonus: Find the highest grade
+highest_grade = max(grades.values())
+highest_student = [name for name, grade in grades.items() if grade == highest_grade][0]
+print(f"\nTop student: {highest_student} ({highest_grade})")</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Problem 5 -->
+                    <div class="problem-section">
+                        <div class="problem-title">⭐⭐⭐⭐⭐ Problem 5: "The Challenge" - Student Management System</div>
+                        
+                        <p><strong>Problem Description:</strong> Combine EVERYTHING you've learned to build a complete student management system.</p>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">🔍</span> Stage 1: Research, Define & Refine</h5>
+                            <p><strong>Requirements:</strong></p>
+                            <ul>
+                                <li>Create a student profile (name, age, list of test scores stored as a list)</li>
+                                <li>Calculate the average score from the list</li>
+                                <li>Determine pass/fail (average >= 75 = pass)</li>
+                                <li>Display a complete report</li>
+                            </ul>
+                            <p><strong>Use: variables, lists, loops, if-else, dictionaries, input(), print()</strong></p>
+                        </div>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">📋</span> Stage 2: Algorithm</h5>
+                            <pre><code>ALGORITHM StudentManagement
+    Ask user for student name
+    Ask user for age
+    Ask user for test scores (comma-separated)
+    
+    CREATE dictionary with:
+        "name": student name
+        "age": age
+        "scores": list of scores converted to numbers
+    
+    CALCULATE:
+        average = sum of all scores / number of scores
+        status = "PASSED" if average >= 75 else "NEEDS IMPROVEMENT"
+    
+    DISPLAY:
+        Print student name, age, list of scores, average, status
+END</code></pre>
+                        </div>
+                        
+                        <div class="problem-stage">
+                            <h5><span class="icon">💻</span> Stage 3: Python Code</h5>
+                            <div class="code-example">
+                                <div class="code-header">
+                                    <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                                <div class="code-content">
+                                    <pre><code class="language-python">name = input("Student name: ")
+age = input("Age: ")
+scores_str = input("Enter test scores (comma-separated): ")
+
+# Convert scores from string to list of numbers
+scores = [int(score.strip()) for score in scores_str.split(",")]
+
+# Create student dictionary
+student = {
+    "name": name,
+    "age": age,
+    "scores": scores
+}
+
+# Calculate average
+average = sum(scores) / len(scores)
+
+# Determine status
+status = "PASSED ✓" if average >= 75 else "NEEDS IMPROVEMENT"
+
+# Display report
+print("\n=== STUDENT REPORT ===")
+print(f"Name: {student['name']}")
+print(f"Age: {student['age']}")
+print(f"Scores: {student['scores']}")
+print(f"Average: {average:.1f}")
+print(f"Status: {status}")</code></pre>
+                                </div>
+                            </div>
+                            <div class="output-example">Student name: Asim
+Age: 12
+Enter test scores (comma-separated): 92, 88, 85, 95
+
+=== STUDENT REPORT ===
+Name: Asim
+Age: 12
+Scores: [92, 88, 85, 95]
+Average: 90.0
+Status: PASSED ✓</div>
+                        </div>
+                    </div>
+                    
+                    <div class="success-box">
+                        <h4>🎉 You Did It!</h4>
+                        <p>Completing these problems means you've mastered Python fundamentals! You can:</p>
+                        <ul>
+                            <li>✓ Work with all major data types</li>
+                            <li>✓ Take input from users and display output</li>
+                            <li>✓ Make smart decisions with if-else</li>
+                            <li>✓ Repeat actions with loops</li>
+                            <li>✓ Organize data with lists and dictionaries</li>
+                            <li>✓ Use a professional problem-solving framework</li>
+                        </ul>
+                        <p>You're officially a Python Superhero! 🦸‍♀️🦸‍♂️</p>
+                    </div>
+                </section>
+                
+                <!-- Final CTA -->
+                <section>
+                    <div class="cta-card">
+                        <h3>🚀 Ready for Session 6?</h3>
+                        <p>You've mastered the fundamentals! Next session, we'll build more complex programs and explore file handling, functions, and advanced AI concepts.</p>
+                    </div>
+                    
+                    <h2>📚 Key Takeaways</h2>
+                    <ul>
+                        <li><strong>Variables:</strong> Labeled boxes that store information</li>
+                        <li><strong>Data Types:</strong> int, float, str, bool, list, dict</li>
+                        <li><strong>Input/Output:</strong> input() to ask questions, print() to show results</li>
+                        <li><strong>If-Else:</strong> Make decisions based on conditions</li>
+                        <li><strong>Loops:</strong> Repeat code multiple times efficiently</li>
+                        <li><strong>Lists:</strong> Ordered collections accessed by position</li>
+                        <li><strong>Dictionaries:</strong> Key-value pairs for labeled data</li>
+                        <li><strong>Problem-Solving:</strong> Research → Algorithm → Code</li>
+                    </ul>
+                </section>
+            </main>
+            
+            <!-- Back Link -->
+            <a href="../../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Blog
+            </a>
+        </div>
+    </div>
+    
+    <!-- Footer-->
+    <footer class="modern-footer">
+        <div class="container px-4 px-lg-5">
+            <div class="footer-top">
+                <div class="row align-items-center mb-5">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="footer-brand">
+                            <h3 class="brand-name">
+                                <i class="fas fa-graduation-cap me-2"></i>
+                                Khalida Educational Foundation
+                            </h3>
+                            <p class="brand-tagline">
+                                Empowering futures through education. Building a legacy of learning, one child at a time.
+                            </p>
+                            <div class="brand-mission">
+                                <i class="fas fa-heart text-danger me-2"></i>
+                                <em>"In loving memory of Khalida - A tribute to a life dedicated to education"</em>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="newsletter-box">
+                            <h4 class="newsletter-title">
+                                <i class="fas fa-bell me-2"></i>
+                                Stay Updated
+                            </h4>
+                            <p class="newsletter-subtitle">Get the latest news and updates about our programs</p>
+                            <form class="newsletter-form-modern">
+                                <div class="newsletter-input-wrapper">
+                                    <i class="fas fa-envelope newsletter-icon"></i>
+                                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                                    <button class="newsletter-btn" type="submit">
+                                        <span>Subscribe</span>
+                                        <i class="fas fa-arrow-right ms-2"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-main">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading">
+                            <i class="fas fa-link me-2"></i>
+                            Quick Links
+                        </h5>
+                        <ul class="footer-menu">
+                            <li><a href="../../../index.html#about"><i class="fas fa-chevron-right me-2"></i>About Us</a></li>
+                            <li><a href="../../../course-pages/courses.html"><i class="fas fa-chevron-right me-2"></i>Our Courses</a></li>
+                            <li><a href="../../../index.html#programs"><i class="fas fa-chevron-right me-2"></i>Our Programs</a></li>
+                            <li><a href="../../../course-pages/courses.html#ai-initiative"><i class="fas fa-chevron-right me-2"></i>AI Initiative</a></li>
+                            <li><a href="../../../index.html#impact"><i class="fas fa-chevron-right me-2"></i>Our Impact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading">
+                            <i class="fas fa-hands-helping me-2"></i>
+                            Get Involved
+                        </h5>
+                        <ul class="footer-menu">
+                            <li><a href="../../../index.html#get-involved"><i class="fas fa-chevron-right me-2"></i>Volunteer</a></li>
+                            <li><a href="../../../index.html#get-involved"><i class="fas fa-chevron-right me-2"></i>Partner With Us</a></li>
+                            <li><a href="../../../register.html"><i class="fas fa-chevron-right me-2"></i>Register for Course</a></li>
+                            <li><a href="../../../index.html#contact"><i class="fas fa-chevron-right me-2"></i>Contact Us</a></li>
+                            <li><a href="../../../index.html#testimonials"><i class="fas fa-chevron-right me-2"></i>Testimonials</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading">
+                            <i class="fas fa-folder-open me-2"></i>
+                            Resources
+                        </h5>
+                        <ul class="footer-menu">
+                            <li><a href="../../../index.html#gallery"><i class="fas fa-chevron-right me-2"></i>Photo Gallery</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Annual Reports</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Success Stories</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>FAQs</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading">
+                            <i class="fas fa-map-marked-alt me-2"></i>
+                            Contact Info
+                        </h5>
+                        <ul class="footer-contact">
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:info@khalidafoundation.com">info@khalidafoundation.com</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+16096086282">+1 (609) 608-6282</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Education Street<br>Foundation City, State 12345</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <p class="copyright-text">
+                            <i class="fas fa-copyright me-1"></i>
+                            2026 Khalida Educational Foundation. All rights reserved.
+                            <br class="d-md-none">
+                            <span class="tribute-text">A Tribute to a Legacy of Love and Learning</span>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="footer-social">
+                            <span class="social-text">Follow Us:</span>
+                            <a href="#" class="footer-social-icon" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="footer-social-icon" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="footer-social-icon" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="footer-social-icon" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-example').querySelector('code');
+            const code = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy code:', err);
+                button.innerHTML = '<i class="fas fa-times"></i> Error';
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                }, 2000);
+            });
+        }
+        
+        // Highlight code blocks
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+        
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

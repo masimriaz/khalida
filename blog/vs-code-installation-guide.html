@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VS Code & Python Installation Guide for Kids</title>
+    <meta name="description" content="Simple step-by-step guide to install VS Code and Python for beginner programmers." />
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <link href="../css/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        :root {
+            --slide-bg: #ffffff;
+            --slide-accent: #3498db;
+            --slide-accent-2: #e74c3c;
+        }
+        body {
+            background: radial-gradient(circle at 12% 12%, rgba(52,152,219,0.08), transparent 32%),
+                        radial-gradient(circle at 88% 10%, rgba(46,204,113,0.08), transparent 35%),
+                        linear-gradient(180deg, #f9f5ef 0%, #ffffff 55%, #f5efe3 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .guide-container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem 3rem;
+        }
+
+        .guide-header {
+            background: linear-gradient(135deg, rgba(52,152,219,0.95), rgba(46,204,113,0.95));
+            color: #fff;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        .guide-header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .guide-header p {
+            margin: 0;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+            background: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #3498db;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .section h2 .icon {
+            font-size: 1.8rem;
+            color: #3498db;
+        }
+
+        .step {
+            margin-bottom: 1.8rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #2ecc71;
+            position: relative;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            background: #2ecc71;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 45px;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .step h3 {
+            color: #2c3e50;
+            margin: 0.8rem 0 0.8rem 0;
+            font-size: 1.15rem;
+        }
+
+        .step p {
+            margin: 0.5rem 0;
+            color: #34495e;
+            line-height: 1.6;
+        }
+
+        .code-box {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        .tip-box p {
+            margin: 0.5rem 0;
+            color: #856404;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .success-box strong {
+            color: #155724;
+        }
+
+        .success-box p {
+            margin: 0.5rem 0;
+            color: #155724;
+        }
+
+        .download-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0.5rem 1rem 0.5rem 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(52,152,219,0.3);
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(52,152,219,0.4);
+        }
+
+        .troubleshoot-item {
+            margin-bottom: 1.5rem;
+            padding: 1.2rem;
+            background: #f0f7ff;
+            border-radius: 8px;
+        }
+
+        .troubleshoot-item strong {
+            color: #e74c3c;
+            font-size: 1.05rem;
+        }
+
+        .troubleshoot-item p {
+            margin: 0.5rem 0;
+            color: #34495e;
+        }
+
+        ul, ol {
+            color: #34495e;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 0.6rem;
+        }
+
+        .emoji {
+            font-size: 1.3rem;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .guide-header h1 {
+                font-size: 1.8rem;
+            }
+            .section {
+                padding: 1.5rem;
+            }
+            .guide-container {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="guide-container">
+        <!-- Header -->
+        <div class="guide-header">
+            <h1>💻 VS Code & Python Setup Guide</h1>
+            <p>Learn to code in Python with VS Code - Step by Step!</p>
+        </div>
+
+        <!-- Introduction Section -->
+        <div class="section">
+            <h2><span class="icon">🚀</span>What Are We Installing?</h2>
+            <p>We're setting up two important tools for Python coding:</p>
+            <ul>
+                <li><strong>Python:</strong> The programming language where you'll write your code</li>
+                <li><strong>VS Code:</strong> A super cool text editor where you'll write and run your code</li>
+            </ul>
+            <div class="success-box">
+                <p><strong>✨ Good News!</strong> This setup takes about 10-15 minutes and is completely free!</p>
+            </div>
+        </div>
+
+        <!-- Step 1: Download & Install Python -->
+        <div class="section">
+            <h2><span class="icon">🐍</span>Step 1: Install Python</h2>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Go to Python's Official Website</h3>
+                <p>Open your web browser and go to: <strong>python.org</strong></p>
+                <p>Or click here: <a href="https://www.python.org/downloads/" target="_blank">python.org/downloads</a></p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Click the Downloads Button</h3>
+                <p>You'll see a big yellow button that says "Download Python 3.x.x" (the version might be different)</p>
+                <p>Click it to download Python for your computer.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Run the Installer</h3>
+                <p>Find the downloaded file (usually in your Downloads folder) and double-click it to open it.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>⚠️ IMPORTANT: Check the "Add Python to PATH" Box</h3>
+                <p>When the installer opens, you'll see a checkbox that says <strong>"Add Python 3.x to PATH"</strong></p>
+                <p><strong class="emoji">✅</strong> Make sure to CHECK this box before clicking Install!</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">5</div>
+                <h3>Click "Install Now"</h3>
+                <p>Let the installer do its magic! Wait for it to finish (you might see a progress bar).</p>
+            </div>
+
+            <div class="success-box">
+                <p><strong>🎉 Great!</strong> Python is now installed on your computer!</p>
+            </div>
+        </div>
+
+        <!-- Step 2: Verify Python Installation -->
+        <div class="section">
+            <h2><span class="icon">✔️</span>Step 2: Verify Python is Installed</h2>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Open Command Prompt (Windows) or Terminal (Mac/Linux)</h3>
+                <p>On Windows: Press the <strong>Windows key</strong>, type "Command Prompt" and press Enter</p>
+                <p>On Mac: Press <strong>Cmd + Space</strong>, type "Terminal" and press Enter</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Type This Command</h3>
+                <div class="code-box">python --version</div>
+                <p>Then press Enter</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Check the Result</h3>
+                <p>You should see something like: <code>Python 3.11.5</code> (the exact version might be different)</p>
+                <p>If you see a version number, Python is installed correctly! ✨</p>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Tip:</strong> If you get an error, try typing <code>python3 --version</code> instead
+            </div>
+        </div>
+
+        <!-- Step 3: Download VS Code -->
+        <div class="section">
+            <h2><span class="icon">📥</span>Step 3: Download VS Code</h2>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Visit the VS Code Website</h3>
+                <p>Go to: <strong>code.visualstudio.com</strong></p>
+                <p>Or click here: <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Click the Download Button</h3>
+                <p>The big blue "Download" button will automatically suggest the right version for your computer.</p>
+                <p>Click it to download VS Code.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Run the Installer</h3>
+                <p>Find the downloaded file in your Downloads folder and double-click it.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Follow the Installation Steps</h3>
+                <p>The installer will ask you questions. Just click "Next" and "Install" for all the default options.</p>
+            </div>
+
+            <div class="success-box">
+                <p><strong>🎊 Awesome!</strong> VS Code is now installed!</p>
+            </div>
+        </div>
+
+        <!-- Step 4: Install Python Extension -->
+        <div class="section">
+            <h2><span class="icon">🧩</span>Step 4: Install the Python Extension</h2>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Open VS Code</h3>
+                <p>Double-click the VS Code icon or find it in your Start menu (Windows) or Applications (Mac).</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Go to Extensions</h3>
+                <p>On the left side, you'll see a square icon that looks like this: <strong>■ ■</strong></p>
+                <p>Click it to open Extensions (or press <code>Ctrl+Shift+X</code>)</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Search for Python</h3>
+                <p>Type "Python" in the search box at the top.</p>
+                <p>The first result should be "Python" by Microsoft (with the blue icon)</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Click Install</h3>
+                <p>Click the blue "Install" button and wait for it to finish.</p>
+            </div>
+
+            <div class="success-box">
+                <p><strong>✅ Perfect!</strong> You now have the Python extension installed in VS Code!</p>
+            </div>
+        </div>
+
+        <!-- Step 5: Create Your First Python File -->
+        <div class="section">
+            <h2><span class="icon">📝</span>Step 5: Write Your First Python Program</h2>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Create a New Folder</h3>
+                <p>On your computer, create a new folder called "PythonProjects" or "MyCode"</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Open the Folder in VS Code</h3>
+                <p>Open VS Code and click <strong>File</strong> → <strong>Open Folder</strong></p>
+                <p>Select the folder you just created and click "Select Folder"</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Create a New Python File</h3>
+                <p>Right-click in the empty folder area on the left and choose "New File"</p>
+                <p>Name it: <strong>hello.py</strong></p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Write Your First Program</h3>
+                <p>Type this code:</p>
+                <div class="code-box">print("Hello, Python World! 🎉")</div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">5</div>
+                <h3>Save Your File</h3>
+                <p>Press <code>Ctrl+S</code> (Windows) or <code>Cmd+S</code> (Mac) to save</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">6</div>
+                <h3>Run Your Program</h3>
+                <p>Right-click in the code editor and click <strong>"Run Python File in Terminal"</strong></p>
+                <p>Or press the ▶️ button in the top-right corner</p>
+            </div>
+
+            <div class="success-box">
+                <p><strong>🌟 Congratulations!</strong> You've just written and run your first Python program! You should see:</p>
+                <div class="code-box" style="background: #2c3e50; margin-top: 0.8rem;">Hello, Python World! 🎉</div>
+            </div>
+        </div>
+
+        <!-- Troubleshooting Section -->
+        <div class="section">
+            <h2><span class="icon">🆘</span>Troubleshooting Help</h2>
+
+            <div class="troubleshoot-item">
+                <strong>Problem: "Python is not recognized" error</strong>
+                <p><i>Solution:</i> You might need to add Python to PATH manually. Restart your computer first. If that doesn't work, ask an adult for help reinstalling Python and make sure to check "Add Python to PATH".</p>
+            </div>
+
+            <div class="troubleshoot-item">
+                <strong>Problem: VS Code doesn't recognize Python files</strong>
+                <p><i>Solution:</i> Make sure you installed the Python extension in Step 4. Also try restarting VS Code.</p>
+            </div>
+
+            <div class="troubleshoot-item">
+                <strong>Problem: "No module named..." error</strong>
+                <p><i>Solution:</i> This means you're trying to use a library that isn't installed. We'll show you how to install libraries in later lessons!</p>
+            </div>
+
+            <div class="troubleshoot-item">
+                <strong>Problem: The run button doesn't work</strong>
+                <p><i>Solution:</i> Try opening the terminal at the bottom of VS Code and typing: <code>python hello.py</code> (replace with your filename)</p>
+            </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="section">
+            <h2><span class="icon">💡</span>Pro Tips for Success</h2>
+            <ul>
+                <li><strong>File Names Matter:</strong> Always use lowercase letters and no spaces in your Python filenames (use underscore instead: my_code.py)</li>
+                <li><strong>Keep Organized:</strong> Create a folder for each project to keep your code neat</li>
+                <li><strong>Read Error Messages:</strong> When something goes wrong, read the error message carefully - it usually tells you what's wrong!</li>
+                <li><strong>Use Comments:</strong> Write comments in your code using # to explain what your code does</li>
+                <li><strong>Practice Regularly:</strong> Code a little every day to improve faster!</li>
+            </ul>
+        </div>
+
+        <!-- Next Steps -->
+        <div class="section" style="border-left-color: #9b59b6; background: linear-gradient(135deg, rgba(155,89,182,0.05), rgba(231,76,60,0.05));">
+            <h2><span class="icon">🎯</span>What's Next?</h2>
+            <p>Now that you have VS Code and Python set up, you're ready to:</p>
+            <ul>
+                <li>Learn Python basics (variables, loops, functions)</li>
+                <li>Build fun projects and games</li>
+                <li>Create AI programs with libraries like TensorFlow or Pygame</li>
+                <li>Join our AI Superheroes coding courses!</li>
+            </ul>
+            <p style="margin-top: 1.5rem;"><strong>Have fun coding! 🚀</strong></p>
+        </div>
+    </div>
+</body>
+</html>
