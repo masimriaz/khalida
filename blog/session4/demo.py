@@ -1,3 +1,10 @@
+number = 999999999
+
+print(f"The {number} Times Table:")
+for i in range(1, 11):
+    result = number * i
+    print(f"{number} × {i} = {result}")
+
 
 # name = "Ayesha";
 # age= 10;
@@ -6,11 +13,8 @@
 # if age > 10:
 #     print("Your age is greater than 10");
 
-# fruits = ["apple", "banana", "cherry"]; 
-# duas = ["Bismillah", "Alhamdulillah", "Subhanallah", "Istaghfirullah"];
-# print(fruits[0]); # Output: apple
-# for dua in duas: 
-#     print(dua);
+fruits = ["apple", "banana", "cherry"]; 
+
 
 ######################################################################################3
 
@@ -19,33 +23,34 @@
 #Contact card example: "Like a contact card: 'Name' → 'Alice', 'Age' → '11'."
 
 # Noor learns to remember!
-# questions = ["who created us?", #Question 0
-#              "how many times do we pray?", 
-#              "what is the quran?", 
-#              "what is ramadan?", 
-#              "what do we say before eating?", 
-#              "who is prophet Muhammad?",
-#              "Who is the last Prophet?",
-#              "How many pillars are in Islam?" ] 
-# answers = ["Allah (SWT) created us!", #Answer 0
-#            "We pray 5 times a day.", 
-#            "The Quran is Allah's message.", 
-#            "Ramadan is the blessed month of fasting.", 
-#            "We say Bismillah before eating.", 
-#            "Prophet Muhammad ﷺ is our final messenger.",
-#             "Prophet Muhammad ﷺ is the last Prophet.",
-#             "There are 5 pillars in Islam." ]
+questions = ["who created us?", #Question 0
+             "how many times do we pray?", 
+             "what is the quran?", 
+             "what is ramadan?", 
+             "what do we say before eating?", 
+             "who is prophet Muhammad?",
+             "Who is the last Prophet?",
+             "How many pillars are in Islam?" ] 
+answers = ["Allah (SWT) created us!", #Answer 0
+           "We pray 5 times a day.", 
+           "The Quran is Allah's message.", 
+           "Ramadan is the blessed month of fasting.", 
+           "We say Bismillah before eating.", 
+           "Prophet Muhammad ﷺ is our final messenger.",
+            "Prophet Muhammad ﷺ is the last Prophet.",
+            "There are 5 pillars in Islam." ]
 
-# question_answer_dict = {
-#     "who created us?": "Allah (SWT) created us!",
-#     "how many times do we pray?": "We pray 5 times a day.",
-#     "what is the quran?": "The Quran is Allah's message.",
-#     "what is ramadan?": "Ramadan is the blessed month of fasting.",
-#     "what do we say before eating?": "We say Bismillah before eating.",
-#     "who is prophet Muhammad?": "Prophet Muhammad ﷺ is our final messenger.",
-#     "Who is the last Prophet?": "Prophet Muhammad ﷺ is the last Prophet.",
-#     "How many pillars are in Islam?": "There are 5 pillars in Islam."
-# }
+#dictionary = {key: value for key, value in zip(questions, answers)}
+question_answer_dict = {
+    "who created us?": "Allah (SWT) created us!", #key value pair
+    "how many times do we pray?": "We pray 5 times a day.",
+    "what is the quran?": "The Quran is Allah's message.",
+    "what is ramadan?": "Ramadan is the blessed month of fasting.",
+    "what do we say before eating?": "We say Bismillah before eating.",
+    "who is prophet Muhammad?": "Prophet Muhammad ﷺ is our final messenger.",
+    "Who is the last Prophet?": "Prophet Muhammad ﷺ is the last Prophet.",
+    "How many pillars are in Islam?": "There are 5 pillars in Islam."
+}
 
 # fruits = ["apple", "banana", "cherry",2]; 
 # print(fruits[3]); # Output: apple
@@ -79,12 +84,12 @@
 #     print("Noor: That's a beautiful dua! I'll remember that.")
 
 # Test Case 1: Prayer question
-test_input = "How many times do we pray?"
-expected = "5 times a day"
-actual = input("How many times do we pray?")
-if expected in actual:
-    print("✅ Test 1 PASSED!")
-else:
-    print("❌ Test 1 FAILED")
-    print("Expected:", expected)
-    print("Got:", actual)
+# test_input = "How many times do we pray?"
+# expected = "5 times a day"
+# actual = input("How many times do we pray?")
+# if expected in actual:
+#     print("✅ Test 1 PASSED!")
+# else:
+#     print("❌ Test 1 FAILED")
+#     print("Expected:", expected)
+#     print("Got:", actual)
