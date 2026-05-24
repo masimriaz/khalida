@@ -1,0 +1,2814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Session 6: After a 2-month break, kids revisit all sessions and build a complete Islamic chatbot in Python from scratch. Fun, story-based, hands-on coding for ages 9-14.">
+    <title>AI Superheroes – Session 6: Design Your Chatbot & Code It! | Khalida Foundation</title>
+    <link rel="icon" type="image/x-icon" href="../../../assets/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="../../../css/styles.css" rel="stylesheet" />
+    <link href="../../../css/custom.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    <style>
+        /* ============================================================
+           KHALIDA FOUNDATION — WORLD-CLASS NAVBAR  (Session 6)
+           Patterns: scroll-shrink · glassmorphism · mega-dropdown
+                     animated hamburger · progress bar · ARIA-ready
+        ============================================================ */
+
+        /* ---------- CSS custom properties ---------- */
+        :root {
+            --kf-teal:        #1F3A46;
+            --kf-teal-deep:   #142830;
+            --kf-amber:       #D46A3A;
+            --kf-gold:        #F0D8C2;
+            --kf-gold-soft:   rgba(240,216,194,0.18);
+            --kf-white:       #ffffff;
+            --nav-h:          68px;       /* desktop height */
+            --nav-h-sm:       56px;       /* scrolled height */
+            --nav-ease:       cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ---------- Reading-progress bar ---------- */
+        #kf-progress {
+            position: fixed;
+            top: 0; left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--kf-amber), var(--kf-gold));
+            z-index: 9999;
+            transition: width 0.1s linear;
+            border-radius: 0 2px 2px 0;
+            box-shadow: 0 0 8px rgba(212,106,58,0.6);
+        }
+
+        /* ---------- Utility strip ---------- */
+        #kf-topbar {
+            background: var(--kf-teal-deep);
+            border-bottom: 1px solid rgba(212,106,58,0.2);
+            height: 34px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            transition: height 0.35s var(--nav-ease), opacity 0.35s var(--nav-ease);
+        }
+        #kf-topbar.hidden { height: 0; opacity: 0; pointer-events: none; }
+        .kf-topbar-inner {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .kf-topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .kf-topbar-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: rgba(240,216,194,0.75);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+        .kf-topbar-item i { color: var(--kf-amber); font-size: 0.68rem; }
+        .kf-topbar-item:hover { color: var(--kf-gold); }
+        .kf-topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .kf-session-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(212,106,58,0.18);
+            border: 1px solid rgba(212,106,58,0.35);
+            color: var(--kf-gold);
+            padding: 0.18rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+        .kf-session-pill i { color: var(--kf-amber); font-size: 0.65rem; }
+        .kf-social {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px; height: 24px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(240,216,194,0.7);
+            font-size: 0.7rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .kf-social:hover {
+            background: rgba(212,106,58,0.25);
+            border-color: rgba(212,106,58,0.5);
+            color: var(--kf-gold);
+            transform: translateY(-1px);
+        }
+
+        /* ---------- Main navbar shell ---------- */
+        #kf-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            width: 100%;
+            height: var(--nav-h);
+            background: rgba(20, 40, 50, 0.92);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom: 1px solid rgba(212,106,58,0.18);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.18);
+            transition: height 0.35s var(--nav-ease),
+                        background 0.35s var(--nav-ease),
+                        box-shadow 0.35s var(--nav-ease);
+            display: flex;
+            align-items: center;
+        }
+        #kf-nav.scrolled {
+            height: var(--nav-h-sm);
+            background: rgba(15, 30, 38, 0.97);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.28), 0 1px 0 rgba(212,106,58,0.12);
+        }
+        /* Subtle amber glow line at bottom on scroll */
+        #kf-nav::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(212,106,58,0.5) 30%, rgba(240,216,194,0.4) 50%, rgba(212,106,58,0.5) 70%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        #kf-nav.scrolled::after { opacity: 1; }
+
+        .kf-nav-inner {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ---------- Brand ---------- */
+        .kf-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            flex-shrink: 0;
+            margin-right: 1rem;
+        }
+        .kf-brand-icon {
+            position: relative;
+            width: 40px; height: 40px;
+            border-radius: 11px;
+            background: linear-gradient(135deg, var(--kf-amber) 0%, #e8845a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 14px rgba(212,106,58,0.4);
+            transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+            flex-shrink: 0;
+        }
+        .kf-brand:hover .kf-brand-icon {
+            transform: rotate(12deg) scale(1.08);
+            box-shadow: 0 6px 20px rgba(212,106,58,0.55);
+        }
+        .kf-brand-icon i { color: white; font-size: 1.05rem; }
+        /* Animated ring on hover */
+        .kf-brand-icon::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 14px;
+            border: 2px solid rgba(212,106,58,0.4);
+            opacity: 0;
+            transform: scale(0.85);
+            transition: all 0.3s ease;
+        }
+        .kf-brand:hover .kf-brand-icon::before { opacity: 1; transform: scale(1); }
+
+        .kf-brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+        .kf-brand-name {
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: var(--kf-white);
+            letter-spacing: 0.1px;
+            transition: color 0.2s ease;
+        }
+        .kf-brand:hover .kf-brand-name { color: var(--kf-gold); }
+        .kf-brand-sub {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: rgba(240,216,194,0.55);
+            letter-spacing: 0.9px;
+            text-transform: uppercase;
+        }
+
+        /* ---------- Desktop nav links ---------- */
+        .kf-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.1rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex: 1;
+        }
+        .kf-nav-links > li { position: relative; }
+
+        .kf-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.5rem 0.85rem;
+            border-radius: 8px;
+            color: rgba(255,255,255,0.82);
+            font-size: 0.855rem;
+            font-weight: 600;
+            letter-spacing: 0.15px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color 0.2s ease, background 0.2s ease;
+            position: relative;
+        }
+        .kf-link:hover, .kf-link[aria-expanded="true"] {
+            color: var(--kf-white);
+            background: rgba(255,255,255,0.09);
+        }
+        /* Animated underline */
+        .kf-link::after {
+            content: '';
+            position: absolute;
+            bottom: 3px; left: 50%;
+            transform: translateX(-50%);
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--kf-amber), var(--kf-gold));
+            border-radius: 2px;
+            transition: width 0.28s var(--nav-ease);
+        }
+        .kf-link:hover::after,
+        .kf-link.kf-active::after { width: 55%; }
+        .kf-link.kf-active {
+            color: var(--kf-gold) !important;
+            background: rgba(212,106,58,0.12);
+        }
+        /* Chevron for dropdowns */
+        .kf-link .kf-chevron {
+            font-size: 0.65rem;
+            transition: transform 0.25s ease;
+            opacity: 0.7;
+        }
+        .kf-link[aria-expanded="true"] .kf-chevron { transform: rotate(180deg); opacity: 1; }
+
+        /* ---------- Dropdown panel ---------- */
+        .kf-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-6px);
+            min-width: 240px;
+            background: rgba(255,255,255,0.99);
+            border: 1px solid rgba(31,58,70,0.1);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.14), 0 4px 16px rgba(0,0,0,0.08);
+            padding: 0.6rem;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.22s var(--nav-ease),
+                        transform 0.22s var(--nav-ease),
+                        visibility 0.22s;
+            z-index: 200;
+        }
+        /* Arrow tip */
+        .kf-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -6px; left: 50%;
+            transform: translateX(-50%);
+            width: 12px; height: 6px;
+            background: rgba(255,255,255,0.99);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        /* Open state */
+        .kf-nav-links > li:hover > .kf-dropdown,
+        .kf-nav-links > li:focus-within > .kf-dropdown,
+        .kf-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+        /* Align right for last items */
+        .kf-nav-links > li:last-of-type .kf-dropdown,
+        .kf-nav-links > li:nth-last-of-type(2) .kf-dropdown {
+            left: auto; right: 0;
+            transform: translateY(-6px);
+        }
+        .kf-nav-links > li:last-of-type .kf-dropdown::before,
+        .kf-nav-links > li:nth-last-of-type(2) .kf-dropdown::before {
+            left: auto; right: 20px;
+            transform: none;
+        }
+        .kf-nav-links > li:last-of-type:hover > .kf-dropdown,
+        .kf-nav-links > li:nth-last-of-type(2):hover > .kf-dropdown {
+            transform: translateY(0);
+        }
+
+        /* Dropdown section header */
+        .kf-dd-header {
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--kf-teal);
+            opacity: 0.5;
+            padding: 0.65rem 0.9rem 0.3rem;
+        }
+        .kf-dd-divider {
+            height: 1px;
+            background: rgba(31,58,70,0.08);
+            margin: 0.4rem 0.5rem;
+        }
+        /* Dropdown item */
+        .kf-dd-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.6rem 0.9rem;
+            border-radius: 10px;
+            color: var(--kf-teal);
+            font-size: 0.855rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.18s ease, transform 0.18s ease, padding-left 0.18s ease;
+            position: relative;
+        }
+        .kf-dd-item:hover {
+            background: linear-gradient(135deg, rgba(212,106,58,0.09), rgba(240,216,194,0.12));
+            color: var(--kf-teal);
+            padding-left: 1.1rem;
+        }
+        .kf-dd-item.kf-dd-active {
+            background: linear-gradient(135deg, var(--kf-amber), #e8845a);
+            color: white;
+        }
+        .kf-dd-item.kf-dd-active:hover { padding-left: 0.9rem; }
+        .kf-dd-icon {
+            width: 28px; height: 28px;
+            border-radius: 7px;
+            background: rgba(31,58,70,0.07);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--kf-amber);
+            flex-shrink: 0;
+            transition: background 0.18s ease;
+        }
+        .kf-dd-item:hover .kf-dd-icon { background: rgba(212,106,58,0.15); }
+        .kf-dd-item.kf-dd-active .kf-dd-icon { background: rgba(255,255,255,0.2); color: white; }
+
+        /* ---------- Blog mega-dropdown ---------- */
+        .kf-mega {
+            min-width: 340px;
+        }
+        .kf-mega-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.25rem;
+        }
+        .kf-session-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 9px;
+            color: var(--kf-teal);
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.18s ease;
+        }
+        .kf-session-item:hover { background: rgba(31,58,70,0.06); color: var(--kf-teal); }
+        .kf-session-item.kf-current {
+            background: linear-gradient(135deg, rgba(212,106,58,0.12), rgba(240,216,194,0.15));
+            border: 1px solid rgba(212,106,58,0.2);
+        }
+        .kf-s-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 26px; height: 20px;
+            border-radius: 5px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+            letter-spacing: 0.3px;
+        }
+        .kf-s-badge.s1 { background: #3498db; }
+        .kf-s-badge.s2 { background: #27ae60; }
+        .kf-s-badge.s3 { background: #0dcaf0; color: #1a1a2e; }
+        .kf-s-badge.s4 { background: #e74c3c; }
+        .kf-s-badge.s5 { background: #f39c12; color: #1a1a2e; }
+        .kf-s-badge.s6 { background: linear-gradient(135deg, var(--kf-amber), #e8845a); }
+        .kf-mega-footer {
+            margin-top: 0.5rem;
+            padding: 0.6rem 0.75rem;
+            background: rgba(31,58,70,0.04);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .kf-mega-footer a {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--kf-amber);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: gap 0.2s ease;
+        }
+        .kf-mega-footer a:hover { gap: 0.5rem; }
+
+        /* ---------- Register CTA ---------- */
+        .kf-register {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, var(--kf-amber) 0%, #e8845a 100%);
+            color: white !important;
+            font-size: 0.84rem;
+            font-weight: 700;
+            border-radius: 24px;
+            text-decoration: none;
+            letter-spacing: 0.2px;
+            box-shadow: 0 4px 14px rgba(212,106,58,0.38);
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.25s var(--nav-ease);
+            white-space: nowrap;
+            margin-left: 0.5rem;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Shimmer sweep */
+        .kf-register::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transition: left 0.5s ease;
+        }
+        .kf-register:hover::before { left: 150%; }
+        .kf-register:hover {
+            background: linear-gradient(135deg, #c05a2a 0%, var(--kf-amber) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(212,106,58,0.48);
+            color: white !important;
+        }
+        .kf-register i { font-size: 0.8rem; }
+
+        /* ---------- Animated hamburger ---------- */
+        .kf-hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 40px; height: 40px;
+            border: 1.5px solid rgba(212,106,58,0.4);
+            border-radius: 9px;
+            background: rgba(212,106,58,0.08);
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            margin-left: auto;
+        }
+        .kf-hamburger:hover {
+            background: rgba(212,106,58,0.18);
+            border-color: rgba(212,106,58,0.7);
+        }
+        .kf-bar {
+            display: block;
+            width: 20px; height: 2px;
+            background: rgba(240,216,194,0.9);
+            border-radius: 2px;
+            transition: all 0.3s var(--nav-ease);
+            transform-origin: center;
+        }
+        /* X state */
+        .kf-hamburger.open .kf-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .kf-hamburger.open .kf-bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .kf-hamburger.open .kf-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* ---------- Mobile drawer ---------- */
+        .kf-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0; right: 0;
+            width: min(320px, 90vw);
+            height: 100vh;
+            background: linear-gradient(160deg, rgba(15,30,38,0.99) 0%, rgba(20,42,52,0.99) 100%);
+            backdrop-filter: blur(24px);
+            border-left: 1px solid rgba(212,106,58,0.15);
+            box-shadow: -20px 0 60px rgba(0,0,0,0.4);
+            z-index: 2000;
+            padding: 1.5rem;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.35s var(--nav-ease);
+        }
+        .kf-mobile-menu.open { transform: translateX(0); }
+        .kf-mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 1999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .kf-mobile-overlay.open { opacity: 1; }
+
+        .kf-mobile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(212,106,58,0.15);
+        }
+        .kf-mobile-close {
+            width: 34px; height: 34px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(240,216,194,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        .kf-mobile-close:hover { background: rgba(212,106,58,0.2); color: var(--kf-gold); }
+
+        .kf-mobile-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            color: rgba(255,255,255,0.85);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            margin-bottom: 0.25rem;
+        }
+        .kf-mobile-link:hover, .kf-mobile-link.kf-active {
+            background: rgba(212,106,58,0.12);
+            color: var(--kf-gold);
+        }
+        .kf-mobile-link i {
+            width: 20px;
+            text-align: center;
+            color: var(--kf-amber);
+            font-size: 0.85rem;
+        }
+        .kf-mobile-section {
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: rgba(240,216,194,0.35);
+            padding: 1rem 1rem 0.4rem;
+        }
+        .kf-mobile-sessions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem;
+            margin-bottom: 0.5rem;
+        }
+        .kf-mobile-session {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 0.65rem;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.75);
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .kf-mobile-session:hover { background: rgba(212,106,58,0.12); color: var(--kf-gold); }
+        .kf-mobile-session.kf-current {
+            background: rgba(212,106,58,0.15);
+            border-color: rgba(212,106,58,0.3);
+            color: var(--kf-gold);
+        }
+        .kf-mobile-register {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem;
+            background: linear-gradient(135deg, var(--kf-amber), #e8845a);
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 12px;
+            text-decoration: none;
+            margin-top: 1.25rem;
+            box-shadow: 0 4px 14px rgba(212,106,58,0.35);
+            transition: all 0.2s ease;
+        }
+        .kf-mobile-register:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,106,58,0.45); color: white; }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 991px) {
+            #kf-topbar { display: none; }
+            .kf-nav-links, .kf-register { display: none; }
+            .kf-hamburger { display: flex; }
+            .kf-mobile-menu, .kf-mobile-overlay { display: block; }
+        }
+        @media (max-width: 480px) {
+            .kf-nav-inner { padding: 0 1rem; }
+            .kf-brand-sub { display: none; }
+        }
+
+        /* ===== TOP UTILITY BAR ===== */
+        .nav-utility-bar {
+            background: linear-gradient(90deg, #0d2b35 0%, #1a3a46 50%, #0d2b35 100%);
+            border-bottom: 1px solid rgba(212, 106, 58, 0.25);
+            padding: 0.4rem 0;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .nav-utility-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .nav-utility-left {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+        .nav-utility-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: rgba(240, 216, 194, 0.85);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            white-space: nowrap;
+        }
+        .nav-utility-item i { color: #D46A3A; font-size: 0.75rem; }
+        .nav-utility-item:hover { color: #F0D8C2; }
+        .nav-utility-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .nav-session-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: linear-gradient(135deg, rgba(212,106,58,0.25), rgba(212,106,58,0.15));
+            border: 1px solid rgba(212,106,58,0.4);
+            color: #F0D8C2;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .nav-session-badge i { color: #D46A3A; }
+        .nav-social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(240,216,194,0.8);
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .nav-social-link:hover {
+            background: rgba(212,106,58,0.25);
+            border-color: rgba(212,106,58,0.5);
+            color: #F0D8C2;
+            transform: translateY(-1px);
+        }
+
+        /* ===== MAIN NAVBAR ENHANCEMENTS ===== */
+        .navbar-elegant {
+            background: linear-gradient(135deg, rgba(31,58,70,0.99) 0%, rgba(20,42,52,0.99) 100%) !important;
+            backdrop-filter: blur(20px) saturate(200%) !important;
+            border-bottom: 1px solid rgba(212,106,58,0.2) !important;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.2), 0 1px 0 rgba(212,106,58,0.1) !important;
+            padding: 0 !important;
+            transition: all 0.35s cubic-bezier(0.4,0,0.2,1) !important;
+        }
+        .navbar-elegant .container-fluid {
+            padding: 0.6rem 2rem !important;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Brand */
+        .navbar-elegant .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.3rem 0 !important;
+            text-decoration: none;
+        }
+        .brand-icon-wrap {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #D46A3A, #F0D8C2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(212,106,58,0.35);
+            flex-shrink: 0;
+            transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .navbar-brand:hover .brand-icon-wrap { transform: rotate(15deg) scale(1.1); }
+        .brand-icon-wrap i { color: white; font-size: 1.1rem; }
+        .brand-text-group { display: flex; flex-direction: column; line-height: 1.1; }
+        .brand-name {
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 0.2px;
+        }
+        .brand-tagline {
+            font-size: 0.65rem;
+            color: rgba(240,216,194,0.7);
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        /* Nav links */
+        .navbar-elegant .nav-link {
+            color: rgba(255,255,255,0.88) !important;
+            font-size: 0.875rem !important;
+            font-weight: 600 !important;
+            padding: 0.55rem 0.9rem !important;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            position: relative;
+            letter-spacing: 0.2px;
+        }
+        .navbar-elegant .nav-link:hover,
+        .navbar-elegant .nav-link.active {
+            color: white !important;
+            background: rgba(255,255,255,0.1) !important;
+        }
+        .navbar-elegant .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #D46A3A, #F0D8C2);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        .navbar-elegant .nav-link:hover::after,
+        .navbar-elegant .nav-link.active::after { width: 55%; }
+        /* Remove the ::before underline from custom.css on this page */
+        .navbar-elegant .nav-link::before { display: none !important; }
+
+        /* Active page indicator */
+        .navbar-elegant .nav-link.current-page {
+            color: #F0D8C2 !important;
+            background: rgba(212,106,58,0.15) !important;
+        }
+        .navbar-elegant .nav-link.current-page::after { width: 55%; }
+
+        /* Dropdown toggle caret */
+        .navbar-elegant .dropdown-toggle::after {
+            border: none;
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.7rem;
+            margin-left: 0.3rem;
+            vertical-align: middle;
+            transition: transform 0.25s ease;
+        }
+        .navbar-elegant .dropdown.show .dropdown-toggle::after { transform: rotate(180deg); }
+
+        /* Dropdown menu */
+        .navbar-elegant .dropdown-menu {
+            background: rgba(255,255,255,0.98) !important;
+            backdrop-filter: blur(20px) !important;
+            border: 1px solid rgba(31,58,70,0.1) !important;
+            border-radius: 14px !important;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.08) !important;
+            padding: 0.6rem !important;
+            margin-top: 0.6rem !important;
+            min-width: 270px !important;
+            animation: dropIn 0.2s cubic-bezier(0.4,0,0.2,1);
+        }
+        @keyframes dropIn {
+            from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .navbar-elegant .dropdown-header {
+            color: #1F3A46 !important;
+            font-size: 0.7rem !important;
+            font-weight: 800 !important;
+            letter-spacing: 1.2px !important;
+            text-transform: uppercase !important;
+            padding: 0.75rem 1rem 0.4rem !important;
+            opacity: 0.6;
+        }
+        .navbar-elegant .dropdown-item {
+            color: #1F3A46 !important;
+            font-size: 0.875rem !important;
+            font-weight: 600 !important;
+            padding: 0.65rem 1rem !important;
+            border-radius: 8px !important;
+            transition: all 0.2s ease !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+        }
+        .navbar-elegant .dropdown-item:hover {
+            background: linear-gradient(135deg, rgba(212,106,58,0.1), rgba(240,216,194,0.15)) !important;
+            color: #1F3A46 !important;
+            transform: translateX(3px) !important;
+            padding-left: 1.25rem !important;
+        }
+        .navbar-elegant .dropdown-item.active,
+        .navbar-elegant .dropdown-item:active {
+            background: linear-gradient(135deg, #D46A3A, #F0D8C2) !important;
+            color: white !important;
+        }
+        .navbar-elegant .dropdown-divider {
+            border-color: rgba(31,58,70,0.08) !important;
+            margin: 0.4rem 0.5rem !important;
+        }
+        /* Remove ::before from custom.css dropdown items */
+        .navbar-elegant .dropdown-item::before { display: none !important; }
+
+        /* Register CTA button */
+        .navbar-elegant .nav-link-register {
+            background: linear-gradient(135deg, #D46A3A 0%, #e8845a 100%) !important;
+            color: white !important;
+            font-weight: 700 !important;
+            padding: 0.5rem 1.25rem !important;
+            border-radius: 22px !important;
+            margin-left: 0.5rem !important;
+            box-shadow: 0 4px 15px rgba(212,106,58,0.35) !important;
+            font-size: 0.85rem !important;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(255,255,255,0.15) !important;
+        }
+        .navbar-elegant .nav-link-register:hover {
+            background: linear-gradient(135deg, #c05a2a 0%, #D46A3A 100%) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 20px rgba(212,106,58,0.45) !important;
+            color: white !important;
+        }
+        .navbar-elegant .nav-link-register::after { display: none !important; }
+
+        /* Mobile toggler */
+        .navbar-elegant .navbar-toggler {
+            border: 1.5px solid rgba(212,106,58,0.4) !important;
+            border-radius: 8px !important;
+            padding: 0.45rem 0.65rem !important;
+            background: rgba(212,106,58,0.08) !important;
+            transition: all 0.2s ease !important;
+        }
+        .navbar-elegant .navbar-toggler:hover {
+            background: rgba(212,106,58,0.2) !important;
+            border-color: rgba(212,106,58,0.7) !important;
+        }
+
+        /* Mobile collapse panel */
+        @media (max-width: 991px) {
+            .nav-utility-bar { display: none; }
+            .navbar-elegant .navbar-collapse {
+                background: linear-gradient(135deg, rgba(20,42,52,0.99), rgba(13,27,35,0.99)) !important;
+                border-radius: 14px !important;
+                margin-top: 0.75rem !important;
+                padding: 1.25rem !important;
+                border: 1px solid rgba(212,106,58,0.15) !important;
+                box-shadow: 0 15px 40px rgba(0,0,0,0.3) !important;
+            }
+            .navbar-elegant .nav-link {
+                padding: 0.75rem 1rem !important;
+                border-radius: 10px !important;
+                background: rgba(255,255,255,0.05) !important;
+                margin-bottom: 0.3rem !important;
+            }
+            .navbar-elegant .nav-link:hover {
+                background: rgba(212,106,58,0.15) !important;
+            }
+            .navbar-elegant .nav-link::after { display: none !important; }
+            .navbar-elegant .nav-link-register {
+                margin: 0.5rem 0 0 0 !important;
+                text-align: center !important;
+                display: block !important;
+                width: 100% !important;
+            }
+            .navbar-elegant .dropdown-menu {
+                background: rgba(255,255,255,0.95) !important;
+                margin: 0.4rem 0 0.4rem 0.5rem !important;
+                border-radius: 10px !important;
+            }
+        }
+
+        /* Hover-open on desktop */
+        @media (min-width: 992px) {
+            .navbar-elegant .dropdown:hover > .dropdown-menu {
+                display: block;
+            }
+        }
+
+        :root {
+            --blog-max-width: 1200px;
+            --blog-content-width: 95%;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --hero-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+            --section-spacing: 1.5rem;
+            --green-dark: #0d7a5f;
+            --green-mid: #11998e;
+            --green-light: #38ef7d;
+        }
+
+        html { scroll-behavior: smooth; }
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            background: linear-gradient(180deg, #f0faf5 0%, #ffffff 50%, #e8f8f0 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .blog-wrapper {
+            width: var(--blog-content-width);
+            max-width: var(--blog-max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .blog-shell { width: 100%; padding: 2rem 0 3rem; }
+
+        .blog-breadcrumbs {
+            font-size: 0.95rem;
+            margin: 1rem 0 2rem;
+            color: #4b5563;
+        }
+        .blog-breadcrumbs a { color: #1f3a46; text-decoration: none; font-weight: 600; }
+        .blog-breadcrumbs a:hover { text-decoration: underline; }
+
+        .blog-hero {
+            background: var(--hero-gradient);
+            color: #fff;
+            border-radius: 20px;
+            padding: clamp(2rem, 6vw, 3rem);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            overflow: hidden;
+            position: relative;
+        }
+        .blog-hero::before {
+            content: '🤖';
+            position: absolute;
+            font-size: 10rem;
+            opacity: 0.07;
+            right: -20px;
+            top: -30px;
+            z-index: 0;
+        }
+        .blog-hero h1 {
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #38ef7d, #11998e, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .blog-hero .blog-date {
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+        }
+        .blog-hero p {
+            max-width: 100%;
+            font-size: clamp(1rem, 2.5vw, 1.15rem);
+            line-height: 1.85;
+            color: rgba(255,255,255,0.92);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1.5rem;
+        }
+        .blog-meta-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .meta-chip-soft {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.25rem;
+            border-radius: 25px;
+            background: rgba(56, 239, 125, 0.15);
+            color: #38ef7d;
+            font-weight: 700;
+            font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(56, 239, 125, 0.3);
+            transition: all 0.3s ease;
+        }
+        .meta-chip-soft:hover { background: rgba(56,239,125,0.25); transform: translateY(-2px); }
+
+        main { width: 100%; margin-bottom: 2rem; }
+        main > section {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: var(--transition-smooth);
+        }
+        main > section:hover { box-shadow: 0 15px 45px rgba(0,0,0,0.12); transform: translateY(-3px); }
+
+        h2 {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            font-weight: 800;
+            color: #1f3a46;
+            margin: 1.5rem 0 1.25rem 0;
+            line-height: 1.25;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--green-mid);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        h3 { font-size: clamp(1.15rem, 3.5vw, 1.6rem); font-weight: 700; color: #1f3a46; margin: 1.5rem 0 0.75rem 0; line-height: 1.35; }
+        h4 { font-size: clamp(1rem, 2.5vw, 1.35rem); font-weight: 700; color: var(--green-dark); margin: 1.25rem 0 0.75rem 0; line-height: 1.3; }
+        p { color: #1f252e; line-height: 1.85; font-size: clamp(0.95rem, 2vw, 1.1rem); margin-bottom: 1rem; letter-spacing: 0.2px; }
+
+        .pill-label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(17, 153, 142, 0.12);
+            color: var(--green-dark);
+            font-weight: 700;
+            font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+            margin-bottom: 1rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        ul, ol { padding-left: clamp(1.5rem, 5vw, 2.25rem); margin: 1.25rem 0; text-align: left; }
+        ul li, ol li { margin-bottom: 0.75rem; color: #1f252e; line-height: 1.88; font-size: clamp(0.95rem, 2vw, 1.08rem); text-align: left; }
+
+        .kids-friendly-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: clamp(1.5rem, 3.5vw, 2.25rem);
+            border-radius: 18px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(253,203,110,0.25);
+            border: 3px solid rgba(255,255,255,0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        .kids-friendly-box::before { content: '💡'; position: absolute; font-size: 5rem; opacity: 0.1; right: -10px; bottom: -15px; z-index: 0; pointer-events: none; }
+        .kids-friendly-box h4 { color: #2c3e50; margin-bottom: 1rem; font-size: clamp(1.2rem, 2.5vw, 1.4rem); font-weight: 800; position: relative; z-index: 1; }
+        .kids-friendly-box p { font-size: clamp(0.95rem, 2vw, 1.1rem); color: #2c3e50; line-height: 1.8; margin-bottom: 0.75rem; position: relative; z-index: 1; font-weight: 500; }
+        .kids-friendly-box ul { position: relative; z-index: 1; }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e0f7f4 0%, #b2ece6 100%);
+            padding: clamp(1.5rem, 3.5vw, 2.25rem);
+            border-radius: 18px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(17,153,142,0.12);
+            border: 3px solid rgba(17,153,142,0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-box h4 { color: #0d7a5f; margin-bottom: 1rem; font-size: clamp(1.2rem, 2.5vw, 1.4rem); font-weight: 800; }
+        .highlight-box p { font-size: clamp(0.95rem, 2vw, 1.1rem); color: #0d5c47; line-height: 1.8; margin-bottom: 0.75rem; font-weight: 500; }
+        .highlight-box ul li { color: #0d5c47; }
+
+        .success-box {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: clamp(1.5rem, 3.5vw, 2.25rem);
+            border-radius: 18px;
+            margin: 2rem 0;
+            color: white;
+            box-shadow: 0 8px 25px rgba(17,153,142,0.3);
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+        .success-box h4 { color: white; margin-bottom: 1rem; font-size: clamp(1.2rem, 2.5vw, 1.4rem); font-weight: 700; }
+        .success-box p { color: white; margin: 0 0 0.75rem 0; font-size: clamp(0.95rem, 2vw, 1.08rem); line-height: 1.7; font-weight: 500; }
+        .success-box ul li { color: white; }
+
+        .teacher-tip {
+            background: linear-gradient(135deg, #e8f4fd 0%, #cce5ff 100%);
+            padding: clamp(1.25rem, 3vw, 1.75rem);
+            border-radius: 14px;
+            margin: 1.5rem 0;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 4px 15px rgba(52,152,219,0.12);
+        }
+        .teacher-tip h5 { color: #1565c0; font-weight: 800; margin-bottom: 0.75rem; font-size: clamp(1rem, 2vw, 1.2rem); }
+        .teacher-tip p { color: #0d47a1; margin-bottom: 0.5rem; font-size: clamp(0.9rem, 1.8vw, 1rem); }
+
+        .revision-card {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffeaa7 100%);
+            padding: clamp(1.25rem, 3vw, 1.75rem);
+            border-radius: 14px;
+            margin-bottom: 1.25rem;
+            border-left: 5px solid #f39c12;
+            box-shadow: 0 4px 15px rgba(243,156,18,0.15);
+            transition: var(--transition-smooth);
+        }
+        .revision-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(243,156,18,0.2); }
+        .revision-card h5 { color: #e67e22; margin: 0 0 0.75rem 0; font-size: clamp(1.1rem, 2.5vw, 1.3rem); font-weight: 800; }
+        .revision-card p { margin-bottom: 0.5rem; color: #7d5a00; }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: clamp(1rem, 2.5vw, 1.75rem);
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f0faf5 100%);
+            padding: clamp(1.5rem, 3vw, 2rem);
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transition: var(--transition-smooth);
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 12px 35px rgba(17,153,142,0.2); border-color: var(--green-mid); }
+        .feature-card i { font-size: clamp(2rem, 8vw, 3rem); color: var(--green-mid); margin-bottom: 1rem; }
+        .feature-card h5 { color: var(--green-dark); margin: 0 0 0.75rem 0; font-size: clamp(1rem, 2.5vw, 1.2rem); font-weight: 700; }
+        .feature-card p { margin: 0; line-height: 1.7; font-size: clamp(0.9rem, 1.8vw, 1rem); color: #555; flex-grow: 1; }
+        .feature-card ul, .feature-card ol { text-align: left; }
+
+        .code-example {
+            background: #282c34;
+            border-radius: 14px;
+            padding: 0;
+            margin: 1rem 0;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+        .code-header {
+            background: #21252b;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .code-language { color: #38ef7d; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .copy-btn {
+            background: #38ef7d;
+            color: #1a1a2e;
+            border: none;
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+            font-weight: 700;
+        }
+        .copy-btn:hover { background: #11998e; color: white; transform: translateY(-1px); }
+        .copy-btn.copied { background: #98c379; }
+        .code-content { padding: clamp(1.1rem, 2.5vw, 1.75rem); overflow-x: auto; }
+        .code-example pre { margin: 0; padding: 0; }
+        .code-example code {
+            color: #abb2bf;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: clamp(0.88rem, 1.5vw, 1rem);
+            line-height: 1.8;
+            display: block;
+            white-space: pre;
+        }
+        .code-example .hljs-keyword { color: #c678dd; font-weight: 600; }
+        .code-example .hljs-string { color: #98c379; }
+        .code-example .hljs-number { color: #d19a66; }
+        .code-example .hljs-comment { color: #5c6370; font-style: italic; }
+        .code-example .hljs-built_in { color: #e5c07b; }
+
+        .output-example {
+            background: #121212;
+            color: #38ef7d;
+            border-radius: 14px;
+            padding: clamp(1.25rem, 3vw, 2rem);
+            margin: 1.75rem 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
+            line-height: 1.75;
+            border: 1px solid rgba(56,239,125,0.3);
+            box-shadow: 0 4px 12px rgba(56,239,125,0.1);
+            overflow-x: auto;
+        }
+
+        .timeline-step {
+            display: flex;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+        .step-badge {
+            min-width: 3rem;
+            height: 3rem;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 4px 12px rgba(17,153,142,0.3);
+            flex-shrink: 0;
+        }
+        .step-content h5 { color: #1f3a46; font-weight: 700; margin: 0 0 0.5rem 0; font-size: clamp(1rem, 2vw, 1.2rem); }
+        .step-content p { margin: 0; color: #4b5563; font-size: clamp(0.9rem, 1.8vw, 1rem); }
+
+        .cta-card {
+            background: var(--hero-gradient);
+            color: #fff;
+            border-radius: 20px;
+            padding: clamp(2rem, 5vw, 3.25rem) clamp(1.75rem, 4vw, 2.5rem);
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border: 1px solid rgba(56,239,125,0.2);
+        }
+        .cta-card h3 { color: #38ef7d; margin: 0 0 1rem 0; font-size: clamp(1.5rem, 4vw, 2rem); line-height: 1.3; }
+        .cta-card p { color: rgba(255,255,255,0.9); margin: 0; font-size: clamp(1rem, 2.5vw, 1.2rem); line-height: 1.6; }
+        .cta-card ul, .cta-card ol { text-align: left; }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--green-mid);
+            font-weight: 700;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover { text-decoration: underline; color: var(--green-dark); gap: 0.75rem; }
+
+        .checkpoint-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            color: white;
+            padding: clamp(1.5rem, 3.5vw, 2rem);
+            border-radius: 18px;
+            margin: 2rem 0;
+            border: 2px solid rgba(56,239,125,0.3);
+            text-align: center;
+        }
+        .checkpoint-box h4 { color: #38ef7d; font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 800; margin-bottom: 0.75rem; }
+        .checkpoint-box p { color: rgba(255,255,255,0.9); margin: 0; font-size: clamp(0.95rem, 2vw, 1.1rem); }
+        .checkpoint-box ul, .checkpoint-box ol { text-align: left; }
+
+        /* ===== DIAGRAM STYLES ===== */
+
+        /* 1. Session Journey Timeline Diagram */
+        .journey-diagram {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            border-radius: 20px;
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .journey-diagram::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(56,239,125,0.08), transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(17,153,142,0.08), transparent 50%);
+            pointer-events: none;
+        }
+        .journey-diagram h4 { color: #38ef7d; text-align: center; margin-bottom: 1.75rem; font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 800; }
+        .journey-track {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            position: relative;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+        .journey-stop {
+            flex: 1;
+            min-width: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .journey-stop:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -12px;
+            top: 22px;
+            color: #38ef7d;
+            font-size: 1.4rem;
+            font-weight: 900;
+            z-index: 2;
+        }
+        .journey-bubble {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(56,239,125,0.3);
+            margin-bottom: 0.75rem;
+            flex-shrink: 0;
+            border: 2px solid rgba(56,239,125,0.4);
+        }
+        .journey-time {
+            background: rgba(56,239,125,0.15);
+            color: #38ef7d;
+            border-radius: 12px;
+            padding: 0.25rem 0.6rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            white-space: nowrap;
+        }
+        .journey-label {
+            color: rgba(255,255,255,0.9);
+            font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+            text-align: center;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* 2. AI Learning Pyramid */
+        .pyramid-diagram {
+            background: linear-gradient(135deg, #fff9e6 0%, #fef3c7 100%);
+            border-radius: 20px;
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+            margin: 2rem 0;
+            border: 2px solid rgba(243,156,18,0.2);
+            box-shadow: 0 8px 25px rgba(243,156,18,0.1);
+        }
+        .pyramid-diagram h4 { color: #92400e; text-align: center; margin-bottom: 1.5rem; font-size: clamp(1.1rem, 2.5vw, 1.35rem); font-weight: 800; }
+        .pyramid-levels { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+        .pyramid-level {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            border-radius: 12px;
+            padding: 0.75rem 1.25rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            transition: transform 0.2s ease;
+            cursor: default;
+        }
+        .pyramid-level:hover { transform: scale(1.02); }
+        .pyramid-level .lvl-icon { font-size: 1.4rem; flex-shrink: 0; }
+        .pyramid-level .lvl-text { font-size: clamp(0.85rem, 1.8vw, 1rem); line-height: 1.3; }
+        .pyramid-level .lvl-session { font-size: 0.75rem; opacity: 0.85; display: block; font-weight: 600; }
+        .pl-1 { width: 100%; background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .pl-2 { width: 88%; background: linear-gradient(135deg, #e67e22, #d35400); }
+        .pl-3 { width: 76%; background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .pl-4 { width: 64%; background: linear-gradient(135deg, #27ae60, #1e8449); }
+        .pl-5 { width: 52%; background: linear-gradient(135deg, #2980b9, #1a5276); }
+
+        /* 3. Python vs Human Language Comparison */
+        .compare-diagram {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        .compare-side {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: clamp(1.25rem, 3vw, 1.75rem);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        }
+        .compare-side.human { border-top: 4px solid #e74c3c; }
+        .compare-side.python { border-top: 4px solid #38ef7d; }
+        .compare-side h5 {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .compare-side.human h5 { color: #c0392b; }
+        .compare-side.python h5 { color: #0d7a5f; }
+        .compare-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+            color: #374151;
+            line-height: 1.4;
+        }
+        .compare-row .cr-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .compare-vs {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            color: white;
+            font-weight: 900;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(17,153,142,0.3);
+            align-self: center;
+        }
+
+        /* 4. Chatbot Architecture Diagram */
+        .arch-diagram {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 20px;
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+            margin: 2rem 0;
+            border: 2px solid rgba(17,153,142,0.2);
+            box-shadow: 0 8px 25px rgba(17,153,142,0.1);
+        }
+        .arch-diagram h4 { color: #0d7a5f; text-align: center; margin-bottom: 1.75rem; font-size: clamp(1.1rem, 2.5vw, 1.35rem); font-weight: 800; }
+        .arch-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .arch-node {
+            width: 100%;
+            max-width: 520px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            border-radius: 14px;
+            padding: 0.9rem 1.25rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+            border-left: 5px solid var(--green-mid);
+            transition: transform 0.2s ease;
+        }
+        .arch-node:hover { transform: translateX(4px); }
+        .arch-node.user-node { border-left-color: #3498db; }
+        .arch-node.brain-node { border-left-color: #9b59b6; }
+        .arch-node.reply-node { border-left-color: #38ef7d; }
+        .arch-node.safe-node { border-left-color: #e74c3c; }
+        .arch-node-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .arch-node.user-node .arch-node-icon { background: rgba(52,152,219,0.15); }
+        .arch-node.brain-node .arch-node-icon { background: rgba(155,89,182,0.15); }
+        .arch-node.reply-node .arch-node-icon { background: rgba(56,239,125,0.15); }
+        .arch-node.safe-node .arch-node-icon { background: rgba(231,76,60,0.15); }
+        .arch-node-text h6 { margin: 0 0 0.2rem 0; font-weight: 700; font-size: clamp(0.9rem, 1.8vw, 1rem); color: #1f3a46; }
+        .arch-node-text p { margin: 0; font-size: clamp(0.8rem, 1.5vw, 0.88rem); color: #6b7280; line-height: 1.3; }
+        .arch-arrow {
+            color: var(--green-mid);
+            font-size: 1.5rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        /* 5. Python 4 Tools Visual */
+        .tools-diagram {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .tool-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            border-radius: 16px;
+            padding: clamp(1.25rem, 3vw, 1.75rem);
+            border: 1px solid rgba(56,239,125,0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .tool-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(56,239,125,0.15); }
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: -20px; right: -20px;
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: rgba(56,239,125,0.06);
+        }
+        .tool-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px; height: 32px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            color: white;
+            font-weight: 900;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+        .tool-card h5 { color: #38ef7d; font-size: clamp(0.95rem, 2vw, 1.1rem); font-weight: 800; margin-bottom: 0.5rem; }
+        .tool-card .tool-emoji { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+        .tool-card p { color: rgba(255,255,255,0.8); font-size: clamp(0.82rem, 1.6vw, 0.92rem); margin: 0; line-height: 1.5; }
+        .tool-card code { background: rgba(56,239,125,0.15); color: #38ef7d; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.88em; }
+
+        @media (max-width: 768px) {
+            .blog-wrapper { --blog-content-width: 100%; padding: 0 1rem; }
+            main > section { padding: clamp(1.5rem, 3vw, 2rem); margin-bottom: 2rem; border-radius: 16px; }
+            .blog-hero { padding: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 2rem; }
+            h2 { font-size: clamp(1.3rem, 4vw, 1.7rem); }
+            .feature-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+            .blog-meta-strip { flex-direction: column; gap: 0.5rem; }
+            .meta-chip-soft { justify-content: center; width: 100%; padding: 0.6rem 1rem; }
+            .compare-diagram { grid-template-columns: 1fr; }
+            .compare-vs { display: none; }
+            .tools-diagram { grid-template-columns: 1fr; }
+            .journey-stop:not(:last-child)::after { display: none; }
+        }
+        @media (max-width: 480px) {
+            .blog-wrapper { padding: 0 0.75rem; }
+            main > section { padding: 1.5rem; margin-bottom: 1.5rem; }
+            h2 { font-size: 1.3rem; gap: 0.5rem; }
+            .timeline-step { flex-direction: column; gap: 0.75rem; }
+            .pyramid-level { width: 100% !important; }
+        }
+    </style>
+</head>
+<body id="page-top">
+    <!-- Reading progress bar -->
+    <div id="kf-progress" role="progressbar" aria-label="Reading progress"></div>
+
+    <!-- Top utility strip -->
+    <div id="kf-topbar" aria-label="Site information">
+        <div class="kf-topbar-inner">
+            <div class="kf-topbar-left">
+                <span class="kf-topbar-item">
+                    <i class="fas fa-graduation-cap"></i> Empowering Kids Through AI &amp; Education
+                </span>
+                <span class="kf-topbar-item">
+                    <i class="fas fa-map-marker-alt"></i> Pakistan
+                </span>
+                <span class="kf-topbar-item">
+                    <i class="fas fa-calendar-check"></i> Sessions Every Weekend
+                </span>
+            </div>
+            <div class="kf-topbar-right">
+                <span class="kf-session-pill">
+                    <i class="fas fa-robot"></i> AI Superheroes · Session 6
+                </span>
+                <a href="#" class="kf-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="kf-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="kf-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile overlay -->
+    <div class="kf-mobile-overlay" id="kfOverlay" aria-hidden="true"></div>
+
+    <!-- Main navbar -->
+    <nav id="kf-nav" role="navigation" aria-label="Main navigation">
+        <div class="kf-nav-inner">
+
+            <!-- Brand -->
+            <a class="kf-brand" href="../../../index.html#page-top" aria-label="Khalida Foundation — Home">
+                <div class="kf-brand-icon" aria-hidden="true">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="kf-brand-text">
+                    <span class="kf-brand-name">Khalida Foundation</span>
+                    <span class="kf-brand-sub">Education · Innovation · Impact</span>
+                </div>
+            </a>
+
+            <!-- Desktop nav links -->
+            <ul class="kf-nav-links" role="menubar">
+                <li role="none">
+                    <a class="kf-link" href="../../../index.html#page-top" role="menuitem">Home</a>
+                </li>
+                <li role="none">
+                    <a class="kf-link" href="../../../index.html#about" role="menuitem">About</a>
+                </li>
+
+                <!-- Explore dropdown -->
+                <li role="none">
+                    <a class="kf-link" href="#" role="menuitem" aria-haspopup="true" aria-expanded="false"
+                       tabindex="0" id="kf-explore-btn">
+                        Explore <i class="fas fa-chevron-down kf-chevron"></i>
+                    </a>
+                    <div class="kf-dropdown" role="menu" aria-labelledby="kf-explore-btn">
+                        <div class="kf-dd-header">Courses</div>
+                        <a class="kf-dd-item" href="../../../course-pages/courses.html" role="menuitem">
+                            <span class="kf-dd-icon"><i class="fas fa-list-ul"></i></span>
+                            All Courses
+                        </a>
+                        <a class="kf-dd-item" href="../../../course-pages/advanced-ai-for-kids.html" role="menuitem">
+                            <span class="kf-dd-icon"><i class="fas fa-robot"></i></span>
+                            Advanced AI for Kids
+                        </a>
+                        <div class="kf-dd-divider"></div>
+                        <div class="kf-dd-header">Programs</div>
+                        <a class="kf-dd-item" href="../../../index.html#programs" role="menuitem">
+                            <span class="kf-dd-icon"><i class="fas fa-seedling"></i></span>
+                            Programs &amp; Initiatives
+                        </a>
+                        <a class="kf-dd-item" href="../../../index.html#impact" role="menuitem">
+                            <span class="kf-dd-icon"><i class="fas fa-chart-line"></i></span>
+                            Our Impact
+                        </a>
+                        <div class="kf-dd-divider"></div>
+                        <div class="kf-dd-header">AI Initiative</div>
+                        <a class="kf-dd-item" href="../../../course-pages/courses.html#ai-initiative" role="menuitem">
+                            <span class="kf-dd-icon"><i class="fas fa-microchip"></i></span>
+                            AI Initiative Overview
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Blog mega-dropdown -->
+                <li role="none">
+                    <a class="kf-link kf-active" href="../../index.html" role="menuitem" aria-haspopup="true" aria-expanded="false"
+                       tabindex="0" id="kf-blog-btn">
+                        <i class="fas fa-newspaper" style="font-size:0.75rem;opacity:0.8;"></i>
+                        Blog <i class="fas fa-chevron-down kf-chevron"></i>
+                    </a>
+                    <div class="kf-dropdown kf-mega" role="menu" aria-labelledby="kf-blog-btn">
+                        <a class="kf-dd-item" href="../../index.html" role="menuitem">
+                            <span class="kf-dd-icon"><i class="fas fa-th-large"></i></span>
+                            All Blog Posts
+                        </a>
+                        <div class="kf-dd-divider"></div>
+                        <div class="kf-dd-header">🦸 AI Superheroes Series</div>
+                        <div class="kf-mega-grid">
+                            <a class="kf-session-item" href="../01/ai-superheroes-session-1.html" role="menuitem">
+                                <span class="kf-s-badge s1">S1</span> AI Power
+                            </a>
+                            <a class="kf-session-item" href="ai-superheroes-session-2.html" role="menuitem">
+                                <span class="kf-s-badge s2">S2</span> Noor Chatbot
+                            </a>
+                            <a class="kf-session-item" href="ai-superheroes-session-3.html" role="menuitem">
+                                <span class="kf-s-badge s3">S3</span> Python Basics
+                            </a>
+                            <a class="kf-session-item" href="ai-superheroes-session-4.html" role="menuitem">
+                                <span class="kf-s-badge s4">S4</span> Level Up Noor
+                            </a>
+                            <a class="kf-session-item" href="ai-superheroes-session-5.html" role="menuitem">
+                                <span class="kf-s-badge s5">S5</span> Fundamentals
+                            </a>
+                            <a class="kf-session-item kf-current" href="ai-superheroes-session-6.html" role="menuitem" aria-current="page">
+                                <span class="kf-s-badge s6">S6</span> Build Chatbot ✓
+                            </a>
+                        </div>
+                        <div class="kf-mega-footer">
+                            <a href="../../index.html">View all posts <i class="fas fa-arrow-right"></i></a>
+                            <span class="kf-session-pill" style="font-size:0.62rem;">6 Sessions</span>
+                        </div>
+                    </div>
+                </li>
+
+                <li role="none">
+                    <a class="kf-link" href="../../../index.html#get-involved" role="menuitem">Get Involved</a>
+                </li>
+                <li role="none">
+                    <a class="kf-link" href="../../../index.html#gallery" role="menuitem">Gallery</a>
+                </li>
+                <li role="none">
+                    <a class="kf-link" href="../../../index.html#contact" role="menuitem">Contact</a>
+                </li>
+            </ul>
+
+            <!-- Register CTA -->
+            <a class="kf-register" href="../../../register.html">
+                <i class="fas fa-star"></i> Register
+            </a>
+
+            <!-- Animated hamburger (mobile) -->
+            <button class="kf-hamburger" id="kfHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="kfMobileMenu">
+                <span class="kf-bar"></span>
+                <span class="kf-bar"></span>
+                <span class="kf-bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile slide-in drawer -->
+    <div class="kf-mobile-menu" id="kfMobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+        <div class="kf-mobile-header">
+            <a class="kf-brand" href="../../../index.html#page-top" style="gap:0.5rem;">
+                <div class="kf-brand-icon" style="width:32px;height:32px;border-radius:8px;">
+                    <i class="fas fa-graduation-cap" style="font-size:0.9rem;"></i>
+                </div>
+                <span class="kf-brand-name" style="font-size:0.9rem;">Khalida Foundation</span>
+            </a>
+            <button class="kf-mobile-close" id="kfMobileClose" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="kf-mobile-section">Navigation</div>
+        <a class="kf-mobile-link" href="../../../index.html#page-top"><i class="fas fa-home"></i> Home</a>
+        <a class="kf-mobile-link" href="../../../index.html#about"><i class="fas fa-heart"></i> About</a>
+        <a class="kf-mobile-link" href="../../../course-pages/courses.html"><i class="fas fa-list-ul"></i> All Courses</a>
+        <a class="kf-mobile-link" href="../../../course-pages/advanced-ai-for-kids.html"><i class="fas fa-robot"></i> Advanced AI for Kids</a>
+        <a class="kf-mobile-link" href="../../../index.html#programs"><i class="fas fa-seedling"></i> Programs</a>
+        <a class="kf-mobile-link" href="../../../index.html#impact"><i class="fas fa-chart-line"></i> Our Impact</a>
+        <a class="kf-mobile-link kf-active" href="../../index.html"><i class="fas fa-newspaper"></i> Blog</a>
+
+        <div class="kf-mobile-section">AI Superheroes Series</div>
+        <div class="kf-mobile-sessions">
+            <a class="kf-mobile-session" href="../01/ai-superheroes-session-1.html">
+                <span class="kf-s-badge s1">S1</span> AI Power
+            </a>
+            <a class="kf-mobile-session" href="ai-superheroes-session-2.html">
+                <span class="kf-s-badge s2">S2</span> Noor Chatbot
+            </a>
+            <a class="kf-mobile-session" href="ai-superheroes-session-3.html">
+                <span class="kf-s-badge s3">S3</span> Python Basics
+            </a>
+            <a class="kf-mobile-session" href="ai-superheroes-session-4.html">
+                <span class="kf-s-badge s4">S4</span> Level Up Noor
+            </a>
+            <a class="kf-mobile-session" href="ai-superheroes-session-5.html">
+                <span class="kf-s-badge s5">S5</span> Fundamentals
+            </a>
+            <a class="kf-mobile-session kf-current" href="ai-superheroes-session-6.html">
+                <span class="kf-s-badge s6">S6</span> Build Chatbot ✓
+            </a>
+        </div>
+
+        <div class="kf-mobile-section">More</div>
+        <a class="kf-mobile-link" href="../../../index.html#get-involved"><i class="fas fa-hands-helping"></i> Get Involved</a>
+        <a class="kf-mobile-link" href="../../../index.html#gallery"><i class="fas fa-images"></i> Gallery</a>
+        <a class="kf-mobile-link" href="../../../index.html#contact"><i class="fas fa-envelope"></i> Contact</a>
+
+        <a class="kf-mobile-register" href="../../../register.html">
+            <i class="fas fa-star"></i> Register Now
+        </a>
+    </div>
+
+    <div class="blog-shell">
+        <div class="blog-wrapper">
+            <!-- Breadcrumbs -->
+            <nav class="blog-breadcrumbs" aria-label="Breadcrumb">
+                <a href="../../../index.html">Home</a> &nbsp;/&nbsp;
+                <a href="../../index.html">Blog</a> &nbsp;/&nbsp;
+                <span>Session 6: Design &amp; Build Your Chatbot</span>
+            </nav>
+
+            <!-- Hero -->
+            <div class="blog-hero">
+                <div class="blog-date">✨ AI Superheroes Workshop – Session 6 &nbsp;|&nbsp; May 23, 2026</div>
+                <h1>🤖 Design Your Chatbot &amp; Code It with Python!</h1>
+                <p>Assalamu Alaikum, AI Superheroes! 👋 We're back after two months — and today is extra special. We'll do a quick, fun revision of everything we've learned, then design and build a real Islamic chatbot together using Python. No internet needed. Just your brain, your keyboard, and your creativity!</p>
+                <div class="blog-meta-strip">
+                    <span class="meta-chip-soft"><i class="fas fa-child"></i> Ages 9–14</span>
+                    <span class="meta-chip-soft"><i class="fas fa-clock"></i> 90 minutes</span>
+                    <span class="meta-chip-soft"><i class="fas fa-redo"></i> Revision + Build</span>
+                    <span class="meta-chip-soft"><i class="fas fa-robot"></i> Live Chatbot</span>
+                    <span class="meta-chip-soft"><i class="fas fa-mosque"></i> Islamic Values</span>
+                </div>
+            </div>
+
+            <main>
+                <!-- ===== SECTION 0: WELCOME BACK ===== -->
+                <section id="welcome">
+                    <div class="pill-label">🌙 Welcome Back!</div>
+                    <h2>Assalamu Alaikum — We Missed You! 🤗</h2>
+                    <p>It's been two months since our last session. That's okay — great things take time! Today we start fresh, remember what we've learned, and build something amazing together.</p>
+
+                    <div class="kids-friendly-box">
+                        <h4>📅 Today's Session at a Glance</h4>
+                        <ul>
+                            <li>⏱️ <strong>0–15 min:</strong> Quick revision — what did we learn in Sessions 1–5?</li>
+                            <li>⏱️ <strong>15–30 min:</strong> What is Python? Story-based intro for beginners</li>
+                            <li>⏱️ <strong>30–50 min:</strong> Design your chatbot — sketch it on paper first!</li>
+                            <li>⏱️ <strong>50–80 min:</strong> Live coding — build the chatbot step by step</li>
+                            <li>⏱️ <strong>80–90 min:</strong> Run your bot 🎉 + mini recap + homework</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>🎯 By the End of Today, You Will:</h4>
+                        <ul>
+                            <li>Remember the key ideas from all 5 previous sessions</li>
+                            <li>Understand what Python is and why we use it for AI</li>
+                            <li>Design your own chatbot personality on paper</li>
+                            <li>Build a working text-based Islamic chatbot in Python</li>
+                            <li>Run your chatbot and see it answer questions — live!</li>
+                        </ul>
+                    </div>
+
+                    <!-- DIAGRAM 1: Session Journey Timeline -->
+                    <div class="journey-diagram">
+                        <h4>🗺️ Our 90-Minute Adventure Map</h4>
+                        <div class="journey-track">
+                            <div class="journey-stop">
+                                <div class="journey-bubble">🧠</div>
+                                <div class="journey-time">0–15 min</div>
+                                <div class="journey-label">Quick<br>Revision</div>
+                            </div>
+                            <div class="journey-stop">
+                                <div class="journey-bubble">🐍</div>
+                                <div class="journey-time">15–30 min</div>
+                                <div class="journey-label">Python<br>Story</div>
+                            </div>
+                            <div class="journey-stop">
+                                <div class="journey-bubble">✏️</div>
+                                <div class="journey-time">30–50 min</div>
+                                <div class="journey-label">Design<br>Chatbot</div>
+                            </div>
+                            <div class="journey-stop">
+                                <div class="journey-bubble">💻</div>
+                                <div class="journey-time">50–80 min</div>
+                                <div class="journey-label">Live<br>Coding</div>
+                            </div>
+                            <div class="journey-stop">
+                                <div class="journey-bubble">🎉</div>
+                                <div class="journey-time">80–90 min</div>
+                                <div class="journey-label">Run Your<br>Bot!</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== SECTION 1: REVISION ===== -->
+                <section id="revision">
+                    <div class="pill-label">🔁 Quick Revision</div>
+                    <h2>🧠 Remember What We Learned? Let's Find Out!</h2>
+                    <p>Before we build something new, let's warm up our brains. Here's a lightning-fast tour of Sessions 1–5. Raise your hand if you remember each one!</p>
+
+                    <div class="revision-card">
+                        <h5>📌 Session 1 — Discovering AI Power</h5>
+                        <p>We learned that AI is not magic — it's a machine that finds <strong>patterns</strong>. We spotted patterns in pictures, words, and numbers. We also learned how to write <strong>kind, clear prompts</strong> to talk to AI tools.</p>
+                        <p><strong>Key idea:</strong> AI learns from examples, just like you learn from practice!</p>
+                    </div>
+
+                    <div class="revision-card">
+                        <h5>📌 Session 2 — Building Noor Chatbot</h5>
+                        <p>We designed <strong>Noor</strong> — a friendly Islamic chatbot. We gave Noor a personality, safety rules, and a list of Islamic Q&amp;A. We learned that a good chatbot is <strong>safe, kind, and honest</strong>.</p>
+                        <p><strong>Key idea:</strong> A chatbot is only as good as the rules and knowledge we give it!</p>
+                    </div>
+
+                    <div class="revision-card">
+                        <h5>📌 Session 3 — Python Programming Begins</h5>
+                        <p>We wrote our first Python code! We learned <strong>variables</strong> (labeled boxes), <strong>if/else</strong> (making decisions), and <strong>lists</strong> (storing many things). We built a simple chatbot using these tools.</p>
+                        <p><strong>Key idea:</strong> Python is a language that lets you talk to computers!</p>
+                    </div>
+
+                    <div class="revision-card">
+                        <h5>📌 Session 4 — Leveling Up Noor</h5>
+                        <p>We gave Noor a <strong>memory</strong> using Python dictionaries. We also learned how to <strong>test</strong> our code like professional engineers — writing test cases to find bugs before users do.</p>
+                        <p><strong>Key idea:</strong> Dictionaries store information in key-value pairs, like a contact card!</p>
+                    </div>
+
+                    <div class="revision-card">
+                        <h5>📌 Session 5 — Python Fundamentals Unlocked</h5>
+                        <p>We went deep into Python: all 6 data types (int, float, str, bool, list, dict), <strong>input/output</strong>, <strong>for loops</strong>, and the professional problem-solving framework. We solved real challenges!</p>
+                        <p><strong>Key idea:</strong> Loops let you repeat code without writing it 100 times!</p>
+                    </div>
+
+                    <!-- DIAGRAM 2: AI Learning Pyramid -->
+                    <div class="pyramid-diagram">
+                        <h4>🏆 Our AI Superheroes Learning Pyramid</h4>
+                        <div class="pyramid-levels">
+                            <div class="pyramid-level pl-5">
+                                <span class="lvl-icon">🤖</span>
+                                <div class="lvl-text">
+                                    Build AI Chatbot
+                                    <span class="lvl-session">Session 6 — Today!</span>
+                                </div>
+                            </div>
+                            <div class="pyramid-level pl-4">
+                                <span class="lvl-icon">🔁</span>
+                                <div class="lvl-text">
+                                    Loops, Functions &amp; Problem Solving
+                                    <span class="lvl-session">Session 5 — Python Fundamentals</span>
+                                </div>
+                            </div>
+                            <div class="pyramid-level pl-3">
+                                <span class="lvl-icon">🧠</span>
+                                <div class="lvl-text">
+                                    Memory, Dictionaries &amp; Testing
+                                    <span class="lvl-session">Session 4 — Leveling Up Noor</span>
+                                </div>
+                            </div>
+                            <div class="pyramid-level pl-2">
+                                <span class="lvl-icon">🐍</span>
+                                <div class="lvl-text">
+                                    Variables, If/Else &amp; Lists
+                                    <span class="lvl-session">Session 3 — Python Begins</span>
+                                </div>
+                            </div>
+                            <div class="pyramid-level pl-1">
+                                <span class="lvl-icon">💡</span>
+                                <div class="lvl-text">
+                                    AI Concepts, Patterns &amp; Chatbot Design
+                                    <span class="lvl-session">Sessions 1 &amp; 2 — Foundation</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="teacher-tip">
+                        <h5>👩‍🏫 Instructor Tip — Quick Quiz!</h5>
+                        <p>Ask a volunteer: "What is a variable?" Then ask another: "What does if/else do?" Then ask the group: "What is a loop?" Give a small sticker or emoji stamp to anyone who answers. Keep it fun and fast — 3 minutes max!</p>
+                    </div>
+                </section>
+
+                <!-- ===== SECTION 2: WHAT IS PYTHON ===== -->
+                <section id="python-story">
+                    <div class="pill-label">🐍 Python — The Story</div>
+                    <h2>🐍 What is Python? (A Story for Kids)</h2>
+
+                    <div class="kids-friendly-box">
+                        <h4>📖 The Story of the Friendly Snake</h4>
+                        <p>Once upon a time, a programmer named Guido was tired of writing complicated code. He wanted a language that was <strong>simple, readable, and fun</strong> — like reading a story in English.</p>
+                        <p>So in 1991, he created <strong>Python</strong>. He named it after his favourite comedy show, not the snake! 🐍😄</p>
+                        <p>Today, Python is used by <strong>NASA, Google, Netflix, and millions of kids like you</strong> to build amazing things — including AI chatbots!</p>
+                    </div>
+
+                    <h3>Why Python for AI? 🤔</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-book-open"></i>
+                            <h5>Easy to Read</h5>
+                            <p>Python code looks almost like English sentences. <code>print("Hello")</code> — that's it!</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-rocket"></i>
+                            <h5>Super Powerful</h5>
+                            <p>The same language that powers Instagram, YouTube recommendations, and AI assistants.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <h5>Works Offline</h5>
+                            <p>Our chatbot runs on your computer — no internet needed. Safe and private!</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-users"></i>
+                            <h5>Huge Community</h5>
+                            <p>Millions of people use Python. If you get stuck, someone has already solved it!</p>
+                        </div>
+                    </div>
+
+                    <h3>Python vs. Everyday Language 🗣️</h3>
+                    <p>Think of Python like giving instructions to a very obedient robot. The robot does <em>exactly</em> what you say — no more, no less!</p>
+
+                    <div class="highlight-box">
+                        <h4>🧠 Analogy: Python is Like a Recipe</h4>
+                        <p>When you bake a cake, you follow a recipe step by step. Python code is the same — a list of instructions the computer follows in order, one line at a time.</p>
+                        <ul>
+                            <li>Step 1: Get the ingredients (variables)</li>
+                            <li>Step 2: Mix them (operations)</li>
+                            <li>Step 3: Check if it's ready (if/else)</li>
+                            <li>Step 4: Repeat until done (loops)</li>
+                            <li>Step 5: Serve! (print / output)</li>
+                        </ul>
+                    </div>
+
+                    <!-- DIAGRAM 3: Python vs Human Language -->
+                    <div class="compare-diagram">
+                        <div class="compare-side human">
+                            <h5>🗣️ How You Say It</h5>
+                            <div class="compare-row"><span class="cr-icon">👋</span><span>"Hey, what's your name?"</span></div>
+                            <div class="compare-row"><span class="cr-icon">📦</span><span>"Remember my age is 12"</span></div>
+                            <div class="compare-row"><span class="cr-icon">🔀</span><span>"If it's raining, take an umbrella"</span></div>
+                            <div class="compare-row"><span class="cr-icon">🔁</span><span>"Say Bismillah before every meal"</span></div>
+                            <div class="compare-row"><span class="cr-icon">📢</span><span>"Tell me the answer"</span></div>
+                        </div>
+                        <div class="compare-vs">VS</div>
+                        <div class="compare-side python">
+                            <h5>🐍 How Python Says It</h5>
+                            <div class="compare-row"><span class="cr-icon">💻</span><span><code>input("What is your name? ")</code></span></div>
+                            <div class="compare-row"><span class="cr-icon">💻</span><span><code>age = 12</code></span></div>
+                            <div class="compare-row"><span class="cr-icon">💻</span><span><code>if raining: take_umbrella()</code></span></div>
+                            <div class="compare-row"><span class="cr-icon">💻</span><span><code>for meal in meals: say_bismillah()</code></span></div>
+                            <div class="compare-row"><span class="cr-icon">💻</span><span><code>print(answer)</code></span></div>
+                        </div>
+                    </div>
+
+                    <div class="teacher-tip">
+                        <h5>👩‍🏫 Instructor Tip — Participation Moment!</h5>
+                        <p>Ask: "Who has heard of Python before?" Then: "Who has written Python code?" Celebrate every hand that goes up. Then say: "Today, ALL of you will write Python code that actually works. Ready?"</p>
+                    </div>
+                </section>
+
+                <!-- ===== SECTION 3: DESIGN YOUR CHATBOT ===== -->
+                <section id="design">
+                    <div class="pill-label">✏️ Design Time</div>
+                    <h2>✏️ Design Your Chatbot — On Paper First!</h2>
+                    <p>Before we write a single line of code, we design. Real engineers always plan before they build. Today, you'll sketch your chatbot idea — just like the kids did in Session 2!</p>
+
+                    <div class="kids-friendly-box">
+                        <h4>🎨 Your Chatbot Design Challenge (5 minutes)</h4>
+                        <p>Grab a piece of paper and answer these questions about your chatbot:</p>
+                        <ul>
+                            <li>🤖 <strong>Name:</strong> What is your chatbot called? (e.g., Noor, Huda, Bilal)</li>
+                            <li>😊 <strong>Personality:</strong> Is it friendly? Funny? Calm? Wise?</li>
+                            <li>📚 <strong>Topic:</strong> What does it know about? (Islamic facts, duas, stories)</li>
+                            <li>💬 <strong>3 Questions it can answer:</strong> Write them down!</li>
+                            <li>🚫 <strong>What it should NOT say:</strong> What topics should it avoid?</li>
+                        </ul>
+                    </div>
+
+                    <h3>How a Chatbot Thinks 🧠</h3>
+                    <p>A chatbot is like a very smart flashcard game. You ask a question → the chatbot looks for a matching answer → it replies. Simple!</p>
+
+                    <!-- DIAGRAM 4: Chatbot Architecture -->
+                    <div class="arch-diagram">
+                        <h4>🏗️ How Your Chatbot Works — Inside the Machine</h4>
+                        <div class="arch-flow">
+                            <div class="arch-node user-node">
+                                <div class="arch-node-icon">👦</div>
+                                <div class="arch-node-text">
+                                    <h6>You Type a Question</h6>
+                                    <p>"How many times do we pray?"</p>
+                                </div>
+                            </div>
+                            <div class="arch-arrow">↓</div>
+                            <div class="arch-node safe-node">
+                                <div class="arch-node-icon">🔡</div>
+                                <div class="arch-node-text">
+                                    <h6>Python Makes It Lowercase</h6>
+                                    <p><code>message.lower().strip()</code> — so "Hello" and "hello" both work</p>
+                                </div>
+                            </div>
+                            <div class="arch-arrow">↓</div>
+                            <div class="arch-node brain-node">
+                                <div class="arch-node-icon">🧠</div>
+                                <div class="arch-node-text">
+                                    <h6>Search the Knowledge Dictionary</h6>
+                                    <p>Loop through every keyword — does any keyword appear in the question?</p>
+                                </div>
+                            </div>
+                            <div class="arch-arrow">↓</div>
+                            <div class="arch-node reply-node">
+                                <div class="arch-node-icon">✅</div>
+                                <div class="arch-node-text">
+                                    <h6>Match Found → Return Answer</h6>
+                                    <p>"Muslims pray 5 times a day: Fajr, Dhuhr, Asr, Maghrib, Isha. 🕌"</p>
+                                </div>
+                            </div>
+                            <div class="arch-arrow">↓</div>
+                            <div class="arch-node safe-node">
+                                <div class="arch-node-icon">🤲</div>
+                                <div class="arch-node-text">
+                                    <h6>No Match → Safe Default Reply</h6>
+                                    <p>"I'm not sure. Please ask a parent, teacher, or imam!"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="teacher-tip">
+                        <h5>👩‍🏫 Instructor Tip — Share Designs!</h5>
+                        <p>After 5 minutes, ask 2–3 volunteers to share their chatbot name and one question it can answer. Write them on the whiteboard. This builds excitement before coding begins!</p>
+                    </div>
+                </section>
+
+                <!-- ===== SECTION 4: PYTHON CONCEPTS ===== -->
+                <section id="python-concepts">
+                    <div class="pill-label">🐍 Python Concepts</div>
+                    <h2>🐍 The Python Tools We'll Use Today</h2>
+                    <p>We only need 4 Python tools to build our chatbot. You've seen all of these before — let's do a super-fast refresher!</p>
+
+                    <!-- DIAGRAM 5: Python 4 Tools Visual -->
+                    <div class="tools-diagram">
+                        <div class="tool-card">
+                            <div class="tool-number">1</div>
+                            <span class="tool-emoji">📦</span>
+                            <h5>Variables</h5>
+                            <p>Labeled boxes that store information. <code>name = "Noor"</code> — give it a name, put something inside!</p>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-number">2</div>
+                            <span class="tool-emoji">💬</span>
+                            <h5>Input &amp; Output</h5>
+                            <p>Talk to users! <code>input()</code> asks a question. <code>print()</code> shows the answer on screen.</p>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-number">3</div>
+                            <span class="tool-emoji">🔀</span>
+                            <h5>If / Else</h5>
+                            <p>Make decisions! <code>if</code> this is true → do this. <code>else</code> → do something different.</p>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-number">4</div>
+                            <span class="tool-emoji">🗝️</span>
+                            <h5>Dictionaries</h5>
+                            <p>The chatbot's brain! Stores Q&amp;A pairs. <code>{"question": "answer"}</code> — like digital flashcards.</p>
+                        </div>
+                    </div>
+
+                    <h3>Tool 1: Variables — The Labeled Boxes 📦</h3>
+                    <p>A variable stores information. Give it a name, and put something inside.</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">chatbot_name = "Noor"       # A string (text)
+age_limit = 14              # An integer (whole number)
+is_running = True           # A boolean (yes/no)</code></pre>
+                        </div>
+                    </div>
+
+                    <h3>Tool 2: Input &amp; Output — Talking to Users 💬</h3>
+                    <p><code>input()</code> asks the user a question. <code>print()</code> shows a message on screen.</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">question = input("You: ")          # Ask the user
+print("Noor: Assalamu Alaikum!")   # Show a reply</code></pre>
+                        </div>
+                    </div>
+
+                    <h3>Tool 3: If/Else — Making Decisions 🔀</h3>
+                    <p>If the user says X, reply with Y. Otherwise, say something else.</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">if question == "hello":
+    print("Noor: Wa Alaikum Assalam! 😊")
+else:
+    print("Noor: I'm not sure about that!")</code></pre>
+                        </div>
+                    </div>
+
+                    <h3>Tool 4: Dictionaries — The Q&amp;A Brain 🗝️</h3>
+                    <p>A dictionary stores pairs: a question (key) and an answer (value). This is the chatbot's knowledge!</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">knowledge = {
+    "how many prayers": "We pray 5 times a day! 🕌",
+    "what is zakat":    "Zakat is giving 2.5% of savings to those in need. 💛",
+    "who is allah":     "Allah is the One God, Creator of everything. 🌟"
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="kids-friendly-box">
+                        <h4>💡 Think of it Like Flashcards!</h4>
+                        <p>Imagine you have a stack of flashcards. On one side is a question, on the other side is the answer. A Python dictionary is exactly that — a digital stack of flashcards your chatbot can flip through instantly!</p>
+                    </div>
+                </section>
+
+                <!-- ===== SECTION 5: BUILD THE CHATBOT ===== -->
+                <section id="build">
+                    <div class="pill-label">🔨 Live Build</div>
+                    <h2>🔨 Let's Build the Chatbot — Step by Step!</h2>
+                    <p>Now the exciting part! We'll build the chatbot together, one step at a time. Type along with the instructor. Don't worry about mistakes — that's how we learn!</p>
+
+                    <h3>Step 1: Set Up the Chatbot's Identity 🤖</h3>
+                    <p>First, we give our chatbot a name and a welcome message.</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python — Step 1</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python"># ============================================
+# My Islamic Chatbot - Built by AI Superheroes!
+# ============================================
+
+chatbot_name = "Noor"   # Change this to YOUR chatbot's name!
+
+print("=" * 45)
+print(f"  Assalamu Alaikum! I am {chatbot_name} 🤖")
+print("  Your friendly Islamic learning buddy!")
+print("  Type 'quit' anytime to say goodbye.")
+print("=" * 45)
+print()</code></pre>
+                        </div>
+                    </div>
+                    <div class="output-example">=============================================
+  Assalamu Alaikum! I am Noor 🤖
+  Your friendly Islamic learning buddy!
+  Type 'quit' anytime to say goodbye.
+=============================================</div>
+
+                    <div class="teacher-tip">
+                        <h5>👩‍🏫 Instructor Tip</h5>
+                        <p>Ask kids to change <code>chatbot_name</code> to their own chatbot's name from the design activity. This makes it personal and exciting!</p>
+                    </div>
+
+                    <h3>Step 2: Build the Knowledge Base 📚</h3>
+                    <p>Now we add the chatbot's brain — a dictionary of Islamic Q&amp;A pairs.</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python — Step 2</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python"># The chatbot's knowledge - Q&A pairs
+# Key = question keywords, Value = answer
+knowledge = {
+    "hello":              "Wa Alaikum Assalam! How can I help you today? 😊",
+    "assalamu alaikum":   "Wa Alaikum Assalam wa Rahmatullahi wa Barakatuh! 🌙",
+    "how many prayers":   "Muslims pray 5 times a day: Fajr, Dhuhr, Asr, Maghrib, Isha. 🕌",
+    "what is zakat":      "Zakat means giving 2.5% of your savings to help people in need. It's one of the 5 pillars of Islam! 💛",
+    "who is allah":       "Allah is the One God, the Creator of everything in the universe. 🌟",
+    "what is quran":      "The Quran is the holy book of Islam, revealed to Prophet Muhammad ﷺ. It has 114 surahs! 📖",
+    "what is ramadan":    "Ramadan is the blessed month of fasting. Muslims don't eat or drink from sunrise to sunset. 🌙",
+    "what is eid":        "Eid is a joyful celebration! Eid ul-Fitr comes after Ramadan, and Eid ul-Adha celebrates sacrifice. 🎉",
+    "what is dua":        "Dua means supplication — talking to Allah and asking for His help and blessings. 🤲",
+    "what is hadith":     "A Hadith is a saying or action of Prophet Muhammad ﷺ, recorded by his companions. 📜",
+    "what is sunnah":     "Sunnah means following the example of Prophet Muhammad ﷺ in our daily life. ✨",
+    "how to make wudu":   "Wudu is the Islamic way of washing before prayer: hands, mouth, nose, face, arms, head, ears, feet. 💧",
+    "what is sadaqah":    "Sadaqah is voluntary charity — giving to others with a kind heart, any amount! 💚",
+    "thank you":          "You're welcome! JazakAllahu Khayran — may Allah reward you with goodness! 🌸",
+    "bye":                "Wa Alaikum Assalam! May Allah bless you and your family. See you next time! 🌙",
+    "quit":               "Wa Alaikum Assalam! May Allah bless you and your family. See you next time! 🌙",
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="kids-friendly-box">
+                        <h4>🎨 Make It Yours!</h4>
+                        <p>This is YOUR chatbot's brain. You can add more Q&amp;A pairs! Just follow the pattern:</p>
+                        <p><code>"your question keywords": "your answer here",</code></p>
+                        <p>Try adding your favourite dua, a fact about a prophet, or a question about Islamic history!</p>
+                    </div>
+
+                    <h3>Step 3: Build the Smart Reply Function 🧠</h3>
+                    <p>This is the chatbot's brain — it looks at what the user typed and finds the best answer.</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python — Step 3</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">def get_reply(user_message, knowledge_base):
+    """
+    Look for a matching answer in the knowledge base.
+    We check if any keyword from our dictionary
+    appears in what the user typed.
+    """
+    # Make the message lowercase so "Hello" and "hello" both work
+    message = user_message.lower().strip()
+
+    # Check each keyword in our knowledge base
+    for keyword, answer in knowledge_base.items():
+        if keyword in message:
+            return answer   # Found a match! Return the answer
+
+    # No match found - give a polite default reply
+    return "Hmm, I'm not sure about that. Please ask a parent, teacher, or imam! 🤲"</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>🔍 How Does This Work?</h4>
+                        <p>The function loops through every keyword in our dictionary. If the keyword appears anywhere in what the user typed, it returns that answer. It's like a search engine — but tiny and Islamic! 😄</p>
+                        <p>Example: User types <strong>"tell me about zakat please"</strong> → the function finds <strong>"what is zakat"</strong> contains the word <strong>"zakat"</strong> → returns the zakat answer!</p>
+                    </div>
+
+                    <h3>Step 4: The Main Chat Loop 🔁</h3>
+                    <p>Now we make the chatbot keep talking until the user says "quit". This is a <strong>while loop</strong> — it keeps going as long as a condition is true.</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python — Step 4</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python"># Keep chatting until the user says "quit"
+while True:
+    # Ask the user for their message
+    user_input = input("You: ")
+
+    # Check if they want to leave
+    if user_input.lower() == "quit":
+        print(f"{chatbot_name}: Wa Alaikum Assalam! May Allah bless you! 🌙")
+        break   # Exit the loop
+
+    # Get the chatbot's reply
+    reply = get_reply(user_input, knowledge)
+
+    # Show the reply
+    print(f"{chatbot_name}: {reply}")
+    print()   # Empty line for readability</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="kids-friendly-box">
+                        <h4>💡 What is a While Loop?</h4>
+                        <p>A <code>while True</code> loop runs forever — until we tell it to stop with <code>break</code>. It's like a conversation that keeps going until someone says goodbye!</p>
+                        <p>Think of it like a game: the game keeps playing until you press "Exit". The <code>break</code> is the Exit button!</p>
+                    </div>
+                </section>
+
+                <!-- ===== SECTION 6: COMPLETE CODE ===== -->
+                <section id="complete-code">
+                    <div class="pill-label">🚀 Complete Code</div>
+                    <h2>🚀 The Complete Chatbot — All Together!</h2>
+                    <p>Here is the full chatbot code. Copy it into your Python file, run it, and watch your chatbot come to life! 🎉</p>
+
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> noor_chatbot.py — Complete Code</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy All</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python"># ============================================
+# My Islamic Chatbot - Built by AI Superheroes!
+# Session 6 - Khalida Foundation
+# ============================================
+
+# --- STEP 1: Chatbot Identity ---
+chatbot_name = "Noor"   # Change to YOUR chatbot's name!
+
+print("=" * 45)
+print(f"  Assalamu Alaikum! I am {chatbot_name} 🤖")
+print("  Your friendly Islamic learning buddy!")
+print("  Type 'quit' anytime to say goodbye.")
+print("=" * 45)
+print()
+
+# --- STEP 2: Knowledge Base (Q&A Dictionary) ---
+knowledge = {
+    "hello":              "Wa Alaikum Assalam! How can I help you today? 😊",
+    "assalamu alaikum":   "Wa Alaikum Assalam wa Rahmatullahi wa Barakatuh! 🌙",
+    "how many prayers":   "Muslims pray 5 times a day: Fajr, Dhuhr, Asr, Maghrib, Isha. 🕌",
+    "what is zakat":      "Zakat means giving 2.5% of your savings to help people in need. 💛",
+    "who is allah":       "Allah is the One God, the Creator of everything. 🌟",
+    "what is quran":      "The Quran is the holy book of Islam, with 114 surahs! 📖",
+    "what is ramadan":    "Ramadan is the blessed month of fasting. 🌙",
+    "what is eid":        "Eid is a joyful celebration after Ramadan and during Hajj season! 🎉",
+    "what is dua":        "Dua means talking to Allah and asking for His help. 🤲",
+    "what is hadith":     "A Hadith is a saying or action of Prophet Muhammad ﷺ. 📜",
+    "what is sunnah":     "Sunnah means following the example of Prophet Muhammad ﷺ. ✨",
+    "how to make wudu":   "Wudu: wash hands, mouth, nose, face, arms, head, ears, feet. 💧",
+    "what is sadaqah":    "Sadaqah is voluntary charity — giving with a kind heart! 💚",
+    "thank you":          "JazakAllahu Khayran — may Allah reward you! 🌸",
+    "bye":                "Wa Alaikum Assalam! May Allah bless you! 🌙",
+}
+
+# --- STEP 3: Smart Reply Function ---
+def get_reply(user_message, knowledge_base):
+    """Find the best answer for the user's message."""
+    message = user_message.lower().strip()
+
+    for keyword, answer in knowledge_base.items():
+        if keyword in message:
+            return answer
+
+    return "I'm not sure about that. Please ask a parent, teacher, or imam! 🤲"
+
+# --- STEP 4: Main Chat Loop ---
+while True:
+    user_input = input("You: ")
+
+    if user_input.lower() == "quit":
+        print(f"{chatbot_name}: Wa Alaikum Assalam! May Allah bless you! 🌙")
+        break
+
+    reply = get_reply(user_input, knowledge)
+    print(f"{chatbot_name}: {reply}")
+    print()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="checkpoint-box">
+                        <h4>🎉 Run Your Bot Checkpoint!</h4>
+                        <p>Save your file as <strong>noor_chatbot.py</strong> and run it! Try asking: "What is Ramadan?" and "How many prayers?" — does your chatbot answer correctly? High five if it does! ✋</p>
+                    </div>
+
+                    <div class="output-example">=============================================
+  Assalamu Alaikum! I am Noor 🤖
+  Your friendly Islamic learning buddy!
+  Type 'quit' anytime to say goodbye.
+=============================================
+
+You: assalamu alaikum
+Noor: Wa Alaikum Assalam wa Rahmatullahi wa Barakatuh! 🌙
+
+You: what is ramadan
+Noor: Ramadan is the blessed month of fasting. 🌙
+
+You: tell me about zakat
+Noor: Zakat means giving 2.5% of your savings to help people in need. 💛
+
+You: what is the weather
+Noor: I'm not sure about that. Please ask a parent, teacher, or imam! 🤲
+
+You: quit
+Noor: Wa Alaikum Assalam! May Allah bless you! 🌙</div>
+                </section>
+
+                <!-- ===== SECTION 7: BEST PRACTICES ===== -->
+                <section id="best-practices">
+                    <div class="pill-label">🛡️ Best Practices</div>
+                    <h2>🛡️ Building a Safe &amp; Respectful Chatbot</h2>
+                    <p>A great chatbot isn't just smart — it's also <strong>safe, kind, and honest</strong>. Here are the rules every AI Superhero follows:</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-child"></i>
+                            <h5>Kid-Safe Responses</h5>
+                            <p>Never include scary, violent, or adult content. Keep everything positive and age-appropriate.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-mosque"></i>
+                            <h5>Respectful Islamic Language</h5>
+                            <p>Use proper Islamic phrases: ﷺ after the Prophet's name, Alhamdulillah, Insha'Allah, JazakAllahu Khayran.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-question-circle"></i>
+                            <h5>Say "I Don't Know"</h5>
+                            <p>If the chatbot doesn't know, it should say so honestly and redirect to a parent, teacher, or imam.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-ban"></i>
+                            <h5>No Harmful Topics</h5>
+                            <p>The chatbot should not discuss violence, politics, or give religious rulings (fatwas). It's a helper, not a mufti!</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>📋 The Chatbot Safety Checklist</h4>
+                        <ul>
+                            <li>✅ All answers are kind and encouraging</li>
+                            <li>✅ No personal information is collected</li>
+                            <li>✅ Unknown questions get a polite "ask an adult" reply</li>
+                            <li>✅ No religious rulings or fatwas</li>
+                            <li>✅ Works offline — no internet needed</li>
+                            <li>✅ Uses proper Islamic greetings and phrases</li>
+                        </ul>
+                    </div>
+
+                    <div class="teacher-tip">
+                        <h5>👩‍🏫 Instructor Tip — Ethics Discussion (3 min)</h5>
+                        <p>Ask the class: "What should Noor say if someone asks 'Is eating pizza haram?'" Let kids discuss. The answer: Noor should say "Please ask your parents or imam for religious guidance!" This teaches that AI is a helper, not an authority.</p>
+                    </div>
+                </section>
+
+                <!-- ===== SECTION 8: EXTEND YOUR BOT ===== -->
+                <section id="extend">
+                    <div class="pill-label">🌱 Extend &amp; Grow</div>
+                    <h2>🌱 How to Make Your Chatbot Even Better!</h2>
+                    <p>Your chatbot is working — amazing! Now let's think about how to grow it over time. Here are ideas for future sessions:</p>
+
+                    <h3>Level 1: Add More Knowledge 📚</h3>
+                    <p>The easiest way to improve your chatbot is to add more Q&amp;A pairs to the dictionary. Try adding:</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python — Add More Q&amp;A</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python"># Add these to your knowledge dictionary!
+"what is hajj":       "Hajj is the pilgrimage to Makkah — one of the 5 pillars of Islam! 🕋",
+"who is prophet":     "Prophet Muhammad ﷺ is the last messenger of Allah, born in Makkah. 🌟",
+"morning dua":        "Say: 'Alhamdulillahilladhi ahyana ba'da ma amatana' when you wake up! 🌅",
+"sleeping dua":       "Say: 'Bismika Allahumma amutu wa ahya' before sleeping! 🌙",
+"eating dua":         "Say: 'Bismillah' before eating and 'Alhamdulillah' after! 🍽️",</code></pre>
+                        </div>
+                    </div>
+
+                    <h3>Level 2: Add a Greeting with the User's Name 👋</h3>
+                    <p>Make the chatbot ask for the user's name at the start and use it in replies!</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python — Personalized Greeting</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python"># Add this BEFORE the while loop
+user_name = input("What is your name? ")
+print(f"\n{chatbot_name}: Assalamu Alaikum, {user_name}! 🌙 How can I help you today?\n")</code></pre>
+                        </div>
+                    </div>
+
+                    <h3>Level 3: Add Islamic Stories 📖</h3>
+                    <p>Add short stories about prophets or Islamic history to your knowledge base!</p>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-language"><i class="fab fa-python"></i> Python — Story Entry</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">"story of ibrahim":   "Prophet Ibrahim ﷺ was known as Khalilullah — the friend of Allah. He was tested many times and always trusted Allah. His story teaches us patience and faith! 🌟",
+"story of yusuf":     "Prophet Yusuf ﷺ had a beautiful dream about 11 stars. His brothers were jealous, but Allah had a great plan for him. He became a leader in Egypt! 🌙",</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="success-box">
+                        <h4>🚀 Future Session Preview!</h4>
+                        <p>In our next sessions, we'll learn how to:</p>
+                        <ul>
+                            <li>Save the chatbot's conversations to a file</li>
+                            <li>Add a score system — earn points for asking good questions!</li>
+                            <li>Give the chatbot a web interface so anyone can use it in a browser</li>
+                            <li>Connect it to a real AI brain (LLM) for smarter answers</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ===== SECTION 9: MINI RECAP ===== -->
+                <section id="recap">
+                    <div class="pill-label">📝 Mini Recap</div>
+                    <h2>📝 Today's Mini Recap — Remember This!</h2>
+                    <p>Before you go, let's lock in what we learned today. Read this out loud with the class!</p>
+
+                    <div class="kids-friendly-box">
+                        <h4>🧠 The 5 Things I Learned Today</h4>
+                        <ul>
+                            <li>1️⃣ <strong>Python</strong> is a simple, powerful language used for AI — and it reads like English!</li>
+                            <li>2️⃣ A <strong>dictionary</strong> stores Q&amp;A pairs — the chatbot's brain!</li>
+                            <li>3️⃣ <strong>if/else</strong> lets the chatbot make decisions based on what the user says.</li>
+                            <li>4️⃣ A <strong>while loop</strong> keeps the conversation going until the user says goodbye.</li>
+                            <li>5️⃣ A good chatbot is <strong>safe, kind, honest</strong> — and says "I don't know" when it doesn't know!</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>🏠 Homework Challenges</h4>
+                        <ul>
+                            <li>⭐ <strong>Level 1:</strong> Add 5 new Q&amp;A pairs to your chatbot's knowledge base.</li>
+                            <li>⭐⭐ <strong>Level 2:</strong> Add a personalized greeting that uses the user's name.</li>
+                            <li>⭐⭐⭐ <strong>Level 3:</strong> Add 3 Islamic stories (prophets, companions, or historical events).</li>
+                            <li>🌟 <strong>Bonus:</strong> Teach your chatbot a dua for morning, evening, and before eating!</li>
+                        </ul>
+                    </div>
+
+                    <div class="teacher-tip">
+                        <h5>👩‍🏫 Instructor Tip — Closing Moment</h5>
+                        <p>End the session by asking each child to say ONE thing they're proud of building today. Even "I typed the code and it worked!" is a win. Celebrate every achievement. Close with a group "Alhamdulillah!" 🤲</p>
+                    </div>
+                </section>
+
+                <!-- ===== CTA ===== -->
+                <div class="cta-card">
+                    <h3>🌟 You Are an AI Superhero!</h3>
+                    <p>Today you built a real, working chatbot using Python. You designed it, coded it, and ran it. That's something most adults haven't done! Keep learning, keep building, and remember — with knowledge and good intentions, you can use AI to help the world. Alhamdulillah! 🤖🕌</p>
+                </div>
+
+                <!-- Back link -->
+                <a href="../../index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to All Blog Posts
+                </a>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+        // ── Syntax highlighting ──────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach(function(block) {
+                hljs.highlightElement(block);
+            });
+        });
+
+        // ── Copy code button ─────────────────────────────────────────
+        function copyCode(btn) {
+            const codeBlock = btn.closest('.code-example').querySelector('code');
+            const text = codeBlock.innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(function() {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // ── Navbar: scroll-shrink + topbar hide + progress bar ───────
+        (function() {
+            const nav      = document.getElementById('kf-nav');
+            const topbar   = document.getElementById('kf-topbar');
+            const progress = document.getElementById('kf-progress');
+            let lastY = 0;
+
+            function onScroll() {
+                const y = window.scrollY;
+
+                // Shrink navbar after 60px
+                nav.classList.toggle('scrolled', y > 60);
+
+                // Hide topbar after 80px
+                topbar.classList.toggle('hidden', y > 80);
+
+                // Reading progress
+                const docH = document.documentElement.scrollHeight - window.innerHeight;
+                const pct  = docH > 0 ? Math.min((y / docH) * 100, 100) : 0;
+                progress.style.width = pct + '%';
+
+                lastY = y;
+            }
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll(); // run once on load
+        })();
+
+        // ── Mobile drawer ────────────────────────────────────────────
+        (function() {
+            const hamburger = document.getElementById('kfHamburger');
+            const menu      = document.getElementById('kfMobileMenu');
+            const overlay   = document.getElementById('kfOverlay');
+            const closeBtn  = document.getElementById('kfMobileClose');
+
+            function openMenu() {
+                menu.classList.add('open');
+                overlay.classList.add('open');
+                hamburger.classList.add('open');
+                hamburger.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+                // Focus first link
+                const first = menu.querySelector('a, button');
+                if (first) setTimeout(() => first.focus(), 350);
+            }
+
+            function closeMenu() {
+                menu.classList.remove('open');
+                overlay.classList.remove('open');
+                hamburger.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+                hamburger.focus();
+            }
+
+            hamburger.addEventListener('click', openMenu);
+            closeBtn.addEventListener('click', closeMenu);
+            overlay.addEventListener('click', closeMenu);
+
+            // Close on Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+            });
+
+            // Close when a mobile link is clicked
+            menu.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', closeMenu);
+            });
+        })();
+
+        // ── Desktop dropdown keyboard nav ────────────────────────────
+        (function() {
+            document.querySelectorAll('.kf-nav-links > li').forEach(function(li) {
+                const trigger = li.querySelector('.kf-link');
+                const dropdown = li.querySelector('.kf-dropdown');
+                if (!trigger || !dropdown) return;
+
+                trigger.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        dropdown.classList.add('open');
+                        trigger.setAttribute('aria-expanded', 'true');
+                        const first = dropdown.querySelector('a, [role="menuitem"]');
+                        if (first) first.focus();
+                    }
+                });
+
+                dropdown.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        dropdown.classList.remove('open');
+                        trigger.setAttribute('aria-expanded', 'false');
+                        trigger.focus();
+                    }
+                });
+
+                // Close on outside click
+                document.addEventListener('click', function(e) {
+                    if (!li.contains(e.target)) {
+                        dropdown.classList.remove('open');
+                        trigger.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        })();
+    </script>
+    <script src="../../../js/scripts.js"></script>
+</body>
+</html>

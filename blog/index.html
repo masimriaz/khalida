@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
     <link href="../css/styles.css" rel="stylesheet" />
     <link href="../css/custom.css" rel="stylesheet" />
+    <link href="../css/navbar.css" rel="stylesheet" />
     <style>
         :root { --blog-max-width: 1100px; }
         body {
@@ -67,55 +68,120 @@
     </style>
 </head>
 <body id="page-top">
-    <nav class="navbar navbar-expand-lg navbar-elegant fixed-top" id="mainNav">
-        <div class="container-fluid px-3 px-lg-4">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html#page-top">
-                <i class="fas fa-graduation-cap"></i>
-                <span class="brand-text">Khalida Foundation</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto align-items-lg-center nav-master">
-                    <li class="nav-item"><a class="nav-link" href="../index.html#page-top">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="masterDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Explore</a>
-                        <ul class="dropdown-menu dropdown-menu-end p-3 shadow-lg" aria-labelledby="masterDropdown" style="min-width: 320px;">
-                            <li class="dropdown-header text-uppercase small text-muted">Courses</li>
-                            <li><a class="dropdown-item" href="../course-pages/courses.html">All Courses</a></li>
-                            <li><a class="dropdown-item" href="../course-pages/advanced-ai-for-kids.html">Advanced AI for Kids</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li class="dropdown-header text-uppercase small text-muted">Programs</li>
-                            <li><a class="dropdown-item" href="../index.html#programs">Programs & Initiatives</a></li>
-                            <li><a class="dropdown-item" href="../index.html#impact">Impact</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li class="dropdown-header text-uppercase small text-muted">AI Initiative</li>
-                            <li><a class="dropdown-item" href="../course-pages/courses.html#ai-initiative">AI Initiative Overview</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="blogDropdown">
-                            <li><a class="dropdown-item" href="index.html">All Blog Posts</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li class="dropdown-header">AI Superheroes Workshop Series</li>
-                            <li><a class="dropdown-item" href="2026/01/ai-superheroes-session-1.html"><span class="badge badge-sm bg-primary me-2">S1</span>Discovering AI Power</a></li>
-                            <li><a class="dropdown-item" href="2026/02/ai-superheroes-session-2.html"><span class="badge badge-sm bg-success me-2">S2</span>Building Noor Chatbot</a></li>
-                            <li><a class="dropdown-item" href="2026/02/ai-superheroes-session-3.html"><span class="badge badge-sm bg-info me-2">S3</span>Python Programming</a></li>
-                            <li><a class="dropdown-item" href="2026/02/ai-superheroes-session-4.html"><span class="badge badge-sm bg-danger me-2">S4</span>Leveling Up Noor</a></li>
-                            <li><a class="dropdown-item" href="2026/02/ai-superheroes-session-5.html"><span class="badge badge-sm bg-warning me-2">S5</span>Python Fundamentals</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../index.html#get-involved">Get Involved</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../index.html#gallery">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
-                    <li class="nav-item ms-lg-2"><a class="nav-link nav-link-register" href="../register.html">Register</a></li>
-                </ul>
+    <!-- Reading progress bar -->
+    <div id="kf-progress" role="progressbar" aria-label="Reading progress"></div>
+
+    <!-- Utility strip -->
+    <div id="kf-topbar" aria-label="Site information">
+        <div class="kf-topbar-inner">
+            <div class="kf-topbar-left">
+                <span class="kf-topbar-item"><i class="fas fa-graduation-cap"></i> Empowering Kids Through AI &amp; Education</span>
+                <span class="kf-topbar-item"><i class="fas fa-map-marker-alt"></i> Pakistan</span>
+                <span class="kf-topbar-item"><i class="fas fa-calendar-check"></i> Sessions Every Weekend</span>
+            </div>
+            <div class="kf-topbar-right">
+                <span class="kf-session-pill"><i class="fas fa-robot"></i> AI Superheroes · Session 6</span>
+                <a href="#" class="kf-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="kf-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="kf-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
+    </div>
+
+    <!-- Mobile overlay -->
+    <div class="kf-mobile-overlay" id="kfOverlay" aria-hidden="true"></div>
+
+    <!-- Main navbar -->
+    <nav id="kf-nav" role="navigation" aria-label="Main navigation">
+        <div class="kf-nav-inner">
+            <a class="kf-brand" href="../index.html#page-top" aria-label="Khalida Foundation — Home">
+                <div class="kf-brand-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="kf-brand-text">
+                    <span class="kf-brand-name">Khalida Foundation</span>
+                    <span class="kf-brand-sub">Education · Innovation · Impact</span>
+                </div>
+            </a>
+            <ul class="kf-nav-links" role="menubar">
+                <li role="none"><a class="kf-link" href="../index.html#page-top" role="menuitem">Home</a></li>
+                <li role="none"><a class="kf-link" href="../index.html#about" role="menuitem">About</a></li>
+                <li role="none">
+                    <a class="kf-link" href="#" role="menuitem" aria-haspopup="true" aria-expanded="false" id="kf-explore-btn">
+                        Explore <i class="fas fa-chevron-down kf-chevron"></i>
+                    </a>
+                    <div class="kf-dropdown" role="menu" aria-labelledby="kf-explore-btn">
+                        <div class="kf-dd-header">Courses</div>
+                        <a class="kf-dd-item" href="../course-pages/courses.html" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-list-ul"></i></span>All Courses</a>
+                        <a class="kf-dd-item" href="../course-pages/advanced-ai-for-kids.html" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-robot"></i></span>Advanced AI for Kids</a>
+                        <div class="kf-dd-divider"></div>
+                        <div class="kf-dd-header">Programs</div>
+                        <a class="kf-dd-item" href="../index.html#programs" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-seedling"></i></span>Programs &amp; Initiatives</a>
+                        <a class="kf-dd-item" href="../index.html#impact" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-chart-line"></i></span>Our Impact</a>
+                        <div class="kf-dd-divider"></div>
+                        <div class="kf-dd-header">AI Initiative</div>
+                        <a class="kf-dd-item" href="../course-pages/courses.html#ai-initiative" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-microchip"></i></span>AI Initiative Overview</a>
+                    </div>
+                </li>
+                <li role="none">
+                    <a class="kf-link kf-active" href="index.html" role="menuitem" aria-haspopup="true" aria-expanded="false" id="kf-blog-btn">
+                        <i class="fas fa-newspaper" style="font-size:0.72rem;opacity:0.8;"></i> Blog <i class="fas fa-chevron-down kf-chevron"></i>
+                    </a>
+                    <div class="kf-dropdown kf-mega" role="menu" aria-labelledby="kf-blog-btn">
+                        <a class="kf-dd-item kf-dd-active" href="index.html" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-th-large"></i></span>All Blog Posts</a>
+                        <div class="kf-dd-divider"></div>
+                        <div class="kf-dd-header">🦸 AI Superheroes Series</div>
+                        <div class="kf-mega-grid">
+                            <a class="kf-session-item" href="2026/01/ai-superheroes-session-1.html"><span class="kf-s-badge s1">S1</span>AI Power</a>
+                            <a class="kf-session-item" href="2026/02/ai-superheroes-session-2.html"><span class="kf-s-badge s2">S2</span>Noor Chatbot</a>
+                            <a class="kf-session-item" href="2026/02/ai-superheroes-session-3.html"><span class="kf-s-badge s3">S3</span>Python Basics</a>
+                            <a class="kf-session-item" href="2026/02/ai-superheroes-session-4.html"><span class="kf-s-badge s4">S4</span>Level Up Noor</a>
+                            <a class="kf-session-item" href="2026/02/ai-superheroes-session-5.html"><span class="kf-s-badge s5">S5</span>Fundamentals</a>
+                            <a class="kf-session-item" href="2026/02/ai-superheroes-session-6.html"><span class="kf-s-badge s6">S6</span>Build Chatbot</a>
+                        </div>
+                        <div class="kf-mega-footer"><a href="index.html">View all posts <i class="fas fa-arrow-right"></i></a><span class="kf-session-pill" style="font-size:0.62rem;">6 Sessions</span></div>
+                    </div>
+                </li>
+                <li role="none"><a class="kf-link" href="../index.html#get-involved" role="menuitem">Get Involved</a></li>
+                <li role="none"><a class="kf-link" href="../index.html#gallery" role="menuitem">Gallery</a></li>
+                <li role="none"><a class="kf-link" href="../index.html#contact" role="menuitem">Contact</a></li>
+            </ul>
+            <a class="kf-register" href="../register.html"><i class="fas fa-star"></i> Register</a>
+            <button class="kf-hamburger" id="kfHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="kfMobileMenu">
+                <span class="kf-bar"></span><span class="kf-bar"></span><span class="kf-bar"></span>
+            </button>
+        </div>
     </nav>
+
+    <!-- Mobile drawer -->
+    <div class="kf-mobile-menu" id="kfMobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+        <div class="kf-mobile-header">
+            <a class="kf-brand" href="../index.html#page-top" style="gap:0.5rem;">
+                <div class="kf-brand-icon" style="width:30px;height:30px;border-radius:8px;"><i class="fas fa-graduation-cap" style="font-size:0.85rem;"></i></div>
+                <span class="kf-brand-name" style="font-size:0.88rem;">Khalida Foundation</span>
+            </a>
+            <button class="kf-mobile-close" id="kfMobileClose" aria-label="Close menu"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="kf-mobile-section">Navigation</div>
+        <a class="kf-mobile-link" href="../index.html#page-top"><i class="fas fa-home"></i> Home</a>
+        <a class="kf-mobile-link" href="../index.html#about"><i class="fas fa-heart"></i> About</a>
+        <a class="kf-mobile-link" href="../course-pages/courses.html"><i class="fas fa-list-ul"></i> All Courses</a>
+        <a class="kf-mobile-link" href="../course-pages/advanced-ai-for-kids.html"><i class="fas fa-robot"></i> Advanced AI for Kids</a>
+        <a class="kf-mobile-link" href="../index.html#programs"><i class="fas fa-seedling"></i> Programs</a>
+        <a class="kf-mobile-link kf-active" href="index.html"><i class="fas fa-newspaper"></i> Blog</a>
+        <div class="kf-mobile-section">AI Superheroes Series</div>
+        <div class="kf-mobile-sessions">
+            <a class="kf-mobile-session" href="2026/01/ai-superheroes-session-1.html"><span class="kf-s-badge s1">S1</span>AI Power</a>
+            <a class="kf-mobile-session" href="2026/02/ai-superheroes-session-2.html"><span class="kf-s-badge s2">S2</span>Noor Chatbot</a>
+            <a class="kf-mobile-session" href="2026/02/ai-superheroes-session-3.html"><span class="kf-s-badge s3">S3</span>Python Basics</a>
+            <a class="kf-mobile-session" href="2026/02/ai-superheroes-session-4.html"><span class="kf-s-badge s4">S4</span>Level Up Noor</a>
+            <a class="kf-mobile-session" href="2026/02/ai-superheroes-session-5.html"><span class="kf-s-badge s5">S5</span>Fundamentals</a>
+            <a class="kf-mobile-session" href="2026/02/ai-superheroes-session-6.html"><span class="kf-s-badge s6">S6</span>Build Chatbot</a>
+        </div>
+        <div class="kf-mobile-section">More</div>
+        <a class="kf-mobile-link" href="../index.html#get-involved"><i class="fas fa-hands-helping"></i> Get Involved</a>
+        <a class="kf-mobile-link" href="../index.html#gallery"><i class="fas fa-images"></i> Gallery</a>
+        <a class="kf-mobile-link" href="../index.html#contact"><i class="fas fa-envelope"></i> Contact</a>
+        <a class="kf-mobile-register" href="../register.html"><i class="fas fa-star"></i> Register Now</a>
+    </div>
 
     <div class="blog-wrapper">
         <div class="breadcrumb-bar" aria-label="Breadcrumb">
@@ -128,6 +194,19 @@
         </header>
 
         <section aria-label="Blog list" class="blog-grid">
+            <article class="blog-card">
+                <img src="./session1/Learn%20AI%20Image%203.png" alt="Design and Build Islamic Chatbot with Python" />
+                <div class="blog-card-body">
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> May 23, 2026</span>
+                        <span><i class="fas fa-clock"></i> 30 min read</span>
+                    </div>
+                    <h2 class="blog-card-title">AI Superheroes Workshop – Session 6</h2>
+                    <p class="blog-card-text">Back after 2 months! Quick revision of all sessions, then design and build a complete Islamic chatbot in Python from scratch. Story-based, hands-on, and kid-friendly!</p>
+                    <a class="btn btn-primary btn-sm btn-read" href="./2026/02/ai-superheroes-session-6.html">Read Post</a>
+                </div>
+            </article>
+
             <article class="blog-card">
                 <img src="./session1/Learn%20AI%20Image%203.png" alt="Python Fundamentals for Kids" />
                 <div class="blog-card-body">
@@ -197,5 +276,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/scripts.js"></script>
+    <script src="../js/navbar.js"></script>
 </body>
 </html>
