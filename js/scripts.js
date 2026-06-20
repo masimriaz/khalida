@@ -161,9 +161,9 @@ window.addEventListener('DOMContentLoaded', event => {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const counters = entry.target.querySelectorAll('.stat-number');
+                const counters = entry.target.querySelectorAll('[data-target]');
                 counters.forEach(counter => {
-                    if (counter.textContent === '0') {
+                    if (counter.getAttribute('data-target')) {
                         animateCounter(counter);
                     }
                 });
