@@ -403,6 +403,31 @@ body {
 .featured-badge-circle { background: #e0e7ff !important; color: var(--kf-indigo) !important; }
 .btn-gallery-cta { background: linear-gradient(135deg, var(--kf-indigo), var(--kf-teal)) !important; }
 
+/* ── Vision Page Overrides ─────────────────────────────────────── */
+.hero-vision {
+    background: linear-gradient(160deg, #0f172a 0%, #1e293b 50%, #0f172a 100%) !important;
+    padding-top: 6rem !important;
+}
+.hero-vision::before {
+    background: radial-gradient(circle at 20% 50%, rgba(13, 148, 136, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%) !important;
+}
+.vision-nav { display: none !important; }
+.hero-stats { background: rgba(30, 41, 59, 0.6) !important; border-color: rgba(51, 65, 85, 0.3) !important; }
+.section-badge { background: var(--kf-deep) !important; }
+.facility-icon { box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2) !important; }
+.facility-ai .facility-icon { background: linear-gradient(135deg, #0f172a, #0d9488) !important; }
+.facility-library .facility-icon { background: linear-gradient(135deg, #0d9488, #14b8a6) !important; }
+.facility-stitching .facility-icon { background: linear-gradient(135deg, #1e293b, #334155) !important; }
+.facility-title { color: #0f172a !important; }
+.facility-card:hover { border-color: #0d9488 !important; }
+.section-title { color: #0f172a !important; }
+.impact-vision { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0d9488 100%) !important; }
+.cta-button { background: #ffffff !important; color: #0f172a !important; }
+.cta-button:hover { box-shadow: 0 10px 30px rgba(15, 23, 42, 0.3) !important; }
+.vision-footer { background: #0f172a !important; }
+.dt-guide-btn { background: linear-gradient(135deg, #0f172a, #0d9488) !important; }
+
 /* ── Foundation Map Section ────────────────────────────────────── */
 .kf-map-section {
     padding: 4rem 0;

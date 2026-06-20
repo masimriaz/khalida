@@ -12,64 +12,55 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" type="text/css" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/custom.css" rel="stylesheet" />
+    <link href="css/navbar.css" rel="stylesheet" />
     <link href="css/vision-styles.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
 </head>
 <body id="page-top">
-    <nav class="navbar navbar-expand-lg navbar-elegant fixed-top" id="mainNav">
-        <div class="container-fluid px-3 px-lg-4">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html#page-top">
-                <i class="fas fa-graduation-cap"></i>
-                <span class="brand-text">Khalida Foundation</span>
+    <!-- Reading progress bar -->
+    <div id="kf-progress" role="progressbar" aria-label="Reading progress"></div>
+
+    <!-- Main navbar -->
+    <nav id="kf-nav" role="navigation" aria-label="Main navigation">
+        <div class="kf-nav-inner">
+            <a class="kf-brand" href="index.html#page-top" aria-label="Khalida Foundation — Home">
+                <div class="kf-brand-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="kf-brand-text">
+                    <span class="kf-brand-name">Khalida Foundation</span>
+                    <span class="kf-brand-sub">Education · Innovation · Impact</span>
+                </div>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <ul class="kf-nav-links" role="menubar">
+                <li role="none"><a class="kf-link" href="index.html#page-top" role="menuitem">Home</a></li>
+                <li role="none"><a class="kf-link" href="index.html#about" role="menuitem">About</a></li>
+                <li role="none"><a class="kf-link kf-active" href="vision.html" role="menuitem">Vision</a></li>
+                <li role="none"><a class="kf-link" href="index.html#programs" role="menuitem">Programs</a></li>
+                <li role="none"><a class="kf-link" href="index.html#contact" role="menuitem">Contact</a></li>
+            </ul>
+            <button class="kf-hamburger" id="kfHamburger" aria-label="Open menu" aria-expanded="false">
+                <span class="kf-bar"></span><span class="kf-bar"></span><span class="kf-bar"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto align-items-lg-center nav-master">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#page-top">Home</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="vision.html">Vision</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="masterDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Explore</a>
-                        <ul class="dropdown-menu dropdown-menu-end p-3 shadow-lg" aria-labelledby="masterDropdown" style="min-width: 320px;">
-                            <li class="dropdown-header text-uppercase small text-muted">Courses</li>
-                            <li><a class="dropdown-item" href="course-pages/courses.html">All Courses</a></li>
-                            <li><a class="dropdown-item" href="course-pages/advanced-ai-for-kids.html">Advanced AI for Kids</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li class="dropdown-header text-uppercase small text-muted">Teacher Training</li>
-                            <li><a class="dropdown-item" href="design-thinking-guide.html"><i class="fas fa-lightbulb me-2"></i>Design Thinking Guide</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li class="dropdown-header text-uppercase small text-muted">Programs</li>
-                            <li><a class="dropdown-item" href="index.html#programs">Programs & Initiatives</a></li>
-                            <li><a class="dropdown-item" href="index.html#impact">Impact</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li class="dropdown-header text-uppercase small text-muted">AI Initiative</li>
-                            <li><a class="dropdown-item" href="course-pages/courses.html#ai-initiative">AI Initiative Overview</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="blog/index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-newspaper me-1"></i>Blog
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="blogDropdown">
-                            <li><a class="dropdown-item" href="blog/index.html"><i class="fas fa-list me-2"></i>All Blog Posts</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li class="dropdown-header">AI Superheroes Workshop Series</li>
-                            <li><a class="dropdown-item" href="blog/2026/01/ai-superheroes-session-1.html"><span class="badge badge-sm bg-primary me-2">S1</span>Discovering AI Power</a></li>
-                            <li><a class="dropdown-item" href="blog/2026/02/ai-superheroes-session-2.html"><span class="badge badge-sm bg-success me-2">S2</span>Building Noor Chatbot</a></li>
-                            <li><a class="dropdown-item" href="blog/2026/02/ai-superheroes-session-3.html"><span class="badge badge-sm bg-info me-2">S3</span>Python Programming</a></li>
-                            <li><a class="dropdown-item" href="blog/2026/02/ai-superheroes-session-4.html"><span class="badge badge-sm bg-danger me-2">S4</span>Leveling Up Noor</a></li>
-                            <li><a class="dropdown-item" href="blog/2026/02/ai-superheroes-session-5.html"><span class="badge badge-sm bg-warning me-2">S5</span><i class="fas fa-code me-2"></i>Python Fundamentals</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#get-involved">Get Involved</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#gallery">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html#contact">Contact</a></li>
-                    <li class="nav-item ms-lg-2"><a class="nav-link nav-link-register" href="register.html">Register</a></li>
-                </ul>
-            </div>
         </div>
     </nav>
+
+    <!-- Mobile overlay -->
+    <div class="kf-mobile-overlay" id="kfOverlay" aria-hidden="true"></div>
+
+    <!-- Mobile drawer -->
+    <div class="kf-mobile-menu" id="kfMobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+        <div class="kf-mobile-header">
+            <a class="kf-brand" href="index.html#page-top" style="gap:0.5rem;">
+                <div class="kf-brand-icon" style="width:30px;height:30px;border-radius:8px;"><i class="fas fa-graduation-cap" style="font-size:0.85rem;"></i></div>
+                <span class="kf-brand-name" style="font-size:0.88rem;">Khalida Foundation</span>
+            </a>
+            <button class="kf-mobile-close" id="kfMobileClose" aria-label="Close menu"><i class="fas fa-times"></i></button>
+        </div>
+        <a class="kf-mobile-link" href="index.html#page-top"><i class="fas fa-home"></i> Home</a>
+        <a class="kf-mobile-link" href="index.html#about"><i class="fas fa-heart"></i> About</a>
+        <a class="kf-mobile-link kf-active" href="vision.html"><i class="fas fa-eye"></i> Vision</a>
+        <a class="kf-mobile-link" href="index.html#programs"><i class="fas fa-seedling"></i> Programs</a>
+        <a class="kf-mobile-link" href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
 
     <section class="hero-vision">
         <div class="hero-content">
@@ -673,6 +664,7 @@
     <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="js/navbar.js"></script>
     <script src="js/vision-script.js"></script>
 </body>
 </html>
