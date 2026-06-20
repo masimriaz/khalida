@@ -79,6 +79,12 @@ body {
 .kf-mobile-overlay { z-index: 9991 !important; }
 .kf-mobile-menu { z-index: 9992 !important; }
 .kf-hamburger { z-index: 9990; position: relative; }
+
+@media (max-width: 991px) {
+    .kf-nav-links, .kf-register { display: none !important; }
+    .kf-hamburger { display: flex !important; }
+    .kf-mobile-menu, .kf-mobile-overlay { display: block !important; }
+}
 .kf-brand-icon {
     background: linear-gradient(135deg, var(--kf-indigo), var(--kf-teal)) !important;
     box-shadow: 0 4px 12px rgba(15, 23, 42, 0.3) !important;

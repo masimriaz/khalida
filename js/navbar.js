@@ -34,9 +34,9 @@
 
     /* ── Mobile drawer ────────────────────────────────────────── */
     function openMenu() {
-        if (!menu || !overlay || !hamburger) return;
+        if (!menu || !hamburger) return;
         menu.classList.add('kf-open');
-        overlay.classList.add('kf-open');
+        if(overlay) overlay.classList.add('kf-open');
         hamburger.classList.add('kf-open');
         hamburger.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
@@ -45,9 +45,9 @@
     }
 
     function closeMenu() {
-        if (!menu || !overlay || !hamburger) return;
+        if (!menu || !hamburger) return;
         menu.classList.remove('kf-open');
-        overlay.classList.remove('kf-open');
+        if(overlay) overlay.classList.remove('kf-open');
         hamburger.classList.remove('kf-open');
         hamburger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
