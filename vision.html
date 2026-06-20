@@ -20,6 +20,26 @@
     <!-- Reading progress bar -->
     <div id="kf-progress" role="progressbar" aria-label="Reading progress"></div>
 
+    <!-- Utility strip -->
+    <div id="kf-topbar" aria-label="Site information">
+        <div class="kf-topbar-inner">
+            <div class="kf-topbar-left">
+                <span class="kf-topbar-item"><i class="fas fa-graduation-cap"></i> Empowering Kids Through AI &amp; Education</span>
+                <span class="kf-topbar-item"><i class="fas fa-map-marker-alt"></i> Pakistan</span>
+                <span class="kf-topbar-item"><i class="fas fa-calendar-check"></i> Sessions Every Weekend</span>
+            </div>
+            <div class="kf-topbar-right">
+                <span class="kf-session-pill"><i class="fas fa-robot"></i> AI Superheroes · Session 6</span>
+                <a href="#" class="kf-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="kf-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="kf-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile overlay -->
+    <div class="kf-mobile-overlay" id="kfOverlay" aria-hidden="true"></div>
+
     <!-- Main navbar -->
     <nav id="kf-nav" role="navigation" aria-label="Main navigation">
         <div class="kf-nav-inner">
@@ -35,16 +55,14 @@
                 <li role="none"><a class="kf-link" href="index.html#about" role="menuitem">About</a></li>
                 <li role="none"><a class="kf-link kf-active" href="vision.html" role="menuitem">Vision</a></li>
                 <li role="none"><a class="kf-link" href="index.html#programs" role="menuitem">Programs</a></li>
+                <li role="none"><a class="kf-link" href="index.html#get-involved" role="menuitem">Get Involved</a></li>
                 <li role="none"><a class="kf-link" href="index.html#contact" role="menuitem">Contact</a></li>
             </ul>
-            <button class="kf-hamburger" id="kfHamburger" aria-label="Open menu" aria-expanded="false">
+            <button class="kf-hamburger" id="kfHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="kfMobileMenu">
                 <span class="kf-bar"></span><span class="kf-bar"></span><span class="kf-bar"></span>
             </button>
         </div>
     </nav>
-
-    <!-- Mobile overlay -->
-    <div class="kf-mobile-overlay" id="kfOverlay" aria-hidden="true"></div>
 
     <!-- Mobile drawer -->
     <div class="kf-mobile-menu" id="kfMobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
@@ -59,6 +77,8 @@
         <a class="kf-mobile-link" href="index.html#about"><i class="fas fa-heart"></i> About</a>
         <a class="kf-mobile-link kf-active" href="vision.html"><i class="fas fa-eye"></i> Vision</a>
         <a class="kf-mobile-link" href="index.html#programs"><i class="fas fa-seedling"></i> Programs</a>
+        <a class="kf-mobile-link" href="blog/index.html"><i class="fas fa-newspaper"></i> Blog</a>
+        <a class="kf-mobile-link" href="index.html#get-involved"><i class="fas fa-hands-helping"></i> Get Involved</a>
         <a class="kf-mobile-link" href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a>
     </div>
 
