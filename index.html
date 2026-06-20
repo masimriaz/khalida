@@ -46,7 +46,7 @@
         </div>
 
         <!-- Mobile overlay -->
-        <div class="kf-mobile-overlay" id="kfOverlay" aria-hidden="true"></div>
+        <div class="kf-mobile-overlay" id="kfOverlay" aria-hidden="true" onclick="document.getElementById('kfMobileMenu').classList.remove('kf-open');this.classList.remove('kf-open');document.getElementById('kfHamburger').classList.remove('kf-open');document.body.style.overflow=''"></div>
 
         <!-- Main navbar -->
         <nav id="kf-nav" role="navigation" aria-label="Main navigation">
@@ -105,7 +105,7 @@
                     <li role="none"><a class="kf-link" href="index.html#contact" role="menuitem">Contact</a></li>
                 </ul>
                 <a class="kf-register" href="register.html"><i class="fas fa-star"></i> Register</a>
-                <button class="kf-hamburger" id="kfHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="kfMobileMenu">
+                <button class="kf-hamburger" id="kfHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="kfMobileMenu" onclick="document.getElementById('kfMobileMenu').classList.add('kf-open');document.getElementById('kfOverlay').classList.add('kf-open');this.classList.add('kf-open');document.body.style.overflow='hidden'">
                     <span class="kf-bar"></span><span class="kf-bar"></span><span class="kf-bar"></span>
                 </button>
             </div>
@@ -118,7 +118,7 @@
                     <div class="kf-brand-icon" style="width:30px;height:30px;border-radius:8px;"><i class="fas fa-graduation-cap" style="font-size:0.85rem;"></i></div>
                     <span class="kf-brand-name" style="font-size:0.88rem;">Khalida Foundation</span>
                 </a>
-                <button class="kf-mobile-close" id="kfMobileClose" aria-label="Close menu"><i class="fas fa-times"></i></button>
+                <button class="kf-mobile-close" id="kfMobileClose" aria-label="Close menu" onclick="document.getElementById('kfMobileMenu').classList.remove('kf-open');document.getElementById('kfOverlay').classList.remove('kf-open');document.getElementById('kfHamburger').classList.remove('kf-open');document.body.style.overflow=''"><i class="fas fa-times"></i></button>
             </div>
             <div class="kf-mobile-section">Navigation</div>
             <a class="kf-mobile-link kf-active" href="index.html#page-top"><i class="fas fa-home"></i> Home</a>
