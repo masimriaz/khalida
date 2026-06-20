@@ -10,38 +10,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link href="css/styles.css" rel="stylesheet"/>
 <link href="css/custom.css" rel="stylesheet"/>
+<link href="css/navbar.css" rel="stylesheet"/>
+<link href="css/theme.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
-:root{--dt-primary:#667eea;--dt-secondary:#764ba2;--dt-accent:#f093fb;--dt-success:#56ab2f;--dt-bg:#f9f5ef;--dt-text:#1f3a46}
+:root{--dt-primary:#1e293b;--dt-secondary:#0d9488;--dt-accent:#14b8a6;--dt-success:#0d9488;--dt-bg:#f8fafc;--dt-text:#0f172a}
 *{box-sizing:border-box}
-body{background:linear-gradient(180deg,#f9f5ef 0%,#fff 50%,#f5efe3 100%);font-family:'Inter',sans-serif}
-#mainNav .container-fluid{padding-top:0!important;padding-bottom:0!important}
-#mainNav{padding:.5rem 0!important;min-height:60px!important}
-#mainNav .navbar-brand{font-size:1.1rem!important;padding:.4rem 0!important}
-#mainNav .nav-link{padding:.5rem 1rem!important;font-size:.95rem!important}
-.dt-hero{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:5rem 2rem;text-align:center;position:relative;overflow:hidden}
-.dt-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');opacity:.3}
-.dt-hero h1{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;margin-bottom:1rem;position:relative;z-index:1;text-shadow:2px 2px 4px rgba(0,0,0,.2)}
-.dt-hero .subtitle{font-size:clamp(1.2rem,3vw,1.6rem);margin-bottom:1.5rem;opacity:.95;font-weight:300}
+body{background:var(--dt-bg);font-family:'Inter',sans-serif}
+.dt-hero{background:linear-gradient(160deg,#0f172a 0%,#1e293b 40%,#0f172a 100%);color:#fff;padding:8rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
+.dt-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 20% 50%,rgba(13,148,136,0.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(99,102,241,0.1) 0%,transparent 40%);opacity:1}
+.dt-hero h1{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;margin-bottom:1rem;position:relative;z-index:1;text-shadow:2px 2px 4px rgba(0,0,0,.2);color:#ffffff}
+.dt-hero .subtitle{font-size:clamp(1.2rem,3vw,1.6rem);margin-bottom:1.5rem;opacity:.95;font-weight:300;color:#ffffff}
 .dt-hero .description{font-size:clamp(1rem,2vw,1.15rem);max-width:900px;margin:0 auto 2rem;position:relative;z-index:1;line-height:1.8;opacity:.9}
 .hero-badges{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
 .badge-item{background:rgba(255,255,255,.2);padding:.5rem 1.5rem;border-radius:25px;font-size:.9rem;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3)}
-.myth-box{background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);color:#fff;padding:2.5rem;border-radius:15px;margin:2rem 0;box-shadow:0 10px 30px rgba(240,147,251,.3)}
-.myth-box h3{font-size:1.8rem;margin-bottom:1rem}
+.myth-box{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#fff;padding:2.5rem;border-radius:15px;margin:2rem 0;box-shadow:0 10px 30px rgba(15,23,42,.2)}
+.myth-box h3{font-size:1.8rem;margin-bottom:1rem;color:#ffffff}
 .myth-box p{font-size:1.1rem;line-height:1.8}
-.key-concepts-section{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:3rem 2rem;margin:2rem 0;border-radius:15px}
+.key-concepts-section{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#fff;padding:3rem 2rem;margin:2rem 0;border-radius:15px}
 .concept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-top:2rem}
 .concept-box{background:rgba(255,255,255,.1);padding:1.5rem;border-radius:10px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2)}
 .concept-box h4{font-size:1.3rem;margin-bottom:.8rem}
 .chapters-section{background:#fff;padding:3rem 2rem;margin:2rem 0;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,.1)}
-.chapter-item{padding:1.5rem;margin:1rem 0;background:linear-gradient(135deg,#f9f5ef 0%,#fff 100%);border-left:4px solid #667eea;border-radius:8px;transition:transform .3s}
+.chapter-item{padding:1.5rem;margin:1rem 0;background:linear-gradient(135deg,#f8fafc 0%,#fff 100%);border-left:4px solid #1e293b;border-radius:8px;transition:transform .3s}
 .chapter-item:hover{transform:translateX(10px)}
-.chapter-item h4{color:#667eea;font-size:1.3rem;margin-bottom:.5rem}
-.chapter-num{display:inline-block;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:.3rem .8rem;border-radius:20px;font-size:.9rem;margin-right:.5rem}
+.chapter-item h4{color:#1e293b;font-size:1.3rem;margin-bottom:.5rem}
+.chapter-num{display:inline-block;background:linear-gradient(135deg,#1e293b 0%,#0d9488 100%);color:#fff;padding:.3rem .8rem;border-radius:20px;font-size:.9rem;margin-right:.5rem}
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin:2rem 0}
-.tool-card{background:linear-gradient(135deg,#56ab2f 0%,#a8e063 100%);color:#fff;padding:2rem;border-radius:15px;box-shadow:0 5px 20px rgba(86,171,47,.3)}
+.tool-card{background:linear-gradient(135deg,#0d9488 0%,#14b8a6 100%);color:#fff;padding:2rem;border-radius:15px;box-shadow:0 5px 20px rgba(13,148,136,.3)}
 .tool-card h4{font-size:1.4rem;margin-bottom:1rem}
-.balance-box{background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);color:#fff;padding:2.5rem;border-radius:15px;margin:2rem 0;box-shadow:0 10px 30px rgba(240,147,251,.3)}
+.balance-box{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#fff;padding:2.5rem;border-radius:15px;margin:2rem 0;box-shadow:0 10px 30px rgba(15,23,42,.2)}
+.balance-box h3{font-size:1.8rem;margin-bottom:1rem;color:#ffffff}
 .balance-box h3{font-size:1.8rem;margin-bottom:1rem}
 .balance-box p{font-size:1.1rem;line-height:1.8}
 .dt-container{max-width:1200px;margin:0 auto;padding:3rem 1.5rem}
@@ -50,33 +49,33 @@ body{background:linear-gradient(180deg,#f9f5ef 0%,#fff 50%,#f5efe3 100%);font-fa
 .dt-section h3{color:var(--dt-text);font-size:clamp(1.25rem,3vw,1.75rem);font-weight:600;margin:2rem 0 1rem}
 .pdf-viewer{width:100%;height:800px;border:2px solid #ddd;border-radius:12px;margin:2rem 0;box-shadow:0 8px 20px rgba(0,0,0,.1)}
 .stage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin:2rem 0}
-.stage-card{background:linear-gradient(135deg,#fff 0%,#f8f9fa 100%);padding:2rem;border-radius:16px;border-left:5px solid var(--dt-primary);box-shadow:0 4px 15px rgba(0,0,0,.08);transition:all .3s ease}
-.stage-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(102,126,234,.2)}
-.stage-icon{font-size:3rem;margin-bottom:1rem;color:var(--dt-primary)}
-.stage-number{display:inline-block;background:var(--dt-primary);color:#fff;width:40px;height:40px;border-radius:50%;text-align:center;line-height:40px;font-weight:700;margin-bottom:1rem}
+.stage-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);padding:2rem;border-radius:16px;border-left:5px solid #1e293b;box-shadow:0 4px 15px rgba(15,23,42,.06);transition:all .3s ease}
+.stage-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(15,23,42,.12)}
+.stage-icon{font-size:3rem;margin-bottom:1rem;color:#0d9488}
+.stage-number{display:inline-block;background:linear-gradient(135deg,#1e293b 0%,#0d9488 100%);color:#fff;width:40px;height:40px;border-radius:50%;text-align:center;line-height:40px;font-weight:700;margin-bottom:1rem}
 .stage-card h4{color:var(--dt-text);font-size:1.5rem;font-weight:700;margin-bottom:1rem}
 .stage-card p{color:#555;line-height:1.7;margin-bottom:1rem}
 .stage-card ul{padding-left:1.5rem;margin:1rem 0}
 .stage-card li{margin-bottom:.5rem;color:#555}
-.framework-visual{background:linear-gradient(135deg,#e3f2fd 0%,#bbdefb 100%);padding:2.5rem;border-radius:20px;margin:2rem 0;text-align:center}
+.framework-visual{background:linear-gradient(135deg,#f1f5f9 0%,#e2e8f0 100%);padding:2.5rem;border-radius:20px;margin:2rem 0;text-align:center}
 .framework-steps{display:flex;justify-content:space-around;flex-wrap:wrap;gap:1.5rem;margin-top:2rem}
 .framework-step{flex:1;min-width:150px;background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-.framework-step-num{background:var(--dt-primary);color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;margin:0 auto 1rem}
+.framework-step-num{background:#1e293b;color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;margin:0 auto 1rem}
 .framework-step h5{color:var(--dt-text);font-weight:600;margin-bottom:.5rem}
-.pedagogy-box{background:linear-gradient(135deg,#ffeaa7 0%,#fdcb6e 100%);padding:2rem;border-radius:16px;margin:2rem 0;border:3px solid rgba(255,255,255,.6)}
-.pedagogy-box h4{color:#2c3e50;font-weight:700;margin-bottom:1rem}
+.pedagogy-box{background:linear-gradient(135deg,#f1f5f9 0%,#e2e8f0 100%);padding:2rem;border-radius:16px;margin:2rem 0;border:3px solid rgba(13,148,136,.2)}
+.pedagogy-box h4{color:#0f172a;font-weight:700;margin-bottom:1rem}
 .pedagogy-box ul{list-style:none;padding:0}
-.pedagogy-box li{padding:.75rem 0;border-bottom:1px solid rgba(0,0,0,.1);color:#2c3e50;font-weight:500}
+.pedagogy-box li{padding:.75rem 0;border-bottom:1px solid rgba(15,23,42,.08);color:#0f172a;font-weight:500}
 .pedagogy-box li:last-child{border-bottom:none}
-.pedagogy-box li i{color:#e17055;margin-right:.75rem}
-.download-btn{display:inline-block;background:var(--dt-success);color:#fff;padding:1rem 2rem;border-radius:30px;text-decoration:none;font-weight:600;transition:all .3s ease;box-shadow:0 4px 15px rgba(86,171,47,.3)}
-.download-btn:hover{background:#4a9628;transform:translateY(-2px);box-shadow:0 6px 20px rgba(86,171,47,.4);color:#fff}
+.pedagogy-box li i{color:#0d9488;margin-right:.75rem}
+.download-btn{display:inline-block;background:#1e293b;color:#fff;padding:1rem 2rem;border-radius:30px;text-decoration:none;font-weight:600;transition:all .3s ease;box-shadow:0 4px 15px rgba(15,23,42,.2)}
+.download-btn:hover{background:#0f172a;transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,23,42,.3);color:#fff}
 .download-btn i{margin-right:.5rem}
-.cta-box{background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);color:#fff;padding:3rem 2rem;border-radius:20px;text-align:center;margin:3rem 0}
+.cta-box{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#fff;padding:3rem 2rem;border-radius:20px;text-align:center;margin:3rem 0}
 .cta-box h3{font-size:clamp(1.5rem,4vw,2rem);font-weight:700;margin-bottom:1rem}
 .cta-box p{font-size:clamp(1rem,2vw,1.2rem);margin-bottom:2rem}
-.cta-btn{display:inline-block;background:#fff;color:var(--dt-primary);padding:1rem 2.5rem;border-radius:30px;text-decoration:none;font-weight:700;transition:all .3s ease}
-.cta-btn:hover{transform:scale(1.05);box-shadow:0 8px 25px rgba(0,0,0,.2);color:var(--dt-primary)}
+.cta-btn{display:inline-block;background:#0d9488;color:#fff;padding:1rem 2.5rem;border-radius:30px;text-decoration:none;font-weight:700;transition:all .3s ease}
+.cta-btn:hover{transform:scale(1.05);box-shadow:0 8px 25px rgba(13,148,136,.3);color:#fff}
 @media(max-width:768px){
 .dt-hero{padding:3rem 1.5rem}
 .dt-container{padding:2rem 1rem}
@@ -88,56 +87,51 @@ body{background:linear-gradient(180deg,#f9f5ef 0%,#fff 50%,#f5efe3 100%);font-fa
 </style>
 </head>
 <body id="page-top">
-<nav class="navbar navbar-expand-lg navbar-elegant fixed-top" id="mainNav">
-<div class="container-fluid px-3 px-lg-4">
-<a class="navbar-brand d-flex align-items-center gap-2" href="index.html#page-top">
-<i class="fas fa-graduation-cap"></i>
-<span class="brand-text">Khalida Foundation</span>
-</a>
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbarResponsive">
-<ul class="navbar-nav ms-auto align-items-lg-center nav-master">
-<li class="nav-item"><a class="nav-link" href="index.html#page-top">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
-<li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle" href="#" id="masterDropdown" role="button" data-bs-toggle="dropdown">Explore</a>
-<ul class="dropdown-menu dropdown-menu-end p-3 shadow-lg" style="min-width:320px">
-<li class="dropdown-header text-uppercase small text-muted">Courses</li>
-<li><a class="dropdown-item" href="course-pages/courses.html">All Courses</a></li>
-<li><a class="dropdown-item" href="course-pages/advanced-ai-for-kids.html">Advanced AI for Kids</a></li>
-<li><hr class="dropdown-divider"></li>
-<li class="dropdown-header text-uppercase small text-muted">Teacher Training</li>
-<li><a class="dropdown-item" href="design-thinking-guide.html"><i class="fas fa-lightbulb me-2"></i>Design Thinking Guide</a></li>
-<li><hr class="dropdown-divider"></li>
-<li class="dropdown-header text-uppercase small text-muted">Programs</li>
-<li><a class="dropdown-item" href="index.html#programs">Programs & Initiatives</a></li>
-<li><a class="dropdown-item" href="index.html#impact">Impact</a></li>
-</ul>
-</li>
-<li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle" href="blog/index.html" id="blogDropdown" role="button" data-bs-toggle="dropdown">
-<i class="fas fa-newspaper me-1"></i>Blog
-</a>
-<ul class="dropdown-menu dropdown-menu-end">
-<li><a class="dropdown-item" href="blog/index.html"><i class="fas fa-list me-2"></i>All Blog Posts</a></li>
-<li><hr class="dropdown-divider"></li>
-<li class="dropdown-header">AI Superheroes Workshop Series</li>
-<li><a class="dropdown-item" href="blog/2026/01/ai-superheroes-session-1.html"><span class="badge badge-sm bg-primary me-2">S1</span>Discovering AI Power</a></li>
-<li><a class="dropdown-item" href="blog/2026/02/ai-superheroes-session-2.html"><span class="badge badge-sm bg-success me-2">S2</span>Building Noor Chatbot</a></li>
-<li><a class="dropdown-item" href="blog/2026/02/ai-superheroes-session-3.html"><span class="badge badge-sm bg-info me-2">S3</span>Python Programming</a></li>
-<li><a class="dropdown-item" href="blog/2026/02/ai-superheroes-session-4.html"><span class="badge badge-sm bg-danger me-2">S4</span>Leveling Up Noor</a></li>
-<li><a class="dropdown-item" href="blog/2026/02/ai-superheroes-session-5.html"><span class="badge badge-sm bg-warning me-2">S5</span><i class="fas fa-code me-2"></i>Python Fundamentals</a></li>
-</ul>
-</li>
-<li class="nav-item"><a class="nav-link" href="index.html#get-involved">Get Involved</a></li>
-<li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
-<li class="nav-item ms-lg-2"><a class="nav-link nav-link-register" href="register.html">Register</a></li>
-</ul>
-</div>
-</div>
+
+<!-- Reading progress bar -->
+<div id="kf-progress" role="progressbar" aria-label="Reading progress"></div>
+
+<!-- Main navbar -->
+<nav id="kf-nav" role="navigation" aria-label="Main navigation">
+    <div class="kf-nav-inner">
+        <a class="kf-brand" href="index.html#page-top" aria-label="Khalida Foundation — Home">
+            <div class="kf-brand-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="kf-brand-text">
+                <span class="kf-brand-name">Khalida Foundation</span>
+                <span class="kf-brand-sub">Education · Innovation · Impact</span>
+            </div>
+        </a>
+        <ul class="kf-nav-links" role="menubar">
+            <li role="none"><a class="kf-link" href="index.html#page-top" role="menuitem">Home</a></li>
+            <li role="none"><a class="kf-link" href="index.html#about" role="menuitem">About</a></li>
+            <li role="none"><a class="kf-link" href="index.html#programs" role="menuitem">Programs</a></li>
+            <li role="none"><a class="kf-link kf-active" href="design-thinking-guide.html" role="menuitem">Design Thinking</a></li>
+            <li role="none"><a class="kf-link" href="index.html#contact" role="menuitem">Contact</a></li>
+        </ul>
+        <button class="kf-hamburger" id="kfHamburger" aria-label="Open menu" aria-expanded="false">
+            <span class="kf-bar"></span><span class="kf-bar"></span><span class="kf-bar"></span>
+        </button>
+    </div>
 </nav>
+
+<!-- Mobile overlay -->
+<div class="kf-mobile-overlay" id="kfOverlay" aria-hidden="true"></div>
+
+<!-- Mobile drawer -->
+<div class="kf-mobile-menu" id="kfMobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="kf-mobile-header">
+        <a class="kf-brand" href="index.html#page-top" style="gap:0.5rem;">
+            <div class="kf-brand-icon" style="width:30px;height:30px;border-radius:8px;"><i class="fas fa-graduation-cap" style="font-size:0.85rem;"></i></div>
+            <span class="kf-brand-name" style="font-size:0.88rem;">Khalida Foundation</span>
+        </a>
+        <button class="kf-mobile-close" id="kfMobileClose" aria-label="Close menu"><i class="fas fa-times"></i></button>
+    </div>
+    <a class="kf-mobile-link" href="index.html#page-top"><i class="fas fa-home"></i> Home</a>
+    <a class="kf-mobile-link" href="index.html#about"><i class="fas fa-heart"></i> About</a>
+    <a class="kf-mobile-link" href="index.html#programs"><i class="fas fa-seedling"></i> Programs</a>
+    <a class="kf-mobile-link kf-active" href="design-thinking-guide.html"><i class="fas fa-lightbulb"></i> Design Thinking</a>
+    <a class="kf-mobile-link" href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a>
+</div>
 
 <div class="dt-hero">
 <h1>🎨 Design Thinking Teacher Training Guide</h1>
@@ -454,5 +448,6 @@ body{background:linear-gradient(180deg,#f9f5ef 0%,#fff 50%,#f5efe3 100%);font-fa
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/scripts.js"></script>
+<script src="js/navbar.js"></script>
 </body>
 </html>
