@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="AI Graphics Design for Kids — a hands-on 5-session course (ages 9-16) teaching advanced graphic design using AI tools: images, icons, animations, slides, and short videos." />
+    <meta name="author" content="Khalida Foundation" />
+    <title>AI Graphics Design for Kids — Khalida Educational Foundation</title>
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet" />
+    <link href="../css/custom.css" rel="stylesheet" />
+    <link href="../css/theme.css" rel="stylesheet" />
+    <link href="../css/navbar.css" rel="stylesheet" />
+    <style>
+        /* ══════════════════════════════════════════════════════════════
+           AI GRAPHICS COURSE — modern landing page (Creative Trust palette)
+           ══════════════════════════════════════════════════════════════ */
+        :root{
+            --agc-ink:#0f172a; --agc-ink-2:#1e293b; --agc-teal:#0d9488;
+            --agc-teal-lt:#14b8a6; --agc-indigo:#6366f1; --agc-indigo-lt:#818cf8;
+            --agc-muted:#475569; --agc-border:#e2e8f0; --agc-bg-alt:#f1f5f9;
+        }
+        .agc-scope h1,.agc-scope h2,.agc-scope h3,.agc-scope h4,.agc-scope h5{font-family:'Poppins',sans-serif;}
+        .agc-scope p,.agc-scope li,.agc-scope a,.agc-scope span{font-family:'Inter',sans-serif;}
+
+        /* ── Reveal on scroll ── */
+        .agc-reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
+        .agc-reveal.is-in{opacity:1;transform:none;}
+        @media (prefers-reduced-motion:reduce){.agc-reveal{opacity:1!important;transform:none!important;transition:none!important;}.agc-orb{animation:none!important;}}
+
+        /* ── HERO ── */
+        .agc-hero{position:relative;overflow:hidden;padding:6.5rem 0 5rem;color:#fff;
+            background:linear-gradient(160deg,#0b1220 0%,#0f172a 40%,#111c33 100%);}
+        .agc-hero::before{content:"";position:absolute;inset:0;background-image:
+            linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+            linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+            background-size:44px 44px;mask-image:radial-gradient(ellipse at 50% 0%,#000 0%,transparent 75%);}
+        .agc-orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;z-index:0;}
+        .agc-orb.o1{width:420px;height:420px;background:radial-gradient(circle,rgba(13,148,136,.5),transparent 70%);top:-120px;left:-80px;animation:agcFloat 14s ease-in-out infinite;}
+        .agc-orb.o2{width:380px;height:380px;background:radial-gradient(circle,rgba(99,102,241,.45),transparent 70%);bottom:-140px;right:-60px;animation:agcFloat 18s ease-in-out infinite reverse;}
+        @keyframes agcFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-24px)}}
+        .agc-hero .container{position:relative;z-index:2;}
+        .agc-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#e0e7ff;padding:.45rem 1rem;border-radius:999px;font-weight:600;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;}
+        .agc-hero h1{font-weight:800;font-size:clamp(2.2rem,5.2vw,3.6rem);line-height:1.08;margin:1.35rem 0 1rem;}
+        .agc-hero .lead{color:#cbd5e1;font-size:1.12rem;max-width:34rem;}
+        .gradient-text{background:linear-gradient(90deg,#14b8a6,#818cf8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+        .agc-chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.6rem;}
+        .agc-chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#e2e8f0;padding:.45rem .95rem;border-radius:999px;font-size:.82rem;font-weight:500;}
+        .agc-chip i{color:#14b8a6;margin-right:.4rem;}
+        .agc-hero-cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:1.9rem;}
+        .agc-btn-primary{background:linear-gradient(135deg,var(--agc-teal),var(--agc-teal-lt));color:#fff;border:none;padding:.9rem 1.8rem;border-radius:12px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;box-shadow:0 10px 28px rgba(13,148,136,.35);transition:transform .2s,box-shadow .2s;}
+        .agc-btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(13,148,136,.45);color:#fff;}
+        .agc-btn-ghost{background:rgba(255,255,255,.04);color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:.85rem 1.6rem;border-radius:12px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:background .2s,border-color .2s;}
+        .agc-btn-ghost:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.6);color:#fff;}
+
+        /* Hero visual — creation stack mockup */
+        .agc-visual{position:relative;height:100%;min-height:340px;}
+        .agc-mock{position:absolute;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;backdrop-filter:blur(8px);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:.75rem;padding:.9rem 1.1rem;color:#e2e8f0;font-weight:600;font-size:.9rem;}
+        .agc-mock i{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.05rem;}
+        .agc-mock.m1{top:6%;left:6%;animation:agcBob 6s ease-in-out infinite;}
+        .agc-mock.m1 i{background:linear-gradient(135deg,#0d9488,#14b8a6);}
+        .agc-mock.m2{top:34%;right:2%;animation:agcBob 6s ease-in-out .8s infinite;}
+        .agc-mock.m2 i{background:linear-gradient(135deg,#6366f1,#818cf8);}
+        .agc-mock.m3{top:60%;left:2%;animation:agcBob 6s ease-in-out 1.6s infinite;}
+        .agc-mock.m3 i{background:linear-gradient(135deg,#0ea5e9,#38bdf8);}
+        .agc-mock.m4{bottom:2%;right:10%;animation:agcBob 6s ease-in-out 2.4s infinite;}
+        .agc-mock.m4 i{background:linear-gradient(135deg,#f59e0b,#fbbf24);}
+        .agc-mock-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,.35),rgba(99,102,241,.25));border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;box-shadow:0 0 60px rgba(13,148,136,.4);}
+        .agc-mock-center i{font-size:2.4rem;color:#14b8a6;}
+        .agc-mock-center span{font-weight:800;font-family:'Poppins';margin-top:.3rem;font-size:.85rem;}
+        @keyframes agcBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        @media(max-width:991px){.agc-visual{display:none;}}
+
+        /* ── Stat band ── */
+        .agc-stats{background:linear-gradient(135deg,var(--agc-ink),var(--agc-ink-2));}
+        .agc-stat{padding:1.75rem 1rem;text-align:center;color:#fff;position:relative;}
+        .agc-stat:not(:last-child)::after{content:"";position:absolute;right:0;top:22%;height:56%;width:1px;background:rgba(255,255,255,.12);}
+        .agc-stat .num{font-family:'Poppins';font-weight:800;font-size:2rem;background:linear-gradient(90deg,#14b8a6,#818cf8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+        .agc-stat .lbl{color:#94a3b8;font-size:.85rem;margin-top:.2rem;}
+        @media(max-width:767px){.agc-stat:nth-child(2n)::after{display:none;}}
+
+        /* ── Sticky sub-nav ── */
+        .agc-subnav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--agc-border);}
+        .agc-subnav .inner{display:flex;gap:.35rem;overflow-x:auto;padding:.6rem 0;scrollbar-width:none;}
+        .agc-subnav .inner::-webkit-scrollbar{display:none;}
+        .agc-subnav a{flex:0 0 auto;color:var(--agc-muted);text-decoration:none;font-weight:600;font-size:.9rem;padding:.5rem 1rem;border-radius:999px;transition:background .2s,color .2s;}
+        .agc-subnav a:hover,.agc-subnav a.active{background:rgba(13,148,136,.1);color:var(--agc-teal);}
+
+        /* ── Sections / headings ── */
+        .agc-section{padding:4.5rem 0;}
+        .agc-section.alt{background:var(--agc-bg-alt);}
+        .agc-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(13,148,136,.1);color:#0f766e;border:1px solid rgba(13,148,136,.2);padding:.4rem 1rem;border-radius:999px;font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;}
+        .agc-h2{font-weight:800;color:var(--agc-ink);font-size:clamp(1.7rem,3.6vw,2.5rem);margin:1rem 0;line-height:1.15;}
+        .agc-sub{color:var(--agc-muted);max-width:46rem;font-size:1.02rem;}
+
+        /* ── Outcomes grid ── */
+        .agc-outcomes{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.25rem;margin-top:2.5rem;}
+        .agc-outcome{background:#fff;border:1px solid var(--agc-border);border-radius:18px;padding:1.6rem;box-shadow:0 4px 16px rgba(15,23,42,.05);transition:transform .25s,box-shadow .25s,border-color .25s;position:relative;overflow:hidden;}
+        .agc-outcome::after{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--agc-teal),var(--agc-indigo));opacity:0;transition:opacity .25s;}
+        .agc-outcome:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(15,23,42,.12);border-color:transparent;}
+        .agc-outcome:hover::after{opacity:1;}
+        .agc-outcome .ic{width:54px;height:54px;border-radius:15px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--agc-ink-2),var(--agc-teal));color:#fff;font-size:1.35rem;margin-bottom:1.1rem;}
+        .agc-outcome h4{font-weight:700;color:var(--agc-ink);font-size:1.08rem;}
+        .agc-outcome p{color:var(--agc-muted);font-size:.92rem;margin:0;}
+
+        /* ── Journey rail (at a glance) ── */
+        .agc-rail{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:2.5rem;counter-reset:step;}
+        .agc-rail .step{background:#fff;border:1px solid var(--agc-border);border-radius:16px;padding:1.4rem 1rem;text-align:center;position:relative;transition:transform .2s,box-shadow .2s;}
+        .agc-rail .step:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(15,23,42,.1);}
+        .agc-rail .step .n{width:44px;height:44px;margin:0 auto .8rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:800;color:#fff;background:linear-gradient(135deg,var(--agc-teal),var(--agc-teal-lt));box-shadow:0 6px 14px rgba(13,148,136,.35);}
+        .agc-rail .step .t{font-weight:700;font-size:.9rem;color:var(--agc-ink);}
+        .agc-rail .step .d{font-size:.78rem;color:var(--agc-muted);margin-top:.25rem;}
+        @media(max-width:991px){.agc-rail{grid-template-columns:repeat(2,1fr);} }
+        @media(max-width:480px){.agc-rail{grid-template-columns:1fr;} }
+
+        /* ── Curriculum timeline ── */
+        .agc-timeline{position:relative;margin-top:2.5rem;}
+        .agc-timeline::before{content:"";position:absolute;left:31px;top:0;bottom:0;width:2px;background:linear-gradient(var(--agc-teal),var(--agc-indigo));}
+        .agc-session{position:relative;padding-left:80px;margin-bottom:2rem;}
+        .agc-session-dot{position:absolute;left:8px;top:0;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--agc-teal),var(--agc-teal-lt));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:800;font-size:1.2rem;box-shadow:0 6px 16px rgba(13,148,136,.4);border:4px solid #fff;z-index:1;}
+        .agc-card{background:#fff;border:1px solid var(--agc-border);border-radius:20px;overflow:hidden;box-shadow:0 6px 24px rgba(15,23,42,.06);transition:box-shadow .25s;}
+        .agc-card:hover{box-shadow:0 16px 40px rgba(15,23,42,.12);}
+        .agc-card-head{padding:1.4rem 1.6rem;background:linear-gradient(135deg,var(--agc-ink),var(--agc-ink-2));color:#fff;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+        .agc-card-head h3{margin:0;font-weight:700;font-size:1.22rem;}
+        .agc-card-head .meta{color:#94a3b8;font-size:.83rem;margin-top:.2rem;display:inline-flex;align-items:center;gap:.4rem;}
+        .agc-bloom{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:rgba(20,184,166,.15);color:#5eead4;border:1px solid rgba(20,184,166,.3);padding:.3rem .7rem;border-radius:999px;white-space:nowrap;}
+        .agc-card-body{padding:1.6rem;}
+        .agc-badge-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.1rem;}
+        .agc-tag{font-size:.76rem;font-weight:600;padding:.32rem .8rem;border-radius:999px;background:rgba(13,148,136,.1);color:#0f766e;}
+        .agc-tag.skill{background:rgba(99,102,241,.1);color:#4338ca;}
+        .agc-tag.age{background:rgba(15,23,42,.06);color:#334155;}
+        .agc-block-title{font-weight:700;color:var(--agc-ink);font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;margin:1.35rem 0 .7rem;display:flex;align-items:center;gap:.5rem;}
+        .agc-block-title i{color:var(--agc-teal);}
+        .agc-list{padding-left:0;list-style:none;margin:0;}
+        .agc-list li{padding:.38rem 0 .38rem 1.75rem;position:relative;color:#334155;font-size:.94rem;}
+        .agc-list li::before{content:"\f00c";font-family:"Font Awesome 6 Free";font-weight:900;color:var(--agc-teal);position:absolute;left:0;top:.42rem;font-size:.78rem;}
+        .agc-lab{background:linear-gradient(135deg,rgba(13,148,136,.06),rgba(99,102,241,.06));border:1px dashed rgba(13,148,136,.35);border-radius:14px;padding:1.25rem 1.5rem;margin-top:1.1rem;}
+        .agc-lab h5{font-weight:800;color:var(--agc-ink);display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:0;}
+        .agc-lab ol{margin:.75rem 0 0;padding-left:1.25rem;color:#334155;}
+        .agc-lab ol li{margin-bottom:.4rem;}
+        .agc-deliverable{margin-top:1.1rem;padding:.9rem 1.1rem;background:var(--agc-ink);color:#e0e7ff;border-radius:12px;font-size:.9rem;display:flex;align-items:center;gap:.6rem;}
+        .agc-deliverable i{color:var(--agc-teal-lt);}
+
+        /* ── Tools / approach ── */
+        .agc-tool{display:flex;gap:1rem;align-items:flex-start;background:#fff;border:1px solid var(--agc-border);border-radius:14px;padding:1.2rem;height:100%;transition:transform .2s,box-shadow .2s;}
+        .agc-tool:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(15,23,42,.1);}
+        .agc-tool .ic{flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--agc-ink-2),var(--agc-teal));color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+        .agc-tool h5{margin:0 0 .25rem;font-weight:700;color:var(--agc-ink);font-size:.98rem;}
+        .agc-tool p{margin:0;color:var(--agc-muted);font-size:.87rem;}
+        .agc-approach-card{background:#fff;border:1px solid var(--agc-border);border-radius:20px;padding:1.75rem;box-shadow:0 6px 24px rgba(15,23,42,.06);}
+        .agc-note{background:#fff;border-left:4px solid var(--agc-teal);border-radius:0 12px 12px 0;padding:1.25rem 1.4rem;box-shadow:0 4px 16px rgba(15,23,42,.05);height:100%;}
+        .agc-note strong{color:var(--agc-ink);}
+
+        /* ── FAQ ── */
+        .agc-faq{max-width:820px;margin:2.25rem auto 0;}
+        .agc-faq details{background:#fff;border:1px solid var(--agc-border);border-radius:14px;margin-bottom:.85rem;overflow:hidden;transition:box-shadow .2s;}
+        .agc-faq details[open]{box-shadow:0 10px 28px rgba(15,23,42,.08);}
+        .agc-faq summary{list-style:none;cursor:pointer;padding:1.15rem 1.4rem;font-weight:700;color:var(--agc-ink);display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+        .agc-faq summary::-webkit-details-marker{display:none;}
+        .agc-faq summary .chev{transition:transform .25s;color:var(--agc-teal);}
+        .agc-faq details[open] summary .chev{transform:rotate(180deg);}
+        .agc-faq .ans{padding:0 1.4rem 1.25rem;color:var(--agc-muted);font-size:.95rem;}
+
+        /* ── CTA ── */
+        .agc-cta{position:relative;overflow:hidden;background:linear-gradient(135deg,#0f172a 0%,#1e293b 45%,#0d9488 120%);border-radius:26px;padding:3.25rem 2rem;text-align:center;color:#fff;}
+        .agc-cta::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(ellipse at 50% 50%,#000,transparent 70%);}
+        .agc-cta > *{position:relative;z-index:1;}
+        .agc-cta h2{font-weight:800;font-size:clamp(1.7rem,4vw,2.6rem);}
+        .agc-cta p{color:#cbd5e1;max-width:38rem;margin:0 auto 1.9rem;}
+        .agc-cta .agc-btn-primary{background:#fff;color:var(--agc-ink);}
+        .agc-cta .agc-btn-primary:hover{background:#e0e7ff;color:var(--agc-ink);}
+
+        @media(max-width:576px){
+            .agc-card-head{flex-direction:column;text-align:center;align-items:flex-start;}
+            .agc-timeline::before{left:23px;}
+            .agc-session{padding-left:64px;}
+            .agc-session-dot{width:40px;height:40px;left:4px;font-size:1rem;}
+        }
+    </style>
+</head>
+<body id="page-top">
+    <div id="kf-progress" role="progressbar" aria-label="Reading progress"></div>
+
+    <!-- Utility strip -->
+    <div id="kf-topbar" aria-label="Site information">
+        <div class="kf-topbar-inner">
+            <div class="kf-topbar-left">
+                <span class="kf-topbar-item"><i class="fas fa-graduation-cap"></i> Empowering Kids Through AI &amp; Education</span>
+                <span class="kf-topbar-item"><i class="fas fa-map-marker-alt"></i> Pakistan</span>
+                <span class="kf-topbar-item"><i class="fas fa-calendar-check"></i> Sessions Every Weekend</span>
+            </div>
+            <div class="kf-topbar-right">
+                <span class="kf-session-pill"><i class="fas fa-robot"></i> AI Superheroes · Session 6</span>
+                <a href="#" class="kf-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="kf-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="kf-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile overlay -->
+    <div class="kf-mobile-overlay" id="kfOverlay" aria-hidden="true" onclick="document.getElementById('kfMobileMenu').classList.remove('kf-open');this.classList.remove('kf-open');document.getElementById('kfHamburger').classList.remove('kf-open');document.body.style.overflow=''"></div>
+
+    <!-- Main navbar -->
+    <nav id="kf-nav" role="navigation" aria-label="Main navigation">
+        <div class="kf-nav-inner">
+            <a class="kf-brand" href="../index.html#page-top" aria-label="Khalida Foundation — Home">
+                <div class="kf-brand-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="kf-brand-text">
+                    <span class="kf-brand-name">Khalida Foundation</span>
+                    <span class="kf-brand-sub">Education · Innovation · Impact</span>
+                </div>
+            </a>
+            <ul class="kf-nav-links" role="menubar">
+                <li role="none"><a class="kf-link" href="../index.html#page-top" role="menuitem">Home</a></li>
+                <li role="none"><a class="kf-link" href="../index.html#about" role="menuitem">About</a></li>
+                <li role="none"><a class="kf-link" href="../vision.html" role="menuitem">Vision</a></li>
+                <li role="none">
+                    <a class="kf-link kf-active" href="#" role="menuitem" aria-haspopup="true" aria-expanded="false" id="kf-explore-btn">
+                        Explore <i class="fas fa-chevron-down kf-chevron"></i>
+                    </a>
+                    <div class="kf-dropdown" role="menu" aria-labelledby="kf-explore-btn">
+                        <div class="kf-dd-header">Courses</div>
+                        <a class="kf-dd-item" href="../course-pages/courses.html" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-list-ul"></i></span>All Courses</a>
+                        <a class="kf-dd-item" href="../course-pages/advanced-ai-for-kids.html" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-robot"></i></span>Advanced AI for Kids</a>
+                        <a class="kf-dd-item kf-dd-active" href="../course-pages/ai-graphics-design-for-kids.html" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-palette"></i></span>AI Graphics Design for Kids</a>
+                        <div class="kf-dd-divider"></div>
+                        <div class="kf-dd-header">Teacher Training</div>
+                        <a class="kf-dd-item" href="../design-thinking-guide.html" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-lightbulb"></i></span>Design Thinking Guide</a>
+                        <div class="kf-dd-divider"></div>
+                        <div class="kf-dd-header">Programs</div>
+                        <a class="kf-dd-item" href="../index.html#programs" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-seedling"></i></span>Programs &amp; Initiatives</a>
+                        <a class="kf-dd-item" href="../index.html#impact" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-chart-line"></i></span>Our Impact</a>
+                        <div class="kf-dd-divider"></div>
+                        <div class="kf-dd-header">AI Initiative</div>
+                        <a class="kf-dd-item" href="../course-pages/courses.html#ai-initiative" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-microchip"></i></span>AI Initiative Overview</a>
+                    </div>
+                </li>
+                <li role="none">
+                    <a class="kf-link" href="../blog/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false" id="kf-blog-btn">
+                        <i class="fas fa-newspaper" style="font-size:0.72rem;opacity:0.8;"></i> Blog <i class="fas fa-chevron-down kf-chevron"></i>
+                    </a>
+                    <div class="kf-dropdown kf-mega" role="menu" aria-labelledby="kf-blog-btn">
+                        <a class="kf-dd-item" href="../blog/index.html" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-th-large"></i></span>All Blog Posts</a>
+                        <div class="kf-dd-divider"></div>
+                        <div class="kf-dd-header">🦸 AI Superheroes Series</div>
+                        <div class="kf-mega-grid">
+                            <a class="kf-session-item" href="../blog/2026/01/ai-superheroes-session-1.html"><span class="kf-s-badge s1">S1</span>AI Power</a>
+                            <a class="kf-session-item" href="../blog/2026/02/ai-superheroes-session-2.html"><span class="kf-s-badge s2">S2</span>Noor Chatbot</a>
+                            <a class="kf-session-item" href="../blog/2026/02/ai-superheroes-session-3.html"><span class="kf-s-badge s3">S3</span>Python Basics</a>
+                            <a class="kf-session-item" href="../blog/2026/02/ai-superheroes-session-4.html"><span class="kf-s-badge s4">S4</span>Level Up Noor</a>
+                            <a class="kf-session-item" href="../blog/2026/02/ai-superheroes-session-5.html"><span class="kf-s-badge s5">S5</span>Fundamentals</a>
+                            <a class="kf-session-item" href="../blog/2026/02/ai-superheroes-session-6.html"><span class="kf-s-badge s6">S6</span>Build Chatbot</a>
+                        </div>
+                        <div class="kf-mega-footer"><a href="../blog/index.html">View all posts <i class="fas fa-arrow-right"></i></a><span class="kf-session-pill" style="font-size:0.62rem;">6 Sessions</span></div>
+                    </div>
+                </li>
+                <li role="none"><a class="kf-link" href="../index.html#get-involved" role="menuitem">Get Involved</a></li>
+                <li role="none"><a class="kf-link" href="../contact.html" role="menuitem">Contact</a></li>
+            </ul>
+            <a class="kf-register" href="../register.html"><i class="fas fa-star"></i> Register</a>
+            <button class="kf-hamburger" id="kfHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="kfMobileMenu" onclick="document.getElementById('kfMobileMenu').classList.add('kf-open');document.getElementById('kfOverlay').classList.add('kf-open');this.classList.add('kf-open');document.body.style.overflow='hidden'">
+                <span class="kf-bar"></span><span class="kf-bar"></span><span class="kf-bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile drawer -->
+    <div class="kf-mobile-menu" id="kfMobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+        <div class="kf-mobile-header">
+            <a class="kf-brand" href="../index.html#page-top" style="gap:0.5rem;">
+                <div class="kf-brand-icon" style="width:30px;height:30px;border-radius:8px;"><i class="fas fa-graduation-cap" style="font-size:0.85rem;"></i></div>
+                <span class="kf-brand-name" style="font-size:0.88rem;">Khalida Foundation</span>
+            </a>
+            <button class="kf-mobile-close" id="kfMobileClose" aria-label="Close menu" onclick="document.getElementById('kfMobileMenu').classList.remove('kf-open');document.getElementById('kfOverlay').classList.remove('kf-open');document.getElementById('kfHamburger').classList.remove('kf-open');document.body.style.overflow=''"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="kf-mobile-section">Navigation</div>
+        <a class="kf-mobile-link" href="../index.html#page-top"><i class="fas fa-home"></i> Home</a>
+        <a class="kf-mobile-link" href="../index.html#about"><i class="fas fa-heart"></i> About</a>
+        <a class="kf-mobile-link" href="../vision.html"><i class="fas fa-eye"></i> Vision</a>
+        <a class="kf-mobile-link" href="../course-pages/courses.html"><i class="fas fa-list-ul"></i> All Courses</a>
+        <a class="kf-mobile-link" href="../course-pages/advanced-ai-for-kids.html"><i class="fas fa-robot"></i> Advanced AI for Kids</a>
+        <a class="kf-mobile-link kf-active" href="../course-pages/ai-graphics-design-for-kids.html"><i class="fas fa-palette"></i> AI Graphics Design</a>
+        <a class="kf-mobile-link" href="../index.html#programs"><i class="fas fa-seedling"></i> Programs</a>
+        <a class="kf-mobile-link" href="../blog/index.html"><i class="fas fa-newspaper"></i> Blog</a>
+        <div class="kf-mobile-section">AI Superheroes Series</div>
+        <div class="kf-mobile-sessions">
+            <a class="kf-mobile-session" href="../blog/2026/01/ai-superheroes-session-1.html"><span class="kf-s-badge s1">S1</span>AI Power</a>
+            <a class="kf-mobile-session" href="../blog/2026/02/ai-superheroes-session-2.html"><span class="kf-s-badge s2">S2</span>Noor Chatbot</a>
+            <a class="kf-mobile-session" href="../blog/2026/02/ai-superheroes-session-3.html"><span class="kf-s-badge s3">S3</span>Python Basics</a>
+            <a class="kf-mobile-session" href="../blog/2026/02/ai-superheroes-session-4.html"><span class="kf-s-badge s4">S4</span>Level Up Noor</a>
+            <a class="kf-mobile-session" href="../blog/2026/02/ai-superheroes-session-5.html"><span class="kf-s-badge s5">S5</span>Fundamentals</a>
+            <a class="kf-mobile-session" href="../blog/2026/02/ai-superheroes-session-6.html"><span class="kf-s-badge s6">S6</span>Build Chatbot</a>
+        </div>
+        <div class="kf-mobile-section">More</div>
+        <a class="kf-mobile-link" href="../index.html#get-involved"><i class="fas fa-hands-helping"></i> Get Involved</a>
+        <a class="kf-mobile-link" href="../contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a class="kf-mobile-register" href="../register.html"><i class="fas fa-star"></i> Register Now</a>
+    </div>
+
+    <!-- ── HERO ── -->
+    <header class="agc-hero agc-scope">
+        <span class="agc-orb o1"></span>
+        <span class="agc-orb o2"></span>
+        <div class="container px-4 px-lg-5">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-6 agc-reveal">
+                    <span class="agc-eyebrow"><i class="fas fa-palette"></i> AI Initiative · Creative Technology</span>
+                    <h1>Design Like a Pro. <br><span class="gradient-text">Create with AI.</span></h1>
+                    <p class="lead">A hands-on, 5-session adventure where kids ages 9–16 learn <strong>real design skills</strong> and use <strong>AI tools</strong> to create images, icons, animations, presentation slides, and short videos — finishing with a portfolio they can show the world.</p>
+                    <div class="agc-chips">
+                        <span class="agc-chip"><i class="fas fa-child"></i> Ages 9–16</span>
+                        <span class="agc-chip"><i class="fas fa-layer-group"></i> 5 Sessions</span>
+                        <span class="agc-chip"><i class="fas fa-flask"></i> Hands-On Labs</span>
+                        <span class="agc-chip"><i class="fas fa-robot"></i> Learn AI Tools</span>
+                        <span class="agc-chip"><i class="fas fa-award"></i> Capstone Portfolio</span>
+                    </div>
+                    <div class="agc-hero-cta">
+                        <a href="#register" class="agc-btn-primary"><i class="fas fa-user-plus"></i> Enroll Your Child</a>
+                        <a href="#curriculum" class="agc-btn-ghost"><i class="fas fa-list-ol"></i> Explore the Curriculum</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 agc-reveal">
+                    <div class="agc-visual" aria-hidden="true">
+                        <div class="agc-mock-center"><i class="fas fa-wand-magic-sparkles"></i><span>AI + Kids</span></div>
+                        <div class="agc-mock m1"><i class="fas fa-image"></i> AI Image</div>
+                        <div class="agc-mock m2"><i class="fas fa-shapes"></i> Logo &amp; Icons</div>
+                        <div class="agc-mock m3"><i class="fas fa-film"></i> Animation</div>
+                        <div class="agc-mock m4"><i class="fas fa-video"></i> Short Video</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── STAT BAND ── -->
+    <section class="agc-stats agc-scope">
+        <div class="container px-4 px-lg-5">
+            <div class="row">
+                <div class="col-6 col-md-3 agc-stat"><div class="num">5</div><div class="lbl">Project-Based Sessions</div></div>
+                <div class="col-6 col-md-3 agc-stat"><div class="num">6</div><div class="lbl">Creative Skills Mastered</div></div>
+                <div class="col-6 col-md-3 agc-stat"><div class="num">9–16</div><div class="lbl">Ages Welcome</div></div>
+                <div class="col-6 col-md-3 agc-stat"><div class="num">Free</div><div class="lbl">Education-Tier AI Tools</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── STICKY SUB-NAV ── -->
+    <nav class="agc-subnav agc-scope" aria-label="Course sections">
+        <div class="container px-4 px-lg-5">
+            <div class="inner" id="agcSubnav">
+                <a href="#overview">Overview</a>
+                <a href="#outcomes">What You'll Learn</a>
+                <a href="#curriculum">Curriculum</a>
+                <a href="#approach">Our Approach</a>
+                <a href="#safety">For Parents</a>
+                <a href="#faq">FAQ</a>
+                <a href="#register">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ── OVERVIEW / OUTCOMES ── -->
+    <section class="agc-section agc-scope" id="overview">
+        <div class="container px-4 px-lg-5">
+            <div class="agc-reveal" id="outcomes">
+                <span class="agc-pill"><i class="fas fa-bullseye"></i> What Kids Will Master</span>
+                <h2 class="agc-h2">Skills for the Creative, AI-Powered Future</h2>
+                <p class="agc-sub">This course blends timeless <strong>design fundamentals</strong> (color, contrast, hierarchy, typography, layout) with modern <strong>AI creativity tools</strong>. Kids don't just click buttons — they learn to think like designers, direct AI to bring their ideas to life, and use technology responsibly.</p>
+            </div>
+            <div class="agc-outcomes agc-reveal">
+                <div class="agc-outcome"><div class="ic"><i class="fas fa-image"></i></div><h4>AI Images</h4><p>Write clear prompts and generate original artwork, characters, and backgrounds.</p></div>
+                <div class="agc-outcome"><div class="ic"><i class="fas fa-shapes"></i></div><h4>Icons &amp; Logos</h4><p>Design clean icons and a personal logo using shapes, grids, and AI helpers.</p></div>
+                <div class="agc-outcome"><div class="ic"><i class="fas fa-film"></i></div><h4>Animations</h4><p>Bring designs to life with simple motion, transitions, and animated stickers.</p></div>
+                <div class="agc-outcome"><div class="ic"><i class="fas fa-display"></i></div><h4>Slides</h4><p>Build a beautiful, well-structured presentation that tells a story.</p></div>
+                <div class="agc-outcome"><div class="ic"><i class="fas fa-video"></i></div><h4>Short Videos</h4><p>Storyboard and produce a 30–60 second video from their own assets.</p></div>
+                <div class="agc-outcome"><div class="ic"><i class="fas fa-shield-halved"></i></div><h4>AI Ethics</h4><p>Attribution, honesty, bias-checking, and "AI-assisted, human-directed" creativity.</p></div>
+            </div>
+
+            <!-- Journey at a glance -->
+            <div class="agc-reveal mt-5">
+                <span class="agc-pill"><i class="fas fa-route"></i> The Journey at a Glance</span>
+                <div class="agc-rail">
+                    <div class="step"><div class="n">1</div><div class="t">First AI Image</div><div class="d">Design basics + prompting</div></div>
+                    <div class="step"><div class="n">2</div><div class="t">Icons &amp; Logo</div><div class="d">Shapes, grids, type</div></div>
+                    <div class="step"><div class="n">3</div><div class="t">Animation</div><div class="d">Motion &amp; timing</div></div>
+                    <div class="step"><div class="n">4</div><div class="t">Slide Story</div><div class="d">Layout &amp; storytelling</div></div>
+                    <div class="step"><div class="n">5</div><div class="t">Video Capstone</div><div class="d">Produce &amp; showcase</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── HOW IT'S BUILT (pedagogy) ── -->
+    <section class="agc-section alt agc-scope" id="approach">
+        <div class="container px-4 px-lg-5">
+            <div class="row align-items-center gy-4">
+                <div class="col-lg-6 agc-reveal">
+                    <span class="agc-pill"><i class="fas fa-graduation-cap"></i> Research-Based Design</span>
+                    <h2 class="agc-h2">Built on Proven Learning Science</h2>
+                    <p class="agc-sub">Every session is designed with the same frameworks used across leading U.S. skill-based classrooms, so learning is active, inclusive, and mastery-focused.</p>
+                    <ul class="agc-list mt-3">
+                        <li><strong>Competency-Based:</strong> kids advance by showing mastery, not by seat time.</li>
+                        <li><strong>SAFE method:</strong> Sequenced, Active, Focused, Explicit lessons.</li>
+                        <li><strong>Bloom's Taxonomy:</strong> each session climbs from Understand → Apply → Create.</li>
+                        <li><strong>Gradual Release:</strong> "I do → We do → You do" scaffolding.</li>
+                        <li><strong>SEL &amp; 4Cs:</strong> creativity, collaboration, communication, critical thinking.</li>
+                        <li><strong>UDL:</strong> multiple ways to participate, with offline / low-cost fallbacks.</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 agc-reveal">
+                    <div class="agc-approach-card">
+                        <p class="mb-3" style="font-weight:800;color:var(--agc-ink);"><i class="fas fa-toolbox" style="color:var(--agc-teal)"></i> Tools We Use</p>
+                        <div class="row g-3">
+                            <div class="col-sm-6"><div class="agc-tool"><div class="ic"><i class="fas fa-wand-magic-sparkles"></i></div><div><h5>Canva for Education</h5><p>Free for K–12, teacher-supervised, with built-in safety (Canva Shield).</p></div></div></div>
+                            <div class="col-sm-6"><div class="agc-tool"><div class="ic"><i class="fas fa-image"></i></div><div><h5>AI Image Generation</h5><p>Magic Media text-to-image for original art (adult-supervised).</p></div></div></div>
+                            <div class="col-sm-6"><div class="agc-tool"><div class="ic"><i class="fas fa-shapes"></i></div><div><h5>Icon &amp; Shape Tools</h5><p>Free icon libraries + shape editing for logos and icons.</p></div></div></div>
+                            <div class="col-sm-6"><div class="agc-tool"><div class="ic"><i class="fas fa-pencil"></i></div><div><h5>Paper &amp; Pencil</h5><p>Storyboards and sketches first — no device left behind.</p></div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SESSIONS / CURRICULUM ── -->
+    <section class="agc-section agc-scope" id="curriculum">
+        <div class="container px-4 px-lg-5">
+            <div class="text-center mb-2 agc-reveal">
+                <span class="agc-pill"><i class="fas fa-list-ol"></i> The Curriculum</span>
+                <h2 class="agc-h2">5 Sessions · 5 Creations</h2>
+                <p class="agc-sub mx-auto">Each session includes a warm-up, a guided demo, a hands-on lab, a "show &amp; tell", and an at-home challenge. Kids keep everything they make.</p>
+            </div>
+
+            <div class="agc-timeline">
+                <!-- SESSION 1 -->
+                <article class="agc-session agc-reveal">
+                    <div class="agc-session-dot">1</div>
+                    <div class="agc-card">
+                        <div class="agc-card-head">
+                            <div><h3>Design Detectives &amp; Your First AI Image</h3><div class="meta"><i class="far fa-clock"></i> 90 min</div></div>
+                            <span class="agc-bloom">Understand → Apply</span>
+                        </div>
+                        <div class="agc-card-body">
+                            <div class="agc-badge-row">
+                                <span class="agc-tag age">Ages 9–16</span>
+                                <span class="agc-tag skill">Design Fundamentals</span>
+                                <span class="agc-tag">AI Prompting</span>
+                                <span class="agc-tag skill">SEL: Self-Awareness</span>
+                            </div>
+                            <p class="agc-sub">Kids discover what makes a design "work" (color, contrast, hierarchy) by becoming "design detectives," then write their very first AI image prompt.</p>
+                            <div class="agc-block-title"><i class="fas fa-bullseye"></i> Learning Goals (Mastery)</div>
+                            <ul class="agc-list">
+                                <li>Name the 4 design basics: color, contrast, hierarchy, balance.</li>
+                                <li>Explain what a "prompt" is and the 4 parts of a good one: subject, style, mood, detail.</li>
+                                <li>Generate one original AI image that matches a written plan.</li>
+                            </ul>
+                            <div class="agc-lab">
+                                <h5><i class="fas fa-flask"></i> Hands-On Lab: "Prompt to Picture"</h5>
+                                <ol>
+                                    <li>Play "Spot the Design": compare two posters and list what feels good/bad.</li>
+                                    <li>Fill in a Prompt Recipe card: <em>Subject + Style + Mood + Detail</em> (e.g., "a friendly robot, cartoon style, cheerful, holding a book").</li>
+                                    <li>With your facilitator, generate the image using an AI image tool (Magic Media).</li>
+                                    <li>Check it: Is it appropriate? Does it match your plan? Iterate once.</li>
+                                </ol>
+                            </div>
+                            <div class="agc-deliverable"><i class="fas fa-flag-checkered"></i> <strong>You create:</strong> Your first AI-generated character/image + a prompt recipe card.</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- SESSION 2 -->
+                <article class="agc-session agc-reveal">
+                    <div class="agc-session-dot">2</div>
+                    <div class="agc-card">
+                        <div class="agc-card-head">
+                            <div><h3>Icon Lab &amp; Logo Magic</h3><div class="meta"><i class="far fa-clock"></i> 90 min</div></div>
+                            <span class="agc-bloom">Apply → Analyze</span>
+                        </div>
+                        <div class="agc-card-body">
+                            <div class="agc-badge-row">
+                                <span class="agc-tag age">Ages 9–16</span>
+                                <span class="agc-tag skill">Shape &amp; Grid</span>
+                                <span class="agc-tag">Typography</span>
+                                <span class="agc-tag skill">SEL: Self-Management</span>
+                            </div>
+                            <p class="agc-sub">Great icons are simple. Kids learn to build clear icons from basic shapes and design a personal logo, mixing hand-made shapes with AI suggestions.</p>
+                            <div class="agc-block-title"><i class="fas fa-bullseye"></i> Learning Goals (Mastery)</div>
+                            <ul class="agc-list">
+                                <li>Build 3 recognizable icons from circles, squares, and lines.</li>
+                                <li>Choose a font that matches a mood (playful vs. serious).</li>
+                                <li>Combine an icon + name into a personal logo.</li>
+                            </ul>
+                            <div class="agc-lab">
+                                <h5><i class="fas fa-flask"></i> Hands-On Lab: "My Personal Brand"</h5>
+                                <ol>
+                                    <li>Sketch 3 icon ideas on paper (home, star, rocket, etc.).</li>
+                                    <li>Rebuild the best one from shapes in Canva; align it on a grid.</li>
+                                    <li>Use Magic Design / AI suggestions to explore logo layouts.</li>
+                                    <li>Pick a font + 2 brand colors; assemble your logo.</li>
+                                </ol>
+                            </div>
+                            <div class="agc-deliverable"><i class="fas fa-flag-checkered"></i> <strong>You create:</strong> A 3-icon set + your own personal logo.</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- SESSION 3 -->
+                <article class="agc-session agc-reveal">
+                    <div class="agc-session-dot">3</div>
+                    <div class="agc-card">
+                        <div class="agc-card-head">
+                            <div><h3>Make It Move: Animation Studio</h3><div class="meta"><i class="far fa-clock"></i> 90 min</div></div>
+                            <span class="agc-bloom">Apply → Create</span>
+                        </div>
+                        <div class="agc-card-body">
+                            <div class="agc-badge-row">
+                                <span class="agc-tag age">Ages 9–16</span>
+                                <span class="agc-tag skill">Motion Basics</span>
+                                <span class="agc-tag">Timing</span>
+                                <span class="agc-tag skill">SEL: Responsible Decision-Making</span>
+                            </div>
+                            <p class="agc-sub">Kids learn how motion guides the eye and adds emotion, then animate their Session 1 &amp; 2 creations into a looping animated sticker or intro.</p>
+                            <div class="agc-block-title"><i class="fas fa-bullseye"></i> Learning Goals (Mastery)</div>
+                            <ul class="agc-list">
+                                <li>Explain "entrance, emphasis, exit" and why timing matters.</li>
+                                <li>Apply at least 2 animation effects with sensible timing.</li>
+                                <li>Export an animated GIF/clip that loops smoothly.</li>
+                            </ul>
+                            <div class="agc-lab">
+                                <h5><i class="fas fa-flask"></i> Hands-On Lab: "Bring My Character to Life"</h5>
+                                <ol>
+                                    <li>Storyboard 3 frames on paper: start → action → end.</li>
+                                    <li>Import your AI character + logo into Canva.</li>
+                                    <li>Add entrance/emphasis animations; adjust speed to feel natural.</li>
+                                    <li>Export as an animated sticker or 5-second intro clip.</li>
+                                </ol>
+                            </div>
+                            <div class="agc-deliverable"><i class="fas fa-flag-checkered"></i> <strong>You create:</strong> An animated sticker or logo intro clip.</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- SESSION 4 -->
+                <article class="agc-session agc-reveal">
+                    <div class="agc-session-dot">4</div>
+                    <div class="agc-card">
+                        <div class="agc-card-head">
+                            <div><h3>Slide Story: Design a Presentation</h3><div class="meta"><i class="far fa-clock"></i> 90 min</div></div>
+                            <span class="agc-bloom">Analyze → Create</span>
+                        </div>
+                        <div class="agc-card-body">
+                            <div class="agc-badge-row">
+                                <span class="agc-tag age">Ages 9–16</span>
+                                <span class="agc-tag skill">Layout &amp; Hierarchy</span>
+                                <span class="agc-tag">Storytelling</span>
+                                <span class="agc-tag skill">SEL: Relationship Skills</span>
+                            </div>
+                            <p class="agc-sub">A great slide deck is a story, not a wall of text. Kids assemble their images, icons, and animations into a clean, accessible presentation about themselves or a cause they care about.</p>
+                            <div class="agc-block-title"><i class="fas fa-bullseye"></i> Learning Goals (Mastery)</div>
+                            <ul class="agc-list">
+                                <li>Structure a 5-slide story: title, idea, details, example, ending.</li>
+                                <li>Apply consistent colors, fonts, and spacing across slides.</li>
+                                <li>Add alt text and high-contrast text for accessibility.</li>
+                            </ul>
+                            <div class="agc-lab">
+                                <h5><i class="fas fa-flask"></i> Hands-On Lab: "My Story in 5 Slides"</h5>
+                                <ol>
+                                    <li>Plan 5 slides on a paper outline (one idea per slide).</li>
+                                    <li>Build slides in Canva using your own logo, icons, and AI image.</li>
+                                    <li>Use Magic Write to draft a caption, then improve it in your own words.</li>
+                                    <li>Run an accessibility check: contrast + alt text + readable size.</li>
+                                </ol>
+                            </div>
+                            <div class="agc-deliverable"><i class="fas fa-flag-checkered"></i> <strong>You create:</strong> A polished 5-slide presentation.</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- SESSION 5 -->
+                <article class="agc-session agc-reveal">
+                    <div class="agc-session-dot"><i class="fas fa-trophy" style="font-size:1rem;"></i></div>
+                    <div class="agc-card">
+                        <div class="agc-card-head">
+                            <div><h3>Capstone: Make a Short Video &amp; Showcase</h3><div class="meta"><i class="far fa-clock"></i> 90 min</div></div>
+                            <span class="agc-bloom">Create → Evaluate</span>
+                        </div>
+                        <div class="agc-card-body">
+                            <div class="agc-badge-row">
+                                <span class="agc-tag age">Ages 9–16</span>
+                                <span class="agc-tag skill">Video &amp; Audio</span>
+                                <span class="agc-tag">Presenting</span>
+                                <span class="agc-tag skill">SEL: Social Awareness</span>
+                            </div>
+                            <p class="agc-sub">Everything comes together: kids turn their images, animations, and slides into a 30–60 second video, then present their portfolio in a mini "showcase" and give kind, useful feedback to peers.</p>
+                            <div class="agc-block-title"><i class="fas fa-bullseye"></i> Learning Goals (Mastery)</div>
+                            <ul class="agc-list">
+                                <li>Sequence scenes and add music/text to tell a clear story.</li>
+                                <li>Export a shareable 30–60 second video.</li>
+                                <li>Present their portfolio and give one "glow" + one "grow" to a peer.</li>
+                            </ul>
+                            <div class="agc-lab">
+                                <h5><i class="fas fa-flask"></i> Capstone Lab: "My Creative Reel"</h5>
+                                <ol>
+                                    <li>Storyboard the video: intro (logo) → showcase (images/animation) → outro.</li>
+                                    <li>Assemble clips + slides in Canva video; add text and safe, free music.</li>
+                                    <li>Export the video and add it to your portfolio folder.</li>
+                                    <li>Present in the Showcase; collect feedback using the "glow &amp; grow" cards.</li>
+                                </ol>
+                            </div>
+                            <div class="agc-deliverable"><i class="fas fa-trophy"></i> <strong>Capstone:</strong> A short video + a complete portfolio (image, icons, logo, animation, slides, video).</div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SAFETY / PARENT NOTE ── -->
+    <section class="agc-section alt agc-scope" id="safety">
+        <div class="container px-4 px-lg-5">
+            <div class="agc-reveal">
+                <span class="agc-pill"><i class="fas fa-shield-halved"></i> Safe &amp; Inclusive</span>
+                <h2 class="agc-h2">A Note for Parents &amp; Facilitators</h2>
+                <p class="agc-sub">We take child safety, privacy, and equity seriously — so every family can feel confident enrolling.</p>
+            </div>
+            <div class="row g-4 mt-1 agc-reveal">
+                <div class="col-md-4"><div class="agc-note"><strong><i class="fas fa-user-shield" style="color:var(--agc-teal)"></i> Supervised AI use.</strong><br>All AI tools are used with a facilitator present. We prefer education-tier tools like Canva for Education (free for K–12) with built-in safety, and we respect tool age requirements.</div></div>
+                <div class="col-md-4"><div class="agc-note"><strong><i class="fas fa-lock" style="color:var(--agc-teal)"></i> No child data collected.</strong><br>Activities don't require kids to share personal information, and children under 13 work through a supervised school/foundation account.</div></div>
+                <div class="col-md-4"><div class="agc-note"><strong><i class="fas fa-hand-holding-heart" style="color:var(--agc-teal)"></i> No child left behind.</strong><br>Every lab has a paper / offline / low-cost alternative so kids without a device or internet still fully participate.</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="agc-section agc-scope" id="faq">
+        <div class="container px-4 px-lg-5">
+            <div class="text-center agc-reveal">
+                <span class="agc-pill"><i class="fas fa-circle-question"></i> Good to Know</span>
+                <h2 class="agc-h2">Frequently Asked Questions</h2>
+                <p class="agc-sub mx-auto">Everything parents usually ask before enrolling their child.</p>
+            </div>
+            <div class="agc-faq agc-reveal">
+                <details open>
+                    <summary>Does my child need any experience? <i class="fas fa-chevron-down chev"></i></summary>
+                    <div class="ans">No experience is needed. The course starts with the basics and each session builds gently on the last using an "I do → we do → you do" approach, so complete beginners and creative kids both thrive.</div>
+                </details>
+                <details>
+                    <summary>What device and software are required? <i class="fas fa-chevron-down chev"></i></summary>
+                    <div class="ans">A laptop, Chromebook, or tablet with a browser is ideal, since we use Canva for Education (free for K–12). If a device or internet isn't available, every activity has a paper-and-pencil alternative so no child is excluded.</div>
+                </details>
+                <details>
+                    <summary>Is using AI safe for children? <i class="fas fa-chevron-down chev"></i></summary>
+                    <div class="ans">Yes. AI tools are always used with a facilitator present, we choose education-tier tools with built-in safety guardrails, we respect age requirements (under-13s work via a supervised school/foundation account), and no personal data is collected in activities.</div>
+                </details>
+                <details>
+                    <summary>What will my child have at the end? <i class="fas fa-chevron-down chev"></i></summary>
+                    <div class="ans">A complete creative portfolio: an original AI image, a set of icons, a personal logo, an animation, a 5-slide presentation, and a short 30–60 second video — all created and presented by your child.</div>
+                </details>
+                <details>
+                    <summary>How long is each session? <i class="fas fa-chevron-down chev"></i></summary>
+                    <div class="ans">Each of the 5 sessions runs about 90 minutes and includes a warm-up, a guided demo, a hands-on lab, a show-and-tell, and an at-home challenge.</div>
+                </details>
+                <details>
+                    <summary>How do we register? <i class="fas fa-chevron-down chev"></i></summary>
+                    <div class="ans">Just use the "Enroll Your Child" button below or the Register link in the menu. Seats are limited to keep classes small and supportive.</div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── REGISTRATION FORM ── -->
+    <section class="agc-section alt agc-scope" id="register">
+        <div class="container px-4 px-lg-5">
+            <div class="text-center agc-reveal">
+                <span class="agc-pill"><i class="fas fa-pen-to-square"></i> Register</span>
+                <h2 class="agc-h2">Reserve Your Child's Seat</h2>
+                <p class="agc-sub mx-auto">Fill in the form below and our team will email you the schedule and next steps. Submissions are sent straight to our inbox.</p>
+            </div>
+
+            <div class="row justify-content-center mt-4 agc-reveal">
+                <div class="col-lg-8">
+                    <div class="agc-approach-card">
+                        <!--
+                            EMAIL DELIVERY: This form uses EmailJS to send each registration to your
+                            inbox directly from the browser (no backend). Configured with:
+                              Service:  service_y9lg90x
+                              Template: template_v4iqji9
+                              Public key: QgTa6oe27DHJlhdDQ
+                        -->
+                        <form id="agcRegForm" novalidate>
+                            <!-- Honeypot spam trap -->
+                            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="agcParent" class="form-label">Parent / Guardian Name <span style="color:#dc2626">*</span></label>
+                                    <input type="text" class="form-control" id="agcParent" name="parent_name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="agcChild" class="form-label">Child's Name <span style="color:#dc2626">*</span></label>
+                                    <input type="text" class="form-control" id="agcChild" name="child_name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="agcEmail" class="form-label">Email Address <span style="color:#dc2626">*</span></label>
+                                    <input type="email" class="form-control" id="agcEmail" name="email" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="agcPhone" class="form-label">Phone Number <span style="color:#dc2626">*</span></label>
+                                    <input type="tel" class="form-control" id="agcPhone" name="phone" inputmode="tel" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="agcAge" class="form-label">Child's Age <span style="color:#dc2626">*</span></label>
+                                    <select class="form-select" id="agcAge" name="child_age" required>
+                                        <option value="">-- Select age --</option>
+                                        <option>9</option><option>10</option><option>11</option><option>12</option>
+                                        <option>13</option><option>14</option><option>15</option><option>16</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="agcExp" class="form-label">Design / AI Experience</label>
+                                    <select class="form-select" id="agcExp" name="experience">
+                                        <option value="Beginner">Beginner — brand new</option>
+                                        <option value="Some">Some experience</option>
+                                        <option value="Confident">Confident / creative kid</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="agcMsg" class="form-label">Questions or Comments</label>
+                                    <textarea class="form-control" id="agcMsg" name="comments" rows="4" placeholder="Anything you'd like us to know about your child or the course?"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 d-flex flex-wrap align-items-center gap-3">
+                                <button type="submit" class="agc-btn-primary" id="agcRegSubmit"><i class="fas fa-paper-plane"></i> Submit Registration</button>
+                                <a href="mailto:asimesp@gmail.com" class="text-decoration-none" style="color:var(--agc-teal);font-weight:600;">or email us directly</a>
+                            </div>
+                            <p class="mt-3 mb-0" id="agcRegStatus" role="status" aria-live="polite" style="display:none;"></p>
+                        </form>
+
+                        <div id="agcRegSuccess" style="display:none;text-align:center;padding:1.5rem 0;">
+                            <i class="fas fa-circle-check" style="font-size:3rem;color:var(--agc-teal);"></i>
+                            <h3 class="mt-3" style="color:var(--agc-ink);">Registration Received!</h3>
+                            <p class="mb-0 text-muted">Thank you — we've emailed our team and will get back to you shortly with the schedule and details.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="agc-section agc-scope" id="enroll">
+        <div class="container px-4 px-lg-5">
+            <div class="agc-cta agc-reveal">
+                <span class="agc-eyebrow" style="border-color:rgba(255,255,255,.25);"><i class="fas fa-star"></i> Limited Seats</span>
+                <h2 class="mt-3">Ready to Start Creating?</h2>
+                <p>Give a child the skills to design, animate, and tell stories with AI — the confident, creative way. Register today and join the next cohort.</p>
+                <div class="agc-hero-cta" style="justify-content:center;">
+                    <a href="#register" class="agc-btn-primary"><i class="fas fa-user-plus"></i> Enroll Your Child</a>
+                    <a href="../contact.html" class="agc-btn-ghost"><i class="fas fa-envelope"></i> Ask a Question</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER (matches main page) ── -->
+    <footer class="modern-footer">
+        <div class="container px-4 px-lg-5">
+            <!-- Footer Top Section -->
+            <div class="footer-top">
+                <div class="kf-footer-hero">
+                    <h3 class="brand-name"><i class="fas fa-graduation-cap me-2"></i>Khalida Educational Foundation</h3>
+                    <span class="kf-footer-divider">·</span>
+                    <p class="brand-tagline">Empowering futures through education. Building a legacy of learning, one child at a time.</p>
+                    <span class="kf-footer-divider">·</span>
+                    <em class="brand-mission-inline"><i class="fas fa-heart me-1"></i>"In loving memory of Khalida"</em>
+                </div>
+            </div>
+
+            <!-- Footer Main Section -->
+            <div class="footer-main">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading"><i class="fas fa-link me-2"></i>Quick Links</h5>
+                        <ul class="footer-menu">
+                            <li><a href="../index.html#about"><i class="fas fa-chevron-right me-2"></i>About Us</a></li>
+                            <li><a href="../course-pages/courses.html"><i class="fas fa-chevron-right me-2"></i>Our Courses</a></li>
+                            <li><a href="../index.html#programs"><i class="fas fa-chevron-right me-2"></i>Our Programs</a></li>
+                            <li><a href="../course-pages/courses.html#ai-initiative"><i class="fas fa-chevron-right me-2"></i>AI Initiative</a></li>
+                            <li><a href="../index.html#impact"><i class="fas fa-chevron-right me-2"></i>Our Impact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading"><i class="fas fa-hands-helping me-2"></i>Get Involved</h5>
+                        <ul class="footer-menu">
+                            <li><a href="../index.html#get-involved"><i class="fas fa-chevron-right me-2"></i>Volunteer</a></li>
+                            <li><a href="../index.html#get-involved"><i class="fas fa-chevron-right me-2"></i>Partner With Us</a></li>
+                            <li><a href="../register.html"><i class="fas fa-chevron-right me-2"></i>Register for Course</a></li>
+                            <li><a href="../contact.html"><i class="fas fa-chevron-right me-2"></i>Contact Us</a></li>
+                            <li><a href="../index.html#testimonials"><i class="fas fa-chevron-right me-2"></i>Testimonials</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading"><i class="fas fa-folder-open me-2"></i>Resources</h5>
+                        <ul class="footer-menu">
+                            <li><a href="../index.html#gallery"><i class="fas fa-chevron-right me-2"></i>Photo Gallery</a></li>
+                            <li><a href="../blog/index.html"><i class="fas fa-chevron-right me-2"></i>Blog</a></li>
+                            <li><a href="#curriculum"><i class="fas fa-chevron-right me-2"></i>Course Curriculum</a></li>
+                            <li><a href="#faq"><i class="fas fa-chevron-right me-2"></i>FAQs</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="footer-heading"><i class="fas fa-map-marked-alt me-2"></i>Contact Info</h5>
+                        <ul class="footer-contact">
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:info@khalidafoundation.com">info@khalidafoundation.com</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+16096086282">+1 (609) 608-6282</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Education Street<br>Foundation City, State 12345</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Section -->
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <p class="copyright-text">
+                            <i class="fas fa-copyright me-1"></i>
+                            2025 Khalida Educational Foundation. All rights reserved.
+                            <br class="d-md-none">
+                            <span class="tribute-text">A Tribute to a Legacy of Love and Learning</span>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="footer-social">
+                            <span class="social-text">Follow Us:</span>
+                            <a href="#" class="footer-social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="footer-social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="footer-social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="footer-social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="footer-social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script src="../js/navbar.js"></script>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+    (function(){
+        // Reveal on scroll
+        var reveals = document.querySelectorAll('.agc-reveal');
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(function(el){ io.observe(el); });
+        } else {
+            reveals.forEach(function(el){ el.classList.add('is-in'); });
+        }
+
+        // Active state for sticky sub-nav
+        var links = Array.prototype.slice.call(document.querySelectorAll('#agcSubnav a'));
+        var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+        function onScroll(){
+            var pos = window.scrollY + 140;
+            var current = links[0];
+            sections.forEach(function(sec, i){
+                if (sec && sec.offsetTop <= pos) current = links[i];
+            });
+            links.forEach(function(a){ a.classList.toggle('active', a === current); });
+        }
+        window.addEventListener('scroll', onScroll, { passive:true });
+        onScroll();
+
+        // Smooth scroll with sticky-offset compensation for sub-nav + in-page anchors
+        document.querySelectorAll('a[href^="#"]').forEach(function(a){
+            var id = a.getAttribute('href');
+            if (id.length < 2) return;
+            a.addEventListener('click', function(e){
+                var target = document.querySelector(id);
+                if (target){ e.preventDefault(); window.scrollTo({ top: target.offsetTop - 70, behavior:'smooth' }); }
+            });
+        });
+
+        // ── Registration form: email via EmailJS (no backend) ──
+        var EMAILJS_PUBLIC_KEY = 'QgTa6oe27DHJlhdDQ';
+        var EMAILJS_SERVICE_ID = 'service_y9lg90x';
+        var EMAILJS_TEMPLATE_ID = 'template_v4iqji9';
+        if (window.emailjs) { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
+
+        var form = document.getElementById('agcRegForm');
+        if (!form) return;
+        var status = document.getElementById('agcRegStatus');
+        var success = document.getElementById('agcRegSuccess');
+        var submitBtn = document.getElementById('agcRegSubmit');
+
+        function showStatus(msg, isError){
+            status.style.display = 'block';
+            status.textContent = msg;
+            status.style.color = isError ? '#dc2626' : '#0d9488';
+        }
+
+        function mailtoFallback(){
+            var body = 'Parent/Guardian: ' + form.parent_name.value +
+                '\nChild: ' + form.child_name.value + ' (age ' + form.child_age.value + ')' +
+                '\nEmail: ' + form.email.value +
+                '\nPhone: ' + form.phone.value +
+                '\nExperience: ' + form.experience.value +
+                '\nCourse: AI Graphics Design for Kids' +
+                '\n\n' + form.comments.value;
+            window.location.href = 'mailto:asimesp@gmail.com?subject=' +
+                encodeURIComponent('New registration — AI Graphics Design for Kids') +
+                '&body=' + encodeURIComponent(body);
+        }
+
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            if (!form.checkValidity()){ form.reportValidity(); return; }
+            if (form._gotcha && form._gotcha.value) { return; } // bot trap
+
+            if (!window.emailjs) {
+                showStatus('Email service is loading. Opening your email app instead…', true);
+                mailtoFallback();
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+            // Template params — map to your EmailJS "Contact Us" template variables
+            var params = {
+                from_name: form.parent_name.value,
+                child_name: form.child_name.value,
+                child_age: form.child_age.value,
+                reply_to: form.email.value,
+                phone: form.phone.value,
+                experience: form.experience.value,
+                reason: 'Course Registration',
+                course: 'AI Graphics Design for Kids (5 Sessions, Ages 9-16)',
+                message: form.comments.value || '(no additional comments)',
+                to_email: 'asimesp@gmail.com'
+            };
+
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+                .then(function(){
+                    form.style.display = 'none';
+                    success.style.display = 'block';
+                })
+                .catch(function(err){
+                    showStatus('Sorry, something went wrong. Please email asimesp@gmail.com directly.', true);
+                    if (window.console) console.error('EmailJS error:', err);
+                })
+                .finally(function(){
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Registration';
+                });
+        });
+    })();
+    </script>
+</body>
+</html>

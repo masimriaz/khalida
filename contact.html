@@ -132,12 +132,12 @@
             <div class="section-header text-center mb-5">
                 <div class="badge-contact mb-3">
                     <i class="fas fa-envelope-open-text me-2"></i>
-                    Contact Us
+                    Contact &amp; Course Registration
                 </div>
                 <h2 class="section-heading mb-3">We'd Love to Hear From You</h2>
                 <p class="section-description">
-                    Whether you have a question, want to get involved, or simply wish to connect, our team is here to help.<br>
-                    Reach out and we’ll respond as soon as possible.
+                    Have a question, want to volunteer, or ready to register a child for a course?<br>
+                    Fill in the form and your message is emailed straight to our team.
                 </p>
             </div>
             <div class="row justify-content-center">
@@ -147,24 +147,68 @@
                             <i class="fas fa-paper-plane me-2"></i>
                             Send Us a Message
                         </h3>
-                        <p class="form-subtitle mb-4">Email us directly or use the form below.</p>
-                        <form action="mailto:info@khalidafoundation.org" method="post" enctype="text/plain">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                        <p class="form-subtitle mb-4">Fields marked <span style="color:#dc2626">*</span> are required.</p>
+
+                        <!--
+                            EMAIL DELIVERY: This form uses EmailJS to send submissions to your inbox
+                            directly from the browser (no backend). Configured with:
+                              Service:  service_y9lg90x
+                              Template: template_v4iqji9
+                              Public key: QgTa6oe27DHJlhdDQ
+                        -->
+                        <form id="contactForm" novalidate>
+                            <!-- Honeypot spam trap (hidden from users) -->
+                            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Full Name <span style="color:#dc2626">*</span></label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Phone</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" inputmode="tel">
+                                </div>
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Your Email</label>
+                                <label for="email" class="form-label">Your Email <span style="color:#dc2626">*</span></label>
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                             <div class="mb-3">
-                                <label for="message" class="form-label">Message</label>
-                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                                <label for="reason" class="form-label">I'm reaching out about <span style="color:#dc2626">*</span></label>
+                                <select class="form-select" id="reason" name="reason" required>
+                                    <option value="">-- Please choose --</option>
+                                    <option value="Register for a course">Register a child for a course</option>
+                                    <option value="Volunteer">Volunteering</option>
+                                    <option value="Partnership">Partnership / Collaboration</option>
+                                    <option value="General question">General question</option>
+                                </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-paper-plane me-2"></i>Send Email
+                            <div class="mb-3" id="courseWrap" style="display:none;">
+                                <label for="course" class="form-label">Which course?</label>
+                                <select class="form-select" id="course" name="course">
+                                    <option value="">-- Choose a course --</option>
+                                    <option value="AI Graphics Design for Kids (5 Sessions, Ages 9-16)">AI Graphics Design for Kids (5 Sessions, Ages 9-16)</option>
+                                    <option value="AI for Young Minds - Basic Course">AI for Young Minds - Basic Course</option>
+                                    <option value="AI for Young Minds - Advanced Course">AI for Young Minds - Advanced Course</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message <span style="color:#dc2626">*</span></label>
+                                <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Tell us a little about your question or the child you'd like to register..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="contactSubmit">
+                                <i class="fas fa-paper-plane me-2"></i>Send Message
                             </button>
+                            <a href="mailto:asimesp@gmail.com" class="btn btn-link ms-2">or email us directly</a>
+                            <p class="mt-3 mb-0" id="formStatus" role="status" aria-live="polite" style="display:none;"></p>
                         </form>
+
+                        <div id="contactSuccess" style="display:none;text-align:center;padding:1.5rem 0;">
+                            <i class="fas fa-check-circle" style="font-size:3rem;color:#0d9488;"></i>
+                            <h3 class="mt-3">Message Sent!</h3>
+                            <p class="mb-0 text-muted">Thank you for reaching out. Our team will get back to you soon.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-5 mb-5">
@@ -202,11 +246,11 @@
                         </div>
                         <div class="contact-info-item mb-3">
                             <div class="contact-info-icon contact-info-icon-teal">
-                                <i class="fas fa-map-marker-alt"></i>
+                                <i class="fas fa-graduation-cap"></i>
                             </div>
                             <div class="contact-info-content">
-                                <h5 class="contact-info-label">Location</h5>
-                                <span>123 Education Street<br>Foundation City, State 12345</span>
+                                <h5 class="contact-info-label">Courses</h5>
+                                <a href="course-pages/courses.html">Browse all courses</a>
                             </div>
                         </div>
                     </div>
@@ -224,5 +268,88 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/navbar.js"></script>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+    (function () {
+        // ── EmailJS configuration ──
+        var EMAILJS_PUBLIC_KEY = 'QgTa6oe27DHJlhdDQ';
+        var EMAILJS_SERVICE_ID = 'service_y9lg90x';
+        var EMAILJS_TEMPLATE_ID = 'template_v4iqji9';
+        if (window.emailjs) { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
+
+        var form = document.getElementById('contactForm');
+        if (!form) return;
+        var reason = document.getElementById('reason');
+        var courseWrap = document.getElementById('courseWrap');
+        var status = document.getElementById('formStatus');
+        var success = document.getElementById('contactSuccess');
+        var submitBtn = document.getElementById('contactSubmit');
+
+        // Show course selector only when registering for a course
+        reason.addEventListener('change', function () {
+            courseWrap.style.display = reason.value === 'Register for a course' ? 'block' : 'none';
+        });
+
+        function showStatus(msg, isError) {
+            status.style.display = 'block';
+            status.textContent = msg;
+            status.style.color = isError ? '#dc2626' : '#0d9488';
+        }
+
+        function mailtoFallback() {
+            var body = 'Name: ' + form.name.value +
+                '\nEmail: ' + form.email.value +
+                '\nPhone: ' + form.phone.value +
+                '\nReason: ' + form.reason.value +
+                (form.course && form.course.value ? '\nCourse: ' + form.course.value : '') +
+                '\n\n' + form.message.value;
+            window.location.href = 'mailto:asimesp@gmail.com?subject=' +
+                encodeURIComponent('Website enquiry: ' + form.reason.value) +
+                '&body=' + encodeURIComponent(body);
+        }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!form.checkValidity()) { form.reportValidity(); return; }
+            // Ignore bots that fill the honeypot
+            if (form._gotcha && form._gotcha.value) { return; }
+
+            if (!window.emailjs) {
+                showStatus('Email service is loading. Opening your email app instead…', true);
+                mailtoFallback();
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+
+            // Template params — map to your EmailJS "Contact Us" template variables
+            var params = {
+                from_name: form.name.value,
+                reply_to: form.email.value,
+                phone: form.phone.value,
+                reason: form.reason.value,
+                course: (form.course && form.course.value) ? form.course.value : 'N/A',
+                message: form.message.value,
+                to_email: 'asimesp@gmail.com'
+            };
+
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+                .then(function () {
+                    form.style.display = 'none';
+                    success.style.display = 'block';
+                })
+                .catch(function (err) {
+                    showStatus('Sorry, something went wrong sending your message. Please email asimesp@gmail.com directly.', true);
+                    if (window.console) console.error('EmailJS error:', err);
+                })
+                .finally(function () {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Send Message';
+                });
+        });
+    })();
+    </script>
 </body>
 </html>

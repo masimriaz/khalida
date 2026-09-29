@@ -22,6 +22,237 @@
         <link href="css/navbar.css" rel="stylesheet" />
         <!-- Creative Trust Theme -->
         <link href="css/theme.css" rel="stylesheet" />
+        <!-- EmailJS SDK -->
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+        <!-- Page enhancements: fixed header + modern UI polish -->
+        <style>
+            /* ── Static / pinned header while scrolling ──
+               The topbar scrolls away, then the navbar stays pinned at the very
+               top for the rest of the page (sticky keeps it in flow, no overlap). */
+            #kf-nav {
+                position: -webkit-sticky !important;
+                position: sticky !important;
+                top: 0;
+                z-index: 1040 !important;
+            }
+            #kf-topbar { position: relative; z-index: 1039; }
+            html { scroll-padding-top: calc(var(--nav-h, 76px) + 12px); }
+
+            /* ── Modern micro-interactions ── */
+            .program-card, .metric-card, .course-card, .involvement-card, .stat-card-modern {
+                transition: transform .28s cubic-bezier(.16,1,.3,1), box-shadow .28s cubic-bezier(.16,1,.3,1) !important;
+            }
+            .program-card:hover, .metric-card:hover, .stat-card-modern:hover {
+                transform: translateY(-6px) !important;
+            }
+            /* Reveal-on-scroll utility */
+            .kf-reveal { opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+            .kf-reveal.is-in { opacity:1; transform:none; }
+            @media (prefers-reduced-motion: reduce){ .kf-reveal{opacity:1!important;transform:none!important;transition:none!important;} }
+
+            /* Contact form status + success polish */
+            #contactStatus { display:none; margin-top:1rem; font-weight:600; }
+            #contactSuccess { display:none; text-align:center; padding:2rem 1rem; }
+            #contactSuccess i { font-size:3rem; color:#0d9488; }
+            .btn-submit-modern[disabled]{ opacity:.7; cursor:not-allowed; }
+
+            /* ══════════════════════════════════════════════════════════
+               MULTI-LAYERED CREATIVE HERO
+               ══════════════════════════════════════════════════════════ */
+            .hero-x{
+                position:relative; overflow:hidden; isolation:isolate;
+                min-height:clamp(620px,92vh,900px)!important;
+                display:flex!important; align-items:center!important;
+                padding:5.5rem 0 4rem!important;
+                background:
+                    radial-gradient(1200px 600px at 15% -10%, rgba(13,148,136,.28), transparent 60%),
+                    radial-gradient(1000px 700px at 90% 10%, rgba(99,102,241,.26), transparent 55%),
+                    radial-gradient(900px 900px at 50% 120%, rgba(14,165,233,.18), transparent 55%),
+                    linear-gradient(160deg,#0b1220 0%,#0f172a 42%,#0b1526 100%)!important;
+                color:#fff;
+            }
+            /* Layer 1 — fine grid */
+            .hero-x .hx-grid{position:absolute;inset:0;z-index:0;pointer-events:none;
+                background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+                    linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+                background-size:46px 46px;
+                mask-image:radial-gradient(ellipse at 50% 35%,#000 0%,transparent 78%);}
+            /* Layer 2 — aurora blobs */
+            .hero-x .hx-blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.6;z-index:0;pointer-events:none;}
+            .hero-x .hx-blob.b1{width:480px;height:480px;top:-140px;left:-90px;background:radial-gradient(circle,rgba(13,148,136,.55),transparent 70%);animation:hxDrift 16s ease-in-out infinite;}
+            .hero-x .hx-blob.b2{width:420px;height:420px;bottom:-160px;right:-80px;background:radial-gradient(circle,rgba(99,102,241,.5),transparent 70%);animation:hxDrift 20s ease-in-out infinite reverse;}
+            .hero-x .hx-blob.b3{width:340px;height:340px;top:30%;right:22%;background:radial-gradient(circle,rgba(56,189,248,.4),transparent 70%);animation:hxDrift 24s ease-in-out infinite;}
+            @keyframes hxDrift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(36px,-30px) scale(1.08)}}
+            /* Layer 3 — twinkling particles */
+            .hero-x .hx-stars{position:absolute;inset:0;z-index:0;pointer-events:none;
+                background-image:
+                    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.7), transparent),
+                    radial-gradient(2px 2px at 70% 20%, rgba(224,231,255,.6), transparent),
+                    radial-gradient(1.5px 1.5px at 40% 70%, rgba(94,234,212,.7), transparent),
+                    radial-gradient(1.5px 1.5px at 85% 60%, rgba(255,255,255,.6), transparent),
+                    radial-gradient(2px 2px at 55% 45%, rgba(255,255,255,.5), transparent),
+                    radial-gradient(1.5px 1.5px at 12% 80%, rgba(129,140,248,.7), transparent);
+                animation:hxTwinkle 6s ease-in-out infinite;}
+            @keyframes hxTwinkle{0%,100%{opacity:.35}50%{opacity:.9}}
+            /* Vignette */
+            .hero-x::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+                background:radial-gradient(ellipse at 50% 40%,transparent 55%,rgba(3,7,18,.55) 100%);}
+            .hero-x .container{position:relative;z-index:3;}
+
+            /* Content column */
+            .hx-eyebrow{display:inline-flex;align-items:center;gap:.55rem;background:rgba(255,255,255,.07);
+                border:1px solid rgba(255,255,255,.18);color:#e0e7ff;padding:.5rem 1.05rem;border-radius:999px;
+                font-weight:600;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;backdrop-filter:blur(6px);}
+            .hx-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:#14b8a6;box-shadow:0 0 0 0 rgba(20,184,166,.6);animation:hxPulse 2s infinite;}
+            @keyframes hxPulse{0%{box-shadow:0 0 0 0 rgba(20,184,166,.6)}70%{box-shadow:0 0 0 10px rgba(20,184,166,0)}100%{box-shadow:0 0 0 0 rgba(20,184,166,0)}}
+            .hx-title{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.05;
+                font-size:clamp(2.3rem,5.4vw,4rem);margin:1.3rem 0 1rem;letter-spacing:-.01em;}
+            .hx-title .grad{background:linear-gradient(90deg,#14b8a6 0%,#38bdf8 45%,#818cf8 100%);
+                -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+                background-size:200% auto;animation:hxSheen 6s linear infinite;}
+            @keyframes hxSheen{to{background-position:200% center}}
+            /* rotating word */
+            .hx-rotate{display:inline-block;position:relative;height:1.12em;overflow:hidden;vertical-align:bottom;}
+            .hx-rotate span{display:block;height:1.12em;line-height:1.12em;
+                background:linear-gradient(90deg,#5eead4,#818cf8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+                animation:hxRoll 9s cubic-bezier(.86,0,.07,1) infinite;}
+            @keyframes hxRoll{0%,20%{transform:translateY(0)}25%,45%{transform:translateY(-1.12em)}50%,70%{transform:translateY(-2.24em)}75%,95%{transform:translateY(-3.36em)}100%{transform:translateY(0)}}
+            .hx-lead{color:#c7d2fe;font-size:1.12rem;max-width:36rem;line-height:1.6;}
+            .hx-meta{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.6rem;}
+            .hx-chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#e2e8f0;
+                padding:.5rem 1rem;border-radius:999px;font-size:.85rem;font-weight:500;transition:transform .2s,background .2s;}
+            .hx-chip:hover{transform:translateY(-2px);background:rgba(255,255,255,.12);}
+            .hx-chip i{color:#14b8a6;margin-right:.45rem;}
+            .hx-cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem;}
+            .hx-btn{padding:.95rem 1.9rem;border-radius:14px;font-weight:700;text-decoration:none;
+                display:inline-flex;align-items:center;gap:.55rem;transition:transform .2s,box-shadow .2s;}
+            .hx-btn.primary{background:linear-gradient(135deg,#0d9488,#14b8a6);color:#fff;box-shadow:0 12px 30px rgba(13,148,136,.4);}
+            .hx-btn.primary:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(13,148,136,.5);color:#fff;}
+            .hx-btn.ghost{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.35);color:#fff;}
+            .hx-btn.ghost:hover{transform:translateY(-3px);background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.6);color:#fff;}
+            /* trust stats */
+            .hx-stats{display:flex;flex-wrap:wrap;gap:2rem;margin-top:2.5rem;}
+            .hx-stat .n{font-family:'Poppins';font-weight:800;font-size:1.9rem;
+                background:linear-gradient(90deg,#5eead4,#818cf8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+            .hx-stat .l{color:#94a3b8;font-size:.82rem;margin-top:.1rem;}
+
+            /* Visual column — orbit */
+            .hx-visual{position:relative;height:clamp(360px,42vw,520px);}
+            .hx-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+                width:190px;height:190px;border-radius:50%;
+                background:radial-gradient(circle at 40% 35%,rgba(20,184,166,.45),rgba(99,102,241,.28));
+                border:1px solid rgba(255,255,255,.22);box-shadow:0 0 80px rgba(13,148,136,.5),inset 0 0 40px rgba(255,255,255,.08);
+                display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+                animation:hxCoreGlow 4s ease-in-out infinite;}
+            @keyframes hxCoreGlow{0%,100%{box-shadow:0 0 80px rgba(13,148,136,.45),inset 0 0 40px rgba(255,255,255,.08)}50%{box-shadow:0 0 110px rgba(99,102,241,.55),inset 0 0 50px rgba(255,255,255,.12)}}
+            .hx-core i{font-size:2.8rem;color:#5eead4;}
+            .hx-core span{font-family:'Poppins';font-weight:800;font-size:.95rem;margin-top:.35rem;color:#fff;}
+            .hx-core small{color:#c7d2fe;font-size:.7rem;letter-spacing:.05em;}
+            /* orbit rings */
+            .hx-ring{position:absolute;top:50%;left:50%;border:1px dashed rgba(255,255,255,.14);border-radius:50%;transform:translate(-50%,-50%);}
+            .hx-ring.r1{width:300px;height:300px;animation:hxSpin 26s linear infinite;}
+            .hx-ring.r2{width:440px;height:440px;animation:hxSpin 40s linear infinite reverse;}
+            @keyframes hxSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+            /* floating creation cards */
+            .hx-card{position:absolute;display:flex;align-items:center;gap:.6rem;
+                background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:14px;
+                padding:.7rem .95rem;backdrop-filter:blur(10px);box-shadow:0 18px 40px rgba(0,0,0,.35);
+                color:#e2e8f0;font-weight:600;font-size:.85rem;white-space:nowrap;}
+            .hx-card i{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.95rem;}
+            .hx-card.c1{top:6%;left:0;animation:hxBob 6s ease-in-out infinite;}
+            .hx-card.c1 i{background:linear-gradient(135deg,#0d9488,#14b8a6);}
+            .hx-card.c2{top:24%;right:-4%;animation:hxBob 6s ease-in-out .9s infinite;}
+            .hx-card.c2 i{background:linear-gradient(135deg,#6366f1,#818cf8);}
+            .hx-card.c3{bottom:20%;left:-4%;animation:hxBob 6s ease-in-out 1.8s infinite;}
+            .hx-card.c3 i{background:linear-gradient(135deg,#0ea5e9,#38bdf8);}
+            .hx-card.c4{bottom:2%;right:8%;animation:hxBob 6s ease-in-out 2.7s infinite;}
+            .hx-card.c4 i{background:linear-gradient(135deg,#f59e0b,#fbbf24);}
+            @keyframes hxBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+            /* scroll cue */
+            .hx-scroll{position:absolute;left:50%;bottom:1.2rem;transform:translateX(-50%);z-index:3;
+                color:rgba(255,255,255,.6);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-align:center;}
+            .hx-scroll .mouse{width:24px;height:38px;border:2px solid rgba(255,255,255,.4);border-radius:14px;margin:0 auto .5rem;position:relative;}
+            .hx-scroll .mouse::before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:3px;height:7px;border-radius:2px;background:rgba(255,255,255,.7);animation:hxWheel 1.6s ease-in-out infinite;}
+            @keyframes hxWheel{0%{opacity:0;top:6px}30%{opacity:1}60%{opacity:1;top:16px}100%{opacity:0;top:20px}}
+
+            @media (max-width:991px){ .hx-visual{display:none;} .hero-x{min-height:auto;padding:5rem 0 3.5rem;text-align:center;} .hx-lead{margin-left:auto;margin-right:auto;} .hx-meta,.hx-cta,.hx-stats{justify-content:center;} }
+            @media (prefers-reduced-motion:reduce){
+                .hero-x .hx-blob,.hero-x .hx-stars,.hx-title .grad,.hx-rotate span,.hx-core,.hx-ring,.hx-card,.hx-scroll .mouse::before,.hx-eyebrow .dot{animation:none!important;}
+                .hx-rotate{height:auto;} .hx-rotate span:not(:first-child){display:none;}
+            }
+
+            /* ══════════════════════════════════════════════════════════
+               IMPACT SECTION — advanced diagrams & animation
+               ══════════════════════════════════════════════════════════ */
+            /* Count-up numbers get a subtle pop when they finish */
+            .stat-number-large.counted{ animation:ixPop .5s cubic-bezier(.16,1,.3,1); }
+            @keyframes ixPop{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+
+            /* Radial (donut) progress diagrams for highlight boxes */
+            .ix-radials{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1rem;}
+            @media(max-width:767px){.ix-radials{grid-template-columns:1fr;}}
+            .ix-radial{position:relative;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;
+                padding:2rem 1.25rem 1.75rem;text-align:center;box-shadow:0 6px 24px rgba(15,23,42,.06);
+                transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s;overflow:hidden;}
+            .ix-radial::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;
+                background:linear-gradient(90deg,#0d9488,#6366f1);opacity:0;transition:opacity .28s;}
+            .ix-radial:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(15,23,42,.12);}
+            .ix-radial:hover::before{opacity:1;}
+            .ix-dial{position:relative;width:132px;height:132px;margin:0 auto 1rem;}
+            .ix-dial svg{transform:rotate(-90deg);}
+            .ix-dial .track{fill:none;stroke:#e2e8f0;stroke-width:11;}
+            .ix-dial .prog{fill:none;stroke-width:11;stroke-linecap:round;
+                stroke-dasharray:339.29;stroke-dashoffset:339.29;
+                transition:stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1);}
+            .ix-dial.is-in .prog{stroke-dashoffset:var(--dash,120);}
+            .ix-dial .val{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+                font-family:'Poppins',sans-serif;font-weight:800;font-size:1.6rem;color:#0f172a;}
+            .ix-dial .val small{font-size:.9rem;}
+            .ix-radial .ic{width:44px;height:44px;border-radius:12px;margin:0 auto .6rem;
+                display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.05rem;
+                background:linear-gradient(135deg,#1e293b,#0d9488);}
+            .ix-radial h5{font-family:'Poppins';font-weight:700;color:#0f172a;font-size:1.05rem;margin:.25rem 0;}
+            .ix-radial p{color:#475569;font-size:.9rem;margin:0;}
+
+            /* Impact journey flow diagram */
+            .ix-journey{background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:24px;
+                padding:2.5rem 1.5rem;position:relative;overflow:hidden;}
+            .ix-journey::before{content:"";position:absolute;inset:0;
+                background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+                    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+                background-size:34px 34px;mask-image:radial-gradient(ellipse at 50% 40%,#000,transparent 75%);}
+            .ix-journey-head{text-align:center;position:relative;z-index:1;margin-bottom:2rem;}
+            .ix-journey-head .pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(20,184,166,.15);
+                border:1px solid rgba(20,184,166,.35);color:#5eead4;font-size:.72rem;font-weight:700;
+                letter-spacing:.06em;text-transform:uppercase;padding:.4rem 1rem;border-radius:999px;}
+            .ix-journey-head h3{font-family:'Poppins';font-weight:800;color:#fff;font-size:1.5rem;margin:.75rem 0 0;}
+            .ix-flow{display:flex;align-items:stretch;justify-content:center;gap:0;flex-wrap:wrap;position:relative;z-index:1;}
+            .ix-node{flex:1;min-width:150px;max-width:210px;text-align:center;padding:1.25rem 1rem;
+                background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;
+                margin:.4rem;backdrop-filter:blur(6px);}
+            .ix-node .ring{width:58px;height:58px;border-radius:50%;margin:0 auto .75rem;
+                display:flex;align-items:center;justify-content:center;font-size:1.35rem;color:#fff;
+                background:linear-gradient(135deg,#0d9488,#14b8a6);box-shadow:0 8px 20px rgba(13,148,136,.4);}
+            .ix-node.n2 .ring{background:linear-gradient(135deg,#6366f1,#818cf8);box-shadow:0 8px 20px rgba(99,102,241,.4);}
+            .ix-node.n3 .ring{background:linear-gradient(135deg,#0ea5e9,#38bdf8);box-shadow:0 8px 20px rgba(14,165,233,.4);}
+            .ix-node.n4 .ring{background:linear-gradient(135deg,#f59e0b,#fbbf24);box-shadow:0 8px 20px rgba(245,158,11,.4);}
+            .ix-node h6{font-family:'Poppins';font-weight:700;color:#fff;font-size:.95rem;margin:0 0 .3rem;}
+            .ix-node p{color:#94a3b8;font-size:.8rem;margin:0;line-height:1.5;}
+            .ix-arrow{display:flex;align-items:center;color:#334155;font-size:1.2rem;padding:0 .2rem;}
+            @media(max-width:767px){.ix-arrow{transform:rotate(90deg);width:100%;justify-content:center;padding:.3rem 0;}}
+            /* reveal helpers */
+            .ix-reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
+            .ix-reveal.is-in{opacity:1;transform:none;}
+            .ix-node{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+            .ix-flow.is-in .ix-node{opacity:1;transform:none;}
+            .ix-flow.is-in .ix-node.n2{transition-delay:.12s;}
+            .ix-flow.is-in .ix-node.n3{transition-delay:.24s;}
+            .ix-flow.is-in .ix-node.n4{transition-delay:.36s;}
+            @media (prefers-reduced-motion:reduce){
+                .ix-dial .prog{transition:none;} .ix-reveal,.ix-node{opacity:1!important;transform:none!important;transition:none!important;}
+                .stat-number-large.counted{animation:none;}
+            }
+        </style>
     </head>
     <body id="page-top">
 
@@ -37,7 +268,7 @@
                     <span class="kf-topbar-item"><i class="fas fa-calendar-check"></i> Sessions Every Weekend</span>
                 </div>
                 <div class="kf-topbar-right">
-                    <span class="kf-session-pill"><i class="fas fa-robot"></i> AI Superheroes · Session 6</span>
+                    <span class="kf-session-pill"><i class="fas fa-palette"></i> New Course · AI Graphics Design for Kids</span>
                     <a href="#" class="kf-social" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     <a href="#" class="kf-social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     <a href="#" class="kf-social" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
@@ -70,6 +301,7 @@
                             <div class="kf-dd-header">Courses</div>
                             <a class="kf-dd-item" href="course-pages/courses.html" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-list-ul"></i></span>All Courses</a>
                             <a class="kf-dd-item" href="course-pages/advanced-ai-for-kids.html" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-robot"></i></span>Advanced AI for Kids</a>
+                            <a class="kf-dd-item" href="course-pages/ai-graphics-design-for-kids.html" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-palette"></i></span>AI Graphics Design for Kids</a>
                             <div class="kf-dd-divider"></div>
                             <div class="kf-dd-header">Teacher Training</div>
                             <a class="kf-dd-item" href="design-thinking-guide.html" role="menuitem"><span class="kf-dd-icon"><i class="fas fa-lightbulb"></i></span>Design Thinking Guide</a>
@@ -126,6 +358,7 @@
             <a class="kf-mobile-link" href="vision.html"><i class="fas fa-eye"></i> Vision</a>
             <a class="kf-mobile-link" href="course-pages/courses.html"><i class="fas fa-list-ul"></i> All Courses</a>
             <a class="kf-mobile-link" href="course-pages/advanced-ai-for-kids.html"><i class="fas fa-robot"></i> Advanced AI for Kids</a>
+            <a class="kf-mobile-link" href="course-pages/ai-graphics-design-for-kids.html"><i class="fas fa-palette"></i> AI Graphics Design</a>
             <a class="kf-mobile-link" href="index.html#programs"><i class="fas fa-seedling"></i> Programs</a>
             <a class="kf-mobile-link" href="blog/index.html"><i class="fas fa-newspaper"></i> Blog</a>
             <div class="kf-mobile-section">AI Superheroes Series</div>
@@ -142,27 +375,76 @@
             <a class="kf-mobile-link" href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a>
             <a class="kf-mobile-register" href="register.html"><i class="fas fa-star"></i> Register Now</a>
         </div>
-        <!-- Header-->
-        <header class="masthead d-flex align-items-center">
-            <div class="container px-4 px-lg-5 text-center hero-stack">
-                <div class="hero-badge mb-3">✨ Inspired by Creative Confidence ✨</div>
-                <h1 class="mb-3 hero-title">Every child is born creative.<br>We help them believe it.</h1>
-                <h3 class="mb-3 hero-tagline">Unlocking creative potential through design thinking</h3>
-                <p class="lead mb-4 hero-mission">We believe creativity isn't a gift for the privileged few — it's a birthright for every child. Through skill-based learning, design thinking, and guided courage, we help underprivileged children move from "I can't" to "What if I could?"</p>
-                <div class="hero-meta">
-                    <span class="meta-pill"><i class="fas fa-lightbulb me-2"></i>Design Thinking</span>
-                    <span class="meta-pill"><i class="fas fa-rocket me-2"></i>Creative Confidence</span>
-                    <span class="meta-pill"><i class="fas fa-hands-helping me-2"></i>Guided Courage</span>
-                </div>
-                <div class="hero-progress">
-                    <span class="progress-fill"></span>
-                    <span class="progress-glow"></span>
-                </div>
-                <div class="hero-cta">
-                    <a class="btn btn-primary btn-xl me-3 mb-3" href="register.html">Unlock Creative Potential</a>
-                    <a class="btn btn-warning btn-xl mb-3" href="#programs">See Our Programs</a>
+        <!-- Header — Multi-layered creative hero -->
+        <header class="masthead hero-x" role="banner">
+            <!-- Depth layers -->
+            <div class="hx-grid" aria-hidden="true"></div>
+            <span class="hx-blob b1" aria-hidden="true"></span>
+            <span class="hx-blob b2" aria-hidden="true"></span>
+            <span class="hx-blob b3" aria-hidden="true"></span>
+            <div class="hx-stars" aria-hidden="true"></div>
+
+            <div class="container px-4 px-lg-5">
+                <div class="row align-items-center gy-5">
+                    <!-- Content -->
+                    <div class="col-lg-6">
+                        <span class="hx-eyebrow"><span class="dot"></span> ✨ Inspired by Creative Confidence</span>
+                        <h1 class="hx-title">
+                            Every child is born
+                            <span class="hx-rotate">
+                                <span>creative.</span>
+                                <span>curious.</span>
+                                <span>confident.</span>
+                                <span>capable.</span>
+                            </span><br>
+                            <span class="grad">We help them believe it.</span>
+                        </h1>
+                        <p class="hx-lead">
+                            Creativity isn't a gift for the privileged few — it's a birthright for every child.
+                            Through skill-based learning, design thinking, and guided courage, we help children
+                            move from <em>"I can't"</em> to <strong>"What if I could?"</strong>
+                        </p>
+                        <div class="hx-meta">
+                            <span class="hx-chip"><i class="fas fa-lightbulb"></i>Design Thinking</span>
+                            <span class="hx-chip"><i class="fas fa-rocket"></i>Creative Confidence</span>
+                            <span class="hx-chip"><i class="fas fa-hands-helping"></i>Guided Courage</span>
+                            <span class="hx-chip"><i class="fas fa-palette"></i>AI Graphics for Kids</span>
+                        </div>
+                        <div class="hx-cta">
+                            <a class="hx-btn primary" href="register.html"><i class="fas fa-rocket"></i> Unlock Creative Potential</a>
+                            <a class="hx-btn ghost" href="#programs"><i class="fas fa-compass"></i> Explore Our Programs</a>
+                        </div>
+                        <div class="hx-stats">
+                            <div class="hx-stat"><div class="n">100+</div><div class="l">Lives Changed</div></div>
+                            <div class="hx-stat"><div class="n">6+</div><div class="l">Learning Programs</div></div>
+                            <div class="hx-stat"><div class="n">Est. 2023</div><div class="l">Built on Love</div></div>
+                        </div>
+                    </div>
+
+                    <!-- Visual orbit -->
+                    <div class="col-lg-6">
+                        <div class="hx-visual" aria-hidden="true">
+                            <div class="hx-ring r2"></div>
+                            <div class="hx-ring r1"></div>
+                            <div class="hx-core">
+                                <i class="fas fa-wand-magic-sparkles"></i>
+                                <span>Imagine · Create</span>
+                                <small>KIDS + AI + DESIGN</small>
+                            </div>
+                            <div class="hx-card c1"><i class="fas fa-image"></i> AI Art</div>
+                            <div class="hx-card c2"><i class="fas fa-shapes"></i> Logos &amp; Icons</div>
+                            <div class="hx-card c3"><i class="fas fa-film"></i> Animation</div>
+                            <div class="hx-card c4"><i class="fas fa-video"></i> Short Films</div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Scroll cue -->
+            <a href="#about" class="hx-scroll" aria-label="Scroll to learn more">
+                <span class="mouse"></span>
+                Scroll to explore
+            </a>
         </header>
         <!-- About-->
         <section class="about-section-new" id="about">
@@ -666,37 +948,90 @@
                     </div>
                 </div>
                 
-                <!-- Impact Highlights -->
+                <!-- Impact Highlights — animated radial diagrams -->
                 <div class="row mb-5">
                     <div class="col-lg-10 mx-auto">
-                        <div class="impact-highlights">
-                            <div class="row g-4">
-                                <div class="col-md-4">
-                                    <div class="highlight-box">
-                                        <div class="highlight-icon">
-                                            <i class="fas fa-trophy"></i>
-                                        </div>
-                                        <h5>95% Success Rate</h5>
-                                        <p>Students achieving academic excellence</p>
-                                    </div>
+                        <div class="ix-radials ix-reveal">
+                            <div class="ix-radial">
+                                <div class="ic"><i class="fas fa-trophy"></i></div>
+                                <div class="ix-dial" data-value="95">
+                                    <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
+                                        <circle class="track" cx="66" cy="66" r="54"></circle>
+                                        <circle class="prog" cx="66" cy="66" r="54" stroke="url(#ixGrad1)"></circle>
+                                        <defs><linearGradient id="ixGrad1" x1="0" y1="0" x2="1" y2="1">
+                                            <stop offset="0%" stop-color="#0d9488"/><stop offset="100%" stop-color="#14b8a6"/>
+                                        </linearGradient></defs>
+                                    </svg>
+                                    <div class="val"><span class="num" data-target="95">0</span><small>%</small></div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="highlight-box">
-                                        <div class="highlight-icon">
-                                            <i class="fas fa-briefcase"></i>
-                                        </div>
-                                        <h5>80% Employed</h5>
-                                        <p>Vocational graduates in meaningful careers</p>
-                                    </div>
+                                <h5>Success Rate</h5>
+                                <p>Students achieving academic excellence</p>
+                            </div>
+                            <div class="ix-radial">
+                                <div class="ic" style="background:linear-gradient(135deg,#6366f1,#818cf8);"><i class="fas fa-briefcase"></i></div>
+                                <div class="ix-dial" data-value="80">
+                                    <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
+                                        <circle class="track" cx="66" cy="66" r="54"></circle>
+                                        <circle class="prog" cx="66" cy="66" r="54" stroke="url(#ixGrad2)"></circle>
+                                        <defs><linearGradient id="ixGrad2" x1="0" y1="0" x2="1" y2="1">
+                                            <stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#818cf8"/>
+                                        </linearGradient></defs>
+                                    </svg>
+                                    <div class="val"><span class="num" data-target="80">0</span><small>%</small></div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="highlight-box">
-                                        <div class="highlight-icon">
-                                            <i class="fas fa-globe"></i>
-                                        </div>
-                                        <h5>12 Communities</h5>
-                                        <p>Reached through outreach programs</p>
-                                    </div>
+                                <h5>Employed</h5>
+                                <p>Vocational graduates in meaningful careers</p>
+                            </div>
+                            <div class="ix-radial">
+                                <div class="ic" style="background:linear-gradient(135deg,#0ea5e9,#38bdf8);"><i class="fas fa-globe"></i></div>
+                                <div class="ix-dial" data-value="100">
+                                    <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
+                                        <circle class="track" cx="66" cy="66" r="54"></circle>
+                                        <circle class="prog" cx="66" cy="66" r="54" stroke="url(#ixGrad3)"></circle>
+                                        <defs><linearGradient id="ixGrad3" x1="0" y1="0" x2="1" y2="1">
+                                            <stop offset="0%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#38bdf8"/>
+                                        </linearGradient></defs>
+                                    </svg>
+                                    <div class="val"><span class="num" data-target="12">0</span></div>
+                                </div>
+                                <h5>Communities</h5>
+                                <p>Reached through outreach programs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impact Journey — animated flow diagram -->
+                <div class="row">
+                    <div class="col-lg-11 mx-auto">
+                        <div class="ix-journey ix-reveal">
+                            <div class="ix-journey-head">
+                                <span class="pill"><i class="fas fa-diagram-project"></i> How Impact Happens</span>
+                                <h3>From "I can't" to "What if I could?"</h3>
+                            </div>
+                            <div class="ix-flow">
+                                <div class="ix-node n1">
+                                    <div class="ring"><i class="fas fa-hand-holding-heart"></i></div>
+                                    <h6>1 · Reach</h6>
+                                    <p>We meet children where they are — in underserved communities.</p>
+                                </div>
+                                <div class="ix-arrow"><i class="fas fa-arrow-right"></i></div>
+                                <div class="ix-node n2">
+                                    <div class="ring"><i class="fas fa-lightbulb"></i></div>
+                                    <h6>2 · Ignite</h6>
+                                    <p>Design thinking &amp; skill-based learning spark creative confidence.</p>
+                                </div>
+                                <div class="ix-arrow"><i class="fas fa-arrow-right"></i></div>
+                                <div class="ix-node n3">
+                                    <div class="ring"><i class="fas fa-rocket"></i></div>
+                                    <h6>3 · Empower</h6>
+                                    <p>Hands-on AI &amp; creative projects turn ideas into real skills.</p>
+                                </div>
+                                <div class="ix-arrow"><i class="fas fa-arrow-right"></i></div>
+                                <div class="ix-node n4">
+                                    <div class="ring"><i class="fas fa-seedling"></i></div>
+                                    <h6>4 · Transform</h6>
+                                    <p>Confident young creators uplift their families and communities.</p>
                                 </div>
                             </div>
                         </div>
@@ -1003,11 +1338,13 @@
                                 <p class="form-subtitle">Fill out the form and we'll get back to you within 24 hours</p>
                             </div>
                             
-                            <form id="contactForm" action="https://formsubmit.co/info@khalidafoundation.com" method="POST">
-                                <input type="hidden" name="_captcha" value="false">
-                                <input type="hidden" name="_template" value="table">
-                                <input type="hidden" name="_subject" value="New Inquiry from Khalida Foundation Website">
-                                <input type="hidden" name="_next" value="https://khalidafoundation.com/#contact">
+                            <!--
+                                EMAIL DELIVERY: This form uses EmailJS to send submissions to your inbox
+                                (no backend). Service: service_y9lg90x · Template: template_v4iqji9 · Key: QgTa6oe27DHJlhdDQ
+                            -->
+                            <form id="contactForm" novalidate>
+                                <!-- Honeypot spam trap -->
+                                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="modern-form-group">
@@ -1070,7 +1407,13 @@
                                     Send Message
                                     <span class="btn-shimmer"></span>
                                 </button>
+                                <p id="contactStatus" role="status" aria-live="polite"></p>
                             </form>
+                            <div id="contactSuccess">
+                                <i class="fas fa-circle-check"></i>
+                                <h3 class="mt-3">Message Sent!</h3>
+                                <p class="mb-0 text-muted">Thank you for reaching out. Our team will get back to you within 24 hours.</p>
+                            </div>
                         </div>
                     </div>
                     
@@ -1292,5 +1635,117 @@
         <script src="js/scripts.js"></script>
         <!-- Shared Navbar JS -->
         <script src="js/navbar.js"></script>
+        <!-- Contact form (EmailJS) + reveal animations -->
+        <script>
+        (function () {
+            // ── EmailJS configuration ──
+            var EMAILJS_PUBLIC_KEY = 'QgTa6oe27DHJlhdDQ';
+            var EMAILJS_SERVICE_ID = 'service_y9lg90x';
+            var EMAILJS_TEMPLATE_ID = 'template_v4iqji9';
+            if (window.emailjs) { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
+
+            var form = document.getElementById('contactForm');
+            var status = document.getElementById('contactStatus');
+            var success = document.getElementById('contactSuccess');
+            var submitBtn = form ? form.querySelector('.btn-submit-modern') : null;
+
+            function showStatus(msg, isError) {
+                if (!status) return;
+                status.style.display = 'block';
+                status.textContent = msg;
+                status.style.color = isError ? '#dc2626' : '#0d9488';
+            }
+
+            function mailtoFallback() {
+                var body = 'Name: ' + form.name.value +
+                    '\nEmail: ' + form.email.value +
+                    '\nPhone: ' + form.phone.value +
+                    '\nInterested in: ' + form.interest.value +
+                    '\n\n' + form.message.value;
+                window.location.href = 'mailto:asimesp@gmail.com?subject=' +
+                    encodeURIComponent('New inquiry from Khalida Foundation website') +
+                    '&body=' + encodeURIComponent(body);
+            }
+
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    if (!form.checkValidity()) { form.reportValidity(); return; }
+                    if (form._gotcha && form._gotcha.value) { return; } // bot trap
+
+                    if (!window.emailjs) { showStatus('Opening your email app…', true); mailtoFallback(); return; }
+
+                    if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...'; }
+
+                    var params = {
+                        from_name: form.name.value,
+                        reply_to: form.email.value,
+                        phone: form.phone.value,
+                        reason: form.interest.value,
+                        course: 'N/A',
+                        message: form.message.value,
+                        to_email: 'asimesp@gmail.com'
+                    };
+
+                    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+                        .then(function () {
+                            form.style.display = 'none';
+                            if (success) success.style.display = 'block';
+                        })
+                        .catch(function (err) {
+                            showStatus('Sorry, something went wrong. Please email asimesp@gmail.com directly.', true);
+                            if (window.console) console.error('EmailJS error:', err);
+                        })
+                        .finally(function () {
+                            if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Send Message<span class="btn-shimmer"></span>'; }
+                        });
+                });
+            }
+
+            // ── Reveal on scroll for major sections ──
+            var candidates = document.querySelectorAll('.program-card, .metric-card, .course-card, .involvement-card, .stat-card-modern, .testimonial-card, .story-visual-card');
+            candidates.forEach(function (el) { el.classList.add('kf-reveal'); });
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (en) {
+                        if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+                candidates.forEach(function (el) { io.observe(el); });
+            } else {
+                candidates.forEach(function (el) { el.classList.add('is-in'); });
+            }
+
+            // ── Impact: radial dial fill (numbers are counted by scripts.js) ──
+            var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            function fillDial(dial){
+                var value = parseFloat(dial.getAttribute('data-value')) || 0;
+                var circumference = 2 * Math.PI * 54; // r=54 → ~339.29
+                var offset = circumference * (1 - value / 100);
+                var prog = dial.querySelector('.prog');
+                if (prog){
+                    if (reduceMotion){ prog.style.transition = 'none'; }
+                    prog.style.setProperty('--dash', offset);
+                }
+                dial.classList.add('is-in');
+            }
+
+            // Observe radial diagrams + journey flow + generic reveals
+            var impactTargets = document.querySelectorAll('.ix-radials, .ix-journey .ix-flow, .ix-reveal');
+            if ('IntersectionObserver' in window) {
+                var io2 = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (en) {
+                        if (!en.isIntersecting) return;
+                        en.target.classList.add('is-in');
+                        en.target.querySelectorAll('.ix-dial').forEach(fillDial);
+                        io2.unobserve(en.target);
+                    });
+                }, { threshold: 0.25 });
+                impactTargets.forEach(function (el) { io2.observe(el); });
+            } else {
+                impactTargets.forEach(function (el) { el.classList.add('is-in'); el.querySelectorAll('.ix-dial').forEach(fillDial); });
+            }
+        })();
+        </script>
     </body>
 </html>

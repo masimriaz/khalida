@@ -81,9 +81,11 @@
                     You will receive a confirmation email after successful registration.
                 </div>
 
-                <form id="registrationForm" action="https://formspree.io/f/mdaopeay" method="POST">
+                <form id="registrationForm" novalidate>
                     <!-- Hidden field for registration date -->
                     <input type="hidden" name="registration_date" id="registrationDate">
+                    <!-- Honeypot spam trap -->
+                    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
                     
                     <div class="row">
                         <!-- First Name -->
@@ -118,6 +120,7 @@
                         <label for="courseName" class="form-label required-field">Select Course</label>
                         <select class="form-select" id="courseName" name="course_name" required>
                             <option value="">-- Choose a Course --</option>
+                            <option value="AI Graphics Design for Kids (5 Sessions, Ages 9-16)">AI Graphics Design for Kids (5 Sessions, Ages 9-16)</option>
                             <option value="AI for Young Minds - Basic Course">AI for Young Minds - Basic Course</option>
                             <option value="AI for Young Minds - Advanced Course">AI for Young Minds - Advanced Course</option>
                         </select>
@@ -159,7 +162,9 @@
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
     <script>
         // Navbar scroll effect
         const navbar = document.getElementById('mainNav');
@@ -178,18 +183,61 @@
             document.getElementById('registrationDate').value = today;
         });
 
-        // Handle form submission
+        // ── EmailJS configuration ──
+        var EMAILJS_PUBLIC_KEY = 'QgTa6oe27DHJlhdDQ';
+        var EMAILJS_SERVICE_ID = 'service_y9lg90x';
+        var EMAILJS_TEMPLATE_ID = 'template_v4iqji9';
+        if (window.emailjs) { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
+
+        // Handle form submission via EmailJS
         const form = document.getElementById('registrationForm');
         const successMessage = document.getElementById('successMessage');
+        const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
 
-        form.addEventListener('submit', function(e) {
-            // Formspree handles the submission
-            // Show success message after submission
-            setTimeout(function() {
-                form.style.display = 'none';
-                successMessage.classList.add('show');
-            }, 1000);
-        });
+        function regMailtoFallback() {
+            var body = 'Name: ' + form.first_name.value + ' ' + form.last_name.value +
+                '\nEmail: ' + form.email.value +
+                '\nPhone: ' + form.phone.value +
+                '\nCourse: ' + form.course_name.value +
+                '\n\n' + form.comments.value;
+            window.location.href = 'mailto:asimesp@gmail.com?subject=' +
+                encodeURIComponent('New course registration — ' + form.course_name.value) +
+                '&body=' + encodeURIComponent(body);
+        }
+
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (!form.checkValidity()) { form.reportValidity(); return; }
+                if (form._gotcha && form._gotcha.value) { return; } // bot trap
+
+                if (!window.emailjs) { regMailtoFallback(); return; }
+
+                if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...'; }
+
+                var params = {
+                    from_name: form.first_name.value + ' ' + form.last_name.value,
+                    reply_to: form.email.value,
+                    phone: form.phone.value,
+                    reason: 'Course Registration',
+                    course: form.course_name.value,
+                    message: form.comments.value || '(no additional comments)',
+                    registration_date: form.registration_date.value,
+                    to_email: 'asimesp@gmail.com'
+                };
+
+                emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+                    .then(function() {
+                        form.style.display = 'none';
+                        successMessage.classList.add('show');
+                    })
+                    .catch(function(err) {
+                        if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Submit Registration'; }
+                        alert('Sorry, something went wrong submitting your registration. Please email asimesp@gmail.com directly.');
+                        if (window.console) console.error('EmailJS error:', err);
+                    });
+            });
+        }
     </script>
 </body>
 </html>
