@@ -172,11 +172,77 @@
         .agc-cta .agc-btn-primary{background:#fff;color:var(--agc-ink);}
         .agc-cta .agc-btn-primary:hover{background:#e0e7ff;color:var(--agc-ink);}
 
+        /* ── Registration form (scoped) ── */
+        .agc-scope .form-label{font-weight:600;color:var(--agc-ink);font-size:.9rem;margin-bottom:.4rem;display:block;}
+        .agc-scope .form-control,
+        .agc-scope .form-select{
+            width:100%;border:1.5px solid var(--agc-border);border-radius:12px;
+            padding:.8rem 1rem;font-size:1rem;line-height:1.4;color:var(--agc-ink);
+            background-color:#fff;transition:border-color .18s,box-shadow .18s;
+            -webkit-appearance:none;appearance:none;
+        }
+        .agc-scope textarea.form-control{resize:vertical;min-height:120px;}
+        .agc-scope .form-select{
+            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23475569' d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+            background-repeat:no-repeat;background-position:right 1rem center;background-size:14px;padding-right:2.6rem;
+        }
+        .agc-scope .form-control:focus,
+        .agc-scope .form-select:focus{
+            outline:none;border-color:var(--agc-teal);box-shadow:0 0 0 4px rgba(13,148,136,.15);
+        }
+        .agc-scope .form-control.is-invalid,
+        .agc-scope .form-select.is-invalid{border-color:#dc2626;box-shadow:0 0 0 4px rgba(220,38,38,.12);}
+        .agc-field-error{display:none;color:#dc2626;font-size:.8rem;margin-top:.35rem;font-weight:500;}
+        .agc-field-error.show{display:block;}
+        .agc-scope .agc-btn-primary[disabled]{opacity:.7;cursor:not-allowed;transform:none;}
+
+        /* ══════════════════════════════════════════════════════════════
+           MOBILE-FIRST REFINEMENTS
+           ══════════════════════════════════════════════════════════════ */
+        /* Prevent iOS auto-zoom on focus: inputs already >=16px (1rem). */
+        .agc-scope input,.agc-scope select,.agc-scope textarea{font-size:16px;}
+
+        /* Comfortable tap targets everywhere */
+        .agc-btn-primary,.agc-btn-ghost{min-height:48px;}
+        .agc-subnav a{min-height:40px;display:inline-flex;align-items:center;}
+
+        @media(max-width:991px){
+            .agc-hero{padding:4.5rem 0 3.25rem;}
+            .agc-section{padding:3.25rem 0;}
+        }
         @media(max-width:576px){
-            .agc-card-head{flex-direction:column;text-align:center;align-items:flex-start;}
+            .agc-card-head{flex-direction:column;text-align:left;align-items:flex-start;}
             .agc-timeline::before{left:23px;}
             .agc-session{padding-left:64px;}
             .agc-session-dot{width:40px;height:40px;left:4px;font-size:1rem;}
+
+            /* Hero: tighter, readable */
+            .agc-hero{padding:3.5rem 0 2.75rem;}
+            .agc-hero h1{margin:1rem 0 .85rem;}
+            .agc-hero .lead{font-size:1rem;}
+            .agc-eyebrow{font-size:.72rem;padding:.4rem .85rem;}
+
+            /* Full-width stacked CTAs for thumbs */
+            .agc-hero-cta,.agc-cta .agc-hero-cta{flex-direction:column;align-items:stretch;}
+            .agc-hero-cta .agc-btn-primary,
+            .agc-hero-cta .agc-btn-ghost{justify-content:center;width:100%;}
+
+            /* Section rhythm */
+            .agc-section{padding:2.75rem 0;}
+            .agc-h2{margin:.75rem 0;}
+
+            /* Approach card + CTA padding */
+            .agc-approach-card{padding:1.25rem;}
+            .agc-cta{padding:2.25rem 1.25rem;border-radius:20px;}
+            .agc-lab{padding:1rem 1.1rem;}
+
+            /* Form: stack and go full-width */
+            .agc-scope .mt-4.d-flex{flex-direction:column;align-items:stretch !important;}
+            .agc-scope #agcRegSubmit{width:100%;justify-content:center;}
+        }
+        @media(max-width:380px){
+            .agc-chip{font-size:.76rem;padding:.4rem .8rem;}
+            .agc-stat .num{font-size:1.65rem;}
         }
     </style>
 </head>
@@ -682,7 +748,8 @@
 
             <div class="row justify-content-center mt-4 agc-reveal">
                 <div class="col-lg-8">
-                    <div class="agc-approach-card">
+                    <div class="agc-approach-card" style="position:relative;overflow:hidden;">
+                        <span aria-hidden="true" style="position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--agc-teal),var(--agc-indigo));"></span>
                         <!--
                             EMAIL DELIVERY: This form uses EmailJS to send each registration to your
                             inbox directly from the browser (no backend). Configured with:
@@ -697,19 +764,23 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="agcParent" class="form-label">Parent / Guardian Name <span style="color:#dc2626">*</span></label>
-                                    <input type="text" class="form-control" id="agcParent" name="parent_name" required>
+                                    <input type="text" class="form-control" id="agcParent" name="parent_name" autocomplete="name" required>
+                                    <span class="agc-field-error" data-for="agcParent">Please enter the parent/guardian name.</span>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="agcChild" class="form-label">Child's Name <span style="color:#dc2626">*</span></label>
                                     <input type="text" class="form-control" id="agcChild" name="child_name" required>
+                                    <span class="agc-field-error" data-for="agcChild">Please enter the child's name.</span>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="agcEmail" class="form-label">Email Address <span style="color:#dc2626">*</span></label>
-                                    <input type="email" class="form-control" id="agcEmail" name="email" required>
+                                    <input type="email" class="form-control" id="agcEmail" name="email" autocomplete="email" required>
+                                    <span class="agc-field-error" data-for="agcEmail">Please enter a valid email address.</span>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="agcPhone" class="form-label">Phone Number <span style="color:#dc2626">*</span></label>
-                                    <input type="tel" class="form-control" id="agcPhone" name="phone" inputmode="tel" required>
+                                    <input type="tel" class="form-control" id="agcPhone" name="phone" inputmode="tel" autocomplete="tel" required>
+                                    <span class="agc-field-error" data-for="agcPhone">Please enter a phone number.</span>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="agcAge" class="form-label">Child's Age <span style="color:#dc2626">*</span></label>
@@ -718,6 +789,7 @@
                                         <option>9</option><option>10</option><option>11</option><option>12</option>
                                         <option>13</option><option>14</option><option>15</option><option>16</option>
                                     </select>
+                                    <span class="agc-field-error" data-for="agcAge">Please select the child's age.</span>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="agcExp" class="form-label">Design / AI Experience</label>
@@ -905,11 +977,16 @@
             });
         });
 
-        // ── Registration form: email via EmailJS (no backend) ──
+        // ── Registration form: email via EmailJS (no backend) with safe fallback ──
         var EMAILJS_PUBLIC_KEY = 'QgTa6oe27DHJlhdDQ';
         var EMAILJS_SERVICE_ID = 'service_y9lg90x';
         var EMAILJS_TEMPLATE_ID = 'template_v4iqji9';
-        if (window.emailjs) { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
+        var emailjsReady = false;
+        try {
+            if (window.emailjs) { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); emailjsReady = true; }
+        } catch (initErr) {
+            if (window.console) console.warn('EmailJS init failed:', initErr);
+        }
 
         var form = document.getElementById('agcRegForm');
         if (!form) return;
@@ -923,34 +1000,76 @@
             status.style.color = isError ? '#dc2626' : '#0d9488';
         }
 
-        function mailtoFallback(){
-            var body = 'Parent/Guardian: ' + form.parent_name.value +
+        // Inline, mobile-friendly validation (works the same on desktop + touch)
+        var requiredFields = ['agcParent','agcChild','agcEmail','agcPhone','agcAge'];
+        function setError(id, show){
+            var field = document.getElementById(id);
+            var msg = document.querySelector('.agc-field-error[data-for="' + id + '"]');
+            if (field) field.classList.toggle('is-invalid', show);
+            if (msg) msg.classList.toggle('show', show);
+        }
+        function validate(){
+            var firstInvalid = null;
+            requiredFields.forEach(function(id){
+                var field = document.getElementById(id);
+                var valid = field && field.value.trim() !== '';
+                if (valid && field.type === 'email'){
+                    valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
+                }
+                setError(id, !valid);
+                if (!valid && !firstInvalid) firstInvalid = field;
+            });
+            if (firstInvalid){
+                firstInvalid.focus();
+                firstInvalid.scrollIntoView({ behavior:'smooth', block:'center' });
+            }
+            return !firstInvalid;
+        }
+        // Clear a field's error as the user corrects it
+        requiredFields.forEach(function(id){
+            var field = document.getElementById(id);
+            if (field){
+                var evt = (field.tagName === 'SELECT') ? 'change' : 'input';
+                field.addEventListener(evt, function(){ setError(id, false); });
+            }
+        });
+
+        function buildBody(){
+            return 'Parent/Guardian: ' + form.parent_name.value +
                 '\nChild: ' + form.child_name.value + ' (age ' + form.child_age.value + ')' +
                 '\nEmail: ' + form.email.value +
                 '\nPhone: ' + form.phone.value +
                 '\nExperience: ' + form.experience.value +
                 '\nCourse: AI Graphics Design for Kids' +
-                '\n\n' + form.comments.value;
+                '\n\nComments: ' + (form.comments.value || '(none)');
+        }
+        function mailtoFallback(){
             window.location.href = 'mailto:asimesp@gmail.com?subject=' +
                 encodeURIComponent('New registration — AI Graphics Design for Kids') +
-                '&body=' + encodeURIComponent(body);
+                '&body=' + encodeURIComponent(buildBody());
+        }
+
+        function resetButton(){
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Registration';
         }
 
         form.addEventListener('submit', function(e){
             e.preventDefault();
-            if (!form.checkValidity()){ form.reportValidity(); return; }
             if (form._gotcha && form._gotcha.value) { return; } // bot trap
+            if (!validate()) { showStatus('Please complete the highlighted fields.', true); return; }
 
-            if (!window.emailjs) {
-                showStatus('Email service is loading. Opening your email app instead…', true);
+            // No EmailJS available → go straight to the user's email app so the lead is never lost
+            if (!emailjsReady || !window.emailjs) {
+                showStatus('Opening your email app to send the registration…', false);
                 mailtoFallback();
                 return;
             }
 
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            showStatus('Sending your registration…', false);
 
-            // Template params — map to your EmailJS "Contact Us" template variables
             var params = {
                 from_name: form.parent_name.value,
                 child_name: form.child_name.value,
@@ -964,18 +1083,30 @@
                 to_email: 'asimesp@gmail.com'
             };
 
+            // Safety timeout: if the network hangs, fall back to mailto so the user is never stuck
+            var settled = false;
+            var timer = setTimeout(function(){
+                if (settled) return;
+                settled = true;
+                resetButton();
+                showStatus('This is taking a while — opening your email app as a backup…', true);
+                mailtoFallback();
+            }, 12000);
+
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
                 .then(function(){
+                    if (settled) return; settled = true; clearTimeout(timer);
                     form.style.display = 'none';
+                    status.style.display = 'none';
                     success.style.display = 'block';
+                    success.scrollIntoView({ behavior:'smooth', block:'center' });
                 })
                 .catch(function(err){
-                    showStatus('Sorry, something went wrong. Please email asimesp@gmail.com directly.', true);
+                    if (settled) return; settled = true; clearTimeout(timer);
                     if (window.console) console.error('EmailJS error:', err);
-                })
-                .finally(function(){
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Registration';
+                    resetButton();
+                    showStatus('We couldn\u2019t send automatically — opening your email app as a backup…', true);
+                    mailtoFallback();
                 });
         });
     })();
