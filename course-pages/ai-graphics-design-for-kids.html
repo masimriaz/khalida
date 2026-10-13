@@ -199,6 +199,16 @@
         /* ══════════════════════════════════════════════════════════════
            MOBILE-FIRST REFINEMENTS
            ══════════════════════════════════════════════════════════════ */
+        /* CRITICAL FIX: on mobile the shared navbar.css sets the full-screen
+           .kf-mobile-overlay to display:block and only hides it with opacity:0.
+           An opacity:0 element still captures touches, so it was covering the
+           whole page and blocking the form. Make it ignore taps unless open. */
+        .kf-mobile-overlay{pointer-events:none;}
+        .kf-mobile-overlay.kf-open{pointer-events:auto;}
+
+        /* Hero heading fully white as requested */
+        .agc-hero h1{color:#fff;}
+
         /* Prevent iOS auto-zoom on focus: inputs already >=16px (1rem). */
         .agc-scope input,.agc-scope select,.agc-scope textarea{font-size:16px;}
 
@@ -809,6 +819,7 @@
                                 <button type="submit" class="agc-btn-primary" id="agcRegSubmit"><i class="fas fa-paper-plane"></i> Submit Registration</button>
                                 <a href="mailto:asimesp@gmail.com" class="text-decoration-none" style="color:var(--agc-teal);font-weight:600;">or email us directly</a>
                             </div>
+                            <a href="mailto:asimesp@gmail.com" id="agcMailtoBackup" class="agc-btn-ghost mt-3" style="display:none;border-color:var(--agc-teal);color:var(--agc-teal);"><i class="fas fa-envelope"></i> Send My Registration by Email</a>
                             <p class="mt-3 mb-0" id="agcRegStatus" role="status" aria-live="polite" style="display:none;"></p>
                         </form>
 
@@ -993,6 +1004,7 @@
         var status = document.getElementById('agcRegStatus');
         var success = document.getElementById('agcRegSuccess');
         var submitBtn = document.getElementById('agcRegSubmit');
+        var mailtoBackup = document.getElementById('agcMailtoBackup');
 
         function showStatus(msg, isError){
             status.style.display = 'block';
@@ -1043,11 +1055,6 @@
                 '\nCourse: AI Graphics Design for Kids' +
                 '\n\nComments: ' + (form.comments.value || '(none)');
         }
-        function mailtoFallback(){
-            window.location.href = 'mailto:asimesp@gmail.com?subject=' +
-                encodeURIComponent('New registration — AI Graphics Design for Kids') +
-                '&body=' + encodeURIComponent(buildBody());
-        }
 
         function resetButton(){
             submitBtn.disabled = false;
@@ -1058,13 +1065,6 @@
             e.preventDefault();
             if (form._gotcha && form._gotcha.value) { return; } // bot trap
             if (!validate()) { showStatus('Please complete the highlighted fields.', true); return; }
-
-            // No EmailJS available → go straight to the user's email app so the lead is never lost
-            if (!emailjsReady || !window.emailjs) {
-                showStatus('Opening your email app to send the registration…', false);
-                mailtoFallback();
-                return;
-            }
 
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
@@ -1083,31 +1083,75 @@
                 to_email: 'asimesp@gmail.com'
             };
 
-            // Safety timeout: if the network hangs, fall back to mailto so the user is never stuck
+            // Pre-fill the backup email button with this submission's details.
+            if (mailtoBackup) {
+                mailtoBackup.setAttribute('href', 'mailto:asimesp@gmail.com?subject=' +
+                    encodeURIComponent('New registration — AI Graphics Design for Kids') +
+                    '&body=' + encodeURIComponent(buildBody()));
+            }
+            function onSuccess(){
+                form.style.display = 'none';
+                status.style.display = 'none';
+                success.style.display = 'block';
+                success.scrollIntoView({ behavior:'smooth', block:'center' });
+            }
+            function onFailure(err){
+                if (window.console) console.error('Registration send failed:', err);
+                resetButton();
+                showStatus('We couldn\u2019t send automatically. Please tap "email us directly" below (or email asimesp@gmail.com) and we\u2019ll reply quickly.', true);
+                // Reveal a tap-friendly backup button so mobile users always have a working path.
+                if (mailtoBackup) mailtoBackup.style.display = 'inline-flex';
+            }
+
+            // ── Primary path: direct REST call (no SDK dependency, works on mobile
+            //    even when the EmailJS script is blocked by content/ad blockers). ──
+            function sendViaRest(){
+                return fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        service_id: EMAILJS_SERVICE_ID,
+                        template_id: EMAILJS_TEMPLATE_ID,
+                        user_id: EMAILJS_PUBLIC_KEY,
+                        template_params: params
+                    })
+                }).then(function(res){
+                    if (!res.ok) { return res.text().then(function(t){ throw new Error('HTTP ' + res.status + ' ' + t); }); }
+                    return true;
+                });
+            }
+
+            // Overall safety timeout so the button never stays stuck on mobile.
             var settled = false;
             var timer = setTimeout(function(){
-                if (settled) return;
-                settled = true;
-                resetButton();
-                showStatus('This is taking a while — opening your email app as a backup…', true);
-                mailtoFallback();
-            }, 12000);
+                if (settled) return; settled = true;
+                onFailure(new Error('timeout'));
+            }, 15000);
 
-            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
-                .then(function(){
-                    if (settled) return; settled = true; clearTimeout(timer);
-                    form.style.display = 'none';
-                    status.style.display = 'none';
-                    success.style.display = 'block';
-                    success.scrollIntoView({ behavior:'smooth', block:'center' });
-                })
-                .catch(function(err){
-                    if (settled) return; settled = true; clearTimeout(timer);
-                    if (window.console) console.error('EmailJS error:', err);
-                    resetButton();
-                    showStatus('We couldn\u2019t send automatically — opening your email app as a backup…', true);
-                    mailtoFallback();
-                });
+            function finish(fn, arg){
+                if (settled) return; settled = true; clearTimeout(timer); fn(arg);
+            }
+
+            if (window.fetch) {
+                sendViaRest()
+                    .then(function(){ finish(onSuccess); })
+                    .catch(function(err){
+                        // Secondary attempt via SDK if it happens to be available.
+                        if (emailjsReady && window.emailjs) {
+                            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+                                .then(function(){ finish(onSuccess); })
+                                .catch(function(e2){ finish(onFailure, e2); });
+                        } else {
+                            finish(onFailure, err);
+                        }
+                    });
+            } else if (emailjsReady && window.emailjs) {
+                emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+                    .then(function(){ finish(onSuccess); })
+                    .catch(function(e2){ finish(onFailure, e2); });
+            } else {
+                finish(onFailure, new Error('no transport'));
+            }
         });
     })();
     </script>
