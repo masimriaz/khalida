@@ -1,0 +1,7 @@
+# Temp/one-off scripts (not part of the published site)
+_cleanurls.js
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
